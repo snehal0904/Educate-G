@@ -25,12 +25,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: Install Angular
-      run:  npm install angular-cli
-
       - name: Install and build
         working-directory: ./sunbird-rc-ED-ui
-        run:  yarn && ng build --prod
+        run: yarn && npm run build
 
       - name: see directory
         run: ls ./dist
