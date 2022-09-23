@@ -27,4 +27,7 @@ jobs:
 
       - name: Install and build
         working-directory: ./sunbird-rc-ED-ui
-        run: yarn && npm run build
+        run: yarn && ng build --prod
+
+      - name: see directory
+        run: ls ./dist
