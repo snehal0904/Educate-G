@@ -32,11 +32,8 @@ jobs:
       - name: see directory
         run: ls ./sunbird-rc-ED-ui/dist
 
-       - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: ${{ secrets.SSH_HOST }}
+       - name: Install SSH Key
+        echo "${{ secrets.SSH_HOST }}"
 
       #  uses: shimataro/ssh-key-action@v2
           # with:
