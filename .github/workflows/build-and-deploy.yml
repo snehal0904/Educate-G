@@ -32,6 +32,9 @@ jobs:
       - name: see directory
         run: ls ./sunbird-rc-ED-ui/dist
 
+      - name: Check SSH_PRIVATE_KEY
+         run: echo ${{ secrets.SSH_PRIVATE_KEY }}
+
       #  - name: Install SSH key
       #   uses: shimataro/ssh-key-action@v2
       #   with:
