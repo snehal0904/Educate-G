@@ -27,18 +27,18 @@ jobs:
 
       - name: Install and build
         working-directory: ./sunbird-rc-ED-ui
-        run: yarn && npm run build
+        #run: yarn && npm run build
 
       - name: see directory
-        run: ls ./sunbird-rc-ED-ui/dist
+        #run: ls ./sunbird-rc-ED-ui/dist
 
       - name: Install SSH Key
-        run: echo "${{ secrets.SSH_HOST }}"
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.SSH_HOST }}
 
-      #  uses: shimataro/ssh-key-action@v2
-          # with:
-          # key: ${{ secrets.SSH_PRIVATE_KEY }} 
-          # known_hosts: ${{ secrets.SSH_HOST }}
+        
 
 
 
