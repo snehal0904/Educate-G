@@ -33,7 +33,7 @@ jobs:
         run: ls ./sunbird-rc-ED-ui/dist
 
        - name: Install SSH Key 2
-       echo "${{ secrets.SSH_PRIVATE_KEY }}"
+      #  echo "${{ secrets.SSH_PRIVATE_KEY }}"
 
 
 
