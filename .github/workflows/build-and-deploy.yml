@@ -18,8 +18,8 @@ jobs:
   # This workflow contains a single job called "build"
   build:
 
-   name: build-deploy-to-prod
-  environment: prod
+  #  name: build-deploy-to-prod
+  # environment: prod
 
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -42,5 +42,5 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: ${{ secrets.HOST }}
 
-      # - name: Adding known hosts
-      #   run: ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts    
+      - name: Adding known hosts
+        run: ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts    
