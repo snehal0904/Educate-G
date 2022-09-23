@@ -33,10 +33,7 @@ jobs:
         run: ls ./sunbird-rc-ED-ui/dist
 
        - name: Install SSH Key 2
-       uses: shimataro/ssh-key-action@v2
-          with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }} 
-          known_hosts: ${{ secrets.SSH_HOST }}
+       echo "${{ secrets.SSH_PRIVATE_KEY }}"
 
 
 
