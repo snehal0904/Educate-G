@@ -25,7 +25,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: Build
-        run: |
-          yarn 
-          ls
+      - name: Install and build
+        working-directory: ./sunbird-rc-ED-ui
+        run: yarn && npm run build
