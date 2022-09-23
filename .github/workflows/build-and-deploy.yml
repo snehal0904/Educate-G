@@ -28,4 +28,4 @@ jobs:
       - name: Build
         run: |
           yarn 
-          ls ./dist
+          ls
