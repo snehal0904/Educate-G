@@ -41,7 +41,7 @@ jobs:
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts  
 
-      - name: Deploy with rsync
-        run: rsync -avz ./sunbird-rc-ED-ui/dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ubuntu/educate-girls-frontend/
+      # - name: Deploy with rsync
+      #   run: rsync -avz ./sunbird-rc-ED-ui/dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ubuntu/educate-girls-frontend/
 
       
