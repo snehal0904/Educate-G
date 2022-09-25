@@ -23,8 +23,8 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-
+      # - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       # - name: Install and build
       #   working-directory: ./sunbird-rc-ED-ui
       #   run: yarn && npm run build
@@ -46,5 +46,6 @@ jobs:
 
       # - name: Deploy with rsync
       #   run: rsync -avz ./sunbird-rc-ED-ui/dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ubuntu/educate-girls-frontend/
+      #ssh-keyscan -p 22 -H 3.111.46.61  >> ~/.ssh/known_hosts
+      # ssh-keyscan -H 3.111.46.61 >> ~/.ssh/known_hosts 
 
-      
