@@ -53,7 +53,7 @@ jobs:
 
       - name: Deploy with rsync
         run: chmod 600 /home/ubuntu/educate-girls-frontend/
-        run: rsync -avz ./sunbird-rc-ED-ui/dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ubuntu/educate-girls-frontend/
+        # run: rsync -avz ./sunbird-rc-ED-ui/dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ubuntu/educate-girls-frontend/
       # rsync shiksha-ui.tar ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/shiksha-prod/shiksha-ui.tar
 
 
