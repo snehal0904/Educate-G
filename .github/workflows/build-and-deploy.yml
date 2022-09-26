@@ -47,7 +47,7 @@ jobs:
 
 
       - name: Deploy with rsync
-       run: rsync -avz ./sunbird-rc-ED-ui/dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ubuntu/educate-girls-frontend/
+        run: rsync -avz ./sunbird-rc-ED-ui/dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ubuntu/educate-girls-frontend/
 
 
       #ssh-keyscan -p 22 -H 3.111.46.61  >> ~/.ssh/known_hosts
