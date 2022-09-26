@@ -7,8 +7,6 @@ on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -39,15 +37,12 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }} 
-          known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
-
-      - name: chmod
-        # run: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-        run: chmod 600 ~/.ssh/known_hosts
+          known_hosts: unnecessary
 
       - name: Adding Known Hosts
+        run: ssh-keyscan -p 22 -H 3.111.46.61  >> ~/.ssh/known_hosts
         # run: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-        run: ssh-keyscan -t rsa ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts 
+        # run: ssh-keyscan -t rsa ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts 
         #run: ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 
 
