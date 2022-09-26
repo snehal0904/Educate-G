@@ -40,14 +40,14 @@ jobs:
           known_hosts: unnecessary
 
       - name: Adding Known Hosts
-        run: ssh-keyscan 172.31.44.174 >> ~/.ssh/known_hosts
+        run: ssh-keyscan ${{ secrets.SSH_PRIVATE_KEY }}  >> /home/ubuntu/.ssh/known_hosts
         # run: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
         # run: ssh-keyscan -t rsa ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts 
         #run: ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 
 
       - name: Deploy with rsync
-        run: rsync -avz ./sunbird-rc-ED-ui/dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ubuntu/educate-girls-frontend/
+       run: rsync -avz ./sunbird-rc-ED-ui/dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ubuntu/educate-girls-frontend/
 
 
       #ssh-keyscan -p 22 -H 3.111.46.61  >> ~/.ssh/known_hosts
