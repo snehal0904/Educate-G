@@ -28,12 +28,12 @@ jobs:
       # - uses: actions/checkout@v3
       - uses: actions/checkout@v2
 
-      - name: Install and build
-        working-directory: ./sunbird-rc-ED-ui
-        run: yarn && npm run build
+      # - name: Install and build
+      #   working-directory: ./sunbird-rc-ED-ui
+      #   run: yarn && npm run build
 
-      - name: see directory
-        run: ls ./sunbird-rc-ED-ui/dist
+      # - name: see directory
+      #   run: ls ./sunbird-rc-ED-ui/dist
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
@@ -43,11 +43,13 @@ jobs:
 
       - name: Adding Known Hosts
         # run: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+        run: chmod 600 ~/.ssh/known_hosts
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts 
         #run: ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 
 
       - name: Deploy with rsync
+        run: chmod 600 /home/ubuntu/educate-girls-frontend/
         run: rsync -avz ./sunbird-rc-ED-ui/dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ubuntu/educate-girls-frontend/
       # rsync shiksha-ui.tar ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/shiksha-prod/shiksha-ui.tar
 
