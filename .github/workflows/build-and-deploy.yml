@@ -39,7 +39,7 @@ jobs:
           repository: Sunbird-RC/demo-education-registry
           
       - name: see directory
-        run: ls ./demo-education-registry
+        run: ls
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
