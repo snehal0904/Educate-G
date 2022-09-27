@@ -31,7 +31,8 @@ jobs:
 #         run: yarn && npm run build
 
       - name: see directory
-        run: ls ./sunbird-rc-ED-ui/dist
+#         run: ls ./sunbird-rc-ED-ui/dist
+        run: ls
         
       - name: Check out my other refernce schema repo
         uses: actions/checkout@master
