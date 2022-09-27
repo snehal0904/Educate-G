@@ -32,6 +32,14 @@ jobs:
 
       - name: see directory
         run: ls ./sunbird-rc-ED-ui/dist
+        
+      - name: Check out my other refernce schema repo
+        uses: actions/checkout@master
+        with:
+          repository: Sunbird-RC/demo-education-registry
+          
+      - name: see directory
+        run: ls ./demo-education-registry
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
