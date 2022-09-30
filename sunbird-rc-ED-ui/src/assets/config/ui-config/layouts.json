@@ -2,94 +2,26 @@
     "type": "opensaberLayoutSchema",
     "version": "0.1",
     "layouts": [
+       
         {
-            "institute": {
-                "api": "/Institute",
-                "title": "INSTITUTE_PROFILE",
-                "langKey" : "institute",
-                "headerName" : "instituteName",
-                "subHeadername" : "address.state,contactDetails.address.city",
-                "blocks": [
-                    {
-                        "definition": "Institute",
-                        "title": "INSTITUTE_DEATILS",
-                        "add": false,
-                        "edit": true,
-                        "editform":"institute-setup",
-                        "fields": {
-                            "includes": ["*"],
-                            "excludes": ["affiliation"]
-                        },
-                        "propertyShowFirst" : [ "instituteName", "email"]
-                    },
-                    {
-                        "definition": "Institute",
-                        "title": "AFFILIATION_DETAILS",
-                        "add": true,
-                        "addform":"affiliation",
-                        "claimEdit": true,
-                        "editform":"affiliation",
-                        "multiple": true,
-                        "headValue" : "affiliationNumber",
-                        "canRaiseClaim" : true,
-                        "fields": {
-                            "includes": ["affiliation"]
-                        },
-                        "propertyShowFirst" : [ "affiliationNumber", "medium", "grantYear", "expiryYear"]
-                    }
-                ]
-            }
-        },
-        {
-            "teacher": {
-                "api": "/Teacher",
+            "prerak": {
+                "api": "/Prerak",
                 "title": "TEACHER_PROFILE",
-                "langKey" : "teacherStudent",
-                "headerName" : "identityDetails.fullName",
-                "subHeadername" : "contactDetails.address.state,contactDetails.address.city",
+                "langKey" : "prerakStudent",
+                "headerName" : "fullName",
                 "blocks": [
                     {
-                        "definition": "Teacher",
+                        "definition": "Prerak",
                         "title": "PERSONAL_DETAILS",
                         "add": false,
                         "edit": true,
-                        "editform":"teacher-setup",
+                        "editform":"prerak-setup",
                         "fields": {
                             "includes": ["*"],
-                            "excludes": ["experience","academicQualifications"]
+                            "excludes": []
                         },
                         "propertyShowFirst" : [ "fullName", "mobile", "email"]
 
-                    },
-                    {
-                        "definition": "Teacher",
-                        "title": "PROFESSIONAL_EXPERIENCE",
-                        "add": true,
-                        "addform":"teacher-experience",
-                        "editform":"teacher-experience",
-                        "claimEdit": true,
-                        "multiple": true,
-                        "headValue" : "teacherType",
-                        "canRaiseClaim" : true,
-                        "fields": {
-                            "includes": ["experience"]
-                        },
-                        "propertyShowFirst" : [ "employmentType", "instituteName"]
-                    },
-                    {
-                        "definition": "Teacher",
-                        "title": "EDUCATION",
-                        "add": true,
-                        "addform":"teacher-education",
-                        "editform":"teacher-education",
-                        "claimEdit": true,
-                        "multiple": true,
-                        "canRaiseClaim" : false,
-                        "headValue" : "qualification",
-                        "fields": {
-                            "includes": ["academicQualifications"]
-                        },
-                        "propertyShowFirst" : [ "qualification", "instituteName", "graduationYear"]
                     }
                 ]
             }
@@ -133,8 +65,8 @@
             }
         },
         {
-            "board-cbse": {
-                "table": "board-cbse-attestation"
+            "admin": {
+                "table": "admin-attestation"
             }
         }
     ]

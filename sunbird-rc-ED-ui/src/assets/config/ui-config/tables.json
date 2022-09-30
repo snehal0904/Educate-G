@@ -1,7 +1,7 @@
 {
     "type": "opensaberLayoutSchema",
     "version": "0.1",
-    "limit" : "15",
+    "limit": "15",
     "tables": [
         {
             "teacher-attestation": {
@@ -17,7 +17,7 @@
                         "name": "requestorName",
                         "title": "NAME"
                     },
-                    {   
+                    {
                         "custom": true,
                         "title": "ACTION",
                         "buttonText": "ATTEST",
@@ -41,7 +41,7 @@
                         "name": "requestorName",
                         "title": "NAME"
                     },
-                    {   
+                    {
                         "custom": true,
                         "title": "ACTION",
                         "type": "button",
@@ -52,25 +52,37 @@
             }
         },
         {
-            "board-cbse-attestation": {
-                "api": "/board-cbse/claims",
+            "admin-attestation": {
+                "api": "/Prerak/search",
                 "title": "CBSE_BOARD_ATTESTATIONS",
                 "fields": [
                     {
-                        "name": "createdAt",
-                        "title": "SUBMITTED_DATE",
-                        "formate": "date"
+                        "name": "fullName",
+                        "title": "Full Name"
                     },
                     {
-                        "name": "requestorName",
-                        "title": "NAME"
+                        "name": "gender",
+                        "title": "Gender"
                     },
-                    {   
+                    {
+                        "name": "mobile",
+                        "title": "Contact Number"
+                    },
+                    {
+                        "name": "qualification",
+                        "title": "Education Details"
+                    },
+                    {
                         "custom": true,
-                        "title": "ACTION",
                         "type": "button",
-                        "buttonText": "ATTEST",
-                        "redirectTo": "/board-cbse/attestation/board-cbse-attestation/:id"
+                        "buttonText": "Edit",
+                        "redirectTo": "/admin/attestation/admin-attestation/:id"
+                    },
+                    {
+                        "custom": true,
+                        "type": "button",
+                        "buttonText": "View",
+                        "redirectTo": "/admin/attestation/admin-attestation/:id"
                     }
                 ]
             }

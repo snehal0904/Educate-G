@@ -1,0 +1,88 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "properties": {
+      "Prerak": {
+        "$ref": "#/definitions/Prerak"
+      }
+    },
+    "required": [
+      "Prerak"
+    ],
+    "title": "Prerak",
+    "definitions": {
+      "Prerak": {
+        "$id": "#/properties/Prerak",
+        "type": "object",
+        "title": "The Prerak Schema",
+        "required": [],
+        "properties": {
+          "fullName": {
+            "$id": "#/properties/fullName",
+            "type": "string",
+            "title": "Full name"
+          },
+          "mobile": {
+            "$id": "#/properties/mobile",
+            "type": "string",
+            "title": "Mobile"
+          },
+          "sourcingChannel": {
+            "$id": "#/properties/sourcingChannel",
+            "type": "string",
+            "title": "Sourcing Channel"
+          },
+          "referrerIfApplicable": {
+            "$id": "#/properties/referrerIfApplicable ",
+            "type": "string",
+            "title": "Referrer (if Applicable) "
+          },
+          "referenceId": {
+            "$id": "#/properties/referenceId",
+            "type": "string",
+            "title": "Reference ID"
+          },
+          "gender": {
+            "$id": "#/properties/gender",
+            "type": "string",
+            "enum": [
+              "Male",
+              "Female",
+              "Other"
+            ],
+            "title": "Gender"
+          },
+          "age": {
+            "$id": "#/properties/age",
+            "type": "string",
+            "$comment": "Age",
+            "title": "Age"
+          },
+          "typeOfPastExp": {
+            "$id": "#/properties/typeOfPastExp",
+            "type": "string",
+            "title": "Type of past experience"
+          },
+          "durationOfPastExp": {
+            "$id": "#/properties/durationOfPastExp",
+            "type": "string",
+            "title": "Years/Months of past experience"
+          }
+        }
+      }
+    },
+    "_osConfig": {
+      "ownershipAttributes": [
+        {
+          "email": "",
+          "mobile": "/mobile",
+          "userId": "/mobile"
+        }
+      ],
+      "inviteRoles": [
+        "anonymous"
+      ],
+      "enableLogin": true
+    }
+  }
+  

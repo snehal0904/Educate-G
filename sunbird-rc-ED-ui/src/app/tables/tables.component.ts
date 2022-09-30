@@ -45,6 +45,10 @@ export class TablesComponent implements OnInit {
     });
   }
 
+  openPreview(item){
+console.log(item);
+  }
+
   getData() {
     var get_url;
     if (this.entity) {
@@ -52,11 +56,28 @@ export class TablesComponent implements OnInit {
     } else {
       console.log("Something went wrong")
     }
-    this.generalService.getData(get_url).subscribe((res) => {
-      this.model = res;
-      // this.entity = res[0].osid;
-      this.addData()
-    });
+
+    if(get_url.includes('Search') || get_url.includes('search'))
+    {
+      let data = {
+        "filters": {
+        }
+    };
+
+      this.generalService.postData(get_url, data).subscribe((res) => {
+        this.model = res;
+        // this.entity = res[0].osid;
+        this.addData()
+      });
+
+    }else{
+      this.generalService.getData(get_url).subscribe((res) => {
+        this.model = res;
+        // this.entity = res[0].osid;
+        this.addData()
+      });
+    }
+
   }
 
   addData() {
@@ -64,7 +85,7 @@ export class TablesComponent implements OnInit {
     var temp_array;
     let temp_object
     this.model.forEach(element => {
-      if (element.status === "OPEN") {
+     // if (element.status === "OPEN") {
         temp_array = [];
         this.tableSchema.fields.forEach((field) => {
 
@@ -94,7 +115,7 @@ export class TablesComponent implements OnInit {
           temp_array.push(this.pushData(temp_object));
         });
         this.property.push(temp_array)
-      }
+     // }
     });
 
     this.tableSchema.items = this.property;

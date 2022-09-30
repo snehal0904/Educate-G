@@ -34,15 +34,11 @@
             }
         },
         {
-            "teacher": {
+            "prerak": {
                 "left": [
                     {
                         "title": "HOME",
                         "redirectTo": "/profile/teacher"
-                    },
-                    {
-                        "title": "ATTESTATIONS",
-                        "redirectTo": "/teacher/attestation/teacher-attestation"
                     }
                 ],
                 "right": [
@@ -72,11 +68,11 @@
             }
         },
         {
-            "board-cbse": {
+            "admin": {
                 "left": [
                     {
-                        "title": "ATTESTATIONS",
-                        "redirectTo": "/profile/board-cbse"
+                        "title": "Prerak",
+                        "redirectTo": "/profile/admin"
                     }
                 ],
                 "right": [

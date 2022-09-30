@@ -1,16 +1,16 @@
 {
     "environment": "development",
     "keycloak": {
-        "url": "https://demo-education-registry.xiv.in/auth",
+        "url": "http://localhost:8080/auth",
         "clientId": "registry-frontend",
         "realm": "sunbird-rc"
     },
     "configFolder": "/assets/config/ui-config",
     "languageFolder": "/assets/i18n",
-    "title": "Education-Sunbird",
-    "baseUrl": "http://localhost:4200/registry/api/v1",
-    "schemaUrl": "http://localhost:4200/registry/api/docs/swagger.json",
-    "footerText": "Education-Sunbird",
+    "title": "Educate Girls",
+    "baseUrl": "http://localhost:4200/api/v1",
+    "schemaUrl": "http://localhost:8081/api/docs/swagger.json",
+    "footerText": "Educate Girls",
     "languages": [
         "en",
         "hi"

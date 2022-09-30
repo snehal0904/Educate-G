@@ -1,6 +1,6 @@
 
 <header class="header">
-    <div class="banner">
+    <!-- <div class="banner">
       
         <span class="span-1"></span>
         <span class="span-2">{{ 'DEMO' | translate}} <a href="https://docs.sunbirdrc.dev/"><u>{{'HERE' | translate}}</u></a></span>
@@ -10,7 +10,7 @@
             </a>
         </span>
       
-    </div>  
+    </div>   -->
       
     <nav class="navbar navbar-expand-lg navbar-light bg-header nav-b navbar-inverse">
         <div class="container-fluid custom-header">
@@ -18,8 +18,10 @@
                 <i class="fa fa-bars toggler"></i>
                 <!-- <span class="navbar-toggler-icon"></span> -->
             </button>
-            <div class="nav-item active logo-text" style="width: auto;">
+            <div class="nav-item active logo-text d-flex" style="width: auto;">
                 <a role="link" aria-disabled="true"><img class="logo" src={{logo}} /></a>
+                <h3 class="sitetitle">{{siteTitle}}</h3>
+               
             </div>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <ng-template [ngIf]="headerSchema?.left">
@@ -76,11 +78,11 @@
                             [selected]="(lang.code == langCode)? true : false">{{lang.name}}</option>
                     </select>
                 </span>
-                <!-- <span (click)="changeTheme()">
+                <span (click)="changeTheme()">
                     <a class="nav-link pr-0">
                         <img style="width: 20px;" src="assets/images/theme_icon.svg" />
                     </a>
-                </span> -->
+                </span>
             </div>
 
         </div>

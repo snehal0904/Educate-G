@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
   lang;
   indexPre;
   ELOCKER_THEME: string;
+  siteTitle: any;
   constructor(
     public router: Router, private config: AppConfig, public schemaService: SchemaService,
     public translate: TranslateService, private themeService: ThemeService
@@ -39,6 +40,7 @@ export class HeaderComponent implements OnInit {
     }
 
     this.logo = this.config.getEnv(localStorage.getItem('ELOCKER_THEME') + '_theme').logoPath;
+    this.siteTitle = this.config.getEnv('title');
     this.schemaService.getHeaderJSON().subscribe(async (HeaderSchemas) => {
       var filtered = HeaderSchemas.headers.filter(obj => {
         return Object.keys(obj)[0] === this.headerFor;
