@@ -8,7 +8,7 @@
                 "type": "entity",
                 "formclass": "row",
                 "header": "default",
-                "title": "REGISTER",
+                "title": "Create Profile",
                 "isSignupForm": "true",
                 "langKey": "prerakStudent",
                 "fieldsets": [
@@ -32,22 +32,33 @@
                                 }
                             },
                             {
-                                "name": "t&c",
-                                "custom": true,
-                                "element": {
-                                    "title": "ACCEPT_TERMS_CONDITIONS",
-                                    "widget": {
-                                        "formlyConfig": {
-                                            "type": "checkbox",
-                                            "fieldGroupClassName": "controls",
-                                            "className": "checkbox",
-                                            "templateOptions": {
-                                                "required": true
-                                            }
-                                        }
-                                    }
-                                }
+                                "name": "qualification"
+                            },
+                            {
+                                "name": "gender"
+                            },
+                            {
+                                "name": "age"
+                            },
+                            {
+                                "name": "address"
+                            },
+                            {
+                                "name": "sourcingChannel"
+                            },
+                            {
+                                "name": "referrerIfApplicable"
+                            },
+                            {
+                                "name": "referenceId"
+                            },
+                            {
+                                "name": "typeOfPastExp"
+                            },
+                            {
+                                "name": "durationOfPastExp"
                             }
+                            
                         ]
                     }
                 ],
@@ -56,6 +67,67 @@
         },
         {
             "prerak-setup": {
+                "api": "/Prerak",
+                "type": "entity",
+                "redirectTo": "/profile/prerak",
+                "langKey": "prerakStudent",
+                "fieldsets": [
+                    {
+                        "definition": "Prerak",
+                        "privacyConfig": "PrerakOsConfig",
+                        "globalPrivacyConfig": "internal-access",
+                        "fields": [
+                            {
+                                "name": "fullName",
+                                "required": true,
+                                "validation": {
+                                    "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
+                                    "message": "NAME_NOT_VALID"
+                                }
+                            }, 
+                            {
+                                "name": "mobile",
+                                "required": true,
+                                "validation": {
+                                    "pattern": "[6-9]{1}[0-9]{9}",
+                                    "message": "MOBILE_NO_MUST_10_DIGIT"
+                                }
+                            },
+                            {
+                                "name": "qualification"
+                            },
+                            {
+                                "name": "gender"
+                            },
+                            {
+                                "name": "age"
+                            },
+                            {
+                                "name": "address"
+                            },
+                            {
+                                "name": "sourcingChannel"
+                            },
+                            {
+                                "name": "referrerIfApplicable"
+                            },
+                            {
+                                "name": "referenceId"
+                            },
+                            {
+                                "name": "typeOfPastExp"
+                            },
+                            {
+                                "name": "durationOfPastExp"
+                            }
+                            
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "prerak-admin-setup": {
                 "api": "/Prerak",
                 "type": "entity",
                 "redirectTo": "/profile/prerak",

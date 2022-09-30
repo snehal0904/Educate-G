@@ -77,12 +77,6 @@
                         "type": "button",
                         "buttonText": "Edit",
                         "redirectTo": "/admin/attestation/admin-attestation/:id"
-                    },
-                    {
-                        "custom": true,
-                        "type": "button",
-                        "buttonText": "View",
-                        "redirectTo": "/admin/attestation/admin-attestation/:id"
                     }
                 ]
             }

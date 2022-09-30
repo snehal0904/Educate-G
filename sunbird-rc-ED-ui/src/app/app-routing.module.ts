@@ -75,6 +75,44 @@ const routes: Routes = [
 
 // Tables
 { path: ':entity/attestation/:table', component: TablesComponent, canActivate: [AuthGuard] },
+{ path: ':entity/attestation/:table/Prerak', component: TablesComponent, canActivate: [AuthGuard],
+children: [
+  {
+    path: 'edit',
+    component: PanelsComponent,
+    outlet: 'claim',
+    children: [
+      {
+        path: ':form',
+        component: EditPanelComponent
+      },
+      {
+        path: ':form/:id',
+        component: EditPanelComponent
+      }
+    ]
+  }
+]
+ },
+ { path: ':entity/attestation/:table/:layout', component: TablesComponent, canActivate: [AuthGuard],
+children: [
+  {
+    path: 'edit',
+    component: PanelsComponent,
+    outlet: 'claim',
+    children: [
+      {
+        path: ':form',
+        component: EditPanelComponent
+      },
+      {
+        path: ':form/:id',
+        component: EditPanelComponent
+      }
+    ]
+  }
+]
+ },
 { path: ':entity/attestation/:table/:id', component: AttestationComponent, canActivate: [AuthGuard] },
 { path: ':entity/documents', component: DocumentsComponent, canActivate: [AuthGuard] },
 { path: ':entity/documents/detail/view/:type/:id', component: DocDetailViewComponent, canActivate: [AuthGuard] },

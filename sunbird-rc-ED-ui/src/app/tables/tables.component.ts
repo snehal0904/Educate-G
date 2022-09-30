@@ -7,7 +7,7 @@ import { GeneralService } from '../services/general/general.service';
 @Component({
   selector: 'app-tables',
   templateUrl: './tables.component.html',
-  styleUrls: ['./tables.component.css']
+  styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit {
   table: any;
@@ -22,6 +22,9 @@ export class TablesComponent implements OnInit {
 
   page: number = 1;
   limit: number = 10;
+  identifier: any;
+  layout: string;
+  isPreview: boolean;
 
   constructor(public router: Router, private route: ActivatedRoute, public generalService: GeneralService, public schemaService: SchemaService) { }
 
@@ -46,9 +49,14 @@ export class TablesComponent implements OnInit {
   }
 
   openPreview(item){
-console.log(item);
+    this.identifier = item.id;
+    this.layout = 'Prerak';
   }
 
+  close()
+  {
+    alert('hi');
+  }
   getData() {
     var get_url;
     if (this.entity) {
@@ -108,6 +116,7 @@ console.log(item);
                   }
                 });
                 temp_object['redirectToUrl'] = urlParam.join("/").replace("//", "/");
+                temp_object['id'] = element.osid;
               }
             }
             temp_object['type'] = field.type
