@@ -1,10 +1,10 @@
 <app-header [headerFor]='entity' [tab]='tab'></app-header>
 <div class="container mt-150">
-    <h3 class="d-inline-block p16 font-weight-bold">{{tableSchema?.title | translate}}</h3>
+    <h5 class="d-inline-block  font-weight-bold">{{tableSchema?.title | translate}}</h5>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th class="p14 text-grey-color" *ngFor="let th of tableSchema?.fields;" scope="col">{{th?.title | translate}}</th>
+                <th class="p16 text-grey-color fw-bold" *ngFor="let th of tableSchema?.fields;" scope="col">{{th?.title | translate}}</th>
             
                 <!-- <th scope="col">Name</th>
         <th scope="col"></th> -->
