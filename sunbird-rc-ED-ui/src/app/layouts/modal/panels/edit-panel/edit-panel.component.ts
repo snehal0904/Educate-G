@@ -31,5 +31,6 @@ export class EditPanelComponent implements OnInit {
   close() {
     this.location.back()
     this.panel.close();
-  }
+    window.location.reload();
+ }
 }

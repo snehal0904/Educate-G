@@ -1,0 +1,295 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "properties": {
+      "Interview": {
+        "$ref": "#/definitions/Interview"
+      }
+    },
+    "required": [
+      "Interview"
+    ],
+    "title": "Interview",
+    "definitions": {
+      "Interview": {
+        "$id": "#/properties/Interview",
+        "type": "object",
+        "title": "The Interview Questions Schema",
+        "required": [],
+        "properties": {
+          "vfsTeamName": {
+            "$id": "#/properties/vfsTeamName",
+            "type": "string",
+            "enum": [
+              "शेख शोएब मानसुरी",
+              "गुलशन निमजे",
+              "अश्लेषेश अधाऊ",
+              "नेहा प्रजापति"
+            ],
+            "title": "VFS team name"
+          },
+          "mcqWhyDoYouWantPragatiPrerak": {
+            "$id": "#/properties/mcqWhyDoYouWantPragatiPrerak",
+            "type": "string",
+            "title": "Why do you want to be a Pragati Prerak?",
+            "enum": [
+              "अन्य",
+              "आम तौर पर नौकरी की तलाश में",
+              "एक शिक्षण भूमिका में रुचि",
+              "बालिका सशक्तिकरण में रुचि",
+              "शिक्षा में रुचि",
+              "समाज की सेवा करने में रुचि"
+            ]
+          },
+          "freeTextWhyDoYouWantPragatiPrerak": {
+            "$id": "#/properties/freeTextWhyDoYouWantPragatiPrerak",
+            "type": "string",
+            "title": "Why do you want to be a Pragati Prerak?"
+          },
+          "mcqPastExperience": {
+            "$id": "#/properties/mcqPastExperience",
+            "type": "string",
+            "title": "Past experience of teaching / volunteering / training ?",
+            "enum": [
+              "अन्य",
+              "प्रशिक्षण अनुभव",
+              "शिक्षण अनुभव",
+              "स्वयंसेवा अनुभव"
+            ]
+          },
+          "freeTextPastExperience": {
+            "$id": "#/properties/freeTextPastExperience",
+            "type": "string",
+            "title": "Past experience of teaching / volunteering / training ?"
+          },
+          "mcqNgoExperience": {
+            "$id": "#/properties/mcqNgoExperience",
+            "type": "string",
+            "title": "NGO expierience",
+            "enum": [
+              "नहीं",
+              "हा"
+            ]
+          },
+          "freeTextNgoExperience": {
+            "$id": "#/properties/freeTextNgoExperience",
+            "type": "string",
+            "title": "NGO experience details (Sector, Stakeholder, Engagement type)"
+          },
+          "mcqYearOfNgoExperience": {
+            "$id": "#/properties/mcqYearOfNgoExperience",
+            "type": "string",
+            "title": "Year of NGO expireince",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "10+"
+            ]
+          },
+          "mcqSectorOfNgoExperience": {
+            "$id": "#/properties/mcqSectorOfNgoExperience",
+            "type": "string",
+            "title": "<If NGO expeirience is 'Yes'> Sector of NGO expeirience",
+            "enum": [
+              "अन्य",
+              "महिला सशक्तिकरण",
+              "किशोरी सशक्तिकरण",
+              "आजीविका",
+              "स्वास्थ्य",
+              "शिक्षा"
+            ]
+          },
+          "mcqPrimaryStakeholder": {
+            "$id": "#/properties/mcqPrimaryStakeholder",
+            "type": "string",
+            "title": "<If NGO expeirience is 'Yes'> Primary stakeholder",
+            "enum": [
+              "अन्य",
+              "वयस्क",
+              "किशोर",
+              "बच्चे",
+              "वयस्क महिलाएं",
+              "किशोरी लड़कियां",
+              "बालिकाएं"
+            ]
+          },
+          "mcqEngagementType": {
+            "$id": "#/properties/mcqEngagementType",
+            "type": "string",
+            "title": "<If NGO expeirience is 'Yes'> Engagement type",
+            "enum": [
+              "अन्य",
+              "कार्यक्रम प्रबंधन",
+              "शिक्षण",
+              "सामुदायिक जुड़ाव",
+              "ऑपरेशनल बैक एंड वर्क"
+            ]
+          },
+          "mcqTeachingExpierience": {
+            "$id": "#/properties/mcqTeachingExpierience",
+            "type": "string",
+            "title": "Teaching expierience",
+            "enum": [
+              "नहीं",
+              "हा"
+            ]
+          },
+          "freeTextTeachingExpierience": {
+            "$id": "#/properties/freeTextTeachingExpierience",
+            "type": "string",
+            "title": "Teaching expierience (Engagement type, Primary stakeholder)"
+          },
+          "mcqYearOfTeachingExpierience": {
+            "$id": "#/properties/mcqYearOfTeachingExpierience",
+            "type": "string",
+            "title": "Years of teaching expierience",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "10+"
+            ]
+          },
+          "mcqTeachingEngagementType": {
+            "$id": "#/properties/mcqTeachingEngagementType",
+            "type": "string",
+            "title": "<If teaching expierience is 'Yes'> Teaching engagement type",
+            "enum": [
+              "अन्य",
+              "स्कूल के बाहर निजी शिक्षक",
+              "निजी स्कूल में शिक्षक",
+              "सरकारी स्कूलों में शिक्षक"
+            ]
+          },
+          "mcqPrimaryStakeholderType": {
+            "$id": "#/properties/mcqPrimaryStakeholderType",
+            "type": "string",
+            "title": "<If teaching expierience is 'Yes'> Primary stakeholder type",
+            "enum": [
+              "अन्य",
+              "सरकारी संस्थान या योजना",
+              "निजी संस्थान",
+              "एनजीओ"
+            ]
+          },
+          "mcqTrainingExpierience": {
+            "$id": "#/properties/mcqTrainingExpierience",
+            "type": "string",
+            "title": "Training expierience",
+            "enum": [
+              "नहीं",
+              "हा"
+            ]
+          },
+          "freeTextTrainingExpierience": {
+            "$id": "#/properties/freeTextTrainingExpierience",
+            "type": "string",
+            "title": "Teaching expierience (Engagement type, Primary stakeholder)"
+          },
+          "mcqTrainingProvider": {
+            "$id": "#/properties/mcqTrainingProvider",
+            "type": "string",
+            "title": "<If training expirience is 'Yes'> Training provider ",
+            "enum": [
+              "अन्य",
+              "सरकारी संस्थान या योजना",
+              "निजी संस्थान",
+              "एनजीओ"
+            ]
+          },
+          "mcqTrainingDuration": {
+            "$id": "#/properties/mcqTrainingDuration",
+            "type": "string",
+            "title": "<If training expirience is 'Yes'> Training duration",
+            "enum": [
+              "6 महीने से ज्यादा",
+              "3 से 6 महीने",
+              "1 से 3 महीने",
+              "एक महीने से कम"
+            ]
+          },
+          "mcqTrainingContent": {
+            "$id": "#/properties/mcqTrainingContent",
+            "type": "string",
+            "title": "<If training expirience is 'Yes'> Training content/objective",
+            "enum": [
+              "अन्य",
+              "नेतृत्व विकास",
+              "व्यावसायिक पाठ्यक्रम",
+              "जीवन कौशल",
+              "सामुदायिक जुड़ा",
+              "शिक्षण"
+            ]
+          },
+          "mcqPastExperienceWillHelp": {
+            "$id": "#/properties/mcqPastExperienceWillHelp",
+            "type": "string",
+            "title": "How do you think your past expireince will help you in role as Prerak? (To judge comprehension and communication skills)",
+            "enum": [
+              "उन्होंने अपनी प्रतिक्रियाओं को अच्छी तरह से व्यक्त किया और अपने पिछले अनुभवों से विशिष्ट उदाहरण लेने में सक्षम थे",
+              "उन्होंने प्रश्न को समझ लिया और प्रतिक्रिया को अच्छी तरह से स्पष्ट करने में सक्षम थे (हालांकि उत्तर संतोषजनक नहीं था)",
+              "वे प्रश्न को समझ नहीं पाए थे या इसे अच्छी तरह से स्पष्ट नहीं कर पाए थे"
+            ]
+          },
+          "mcqPocPastExperience": {
+            "$id": "#/properties/mcqPocPastExperience",
+            "type": "string",
+            "title": "Can you share details of a POC from any of the past experiences for a reference check?",
+            "enum": [
+              "नहीं",
+              "हा"
+            ]
+          },
+          "freeTextNameOfPoc": {
+            "$id": "#/properties/freeTextNameOfPoc",
+            "type": "string",
+            "title": "<If they are able to share reference> Name of the POC"
+          },
+          "digitMobNoOfPoc": {
+            "$id": "#/properties/digitMobNoOfPoc",
+            "type": "string",
+            "title": "<If they are able to share reference> Mobile number of POC"
+          },
+          "mcqRelationshipWithThePOC": {
+            "$id": "#/properties/mcqRelationshipWithThePOC",
+            "type": "string",
+            "title": "<If they are able to share reference> Relationship with the POC",
+            "enum": [
+              "अन्य",
+              "पंचायती राज सदस्य",
+              "पूर्व शिक्षा/प्रशिक्षण प्रशिक्षक",
+              "पूर्व नियोक्ता"
+            ]
+          }
+        }
+      }
+    },
+    "_osConfig": {
+      "ownershipAttributes": [
+        {
+          "email": "",
+          "mobile": "",
+          "userId": ""
+        }
+      ],
+      "inviteRoles": [
+        "anonymous"
+      ],
+      "enableLogin": true
+    }
+  }
