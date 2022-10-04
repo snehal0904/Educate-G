@@ -62,6 +62,8 @@ export class FilterComponent implements OnInit {
             this.activeTabIs = this.searchJson[key1].tab;
           }
         });
+      }, (error) => {
+        console.log("error", error);
       });
 
       this.schemaService.getSchemas().subscribe((res) => {
@@ -87,12 +89,31 @@ export class FilterComponent implements OnInit {
         fieldset.filters.forEach((filter) => {
 
           if (this.privateFields !== [] && !this.privateFields.includes('$.' + filter.propertyPath)) {
-            let fieldObj = {
-              key: filter.key,
-              type: 'input',
-              className: 'col-sm-4',
-              templateOptions: {
-                label: this.translate.instant(filter.title),
+            let fieldObj;
+            if (filter.type === 'select') {
+              fieldObj = {
+                key: filter.key,
+                type: 'select',
+                className: 'col-sm-4',
+                templateOptions: {
+                  label: this.translate.instant(filter.title),
+                  options: filter.templateOptions.options.map((option) => {
+                    return {
+                      label: this.translate.instant(option.label),
+                      value: this.translate.instant(option.value),
+                    }
+                  }),
+                  placeholder: this.translate.instant(filter.templateOptions.placeholder)
+                }
+              }
+            } else {
+              fieldObj = {
+                key: filter.key,
+                type: 'input',
+                className: 'col-sm-4',
+                templateOptions: {
+                  label: this.translate.instant(filter.title),
+                }
               }
             }
 
@@ -112,6 +133,7 @@ export class FilterComponent implements OnInit {
         });
       }
     });
+    console.log("fields", this.fields);
     this.dropdownList = [...list];
   }
 

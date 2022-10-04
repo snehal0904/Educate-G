@@ -1,71 +1,66 @@
 {
-  "type": "opensaberLayoutSchema",
-  "version": "0.1",
-  "header": "default",
-  "limit": "5",
-  "searches": [
-      {
-          "prerak": {
-              "tab": "prerak",
-              "tabTitle": "SEARCH_PRERAK",
-              "api": "/Prerak/search",
-              "activeTab": "active",
-              "privateFields": "PrerakOsConfig",
-              "filters": [
-                  {
-                      "key": "fullName",
-                      "type": "text",
-                      "title": "FULL_NAME",
-                      "propertyPath": "fullName"
-                  },
-                  {
-                      "key": "mobile",
-                      "type": "text",
-                      "title": "MOBILE_NUMBER",
-                      "propertyPath": "mobile"
-                  }
-              ],
-              "results": {
-                  "fields": [
-                      {
-                          "title": "FULL_NAME",
-                          "property": "fullName"
-                      },
-                      {
-                          "title": "MOBILE_NUMBER",
-                          "property": "mobile"
-                      },
-                      {
-                          "title": "Qualification",
-                          "property": "qualification"
-                      },
-                      {
-                          "title": "Gender",
-                          "property": "gender"
-                      },
-                      {
-                          "title": "Sourcing Channel",
-                          "property": "sourcingChannel"
-                      },
-                      {
-                          "title": "Reference Id",
-                          "property": "referenceId"
-                      },
-                      {
-                          "title": "VFS Member Name",
-                          "property": "vfsMemberName"
-                      },
-                      {
-                          "title": "Call Status",
-                          "property": "callStatus"
-                      },
-                      {
-                          "title": "User Interested Role",
-                          "property": "userInterestedRole"
-                      }
-                  ]
-              }
-          }
-      }
-  ]
+    "type": "opensaberLayoutSchema",
+    "version": "0.1",
+    "header": "default",
+    "limit": "5",
+    "searches": [
+        {
+            "prerak": {
+                "tab": "prerak",
+                "tabTitle": "SEARCH_PRERAK",
+                "api": "/Prerak/search",
+                "activeTab": "active",
+                "privateFields": "PrerakOsConfig",
+                "filters": [
+                    {
+                        "key": "fullName",
+                        "type": "text",
+                        "title": "FULL_NAME",
+                        "propertyPath": "fullName"
+                    },
+                    {
+                        "key": "mobile",
+                        "type": "text",
+                        "title": "MOBILE_NUMBER",
+                        "propertyPath": "mobile"
+                    },
+                    {
+                        "key": "gender",
+                        "type": "select",
+                        "title": "GENDER",
+                        "propertyPath": "gender",
+                        "templateOptions": {
+                            "placeholder": "SELECT_GENDER",
+                            "options": [
+                                {
+                                    "label": "MALE",
+                                    "value": "MALE"
+                                },
+                                {
+                                    "label": "FEMALE",
+                                    "value": "FEMALE"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "results": {
+                    "fields": [
+                        {
+                            "title": "FULL_NAME",
+                            "property": "fullName"
+                        },
+                        {
+                            "title": "MOBILE_NUMBER",
+                            "property": "mobile"
+                        },
+                        {
+                            "title": "GENDER",
+                            "property": "gender"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
 }

@@ -186,7 +186,9 @@
     "HERE" : "here",
     "SEARCH_PRERAK": "Search Prerak",
     "FULL_NAME": "Full Name",
-    "MOBILE_NUMBER": "Mobile Number"
-
-    
+    "MOBILE_NUMBER": "Mobile Number",
+    "GENDER": "Gender",
+    "SELECT_GENDER": "Select Gender",
+    "MALE": "Male",
+    "FEMALE": "Female"
 }
