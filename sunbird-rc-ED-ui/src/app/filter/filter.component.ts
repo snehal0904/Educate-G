@@ -49,7 +49,7 @@ export class FilterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.schemaService.getSearchJSON().subscribe((searchSchemas) => {
+    this.schemaService.getFilterJSON().subscribe((searchSchemas) => {
       this.searchSchemas = searchSchemas;
 
       Object.keys(this.searchSchemas.searches).forEach((key) => {
