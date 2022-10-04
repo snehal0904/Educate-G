@@ -130,7 +130,7 @@
             "prerak-admin-setup": {
                 "api": "/Prerak",
                 "type": "entity",
-                "redirectTo": "/profile/prerak",
+                "redirectTo": "admin/attestation/admin-attestation/Prerak",
                 "langKey": "prerakStudent",
                 "fieldsets": [
                     {

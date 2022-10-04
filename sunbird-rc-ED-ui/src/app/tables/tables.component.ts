@@ -2,7 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SchemaService } from '../services/data/schema.service';
 import { GeneralService } from '../services/general/general.service';
-// import * as TableSchemas from './tables.json'
+
+
+import { FormGroup } from '@angular/forms';
+import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
+import { Location } from '@angular/common';
+import { ToastMessageService } from '../services/toast-message/toast-message.service';
+
 
 @Component({
   selector: 'app-tables',
@@ -24,17 +30,25 @@ export class TablesComponent implements OnInit {
   limit: number = 10;
   identifier: any;
   layout: string;
-  isPreview: boolean;
+  isPreview: boolean = false;
   isLoading = false;
 
+  form = new FormGroup({});
+  modelInterview: any;
+  options: FormlyFormOptions = {};
+
+  fields: FormlyFieldConfig[] = [];
+  isEdit: boolean = false;
+  responseData: any;
+
   constructor(
+    public location: Location,
     public router: Router,
-    private route: ActivatedRoute,
-    public generalService: GeneralService,
-    public schemaService: SchemaService
-  ) { }
+    public toastMsg: ToastMessageService, private route: ActivatedRoute, public generalService: GeneralService, public schemaService: SchemaService) { }
 
   ngOnInit(): void {
+    this.location.replaceState("admin/attestation/admin-attestation/Prerak");
+
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     let tabUrl = this.router.url;
     this.route.params.subscribe(async params => {
@@ -50,16 +64,121 @@ export class TablesComponent implements OnInit {
         this.limit = filtered[0].hasOwnProperty(this.limit) ? filtered[0].limit : this.limit;
         await this.getData();
       })
+
+    });
+
+    this.schemaService.getJSONData('/assets/config/ui-config/interview.json').subscribe((res) => {
+      this.responseData = res.definitions.Interview.properties;
+      let _self = this;
+      Object.keys(this.responseData).forEach(function (key) {
+        let fieldVal = _self.responseData[key];
+        let option = [];
+
+
+
+     
+        if (fieldVal.hasOwnProperty('enum')) {
+          for (let i = 0; i < fieldVal.enum.length; i++) {
+            option.push({ value: fieldVal.enum[i], label: fieldVal.enum[i] })
+          }
+          console.log({ option });
+          _self.fields.push({
+            key: key,
+            type: 'select',
+            templateOptions: {
+              label: fieldVal.title,
+              // placeholder: fieldVal.placeholder,
+              // description: fieldVal.description,
+             // required: true,
+              options: option,
+            },
+          });
+        } else {
+          _self.fields.push({
+            key: key,
+            type: 'input',
+            templateOptions: {
+             // placeholder: fieldVal.placeholder,
+              // description: fieldVal.description,
+             // required: true,
+              label: fieldVal.title
+            }
+
+          })
+        }
+        console.log({ key });
+      })
     });
   }
 
-  openPreview(item) {
+  submitInterviewData(modelInterview)
+  {
+    let data = {
+      'vfsTeamName' : modelInterview['vfsTeamName'],
+      'mcqWhyDoYouWantPragatiPrerak' : modelInterview['mcqWhyDoYouWantPragatiPrerak'],
+      'freeTextWhyDoYouWantPragatiPrerak' : modelInterview['freeTextWhyDoYouWantPragatiPrerak'],
+      'mcqPastExperience' : modelInterview['mcqPastExperience'],
+      'freeTextPastExperience' : modelInterview['freeTextPastExperience'],
+      'mcqNgoExperience' : modelInterview['mcqNgoExperience'],
+      'freeTextNgoExperience' : modelInterview['freeTextNgoExperience'],
+      'mcqYearOfNgoExperience' : modelInterview['mcqYearOfNgoExperience'],
+      'mcqSectorOfNgoExperience' : modelInterview['mcqSectorOfNgoExperience'],
+      'mcqPrimaryStakeholder' : modelInterview['mcqPrimaryStakeholder'],
+      'mcqEngagementType' : modelInterview['mcqEngagementType'],
+      'mcqTeachingExpierience' : modelInterview['mcqTeachingExpierience'],
+      'freeTextTeachingExpierience' : modelInterview['freeTextTeachingExpierience'],
+      'mcqYearOfTeachingExpierience' : modelInterview['mcqYearOfTeachingExpierience'],
+      'mcqTeachingEngagementType' : modelInterview['mcqTeachingEngagementType'],
+      'mcqPrimaryStakeholderType' : modelInterview['mcqPrimaryStakeholderType'],
+      'mcqTrainingExpierience' : modelInterview['mcqTrainingExpierience'],
+      'freeTextTrainingExpierience' : modelInterview['freeTextTrainingExpierience'],
+      'mcqTrainingProvider' : modelInterview['mcqTrainingProvider'],
+      'mcqTrainingDuration' : modelInterview['mcqTrainingDuration'],
+      'mcqTrainingContent' : modelInterview['mcqTrainingContent'],
+      'mcqPastExperienceWillHelp' : modelInterview['mcqPastExperienceWillHelp'],
+      'mcqPocPastExperience' : modelInterview['mcqPocPastExperience'],
+      'freeTextNameOfPoc' : modelInterview['freeTextNameOfPoc'],
+      'digitMobNoOfPoc' : modelInterview['digitMobNoOfPoc'],
+      'mcqRelationshipWithThePOC' : modelInterview['mcqRelationshipWithThePOC'],
+    }
+   // this.model['sorder']  = this.exLength;
+     this.generalService.postData('/Interview', data).subscribe((res) => {
+       console.log({res});
+      if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
+      // this.router.navigate([this.redirectTo])
+      }
+      else if (res.params.errmsg != '' && res.params.status == 'UNSUCCESSFUL') {
+        this.toastMsg.error('error', res.params.errmsg);
+
+      }
+    }, (err) => {
+      this.toastMsg.error('error', err.error.params.errmsg);
+      
+    });
+  }
+  openPreview(item, row) {
+    this.isPreview = true;
+
     this.identifier = item.id;
     this.layout = 'Prerak';
   }
 
-  close() {
-    alert('hi');
+  openEdit(item, row) {
+    this.identifier = '';
+    this.isEdit = true;
+    this.isPreview = false;
+
+
+    this.identifier = item.id;
+    this.layout = 'Prerak';
+    this.location.replaceState("admin/attestation/admin-attestation/Prerak/(claim:edit/prerak-admin-setup)");
+
+  }
+
+ getPrerakData(data)
+  {
+
+ console.log(data);
   }
 
   getData(request = { filters: {} }) {
