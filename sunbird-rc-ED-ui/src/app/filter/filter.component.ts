@@ -133,7 +133,6 @@ export class FilterComponent implements OnInit {
         });
       }
     });
-    console.log("fields", this.fields);
     this.dropdownList = [...list];
   }
 

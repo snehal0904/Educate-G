@@ -142,7 +142,7 @@ export class TablesComponent implements OnInit {
       'mcqRelationshipWithThePOC' : modelInterview['mcqRelationshipWithThePOC'],
     }
    // this.model['sorder']  = this.exLength;
-     this.generalService.postData('/Interview', data).subscribe((res) => {
+     this.generalService.postData('/Prerak/'+ this.identifier, data).subscribe((res) => {
        console.log({res});
       if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
       // this.router.navigate([this.redirectTo])
@@ -157,6 +157,7 @@ export class TablesComponent implements OnInit {
     });
   }
   openPreview(item, row) {
+    this.isEdit = false;
     this.isPreview = true;
 
     this.identifier = item.id;
@@ -171,14 +172,12 @@ export class TablesComponent implements OnInit {
 
     this.identifier = item.id;
     this.layout = 'Prerak';
-    this.location.replaceState("admin/attestation/admin-attestation/Prerak/(claim:edit/prerak-admin-setup)");
 
   }
 
- getPrerakData(data)
+ getPrerakData(item, data)
   {
-
- console.log(data);
+    this.identifier = item.id;
   }
 
   getData(request = { filters: {} }) {
