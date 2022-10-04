@@ -34,6 +34,34 @@
                       {
                           "title": "MOBILE_NUMBER",
                           "property": "mobile"
+                      },
+                      {
+                          "title": "Qualification",
+                          "property": "qualification"
+                      },
+                      {
+                          "title": "Gender",
+                          "property": "gender"
+                      },
+                      {
+                          "title": "Sourcing Channel",
+                          "property": "sourcingChannel"
+                      },
+                      {
+                          "title": "Reference Id",
+                          "property": "referenceId"
+                      },
+                      {
+                          "title": "VFS Member Name",
+                          "property": "vfsMemberName"
+                      },
+                      {
+                          "title": "Call Status",
+                          "property": "callStatus"
+                      },
+                      {
+                          "title": "User Interested Role",
+                          "property": "userInterestedRole"
                       }
                   ]
               }

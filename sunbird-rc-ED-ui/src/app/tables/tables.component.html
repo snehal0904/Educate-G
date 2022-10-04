@@ -17,13 +17,15 @@
                     <ng-template ngFor let-td [ngForOf]="item" class="row" let-j="index">
                         <td *ngIf="td.type && td.type === 'button'; else normalTd">
                             <!-- <a [routerLink]="[td.redirectToUrl]" class="btn btn-bg btn-sec-bg btn-style float-end text-primary-color text-end fw-bold text-capitalize">{{td?.buttonText | translate}}</a> -->
-                            <a panelEditLink="prerak-admin-setup"
+                            <a panelEditLink="prerak-setup"
                                 class=" mr-3 p-2 p14 btn-bg label-primary btn-style float-end" data-toggle="modal"
                                 data-target="#prewiewEdit" (click)="openEdit(item[j])">Edit</a> &nbsp; &nbsp;
+
                             <a class=" p-2 p14 btn-bg label-primary mr-3 btn-style float-end" data-toggle="modal"
                                 data-target="#prewiewProfile" (click)="openPreview(item[j])">View</a>
-     <a class=" mr-3 p-2 p14 btn-bg label-primary btn-style float-end" data-toggle="modal" (click)="getPrerakData(item)"  data-target="#interviewPG">Interview</a> &nbsp; &nbsp;
 
+                            <a class=" mr-3 p-2 p14 btn-bg label-primary btn-style float-end" data-toggle="modal"
+                                (click)="getPrerakData(item)" data-target="#interviewPG">Interview</a> &nbsp; &nbsp;
 
                         </td>
                         <ng-template #normalTd>
@@ -69,8 +71,8 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" (click)="closePg()" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" (click)="closePg()"
+                        aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body" *ngIf="identifier">
                     <app-layouts layout={{layout}} identifier={{identifier}} public="true"></app-layouts>
