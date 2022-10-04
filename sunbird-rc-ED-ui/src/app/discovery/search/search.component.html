@@ -38,7 +38,7 @@
   <div class="mt-4" *ngIf="items">
 
     <!-- Search Result -->
-    <div class="card p-4" this.cardFields
+    <div class="card p-4" 
       *ngFor="let item of items | paginate: { itemsPerPage: limit, currentPage: page }">
       <div *ngFor="let field of item.fields">
         <div data-toggle="modal" data-target="#prewiewProfile" (click)="showDetails(item?.data)">
