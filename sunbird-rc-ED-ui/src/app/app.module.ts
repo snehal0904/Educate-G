@@ -122,6 +122,7 @@ import { DocDetailViewComponent } from './documents/doc-detail-view/doc-detail-v
 // import { FaqComponent } from './custom-components/faq/faq.component';
 import { SafeHtmlPipe } from './safe-html.pipe';
 import { initTheme } from './theme.config';
+import { FilterComponent } from './filter/filter.component';
 // import { CreateCertificateComponent } from './create-certificate/create-certificate.component';
 
 @NgModule({
@@ -153,7 +154,8 @@ import { initTheme } from './theme.config';
     ScanDocumentComponent,
     ScanQrCodeComponent,
     BrowseDocumentsComponent,
-    AuthImagePipe
+    AuthImagePipe,
+    FilterComponent
   ],
   imports: [
     BrowserModule,

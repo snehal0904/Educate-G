@@ -25,18 +25,24 @@ export class TablesComponent implements OnInit {
   identifier: any;
   layout: string;
   isPreview: boolean;
+  isLoading = false;
 
-  constructor(public router: Router, private route: ActivatedRoute, public generalService: GeneralService, public schemaService: SchemaService) { }
+  constructor(
+    public router: Router,
+    private route: ActivatedRoute,
+    public generalService: GeneralService,
+    public schemaService: SchemaService
+  ) { }
 
   ngOnInit(): void {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    var tab_url = this.router.url
+    let tabUrl = this.router.url;
     this.route.params.subscribe(async params => {
-      this.table = (params['table']).toLowerCase()
-      this.entity = (params['entity']).toLowerCase();
-      this.tab = tab_url.replace(this.table, "").replace(this.entity, "").split("/").join("")
+      this.table = params['table'].toLowerCase();
+      this.entity = params['entity'].toLowerCase();
+      this.tab = tabUrl.replace(this.table, "").replace(this.entity, "").split("/").join("");
       this.schemaService.getTableJSON().subscribe(async (TableSchemas) => {
-        var filtered = TableSchemas.tables.filter(obj => {
+        let filtered = TableSchemas.tables.filter(obj => {
           return Object.keys(obj)[0] === this.table
         })
         this.tableSchema = filtered[0][this.table]
@@ -44,99 +50,94 @@ export class TablesComponent implements OnInit {
         this.limit = filtered[0].hasOwnProperty(this.limit) ? filtered[0].limit : this.limit;
         await this.getData();
       })
-      
     });
   }
 
-  openPreview(item){
+  openPreview(item) {
     this.identifier = item.id;
     this.layout = 'Prerak';
   }
 
-  close()
-  {
+  close() {
     alert('hi');
   }
-  getData() {
-    var get_url;
+
+  getData(request = { filters: {} }) {
+    this.isLoading = true;
+    let url;
     if (this.entity) {
-      get_url = this.apiUrl
+      url = this.apiUrl
     } else {
-      console.log("Something went wrong")
+      console.log("Something went wrong");
+      return;
     }
 
-    if(get_url.includes('Search') || get_url.includes('search'))
-    {
-      let data = {
-        "filters": {
-        }
-    };
-
-      this.generalService.postData(get_url, data).subscribe((res) => {
+    if (url.toLowerCase().includes('search')) {
+      this.generalService.postData(url, request).subscribe((res) => {
         this.model = res;
-        // this.entity = res[0].osid;
         this.addData()
       });
-
-    }else{
-      this.generalService.getData(get_url).subscribe((res) => {
+    } else {
+      this.generalService.getData(url).subscribe((res) => {
         this.model = res;
-        // this.entity = res[0].osid;
         this.addData()
       });
     }
-
   }
 
   addData() {
-
-    var temp_array;
-    let temp_object
+    let tempArray;
+    let tempObject;
+    this.property = []; 
     this.model.forEach(element => {
-     // if (element.status === "OPEN") {
-        temp_array = [];
-        this.tableSchema.fields.forEach((field) => {
+      tempArray = [];
+      this.tableSchema.fields.forEach((field) => {
+        tempObject = field;
 
-          temp_object = field;
+        if (tempObject.name) {
+          tempObject['value'] = element[field.name]
+          tempObject['status'] = element['status']
+        }
 
-          if (temp_object.name) {
-            temp_object['value'] = element[field.name]
-            temp_object['status'] = element['status']
-          }
-          if (temp_object.formate) {
-            temp_object['formate'] = field.formate
-          }
-          if (temp_object.custom) {
-            if (temp_object.type == "button") {
-              if (temp_object.redirectTo && temp_object.redirectTo.includes(":")) {
-                let urlParam = temp_object.redirectTo.split(":")
-                urlParam.forEach((paramVal, index) => {
-                  if (paramVal in element) {
-                    urlParam[index] = element[paramVal]
-                  }
-                });
-                temp_object['redirectToUrl'] = urlParam.join("/").replace("//", "/");
-                temp_object['id'] = element.osid;
-              }
+        if (tempObject.formate) {
+          tempObject['formate'] = field.formate
+        }
+
+        if (tempObject.custom) {
+          if (tempObject.type === "button") {
+            if (tempObject.redirectTo && tempObject.redirectTo.includes(":")) {
+              let urlParam = tempObject.redirectTo.split(":")
+              urlParam.forEach((paramVal, index) => {
+                if (paramVal in element) {
+                  urlParam[index] = element[paramVal]
+                }
+              });
+              tempObject['redirectToUrl'] = urlParam.join("/").replace("//", "/");
+              tempObject['id'] = element.osid;
             }
-            temp_object['type'] = field.type
           }
-          temp_array.push(this.pushData(temp_object));
-        });
-        this.property.push(temp_array)
-     // }
+          tempObject['type'] = field.type
+        }
+        tempArray.push(this.pushData(tempObject));
+      });
+      this.property.push(tempArray)
     });
 
     this.tableSchema.items = this.property;
+    this.isLoading = false;
   }
 
   pushData(data) {
-    var object = {};
-    for (var key in data) {
+    let object = {};
+    for (let key in data) {
       if (data.hasOwnProperty(key))
         object[key] = data[key];
     }
     return object;
+  }
+
+  onSubmit(event) {
+    this.getData(event);
   }
 
 }
