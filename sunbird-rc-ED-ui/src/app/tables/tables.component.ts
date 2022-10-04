@@ -171,6 +171,8 @@ export class TablesComponent implements OnInit {
 
     this.identifier = item.id;
     this.layout = 'Prerak';
+    this.location.replaceState("admin/attestation/admin-attestation/Prerak/(claim:edit/prerak-admin-setup)");
+
   }
 
  getPrerakData(data)
