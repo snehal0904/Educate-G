@@ -33,12 +33,140 @@
                             "placeholder": "SELECT_GENDER",
                             "options": [
                                 {
-                                    "label": "MALE",
-                                    "value": "MALE"
+                                    "label": "पुरुष",
+                                    "value": "पुरुष"
                                 },
                                 {
-                                    "label": "FEMALE",
-                                    "value": "FEMALE"
+                                    "label": "महिला",
+                                    "value": "महिला"
+                                },
+                                {
+                                    "label": "अन्य",
+                                    "value": "अन्य"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "key": "callStatus",
+                        "type": "select",
+                        "title": "CALL_STATUS",
+                        "propertyPath": "callStatus",
+                        "templateOptions": {
+                            "placeholder": "CALL_STATUS",
+                            "options": [
+                                {
+                                    "label": "कॉल बैक",
+                                    "value": "कॉल बैक"
+                                },
+                                {
+                                    "label": "गलत नंबर",
+                                    "value": "गलत नंबर"
+                                },
+                                {
+                                    "label": "RnR",
+                                    "value": "RnR"
+                                },
+                                {
+                                    "label": "पूर्ण",
+                                    "value": "पूर्ण"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "key": "vfsMemberName",
+                        "type": "select",
+                        "title": "VFS_MEMBER_NAME",
+                        "propertyPath": "vfsMemberName",
+                        "templateOptions": {
+                            "placeholder": "VFS_MEMBER_NAME",
+                            "options": [
+                                {
+                                    "label": "शेख शोएब मानसुरी",
+                                    "value": "शेख शोएब मानसुरी"
+                                },
+                                {
+                                    "label": "गुलशन निमजे",
+                                    "value": "गुलशन निमजे"
+                                },
+                                {
+                                    "label": "अश्लेषेश अधाऊ",
+                                    "value": "अश्लेषेश अधाऊ"
+                                },
+                                {
+                                    "label": "नेहा प्रजापति",
+                                    "value": "नेहा प्रजापति"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "key": "candidateStatus",
+                        "type": "select",
+                        "title": "CANDIDATE_STATUS",
+                        "propertyPath": "candidateStatus",
+                        "templateOptions": {
+                            "placeholder": "CANDIDATE_STATUS",
+                            "options": [
+                                {
+                                    "label": "Attended Training",
+                                    "value": "Attended Training"
+                                },
+                                {
+                                    "label": "Finalized",
+                                    "value": "Finalized"
+                                },
+                                {
+                                    "label": "Attended Orientation",
+                                    "value": "Attended Orientation"
+                                },
+                                {
+                                    "label": "Not interested in attending orientation",
+                                    "value": "Not interested in attending orientation"
+                                },
+                                {
+                                    "label": "Not interested",
+                                    "value": "Not interested"
+                                },
+                                {
+                                    "label": "Shortlisted",
+                                    "value": "Shortlisted"
+                                },
+                                {
+                                    "label": "Rejected",
+                                    "value": "Rejected"
+                                },
+                                {
+                                    "label": "Applied",
+                                    "value": "Applied"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "key": "sourcingChannel",
+                        "type": "select",
+                        "title": "SOURCING_CHANNEL",
+                        "propertyPath": "sourcingChannel",
+                        "templateOptions": {
+                            "placeholder": "SOURCING_CHANNEL",
+                            "options": [
+                                {
+                                    "label": "Advertisements",
+                                    "value": "Advertisements"
+                                },
+                                {
+                                    "label": "NGO referral",
+                                    "value": "NGO referral"
+                                },
+                                {
+                                    "label": "Prerak referral",
+                                    "value": "Prerak referral"
+                                },
+                                {
+                                    "label": "Other",
+                                    "value": "Other"
                                 }
                             ]
                         }
@@ -57,6 +185,22 @@
                         {
                             "title": "GENDER",
                             "property": "gender"
+                        },
+                        {
+                            "title": "CALL_STATUS",
+                            "property": "callStatus"
+                        },
+                        {
+                            "title": "VFS_MEMBER_NAME",
+                            "property": "vfsMemberName"
+                        },
+                        {
+                            "title": "CANDIDATE_STATUS",
+                            "property": "candidateStatus"
+                        },
+                        {
+                            "title": "sourcingChannel",
+                            "property": "SOURCING_CHANNEL"
                         }
                     ]
                 }
