@@ -73,16 +73,6 @@ export class SchemaService {
     return this.dataService.get(req);
   }
 
-  getFilterJSON() {
-    let url = `.${this.configFolder}/filter.json`;
-    url.replace('//', '/');
-    const req = {
-      url: url
-    };
-
-    return this.dataService.get(req);
-  }
-
   getPageJSON() {
     let url = `.${this.configFolder}/pages.json`;
     url.replace('//', '/');

@@ -25,7 +25,9 @@
                                 data-target="#prewiewProfile" (click)="openPreview(item[j])">View</a>
 
                             <a class=" mr-3 p-2 p14 btn-bg label-primary btn-style float-end" data-toggle="modal"
-                                (click)="getPrerakData(item)" data-target="#interviewPG">Interview</a> &nbsp; &nbsp;
+                                (click)="getPrerakData(item[j], item)" data-target="#interviewPG">Interview</a> &nbsp;
+                            &nbsp;
+
 
                         </td>
                         <ng-template #normalTd>
@@ -57,7 +59,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
-                <div class="modal-body" *ngIf="isPreview">
+                <div class="modal-body" *ngIf="isPreview && identifier">
                     <app-layouts layout={{layout}} identifier={{identifier}} public="true"></app-layouts>
                 </div>
             </div>
@@ -71,10 +73,10 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" (click)="closePg()"
-                        aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                 </div>
-                <div class="modal-body" *ngIf="identifier">
+                <div class="modal-body" *ngIf="isEdit && identifier">
                     <app-layouts layout={{layout}} identifier={{identifier}} public="true"></app-layouts>
 
                 </div>
