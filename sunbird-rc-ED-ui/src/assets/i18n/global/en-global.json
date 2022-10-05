@@ -190,5 +190,9 @@
     "GENDER": "Gender",
     "SELECT_GENDER": "Select Gender",
     "MALE": "Male",
-    "FEMALE": "Female"
+    "FEMALE": "Female",
+    "CALL_STATUS": "Call Status",
+    "VFS_MEMBER_NAME": "VFS Member Name",
+    "CANDIDATE_STATUS": "Candidate Status",
+    "SOURCING_CHANNEL": "Sourcing Channel"
 }

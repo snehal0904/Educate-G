@@ -189,5 +189,9 @@
   "GENDER": "लिंग",
   "SELECT_GENDER": "लिंग चुनें",
   "MALE": "पुरुष",
-  "FEMALE": "महिला"
+  "FEMALE": "महिला",
+  "CALL_STATUS": "कॉल की स्थिति",
+  "VFS_MEMBER_NAME": "वीएफएस सदस्य का नाम",
+  "CANDIDATE_STATUS": "उम्मीदवार की स्थिति",
+  "SOURCING_CHANNEL": "सोर्सिंग चैनल"
 }

@@ -97,12 +97,7 @@ export class FilterComponent implements OnInit {
                 className: 'col-sm-4',
                 templateOptions: {
                   label: this.translate.instant(filter.title),
-                  options: filter.templateOptions.options.map((option) => {
-                    return {
-                      label: this.translate.instant(option.label),
-                      value: this.translate.instant(option.value),
-                    }
-                  }),
+                  options: filter.templateOptions.options,
                   placeholder: this.translate.instant(filter.templateOptions.placeholder)
                 }
               }
