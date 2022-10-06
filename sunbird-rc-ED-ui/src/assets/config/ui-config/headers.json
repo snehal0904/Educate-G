@@ -51,6 +51,23 @@
             }
         },
         {
+            "admin-prerak": {
+                "left": [
+                    {
+                        "title": "HOME",
+                        "redirectTo": "/profile/teacher"
+                    }
+                ],
+                "right": [
+                    {
+                        "title": "LOGOUT",
+                        "redirectTo": "/logout",
+                        "className" : "font-weight-bold"
+                    }
+                ]
+            }
+        },
+        {
             "student": {
                 "left": [
                     {

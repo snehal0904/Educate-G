@@ -33,6 +33,7 @@ const routes: Routes = [
 // Forms
 { path: 'form/:form', component: FormsComponent },
 { path: 'form/:form/:id', component: FormsComponent, canActivate: [AuthGuard] },
+{ path: 'profile/:layout/:id', component: LayoutsComponent, canActivate: [AuthGuard] },
 
 
 // Layouts
@@ -69,7 +70,38 @@ const routes: Routes = [
     }
   ]
 },
-
+{
+  path: 'profile/:layout/:id', component: LayoutsComponent,
+  canActivate: [AuthGuard],
+  children: [
+    {
+      path: 'edit',
+      component: PanelsComponent,
+      outlet: 'claim',
+      children: [
+        {
+          path: ':form',
+          component: EditPanelComponent
+        },
+        {
+          path: ':form/:id',
+          component: EditPanelComponent
+        }
+      ]
+    },
+    {
+      path: 'add',
+      component: PanelsComponent,
+      outlet: 'claim',
+      children: [
+        {
+          path: ':form',
+          component: AddPanelComponent
+        }
+      ]
+    }
+  ]
+},
 // Pages
 { path: 'page/:page', component: PagesComponent },
 

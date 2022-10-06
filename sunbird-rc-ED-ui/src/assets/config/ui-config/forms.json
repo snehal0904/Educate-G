@@ -84,7 +84,7 @@
                                     "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
                                     "message": "NAME_NOT_VALID"
                                 }
-                            }, 
+                            },
                             {
                                 "name": "mobile",
                                 "required": true,
@@ -130,7 +130,7 @@
             "prerak-admin-setup": {
                 "api": "/Prerak",
                 "type": "entity",
-                "redirectTo": "admin/attestation/admin-attestation/Prerak",
+                "redirectTo": "profile/admin-prerak",
                 "langKey": "prerakStudent",
                 "fieldsets": [
                     {
@@ -145,7 +145,7 @@
                                     "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
                                     "message": "NAME_NOT_VALID"
                                 }
-                            }, 
+                            },
                             {
                                 "name": "mobile",
                                 "required": true,
@@ -210,11 +210,7 @@
                             },
                             {
                                 "name": "confirmPhoneNumber"
-                            },
-                            {
-                                "name": "confirmMobNumber"
                             }
-                            
                         ]
                     }
                 ]
@@ -531,130 +527,97 @@
             }
         },
         {
-            "student-education": {
-                "api": "/Student",
-                "type": "property:educationDetails",
-                "redirectTo": "/profile/student",
-                "langKey": "prerakStudent",
+            "interview": {
+                "api": "/Prerak",
+                "type": "property:interviewDetails",
+                "redirectTo": "/profile/admin-prerak/",
+                "langKey" : "teacherStudent",
                 "fieldsets": [
                     {
-                        "definition": "EducationType",
-                        "privacyConfig": "AffiliationOsConfig",
+                        "definition": "interviewDetails",
+                        "privacyConfig": "StudentOsConfig",
+                        "globalPrivacyConfig": "private-access",
                         "fields": [
-                            {
-                                "name": "instituteOSID",
-                                "custom": true,
-                                "element": {
-                                    "widget": {
-                                        "formlyConfig": {
-                                            "type": "input",
-                                            "templateOptions": {
-                                                "type": "hidden"
-                                            }
-                                        }
-                                    }
-                                }
+                              {
+                                "name": "vfsTeamName"
                             },
                             {
-                                "name": "institute",
-                                "required": true,
-                                "autocomplete": {
-                                    "apiURL": "https://demo-education-registry.xiv.in/registry/api/v1/Institute/search",
-                                    "body": {
-                                        "filters": {
-                                            "instituteName": {
-                                                "contains": "{{value}}"
-                                            },
-                                            "instituteAffiliation._osState": {
-                                                "eq": "PUBLISHED"
-                                            }
-                                        },
-                                        "limit": 20,
-                                        "offset": 0
-                                    },
-                                    "responseKey": "instituteName"
-                                },
-                                "autofill": {
-                                    "apiURL": "https://demo-education-registry.xiv.in/registry/api/v1/Institute/search",
-                                    "method": "POST",
-                                    "body": {
-                                        "filters": {
-                                            "instituteName": {
-                                                "contains": "{{value}}"
-                                            }
-                                        },
-                                        "limit": 20,
-                                        "offset": 0
-                                    },
-                                    "fields": [
-                                        {
-                                            "instituteOSID": "osid"
-                                        }
-                                    ],
-                                    "dropdowns": [
-                                        {
-                                            "class": "affiliation[0].classes"
-                                        }
-                                    ]
-                                }
+                                "name": "mcqWhyDoYouWantPragatiPrerak"
                             },
                             {
-                                "name": "class",
-                                "required": true
+                                "name": "freeTextWhyDoYouWantPragatiPrerak"
                             },
                             {
-                                "name": "currStudyHere",
-                                "custom": true,
-                                "element": {
-                                    "title": "CURRENTLY_STUDYING_HERE",
-                                    "widget": {
-                                        "formlyConfig": {
-                                            "type": "checkbox",
-                                            "fieldGroupClassName": "controls",
-                                            "className": "checkbox",
-                                            "templateOptions": {
-                                                "required": true
-                                            }
-                                        }
-                                    }
-                                }
+                                "name": "mcqPastExperience"
                             },
                             {
-                                "name": "documents",
-                                "format": "file",
-                                "multiple": true
+                                "name": "freeTextPastExperience"
                             },
                             {
-                                "name": "attest",
-                                "custom": true,
-                                "element": {
-                                    "title": "SEND_FOR_ATTENSTATION",
-                                    "widget": {
-                                        "formlyConfig": {
-                                            "type": "checkbox",
-                                            "fieldGroupClassName": "controls",
-                                            "className": "checkbox",
-                                            "templateOptions": {
-                                                "required": true
-                                            }
-                                        }
-                                    }
-                                }
+                                "name": "mcqNgoExperience"
                             },
                             {
-                                "name": "notes",
-                                "custom": true,
-                                "element": {
-                                    "title": "NOTE",
-                                    "widget": {
-                                        "formlyConfig": {
-                                            "type": "string",
-                                            "fieldGroupClassName": "controls",
-                                            "className": "input",
-                                            "hideExpression": "!model.attest"
-                                        }
-                                    }
-                                }
+                                "name": "freeTextNgoExperience"
+                            },
+                            {
+                                "name": "mcqYearOfNgoExperience"
+                            },
+                            {
+                                "name": "mcqSectorOfNgoExperience"
+                            },
+                            {
+                                "name": "mcqPrimaryStakeholder"
+                            },
+                            {
+                                "name": "mcqEngagementType"
+                            },
+                            {
+                                "name": "mcqTeachingExpierience"
+                            },
+                            {
+                                "name": "freeTextTeachingExpierience"
+                            },
+                            {
+                                "name": "mcqYearOfTeachingExpierience"
+                            },
+                            {
+                                "name": "mcqTeachingEngagementType"
+                            },
+                            {
+                                "name": "mcqPrimaryStakeholderType"
+                            },
+                            {
+                                "name": "mcqTrainingExpierience"
+                            },
+                            {
+                                "name": "freeTextTrainingExpierience"
+                            },
+                            {
+                                "name": "mcqTrainingProvider"
+                            },
+                            {
+                                "name": "mcqTrainingDuration"
+                            },
+                            {
+                                "name": "mcqTrainingContent"
+                            },
+                            {
+                                "name": "mcqPastExperienceWillHelp"
+                            },
+                            {
+                                "name": "mcqPocPastExperience"
+                            },
+                            {
+                                "name": "freeTextNameOfPoc"
+                            },
+                            {
+                                "name": "digitMobNoOfPoc"
+                            },
+                            {
+                                "name": "mcqRelationshipWithThePOC"
+                            },
+                            {
+                                "name": "interviewDate"
                             }
                         ]
                     }

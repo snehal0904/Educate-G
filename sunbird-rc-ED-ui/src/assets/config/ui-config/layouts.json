@@ -27,6 +27,44 @@
             }
         },
         {
+            "admin-prerak": {
+                "api": "/Prerak",
+                "title": "TEACHER_PROFILE",
+                "langKey" : "prerakStudent",
+                "headerName" : "fullName",
+                "blocks": [
+                    {
+                        "definition": "Prerak",
+                        "title": "PERSONAL_DETAILS",
+                        "add": false,
+                        "edit": true,
+                        "editform":"prerak-admin-setup",
+                        "fields": {
+                            "includes": ["*"],
+                            "excludes": []
+                        },
+                        "propertyShowFirst" : [ "fullName", "mobile", "email"]
+
+                    },
+                    {
+                        "definition": "Prerak",
+                        "title": "Interview Details",
+                        "add": true,
+                        "addform":"interview",
+                        "editform":"interview",
+                        "edit": true,
+                        "claimEdit": true,
+                        "canRaiseClaim" : true,
+                        "multiple": true,
+                        "headValue" : "class",
+                        "fields": {
+                            "includes": ["interviewDetails"]
+                        }
+                    }
+                ]
+            }
+        },
+        {
             "student": {
                 "api": "/Student",
                 "title": "STUDENT_PROFILE",

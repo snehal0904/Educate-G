@@ -230,6 +230,7 @@ export class TablesComponent implements OnInit {
                   urlParam[index] = element[paramVal]
                 }
               });
+              urlParam[1] = element['osid'];
               tempObject['redirectToUrl'] = urlParam.join("/").replace("//", "/");
               tempObject['id'] = element.osid;
             }

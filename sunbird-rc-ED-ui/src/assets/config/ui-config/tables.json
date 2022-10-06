@@ -75,8 +75,8 @@
                     {
                         "custom": true,
                         "type": "button",
-                        "buttonText": "Edit",
-                        "redirectTo": "/admin/attestation/admin-attestation/:id"
+                        "buttonText": "View",
+                        "redirectTo": "/profile/admin-prerak:id"
                     }
                 ]
             }

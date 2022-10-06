@@ -16,8 +16,8 @@
                 <tr class="pl-2">
                     <ng-template ngFor let-td [ngForOf]="item" class="row" let-j="index">
                         <td *ngIf="td.type && td.type === 'button'; else normalTd">
-                            <!-- <a [routerLink]="[td.redirectToUrl]" class="btn btn-bg btn-sec-bg btn-style float-end text-primary-color text-end fw-bold text-capitalize">{{td?.buttonText | translate}}</a> -->
-                            <a panelEditLink="prerak-setup"
+                            <a [routerLink]="[td.redirectToUrl]" class="btn btn-bg btn-sec-bg btn-style float-end text-primary-color text-end fw-bold text-capitalize">{{td?.buttonText | translate}}</a>
+                            <!-- <a panelEditLink="prerak-setup"
                                 class=" mr-3 p-2 p14 btn-bg label-primary btn-style float-end" data-toggle="modal"
                                 data-target="#prewiewEdit" (click)="openEdit(item[j])">Edit</a> &nbsp; &nbsp;
 
@@ -26,7 +26,7 @@
 
                             <a class=" mr-3 p-2 p14 btn-bg label-primary btn-style float-end" data-toggle="modal"
                                 (click)="getPrerakData(item[j], item)" data-target="#interviewPG">Interview</a> &nbsp;
-                            &nbsp;
+                            &nbsp; -->
 
 
                         </td>

@@ -45,7 +45,7 @@ export class FormsComponent implements OnInit {
   fields: FormlyFieldConfig[];
   customFields = [];
   header = null;
-exLength : number = 0
+  exLength: number = 0
   type: string;
   apiUrl: string;
   redirectTo: any;
@@ -70,6 +70,7 @@ exLength : number = 0
   entityName: string;
   sorder: any;
   isSubmitForm: boolean = false;
+  adminForm: string;
   constructor(private route: ActivatedRoute,
     public translate: TranslateService,
     public toastMsg: ToastMessageService, public router: Router, public schemaService: SchemaService, private formlyJsonschema: FormlyJsonschema, public generalService: GeneralService, private location: Location) { }
@@ -88,6 +89,22 @@ exLength : number = 0
       }
       if (params['modal'] != undefined) {
         this.modal = params['modal']
+      }
+
+      if (params.hasOwnProperty('id')) {
+        this.identifier = params['id']
+      }
+
+      if (params['form'] != undefined && (params['form'] == 'prerak-admin-setup' || params['form'] == 'interview')) {
+        this.adminForm = params['form'];
+
+        if (params.hasOwnProperty('id')) {
+          this.identifier = params['id'];
+          localStorage.setItem('id', params['id']);
+        } else {
+          this.identifier = localStorage.getItem('id');
+          //this.propertyName = 'Prerak';
+        }
       }
 
     });
@@ -900,7 +917,7 @@ exLength : number = 0
   };
 
   submit() {
-this.isSubmitForm = true;
+    this.isSubmitForm = true;
     if (this.fileFields.length > 0) {
       this.fileFields.forEach(fileField => {
         if (this.model[fileField]) {
@@ -915,7 +932,7 @@ this.isSubmitForm = true;
           }
 
           let id = (this.entityId) ? this.entityId : this.identifier;
-          var url = [this.apiUrl, id , property, 'documents']
+          var url = [this.apiUrl, id, property, 'documents']
           this.generalService.postData(url.join('/'), formData).subscribe((res) => {
             var documents_list: any[] = [];
             var documents_obj = {
@@ -944,7 +961,7 @@ this.isSubmitForm = true;
               } else {
                 var url = [this.apiUrl, this.identifier, property];
               }
-  
+
               this.apiUrl = (url.join("/"));
               if (this.model[property]) {
                 this.model = this.model[property];
@@ -1013,7 +1030,12 @@ this.isSubmitForm = true;
         var property = this.type.split(":")[1];
 
         if (this.identifier != null && this.entityId != undefined) {
-          var url = [this.apiUrl, this.entityId, property, this.identifier];
+          if ((this.adminForm == 'prerak-admin-setup' || this.adminForm == 'interview')) {
+            var url = [this.apiUrl, this.identifier, property];
+
+          } else {
+            var url = [this.apiUrl, this.entityId, property, this.identifier];
+          }
         } else {
           var url = [this.apiUrl, this.identifier, property];
         }
@@ -1024,7 +1046,13 @@ this.isSubmitForm = true;
         }
 
         if (this.identifier != null && this.entityId != undefined) {
-          this.updateClaims()
+          if ((this.adminForm == 'prerak-admin-setup' || this.adminForm == 'interview')) {
+            this.postData()
+          }
+          else{
+            this.updateClaims()
+          }
+          
         } else {
           this.postData()
         }
@@ -1039,57 +1067,56 @@ this.isSubmitForm = true;
 
   async raiseClaim(property) {
     setTimeout(() => {
-     this.generalService.getData(this.entityUrl).subscribe((res) => {
+      this.generalService.getData(this.entityUrl).subscribe((res) => {
 
-      res = (res[0]) ? res[0] : res;
-      this.entityId = res.osid;
-      if (res.hasOwnProperty(property)) {
+        res = (res[0]) ? res[0] : res;
+        this.entityId = res.osid;
+        if (res.hasOwnProperty(property)) {
 
-        if (!this.propertyId && !this.sorder) {
+          if (!this.propertyId && !this.sorder) {
 
-        /*  var tempObj = []
-          for (let j = 0; j < res[property].length; j++) {
-            res[property][j].osUpdatedAt = new Date(res[property][j].osUpdatedAt);
-            tempObj.push(res[property][j])
+            /*  var tempObj = []
+              for (let j = 0; j < res[property].length; j++) {
+                res[property][j].osUpdatedAt = new Date(res[property][j].osUpdatedAt);
+                tempObj.push(res[property][j])
+              }
+    
+             // tempObj.sort((a, b) => (b.osUpdatedAt) - (a.osUpdatedAt));
+              this.propertyId = tempObj[0]["osid"];*/
+
+            res[property].sort((a, b) => (b.sorder) - (a.sorder));
+            this.propertyId = res[property][0]["osid"];
+
           }
 
-         // tempObj.sort((a, b) => (b.osUpdatedAt) - (a.osUpdatedAt));
-          this.propertyId = tempObj[0]["osid"];*/
+          if (this.sorder) {
+            var result = res[property].filter(obj => {
+              return obj.sorder === this.sorder
+            })
 
-          res[property].sort((a, b) => (b.sorder) - (a.sorder));
-           this.propertyId = res[property][0]["osid"];
-
-        }
-
-        if(this.sorder)
-        {
-          var result = res[property].filter(obj => {
-            return obj.sorder === this.sorder
-          })
-
-          this.propertyId = result[0]["osid"];
-        }
-
-        var temp = {};
-        temp[property] = [this.propertyId];
-        let propertyUniqueName = this.entityName.toLowerCase() + property.charAt(0).toUpperCase() + property.slice(1);
-
-        propertyUniqueName = (this.entityName == 'student' || this.entityName == 'Student') ? 'studentInstituteAttest' : propertyUniqueName;
-
-        let data = {
-          "entityName": this.entityName.charAt(0).toUpperCase() + this.entityName.slice(1),
-          "entityId": this.entityId,
-          "name": propertyUniqueName,
-          "propertiesOSID": temp,
-           "additionalInput":{
-            "notes": this.model['notes']
+            this.propertyId = result[0]["osid"];
           }
+
+          var temp = {};
+          temp[property] = [this.propertyId];
+          let propertyUniqueName = this.entityName.toLowerCase() + property.charAt(0).toUpperCase() + property.slice(1);
+
+          propertyUniqueName = (this.entityName == 'student' || this.entityName == 'Student') ? 'studentInstituteAttest' : propertyUniqueName;
+
+          let data = {
+            "entityName": this.entityName.charAt(0).toUpperCase() + this.entityName.slice(1),
+            "entityId": this.entityId,
+            "name": propertyUniqueName,
+            "propertiesOSID": temp,
+            "additionalInput": {
+              "notes": this.model['notes']
+            }
+          }
+          this.sentToAttestation(data);
         }
-        this.sentToAttestation(data);
-      }
-      
-    });
-  }, 1000);
+
+      });
+    }, 1000);
 
   }
 
@@ -1133,7 +1160,7 @@ this.isSubmitForm = true;
   }
 
   getNotes() {
-let entity = this.entityName.charAt(0).toUpperCase() + this.entityName.slice(1);
+    let entity = this.entityName.charAt(0).toUpperCase() + this.entityName.slice(1);
     this.generalService.getData(entity).subscribe((res) => {
       res = (res[0]) ? res[0] : res;
 
@@ -1143,7 +1170,7 @@ let entity = this.entityName.charAt(0).toUpperCase() + this.entityName.slice(1);
 
       if (res.hasOwnProperty(propertyUniqueName)) {
 
-      let  attestionRes= res[propertyUniqueName];
+        let attestionRes = res[propertyUniqueName];
 
 
         var tempObj = [];
@@ -1159,13 +1186,12 @@ let entity = this.entityName.charAt(0).toUpperCase() + this.entityName.slice(1);
         let claimId = tempObj[0]["_osClaimId"];
 
 
-        if(claimId)
-        {
+        if (claimId) {
           this.generalService.getData(entity + "/claims/" + claimId).subscribe((res) => {
             this.notes = res.notes;
           });
         }
-       
+
       }
     });
 
@@ -1175,10 +1201,18 @@ let entity = this.entityName.charAt(0).toUpperCase() + this.entityName.slice(1);
   getData() {
     var get_url;
     if (this.identifier) {
-      get_url = this.propertyName + '/' + this.identifier;
-    } else {
+      if ((this.adminForm == 'prerak-admin-setup' || this.adminForm == 'interview')) {
+        get_url = '/Prerak/' + this.identifier;
+      } else {
+
+        get_url = this.propertyName + '/' + this.identifier;
+      }
+
+    }
+    else {
       get_url = this.apiUrl
     }
+
     this.generalService.getData(get_url).subscribe((res) => {
       res = (res[0]) ? res[0] : res;
       if (this.propertyName && this.entityId) {
@@ -1186,7 +1220,9 @@ let entity = this.entityName.charAt(0).toUpperCase() + this.entityName.slice(1);
       }
 
       this.model = res;
+
       this.identifier = res.osid;
+
       this.loadSchema()
     });
   }
@@ -1195,10 +1231,10 @@ let entity = this.entityName.charAt(0).toUpperCase() + this.entityName.slice(1);
     if (Array.isArray(this.model)) {
       this.model = this.model[0];
     }
-    this.model['sorder']  = this.exLength;
+    this.model['sorder'] = this.exLength;
     await this.generalService.postData(this.apiUrl, this.model).subscribe((res) => {
       if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
-       this.router.navigate([this.redirectTo])
+        this.router.navigate([this.redirectTo])
       }
       else if (res.params.errmsg != '' && res.params.status == 'UNSUCCESSFUL') {
         this.toastMsg.error('error', res.params.errmsg);
@@ -1214,7 +1250,7 @@ let entity = this.entityName.charAt(0).toUpperCase() + this.entityName.slice(1);
 
   updateData() {
     this.generalService.putData(this.apiUrl, this.identifier, this.model).subscribe((res) => {
-      if (res.params.status == 'SUCCESSFUL'  && !this.model['attest']) {
+      if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
         this.router.navigate([this.redirectTo])
       }
       else if (res.params.errmsg != '' && res.params.status == 'UNSUCCESSFUL') {
@@ -1310,7 +1346,7 @@ let entity = this.entityName.charAt(0).toUpperCase() + this.entityName.slice(1);
         this.exLength = res[0][this.propertyName].length;
 
       });
-    }else{
+    } else {
       this.generalService.getData(apiUrl).subscribe((res) => {
         this.exLength = res[0][this.propertyName].length;
       });
@@ -1319,7 +1355,7 @@ let entity = this.entityName.charAt(0).toUpperCase() + this.entityName.slice(1);
   }
 
   updateClaims() {
-    this.sorder = this.model.hasOwnProperty('sorder')? this.model['sorder'] : '';
+    this.sorder = this.model.hasOwnProperty('sorder') ? this.model['sorder'] : '';
 
     this.generalService.updateclaims(this.apiUrl, this.model).subscribe((res) => {
       if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {

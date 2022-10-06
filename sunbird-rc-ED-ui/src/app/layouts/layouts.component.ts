@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-layouts',
@@ -37,7 +38,8 @@ export class LayoutsComponent implements OnInit, OnChanges {
   params: any;
   langKey;
   titleVal;
-  constructor(private route: ActivatedRoute, public schemaService: SchemaService, private titleService: Title, public generalService: GeneralService, private modalService: NgbModal,
+  constructor(
+    public location: Location,private route: ActivatedRoute, public schemaService: SchemaService, private titleService: Title, public generalService: GeneralService, private modalService: NgbModal,
     public router: Router, public translate: TranslateService) {
   }
 
@@ -61,6 +63,21 @@ export class LayoutsComponent implements OnInit, OnChanges {
         this.layout = params['layout']
         this.titleService.setTitle(params['layout'].charAt(0).toUpperCase() + params['layout'].slice(1));
       }
+
+      if (params.hasOwnProperty('id')) {
+        this.identifier = params['id']
+      }
+
+      if (params['layout'] != undefined && params['layout'] == 'admin-prerak') {
+        if (params.hasOwnProperty('id')) {
+          this.identifier = params['id'];
+          localStorage.setItem('id', params['id']);
+        }else{
+          this.identifier = localStorage.getItem('id');
+          this.location.replaceState("profile/admin-prerak/" + this.identifier);
+        }
+      }
+
       if (params['claim']) {
         this.claim = params['claim']
       };
