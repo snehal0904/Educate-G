@@ -71,6 +71,7 @@ export class FormsComponent implements OnInit {
   sorder: any;
   isSubmitForm: boolean = false;
   adminForm: string;
+  isThisAdminRole: boolean = false;
   constructor(private route: ActivatedRoute,
     public translate: TranslateService,
     public toastMsg: ToastMessageService, public router: Router, public schemaService: SchemaService, private formlyJsonschema: FormlyJsonschema, public generalService: GeneralService, private location: Location) { }
@@ -82,6 +83,11 @@ export class FormsComponent implements OnInit {
       if (params['form'] != undefined) {
         this.form = params['form'].split('/', 1)[0];
         this.identifier = params['form'].split('/', 2)[1];
+
+        if(this.form == 'prerak-admin-setup' || this.form == 'interview')
+        {
+          this.isThisAdminRole = true;
+        }
       }
 
       if (params['id'] != undefined) {
@@ -1033,7 +1039,10 @@ export class FormsComponent implements OnInit {
           if ((this.adminForm == 'prerak-admin-setup' || this.adminForm == 'interview')) {
             var url = [this.apiUrl, this.identifier, property];
 
-          } else {
+          } else if(this.isThisAdminRole){
+            var url = [this.apiUrl, localStorage.getItem('id'), property, this.identifier];
+          }
+          else {
             var url = [this.apiUrl, this.entityId, property, this.identifier];
           }
         } else {

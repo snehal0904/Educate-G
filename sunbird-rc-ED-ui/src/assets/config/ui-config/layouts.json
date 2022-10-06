@@ -52,11 +52,11 @@
                         "add": true,
                         "addform":"interview",
                         "editform":"interview",
-                        "edit": true,
+                        "edit": false,
                         "claimEdit": true,
-                        "canRaiseClaim" : true,
+                       "canRaiseClaim" : false,
                         "multiple": true,
-                        "headValue" : "class",
+                        "headValue" : "",
                         "fields": {
                             "includes": ["interviewDetails"]
                         }
