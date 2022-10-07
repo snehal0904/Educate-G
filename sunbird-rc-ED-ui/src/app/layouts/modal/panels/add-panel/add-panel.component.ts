@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PanelsComponent } from  '../panels.component';
 import { Location } from '@angular/common'
 import { ActivatedRoute } from '@angular/router';
+declare const $: any;
 
 @Component({
   selector: 'app-add-panel',
@@ -30,5 +31,7 @@ export class AddPanelComponent implements OnInit {
   close() {
     this.location.back()
     this.panel.close();
+    $('.modal-backdrop').remove() // removes the grey overlay.
+
   }
 }

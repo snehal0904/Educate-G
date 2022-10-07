@@ -47,7 +47,6 @@ export class TablesComponent implements OnInit {
     public toastMsg: ToastMessageService, private route: ActivatedRoute, public generalService: GeneralService, public schemaService: SchemaService) { }
 
   ngOnInit(): void {
-    this.location.replaceState("admin/attestation/admin-attestation/Prerak");
 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     let tabUrl = this.router.url;
@@ -173,6 +172,12 @@ export class TablesComponent implements OnInit {
     this.identifier = item.id;
     this.layout = 'Prerak';
 
+  }
+
+  addPrerak()
+  {
+    localStorage.setItem('id', '');
+    localStorage.setItem('isAdminAdd', 'true' );
   }
 
  getPrerakData(item, data)

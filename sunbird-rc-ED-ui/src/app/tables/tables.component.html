@@ -2,6 +2,10 @@
 <app-filter (submitFilter)="onSubmit($event)"></app-filter>
 <div class="container mt-0">
     <h5 class="d-inline-block  font-weight-bold">{{tableSchema?.title | translate}}</h5>
+            <a panelAddLink="prerak-admin-setup" data-toggle="modal" data-target="#openAddPrerakForm" (click)="addPrerak()" class="fs-7  float-end text-secondary-color"><i
+                class="fa fa-plus pr-1" aria-hidden="true"></i><span
+                class="text-secondary-color p14 fw-bold">Add Prerak</span></a>
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -49,7 +53,7 @@
     </table>
 
     <!-- Preview Profile Modal -->
-    <div *ngIf="isPreview" class="modal right fade right-xl-modal" id="prewiewProfile" tabindex="-1" role="dialog"
+    <!-- <div *ngIf="isPreview" class="modal right fade right-xl-modal" id="prewiewProfile" tabindex="-1" role="dialog"
         aria-labelledby="prewiewProfile">
         <div class="modal-dialog w-100" role="document">
             <div class="modal-content">
@@ -64,11 +68,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Edit Modal -->
-    <div *ngIf="isEdit" class="modal right fade right-xl-modal" id="prewiewEdit" tabindex="-2" role="dialog"
-        aria-labelledby="prewiewEdit">
+    <!-- <div class="modal right fade ri aria-labght-xl-modal" id="prewiewEdit" tabindex="-1" role="dialog"
+    aria-labelledby="prewiewEdit">
         <div class="modal-dialog w-100" role="document">
             <div class="modal-content">
 
@@ -76,16 +80,32 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
-                <div class="modal-body" *ngIf="isEdit && identifier">
+                <div class="modal-body">
                     <app-layouts layout={{layout}} identifier={{identifier}} public="true"></app-layouts>
 
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="modal right fade right-xl-modal" id="openAddPrerakForm" tabindex="-1" role="dialog"
+        aria-labelledby="openAddPrerakForm">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title primary-text" id="openAddPrerakForm">{{'PUBLIC_PROFILE' | translate}}</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <app-layouts layout={{layout}} identifier={{identifier}} public="false"></app-layouts>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <div class="modal right fade right-xl-modal" id="interviewPG" tabindex="-1" role="dialog"
+    <!-- <div class="modal right fade right-xl-modal" id="interviewPG" tabindex="-1" role="dialog"
         aria-labelledby="interviewPG">
         <div class="modal-dialog w-100" role="document">
             <div class="modal-content">
@@ -104,7 +124,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 

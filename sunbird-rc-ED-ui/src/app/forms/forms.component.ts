@@ -12,6 +12,7 @@ import { ToastMessageService } from '../services/toast-message/toast-message.ser
 import { of as observableOf } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { throwError } from 'rxjs';
+declare const $: any;
 
 @Component({
   selector: 'app-forms',
@@ -84,8 +85,7 @@ export class FormsComponent implements OnInit {
         this.form = params['form'].split('/', 1)[0];
         this.identifier = params['form'].split('/', 2)[1];
 
-        if(this.form == 'prerak-admin-setup' || this.form == 'interview')
-        {
+        if (this.form == 'prerak-admin-setup' || this.form == 'interview') {
           this.isThisAdminRole = true;
         }
       }
@@ -798,6 +798,7 @@ export class FormsComponent implements OnInit {
           return observableOf(this.searchResult);
         }
       }
+
       if (field.type) {
 
         if (field.type === 'multiselect') {
@@ -923,6 +924,11 @@ export class FormsComponent implements OnInit {
   };
 
   submit() {
+
+    if (localStorage.getItem('isAdminAdd')) {
+      this.identifier = null;
+    }
+
     this.isSubmitForm = true;
     if (this.fileFields.length > 0) {
       this.fileFields.forEach(fileField => {
@@ -1039,7 +1045,7 @@ export class FormsComponent implements OnInit {
           if ((this.adminForm == 'prerak-admin-setup' || this.adminForm == 'interview')) {
             var url = [this.apiUrl, this.identifier, property];
 
-          } else if(this.isThisAdminRole){
+          } else if (this.isThisAdminRole) {
             var url = [this.apiUrl, localStorage.getItem('id'), property, this.identifier];
           }
           else {
@@ -1058,10 +1064,10 @@ export class FormsComponent implements OnInit {
           if ((this.adminForm == 'prerak-admin-setup' || this.adminForm == 'interview')) {
             this.postData()
           }
-          else{
+          else {
             this.updateClaims()
           }
-          
+
         } else {
           this.postData()
         }
@@ -1243,7 +1249,15 @@ export class FormsComponent implements OnInit {
     this.model['sorder'] = this.exLength;
     await this.generalService.postData(this.apiUrl, this.model).subscribe((res) => {
       if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
-        this.router.navigate([this.redirectTo])
+
+        if (localStorage.getItem('isAdminAdd')) {
+          localStorage.setItem('isAdminAdd', '');
+          this.router.navigate(['/profile/admin-prerak/' + res.result.Prerak.osid]);
+          $('.modal-backdrop').remove() // removes the grey overlay.
+        } else {
+          this.router.navigate([this.redirectTo]);
+
+        }
       }
       else if (res.params.errmsg != '' && res.params.status == 'UNSUCCESSFUL') {
         this.toastMsg.error('error', res.params.errmsg);

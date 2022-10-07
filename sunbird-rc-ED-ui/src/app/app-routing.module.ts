@@ -123,6 +123,17 @@ children: [
         component: EditPanelComponent
       }
     ]
+  },
+  {
+    path: 'add',
+    component: PanelsComponent,
+    outlet: 'claim',
+    children: [
+      {
+        path: ':form',
+        component: AddPanelComponent
+      }
+    ]
   }
 ]
  },
