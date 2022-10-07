@@ -10,7 +10,7 @@
                 "header": "default",
                 "title": "Create Profile",
                 "isSignupForm": "true",
-                "langKey": "prerakStudent",
+                "langKey": "prerakAdmin",
                 "fieldsets": [
                     {
                         "definition": "Prerak",
@@ -70,7 +70,7 @@
                 "api": "/Prerak",
                 "type": "entity",
                 "redirectTo": "/profile/prerak",
-                "langKey": "prerakStudent",
+                "langKey": "prerakAdmin",
                 "fieldsets": [
                     {
                         "definition": "Prerak",
@@ -131,7 +131,7 @@
                 "api": "/Prerak",
                 "type": "entity",
                 "redirectTo": "profile/admin-prerak",
-                "langKey": "prerakStudent",
+                "langKey": "prerakAdmin",
                 "fieldsets": [
                     {
                         "definition": "Prerak",
@@ -209,7 +209,11 @@
                                 "name": "confirmName"
                             },
                             {
-                                "name": "confirmPhoneNumber"
+                                "name": "confirmPhoneNumber",
+                                "validation": {
+                                    "pattern": "[6-9]{1}[0-9]{9}",
+                                    "message": "MOBILE_NO_MUST_10_DIGIT"
+                                }
                             }
                         ]
                     }
@@ -221,7 +225,7 @@
                 "api": "/Prerak",
                 "type": "property:academicQualifications",
                 "redirectTo": "/profile/teacher",
-                "langKey": "prerakStudent",
+                "langKey": "prerakAdmin",
                 "fieldsets": [
                     {
                         "definition": "AcademicQualification",
@@ -290,7 +294,7 @@
                 "api": "/Prerak",
                 "type": "property:experience",
                 "redirectTo": "/profile/prerak",
-                "langKey": "prerakStudent",
+                "langKey": "prerakAdmin",
                 "fieldsets": [
                     {
                         "definition": "ExperienceType",
@@ -412,7 +416,7 @@
                 "header": "default",
                 "title": "REGISTER",
                 "isSignupForm": "true",
-                "langKey": "prerakStudent",
+                "langKey": "prerakAdmin",
                 "fieldsets": [
                     {
                         "definition": "Student",
@@ -479,11 +483,11 @@
                 "api": "/Student",
                 "type": "entity",
                 "redirectTo": "/profile/student",
-                "langKey": "prerakStudent",
+                "langKey": "prerakAdmin",
                 "fieldsets": [
                     {
                         "definition": "Student",
-                        "privacyConfig": "StudentOsConfig",
+                        "privacyConfig": "PrerakOsConfig",
                         "globalPrivacyConfig": "private-access",
                         "fields": [
                             {
@@ -531,11 +535,11 @@
                 "api": "/Prerak",
                 "type": "property:interviewDetails",
                 "redirectTo": "/profile/admin-prerak/",
-                "langKey" : "teacherStudent",
+                "langKey" : "prerakAdmin",
                 "fieldsets": [
                     {
                         "definition": "interviewDetails",
-                        "privacyConfig": "StudentOsConfig",
+                        "privacyConfig": "PrerakOsConfig",
                         "globalPrivacyConfig": "private-access",
                         "fields": [
                               {

@@ -7,7 +7,7 @@
             "prerak": {
                 "api": "/Prerak",
                 "title": "TEACHER_PROFILE",
-                "langKey" : "prerakStudent",
+                "langKey" : "prerakAdmin",
                 "headerName" : "fullName",
                 "blocks": [
                     {
@@ -30,7 +30,7 @@
             "admin-prerak": {
                 "api": "/Prerak",
                 "title": "TEACHER_PROFILE",
-                "langKey" : "prerakStudent",
+                "langKey" : "prerakAdmin",
                 "headerName" : "fullName",
                 "blocks": [
                     {

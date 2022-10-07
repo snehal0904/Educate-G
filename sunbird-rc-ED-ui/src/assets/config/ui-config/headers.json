@@ -54,8 +54,8 @@
             "admin-prerak": {
                 "left": [
                     {
-                        "title": "HOME",
-                        "redirectTo": "/profile/teacher"
+                        "title": "Prerak List",
+                        "redirectTo": "/admin/attestation/admin-attestation/Prerak"
                     }
                 ],
                 "right": [

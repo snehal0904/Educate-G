@@ -52,7 +52,7 @@
         "medium": "Medium of Education",
         "address": "Address"
     },
-    "prerakStudent": {
+    "prerakAdmin": {
         "employeeName": "Employee Full name",
         "instituteName": "School Name",
         "fullName": "Full name",
@@ -115,7 +115,7 @@
         "educationDetails" : "Education related documents",
         "AS_PER_AADHAAR_ID": "as per ID(Aadhaar)",
         "Yes" : "Yes",
-        "No" : "No"
-
+        "No" : "No",
+        "VFS member name" : "वीएफएस सदस्य का नाम"
     }
 }
