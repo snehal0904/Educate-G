@@ -41,6 +41,8 @@
   "INSTITUTE_NAME": "संस्थान का नाम",
   "DISTRICT": "जिला",
   "PINCODE": "पिन कोड",
+  "VILLAGE":"गाँव",
+  "BLOCK": "खंड मैथा",
   "AFFILIATION_NUMBER": "संबद्धता संख्या",
   "AFFILIATION_CLASS": "संबद्धता वर्ग",
   "SEARCH_TEACHER": "शिक्षक खोज",

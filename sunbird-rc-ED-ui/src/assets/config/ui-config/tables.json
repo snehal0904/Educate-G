@@ -58,19 +58,33 @@
                 "fields": [
                     {
                         "name": "fullName",
-                        "title": "Full Name"
-                    },
-                    {
-                        "name": "gender",
-                        "title": "Gender"
+                        "title": "Full Name",
+                        "keyPath" : "fullName"
                     },
                     {
                         "name": "mobile",
-                        "title": "Contact Number"
+                        "title": "Contact Number",
+                        "keyPath" : "mobile"
                     },
                     {
-                        "name": "qualification",
-                        "title": "Education Details"
+                        "name": "district",
+                        "title": "District",
+                        "keyPath" : "address.district"
+                    },
+                    {
+                        "name": "block",
+                        "title": "Block",
+                        "keyPath" : "address.block"
+                    },
+                    {
+                        "name": "village",
+                        "title": "Village",
+                        "keyPath" : "address.village"
+                    },
+                    {
+                        "name": "candidateStatus",
+                        "title": "Current Status",
+                        "keyPath" : "candidateStatus"
                     },
                     {
                         "custom": true,

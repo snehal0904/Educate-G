@@ -53,6 +53,12 @@
                                 "name": "referenceId"
                             },
                             {
+                                "name": "relationshipWithTheCandidate"
+                            },
+                            {
+                                "name": "parentOrganization"
+                            },
+                            {
                                 "name": "typeOfPastExp"
                             },
                             {
@@ -115,6 +121,12 @@
                                 "name": "referenceId"
                             },
                             {
+                                "name": "relationshipWithTheCandidate"
+                            },
+                            {
+                                "name": "parentOrganization"
+                            },
+                            {
                                 "name": "typeOfPastExp"
                             },
                             {
@@ -174,6 +186,12 @@
                             },
                             {
                                 "name": "referenceId"
+                            },
+                            {
+                                "name": "relationshipWithTheCandidate"
+                            },
+                            {
+                                "name": "parentOrganization"
                             },
                             {
                                 "name": "typeOfPastExp"

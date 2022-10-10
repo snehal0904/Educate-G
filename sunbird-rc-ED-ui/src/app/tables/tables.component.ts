@@ -27,7 +27,7 @@ export class TablesComponent implements OnInit {
   field;
 
   page: number = 1;
-  limit: number = 10;
+  limit: number = 100;
   identifier: any;
   layout: string;
   isPreview: boolean = false;
@@ -75,7 +75,7 @@ export class TablesComponent implements OnInit {
 
 
 
-     
+
         if (fieldVal.hasOwnProperty('enum')) {
           for (let i = 0; i < fieldVal.enum.length; i++) {
             option.push({ value: fieldVal.enum[i], label: fieldVal.enum[i] })
@@ -152,7 +152,7 @@ export class TablesComponent implements OnInit {
       }
     }, (err) => {
       this.toastMsg.error('error', err.error.params.errmsg);
-      
+
     });
   }
   openPreview(item, row) {
@@ -174,14 +174,12 @@ export class TablesComponent implements OnInit {
 
   }
 
-  addPrerak()
-  {
+  addPrerak() {
     localStorage.setItem('id', '');
-    localStorage.setItem('isAdminAdd', 'true' );
+    localStorage.setItem('isAdminAdd', 'true');
   }
 
- getPrerakData(item, data)
-  {
+  getPrerakData(item, data) {
     this.identifier = item.id;
   }
 
@@ -211,14 +209,14 @@ export class TablesComponent implements OnInit {
   addData() {
     let tempArray;
     let tempObject;
-    this.property = []; 
+    this.property = [];
     this.model.forEach(element => {
       tempArray = [];
       this.tableSchema.fields.forEach((field) => {
         tempObject = field;
 
         if (tempObject.name) {
-          tempObject['value'] = element[field.name]
+          tempObject['value'] = this.getKeyPath(element, field.keyPath)
           tempObject['status'] = element['status']
         }
 
@@ -262,6 +260,48 @@ export class TablesComponent implements OnInit {
 
   onSubmit(event) {
     this.getData(event);
+  }
+
+
+  getKeyPath(element, keyPath) {
+    var propertySplit = keyPath.split(".");
+
+    let fieldValue = [];
+
+    if (propertySplit.length > 1) {
+      for (let j = 0; j < propertySplit.length; j++) {
+        let a = propertySplit[j];
+
+        if (j == 0 && element.hasOwnProperty(a)) {
+          fieldValue = element[a];
+        } else if (fieldValue.hasOwnProperty(a)) {
+
+          fieldValue = fieldValue[a];
+
+        } else if (fieldValue[0]) {
+          let arryItem = []
+          if (fieldValue.length > 0) {
+            for (let i = 0; i < fieldValue.length; i++) {
+            }
+
+            fieldValue = arryItem;
+
+          } else {
+            fieldValue = fieldValue[a];
+          }
+
+        } else {
+          fieldValue = [];
+        }
+      }
+      return fieldValue;
+
+    } else {
+      return element[keyPath]
+    }
+
+
+
   }
 
 }

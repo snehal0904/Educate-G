@@ -142,7 +142,7 @@ export class FilterComponent implements OnInit {
           fieldset.filters.forEach((filter) => {
 
             if (key === filter.key && this.model[key]) {
-              request.filters[filter.propertyPath] = { "startsWith": this.model[key] };
+              request.filters[filter.propertyPath] = { "contains": this.model[key] };
             }
           });
         }

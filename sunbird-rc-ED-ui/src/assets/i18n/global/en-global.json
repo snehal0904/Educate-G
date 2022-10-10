@@ -41,6 +41,8 @@
     "INSTITUTE_NAME": "School Name",
     "SEARCH_BY_INSTITUTE_NAME": "Search by School name",
     "DISTRICT": "District",
+    "VILLAGE":"Village",
+    "BLOCK": "Block",
     "PINCODE": "Pincode",
     "AFFILIATION_NUMBER": "Affiliation Number",
     "AFFILIATION_CLASS": "Affiliation Classes",
