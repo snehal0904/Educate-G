@@ -12,6 +12,9 @@ import { ToastMessageService } from '../services/toast-message/toast-message.ser
 import { of as observableOf } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { throwError } from 'rxjs';
+import { LocationService } from '../services/location/location.service';
+import { startWith, switchMap } from 'rxjs/operators';
+
 declare const $: any;
 
 @Component({
@@ -75,6 +78,7 @@ export class FormsComponent implements OnInit {
   isThisAdminRole: boolean = false;
   constructor(private route: ActivatedRoute,
     public translate: TranslateService,
+    public locationService: LocationService,
     public toastMsg: ToastMessageService, public router: Router, public schemaService: SchemaService, private formlyJsonschema: FormlyJsonschema, public generalService: GeneralService, private location: Location) { }
 
   ngOnInit(): void {
@@ -274,7 +278,14 @@ export class FormsComponent implements OnInit {
 
     if (this.add) {
       this.model = {};
+      this.model = {
+        "address": {
+          "district": null,
+          "block": null,
+        }
+      }
     }
+
     this.schemaloaded = true;
   }
 
@@ -774,6 +785,68 @@ export class FormsComponent implements OnInit {
           }
         }
       }
+
+      if (field.dependent) {
+        this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['type'] = 'select'
+        this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['key'] = field.dependent.key
+        this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions'] = {
+          label: 'District',
+          options: this.locationService.getDistrict()
+        }
+      }
+
+      if (field.dependentOn) {
+
+        this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['type'] = 'select'
+        this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['key'] = field.dependentOn.key
+        this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions'] = {
+          label: field.dependentOn.title,
+          options: []
+        }
+
+        if (field.dependentOn.key == 'block') {
+          this.model = {
+            "address": {
+              "district": null,
+              "block": null,
+            }
+          }
+
+          this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['hooks'] = {
+            onInit: (field1: FormlyFieldConfig) => {
+              field1.templateOptions.options = field1.form
+                .get('district')
+                .valueChanges.pipe(
+                  startWith(this.model['address']['district']),
+                  switchMap(district => this.locationService.getBlock(this.model['address']['district']))
+                );
+            }
+          };
+        } else {
+
+          this.model = {
+            "address": {
+              "block": null,
+              "village": null
+            }
+          }
+
+          this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['hooks'] = {
+            onInit: (field1: FormlyFieldConfig) => {
+              field1.templateOptions.options = field1.form
+                .get('block')
+                .valueChanges.pipe(
+                  startWith(this.model['address']['block']),
+                  switchMap(district => this.locationService.getVillege(this.model['address']['block']))
+                );
+            }
+          };
+        }
+
+      }
+
+
+
       if (field.autocomplete) {
 
         this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['type'] = "autocomplete";
@@ -1247,6 +1320,22 @@ export class FormsComponent implements OnInit {
       this.model = this.model[0];
     }
     this.model['sorder'] = this.exLength;
+
+    if(this.model.hasOwnProperty('address')){
+      if(this.model['address'].hasOwnProperty('district') && this.model['address'].block == null){
+        delete this.model['address']['district'];
+       }
+      
+       if(this.model['address'].hasOwnProperty('block') && this.model['address'].block == null){
+        delete this.model['address']['block'];
+       }
+  
+       if(this.model['address'].hasOwnProperty('village') && this.model['address'].block == null){
+        delete this.model['address']['village'];
+       }
+     
+     }
+
     await this.generalService.postData(this.apiUrl, this.model).subscribe((res) => {
       if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
 
@@ -1272,6 +1361,22 @@ export class FormsComponent implements OnInit {
   }
 
   updateData() {
+
+    if(this.model.hasOwnProperty('address')){
+      if(this.model['address'].hasOwnProperty('district') && this.model['address'].district == null){
+        delete this.model['address']['district'];
+       }
+      
+       if(this.model['address'].hasOwnProperty('block') && this.model['address'].block == null){
+        delete this.model['address']['block'];
+       }
+  
+       if(this.model['address'].hasOwnProperty('village') && this.model['address'].village == null){
+        delete this.model['address']['village'];
+       }
+     
+     }
+
     this.generalService.putData(this.apiUrl, this.identifier, this.model).subscribe((res) => {
       if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
         this.router.navigate([this.redirectTo])
