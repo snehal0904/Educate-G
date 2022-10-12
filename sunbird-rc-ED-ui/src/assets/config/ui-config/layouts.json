@@ -56,7 +56,7 @@
                         "claimEdit": true,
                        "canRaiseClaim" : false,
                         "multiple": true,
-                        "headValue" : "",
+                        "headValue" : "vfsTeamName",
                         "fields": {
                             "includes": ["interviewDetails"]
                         }

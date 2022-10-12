@@ -83,7 +83,7 @@
                     },
                     {
                         "name": "candidateStatus",
-                        "title": "Current Status",
+                        "title": "Candidate Status",
                         "keyPath" : "candidateStatus"
                     },
                     {

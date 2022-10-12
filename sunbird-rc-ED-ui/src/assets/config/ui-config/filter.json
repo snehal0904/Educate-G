@@ -199,8 +199,8 @@
                             "property": "candidateStatus"
                         },
                         {
-                            "title": "sourcingChannel",
-                            "property": "SOURCING_CHANNEL"
+                            "title": "SOURCING_CHANNEL",
+                            "property": "sourcingChannel"
                         }
                     ]
                 }

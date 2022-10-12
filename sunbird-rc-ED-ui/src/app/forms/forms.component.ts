@@ -587,6 +587,10 @@ export class FormsComponent implements OnInit {
           this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions']['placeholder'] = this.generalService.translateString(this.langKey + '.' + field.placeholder);
         }
 
+        if (field.format) {
+          this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions']['type'] = field.format;
+        }
+
         if (field.description) {
           this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions']['description'] = this.generalService.translateString(this.langKey + '.' + field.description);
         }

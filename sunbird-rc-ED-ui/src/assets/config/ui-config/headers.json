@@ -13,34 +13,9 @@
             }
         },
         {
-            "institute": {
-                "left": [
-                    {
-                        "title": "HOME",
-                        "redirectTo": "/profile/institute"
-                    },
-                    {
-                        "title": "ATTESTATIONS",
-                        "redirectTo": "/institute/attestation/institute-attestation"
-                    }
-                ],
-                "right": [
-                    {
-                        "title": "LOGOUT",
-                        "redirectTo": "/logout",
-                        "className" : "font-weight-bold"
-                    }
-                ]
-            }
-        },
-        {
             "prerak": {
-                "left": [
-                    {
-                        "title": "HOME",
-                        "redirectTo": "/profile/teacher"
-                    }
-                ],
+                "logoHref" : "profile/Prerak",
+                "left": [],
                 "right": [
                     {
                         "title": "LOGOUT",
@@ -52,6 +27,7 @@
         },
         {
             "admin-prerak": {
+                "logoHref" : "admin/attestation/admin-attestation/Prerak",
                 "left": [
                     {
                         "title": "Prerak List",
@@ -68,24 +44,8 @@
             }
         },
         {
-            "student": {
-                "left": [
-                    {
-                        "title": "HOME",
-                        "redirectTo": "/profile/student"
-                    }
-                ],
-                "right": [
-                    {
-                        "title": "LOGOUT",
-                        "redirectTo": "/logout",
-                        "className" : "font-weight-bold"
-                    }
-                ]
-            }
-        },
-        {
             "admin": {
+                "logoHref" : "admin/attestation/admin-attestation/Prerak",
                 "left": [
                     {
                         "title": "Prerak",
