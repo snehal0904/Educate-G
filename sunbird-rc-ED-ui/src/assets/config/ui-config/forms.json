@@ -26,7 +26,7 @@
                                 "name": "mobile",
                                 "required": true,
                                 "validation": {
-                                    "pattern": "[6-9]{1}[0-9]{9}",
+                                    "pattern": "[1-9]{1}[0-9]{9}",
                                     "message": "MOBILE_NO_MUST_10_DIGIT"
                                 }
                             },
@@ -128,7 +128,7 @@
                                 "name": "mobile",
                                 "required": true,
                                 "validation": {
-                                    "pattern": "[6-9]{1}[0-9]{9}",
+                                    "pattern": "[1-9]{1}[0-9]{9}",
                                     "message": "MOBILE_NO_MUST_10_DIGIT"
                                 }
                             },
@@ -229,7 +229,7 @@
                                 "name": "mobile",
                                 "required": true,
                                 "validation": {
-                                    "pattern": "[6-9]{1}[0-9]{9}",
+                                    "pattern": "[1-9]{1}[0-9]{9}",
                                     "message": "MOBILE_NO_MUST_10_DIGIT"
                                 }
                             },
@@ -331,7 +331,7 @@
                             {
                                 "name": "confirmPhoneNumber",
                                 "validation": {
-                                    "pattern": "[6-9]{1}[0-9]{9}",
+                                    "pattern": "[1-9]{1}[0-9]{9}",
                                     "message": "MOBILE_NO_MUST_10_DIGIT"
                                 }
                             },
@@ -614,7 +614,7 @@
                                             "name": "mobile",
                                             "required": true,
                                             "validation": {
-                                                "pattern": "[6-9]{1}[0-9]{9}",
+                                                "pattern": "[1-9]{1}[0-9]{9}",
                                                 "message": "MOBILE_NO_MUST_10_DIGIT"
                                             }
                                         }
