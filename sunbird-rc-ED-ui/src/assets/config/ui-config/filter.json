@@ -24,6 +24,37 @@
                         "title": "MOBILE_NUMBER",
                         "propertyPath": "mobile"
                     },
+{
+                        "key": "district",
+                        "type": "select",
+                        "title": "DISTRICT",
+                        "propertyPath": "address.district",
+                        "templateOptions": {
+                            "placeholder": "DISTRICT",
+                            "options": [
+                                {
+                                    "label": "Pali",
+                                    "value": "Pali"
+                                },
+                                {
+                                    "label": "Jaipur",
+                                    "value": "Jaipur"
+                                },
+                                {
+                                    "label": "Baran",
+                                    "value": "Baran"
+                                },
+                                {
+                                    "label": "Dausa",
+                                    "value": "Dausa"
+                                },
+                                {
+                                    "label": "Jodhpur",
+                                    "value": "Jodhpur"
+                                }
+                            ]
+                        }
+                    },
                     {
                         "key": "gender",
                         "type": "select",
@@ -100,6 +131,12 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "key": "block",
+                        "type": "text",
+                        "title": "BLOCK",
+                        "propertyPath": "address.block"
                     },
                     {
                         "key": "candidateStatus",
