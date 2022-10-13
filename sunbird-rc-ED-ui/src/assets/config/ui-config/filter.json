@@ -114,20 +114,40 @@
                             "placeholder": "VFS_MEMBER_NAME",
                             "options": [
                                 {
-                                    "label": "शेख शोएब मानसुरी",
-                                    "value": "शेख शोएब मानसुरी"
+                                    "label": "Raksha Dhoke",
+                                    "value": "Raksha Dhoke"
                                 },
                                 {
-                                    "label": "गुलशन निमजे",
-                                    "value": "गुलशन निमजे"
+                                    "label": "Karishma Sheikh",
+                                    "value": "Karishma Sheikh"
                                 },
                                 {
-                                    "label": "अश्लेषेश अधाऊ",
-                                    "value": "अश्लेषेश अधाऊ"
+                                    "label": "Nikita Jagdale",
+                                    "value": "Nikita Jagdale"
                                 },
                                 {
-                                    "label": "नेहा प्रजापति",
-                                    "value": "नेहा प्रजापति"
+                                    "label": "Pravin Lavhale",
+                                    "value": "Pravin Lavhale"
+                                },
+                                {
+                                    "label": "Roshan Dehari",
+                                    "value": "Roshan Dehari"
+                                },
+                                {
+                                    "label": "Ashlesha Adhau",
+                                    "value": "Ashlesha Adhau"
+                                },
+                                {
+                                    "label": "Neha Prajapati",
+                                    "value": "Neha Prajapati"
+                                },
+                                {
+                                    "label": "Sheikh Shoaib Mansuri",
+                                    "value": "Sheikh Shoaib Mansuri"
+                                },
+                                {
+                                    "label": "Manish Dhomne",
+                                    "value": "Manish Dhomne"
                                 }
                             ]
                         }
@@ -147,36 +167,48 @@
                             "placeholder": "CANDIDATE_STATUS",
                             "options": [
                                 {
-                                    "label": "Attended Training",
-                                    "value": "Attended Training"
+                                    "label": "स्रोत",
+                                    "value": "स्रोत"
                                 },
                                 {
-                                    "label": "Finalized",
-                                    "value": "Finalized"
+                                    "label": "स्क्रीनिंग",
+                                    "value": "स्क्रीनिंग"
                                 },
                                 {
-                                    "label": "Attended Orientation",
-                                    "value": "Attended Orientation"
+                                    "label": "इंटरव्यू (स्क्रीनिंग के बाद)",
+                                    "value": "इंटरव्यू (स्क्रीनिंग के बाद)"
                                 },
                                 {
-                                    "label": "Not interested in attending orientation",
-                                    "value": "Not interested in attending orientation"
+                                    "label": "शॉर्टलिस्टेड (इंटरव्यू के बाद)",
+                                    "value": "शॉर्टलिस्टेड (इंटरव्यू के बाद)"
                                 },
                                 {
-                                    "label": "Not interested",
-                                    "value": "Not interested"
+                                    "label": "दिलचस्पी नहीं (स्क्रीनिंग के बाद)",
+                                    "value": "दिलचस्पी नहीं (स्क्रीनिंग के बाद)"
                                 },
                                 {
-                                    "label": "Shortlisted",
-                                    "value": "Shortlisted"
+                                    "label": "दिलचस्पी नहीं (इंटरव्यू के बाद)",
+                                    "value": "दिलचस्पी नहीं (इंटरव्यू के बाद)"
                                 },
                                 {
-                                    "label": "Rejected",
-                                    "value": "Rejected"
+                                    "label": "ओरिएंटेशन में भाग लिया",
+                                    "value": "ओरिएंटेशन में भाग लिया"
                                 },
                                 {
-                                    "label": "Applied",
-                                    "value": "Applied"
+                                    "label": "ओरिएंटेशन में भाग नहीं लिया",
+                                    "value": "ओरिएंटेशन में भाग नहीं लिया"
+                                },
+                                {
+                                    "label": "ट्रेनिंग में भाग लिया",
+                                    "value": "ट्रेनिंग में भाग लिया"
+                                },
+                                {
+                                    "label": "अंतिम रूप से तय कर लिए गए (15+ एजी जुटाए गए)",
+                                    "value": "अंतिम रूप से तय कर लिए गए (15+ एजी जुटाए गए)"
+                                },
+                                {
+                                    "label": "पात्र नहीं (मान्य नहीं/उत्तरदाय",
+                                    "value": "पात्र नहीं (मान्य नहीं/उत्तरदाय"
                                 }
                             ]
                         }
