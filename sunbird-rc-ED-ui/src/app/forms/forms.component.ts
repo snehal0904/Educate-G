@@ -282,6 +282,10 @@ export class FormsComponent implements OnInit {
         "address": {
           "district": null,
           "block": null,
+        },
+        "confirmAddress": {
+          "district": null,
+          "block": null,
         }
       }
     }
@@ -809,39 +813,39 @@ export class FormsComponent implements OnInit {
         }
 
         if (field.dependentOn.key == 'block') {
-          this.model = {
-            "address": {
+          
+          this.model[childrenName] = 
+             {
               "district": null,
               "block": null,
             }
-          }
+          
 
           this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['hooks'] = {
             onInit: (field1: FormlyFieldConfig) => {
               field1.templateOptions.options = field1.form
                 .get('district')
                 .valueChanges.pipe(
-                  startWith(this.model['address']['district']),
-                  switchMap(district => this.locationService.getBlock(this.model['address']['district']))
+                  startWith(this.model[childrenName]['district']),
+                  switchMap(district => this.locationService.getBlock(this.model[childrenName]['district']))
                 );
             }
           };
         } else {
 
-          this.model = {
-            "address": {
+          this.model[childrenName] = {
               "block": null,
               "village": null
             }
-          }
+          
 
           this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['hooks'] = {
             onInit: (field1: FormlyFieldConfig) => {
               field1.templateOptions.options = field1.form
                 .get('block')
                 .valueChanges.pipe(
-                  startWith(this.model['address']['block']),
-                  switchMap(district => this.locationService.getVillege(this.model['address']['block']))
+                  startWith(this.model[childrenName]['block']),
+                  switchMap(district => this.locationService.getVillege(this.model[childrenName]['block']))
                 );
             }
           };
@@ -1340,6 +1344,21 @@ export class FormsComponent implements OnInit {
      
      }
 
+     if(this.model.hasOwnProperty('confirmAddress')){
+      if(this.model['confirmAddress'].hasOwnProperty('district') && this.model['confirmAddress'].district == null){
+        delete this.model['confirmAddress']['district'];
+       }
+      
+       if(this.model['confirmAddress'].hasOwnProperty('block') && this.model['confirmAddress'].block == null){
+        delete this.model['confirmAddress']['block'];
+       }
+  
+       if(this.model['confirmAddress'].hasOwnProperty('village') && this.model['confirmAddress'].village == null){
+        delete this.model['confirmAddress']['village'];
+       }
+     
+     }
+
     await this.generalService.postData(this.apiUrl, this.model).subscribe((res) => {
       if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
 
@@ -1381,6 +1400,22 @@ export class FormsComponent implements OnInit {
      
      }
 
+     if(this.model.hasOwnProperty('confirmAddress')){
+      if(this.model['confirmAddress'].hasOwnProperty('district') && this.model['confirmAddress'].district == null){
+        delete this.model['confirmAddress']['district'];
+       }
+      
+       if(this.model['confirmAddress'].hasOwnProperty('block') && this.model['confirmAddress'].block == null){
+        delete this.model['confirmAddress']['block'];
+       }
+  
+       if(this.model['confirmAddress'].hasOwnProperty('village') && this.model['confirmAddress'].village == null){
+        delete this.model['confirmAddress']['village'];
+       }
+     
+     }
+
+  
     this.generalService.putData(this.apiUrl, this.identifier, this.model).subscribe((res) => {
       if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
         this.router.navigate([this.redirectTo])
