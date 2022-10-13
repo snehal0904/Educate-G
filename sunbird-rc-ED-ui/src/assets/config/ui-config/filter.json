@@ -5,12 +5,12 @@
     "limit": "5",
     "searches": [
         {
-            "prerak": {
+            "prerakv2": {
                 "tab": "prerak",
                 "tabTitle": "SEARCH_PRERAK",
-                "api": "/Prerak/search",
+                "api": "/PrerakV2/search",
                 "activeTab": "active",
-                "privateFields": "PrerakOsConfig",
+                "privateFields": "PrerakV2OsConfig",
                 "filters": [
                     {
                         "key": "fullName",
@@ -24,7 +24,7 @@
                         "title": "MOBILE_NUMBER",
                         "propertyPath": "mobile"
                     },
-{
+                    {
                         "key": "district",
                         "type": "select",
                         "title": "DISTRICT",

@@ -4,14 +4,14 @@
     "layouts": [
        
         {
-            "prerak": {
-                "api": "/Prerak",
+            "prerakv2": {
+                "api": "/PrerakV2",
                 "title": "TEACHER_PROFILE",
                 "langKey" : "prerakAdmin",
                 "headerName" : "fullName",
                 "blocks": [
                     {
-                        "definition": "Prerak",
+                        "definition": "PrerakV2",
                         "title": "PERSONAL_DETAILS",
                         "add": false,
                         "edit": true,
@@ -28,13 +28,13 @@
         },
         {
             "admin-prerak": {
-                "api": "/Prerak",
+                "api": "/PrerakV2",
                 "title": "TEACHER_PROFILE",
                 "langKey" : "prerakAdmin",
                 "headerName" : "fullName",
                 "blocks": [
                     {
-                        "definition": "Prerak",
+                        "definition": "PrerakV2",
                         "title": "PERSONAL_DETAILS",
                         "add": false,
                         "edit": true,
@@ -47,7 +47,7 @@
 
                     },
                     {
-                        "definition": "Prerak",
+                        "definition": "PrerakV2",
                         "title": "Interview Details",
                         "add": true,
                         "addform":"interview",
@@ -65,46 +65,8 @@
             }
         },
         {
-            "student": {
-                "api": "/Student",
-                "title": "STUDENT_PROFILE",
-                "langKey" : "teacherStudent",
-                "headerName" : "identityDetails.fullName",
-                "subHeadername" : "contactDetails.address.state,contactDetails.address.city",
-                "blocks": [
-                    {
-                        "definition": "Student",
-                        "title": "BASIC_DETAILS",
-                        "add": false,
-                        "edit": true,
-                        "editform":"student-setup",
-                        "fields": {
-                            "includes": ["*"],
-                            "excludes": ["educationDetails"]
-                        },
-                        "propertyShowFirst" : [ "fullName", "mobile", "email"]
-                    },
-                    {
-                        "definition": "Student",
-                        "title": "EDUCATION_DEATILS",
-                        "add": true,
-                        "addform":"student-education",
-                        "editform":"student-education",
-                        "edit": false,
-                        "claimEdit": true,
-                        "canRaiseClaim" : true,
-                        "multiple": true,
-                        "headValue" : "class",
-                        "fields": {
-                            "includes": ["educationDetails"]
-                        }
-                    }
-                ]
-            }
-        },
-        {
             "admin": {
-                "table": "admin-attestation/Prerak"
+                "table": "admin-attestation/PrerakV2"
             }
         }
     ]

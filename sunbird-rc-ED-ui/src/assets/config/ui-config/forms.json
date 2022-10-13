@@ -4,7 +4,7 @@
     "forms": [
         {
             "prerak-signup": {
-                "api": "/Prerak/invite",
+                "api": "/PrerakV2/invite",
                 "type": "entity",
                 "formclass": "row",
                 "header": "default",
@@ -13,7 +13,7 @@
                 "langKey": "prerakAdmin",
                 "fieldsets": [
                     {
-                        "definition": "Prerak",
+                        "definition": "PrerakV2",
                         "fields": [
                             {
                                 "name": "fullName",
@@ -102,19 +102,19 @@
                         ]
                     }
                 ],
-                "redirectTo": "/profile/prerak"
+                "redirectTo": "/profile/prerakv2"
             }
         },
         {
             "prerak-setup": {
-                "api": "/Prerak",
+                "api": "/PrerakV2",
                 "type": "entity",
-                "redirectTo": "/profile/prerak",
+                "redirectTo": "/profile/prerakv2",
                 "langKey": "prerakAdmin",
                 "fieldsets": [
                     {
-                        "definition": "Prerak",
-                        "privacyConfig": "PrerakOsConfig",
+                        "definition": "PrerakV2",
+                        "privacyConfig": "PrerakV2OsConfig",
                         "globalPrivacyConfig": "internal-access",
                         "fields": [
                             {
@@ -208,14 +208,14 @@
         },
         {
             "prerak-admin-setup": {
-                "api": "/Prerak",
+                "api": "/PrerakV2",
                 "type": "entity",
                 "redirectTo": "profile/admin-prerak",
                 "langKey": "prerakAdmin",
                 "fieldsets": [
                     {
-                        "definition": "Prerak",
-                        "privacyConfig": "PrerakOsConfig",
+                        "definition": "PrerakV2",
+                        "privacyConfig": "PrerakV2OsConfig",
                         "globalPrivacyConfig": "internal-access",
                         "fields": [
                             {
@@ -334,6 +334,15 @@
                                     "pattern": "[6-9]{1}[0-9]{9}",
                                     "message": "MOBILE_NO_MUST_10_DIGIT"
                                 }
+                            },
+                            {
+                                "name": "confirmQualification"
+                            },
+                            {
+                                "name": "alternateMobileNumber"
+                            },
+                            {
+                                "name" : "whenToCallNextOrOtherNotes"
                             }
                         ]
                     }
@@ -342,7 +351,7 @@
         },
         {
             "prerak-education": {
-                "api": "/Prerak",
+                "api": "/PrerakV2",
                 "type": "property:academicQualifications",
                 "redirectTo": "/profile/teacher",
                 "langKey": "prerakAdmin",
@@ -411,9 +420,9 @@
         },
         {
             "teacher-experience": {
-                "api": "/Prerak",
+                "api": "/PrerakV2",
                 "type": "property:experience",
-                "redirectTo": "/profile/prerak",
+                "redirectTo": "/profile/prerakv2",
                 "langKey": "prerakAdmin",
                 "fieldsets": [
                     {
@@ -594,7 +603,7 @@
                         ]
                     }
                 ],
-                "redirectTo": "/profile/prerak"
+                "redirectTo": "/profile/prerakv2"
             }
         },
         {
@@ -650,14 +659,14 @@
         },
         {
             "interview": {
-                "api": "/Prerak",
+                "api": "/PrerakV2",
                 "type": "property:interviewDetails",
                 "redirectTo": "/profile/admin-prerak/",
                 "langKey" : "prerakAdmin",
                 "fieldsets": [
                     {
                         "definition": "interviewDetails",
-                        "privacyConfig": "PrerakOsConfig",
+                        "privacyConfig": "PrerakV2OsConfig",
                         "globalPrivacyConfig": "private-access",
                         "fields": [
                               {
@@ -670,7 +679,7 @@
                                 "name": "freeTextWhyDoYouWantPragatiPrerak"
                             },
                             {
-                                "name": "mcqPastExperience"
+                                "name": "mcqPastExperienceVolunteering"
                             },
                             {
                                 "name": "freeTextPastExperience"
@@ -694,7 +703,7 @@
                                 "name": "mcqEngagementType"
                             },
                             {
-                                "name": "mcqTeachingExpierience"
+                                "name": "mcqPastTeachingExperience"
                             },
                             {
                                 "name": "freeTextTeachingExpierience"

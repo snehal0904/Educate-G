@@ -1294,7 +1294,7 @@ export class FormsComponent implements OnInit {
     var get_url;
     if (this.identifier) {
       if ((this.adminForm == 'prerak-admin-setup' || this.adminForm == 'interview')) {
-        get_url = '/Prerak/' + this.identifier;
+        get_url = '/PrerakV2/' + this.identifier;
       } else {
 
         get_url = this.propertyName + '/' + this.identifier;
@@ -1345,7 +1345,7 @@ export class FormsComponent implements OnInit {
 
         if (localStorage.getItem('isAdminAdd')) {
           localStorage.setItem('isAdminAdd', '');
-          this.router.navigate(['/profile/admin-prerak/' + res.result.Prerak.osid]);
+          this.router.navigate(['/profile/admin-prerak/' + res.result.PrerakV2.osid]);
           $('.modal-backdrop').remove() // removes the grey overlay.
         } else {
           this.router.navigate([this.redirectTo]);

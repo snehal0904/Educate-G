@@ -13,8 +13,8 @@
             }
         },
         {
-            "prerak": {
-                "logoHref" : "profile/Prerak",
+            "prerakv2": {
+                "logoHref" : "profile/PrerakV2",
                 "left": [],
                 "right": [
                     {
@@ -27,11 +27,11 @@
         },
         {
             "admin-prerak": {
-                "logoHref" : "admin/attestation/admin-attestation/Prerak",
+                "logoHref" : "admin/attestation/admin-attestation/PrerakV2",
                 "left": [
                     {
                         "title": "Prerak List",
-                        "redirectTo": "/admin/attestation/admin-attestation/Prerak"
+                        "redirectTo": "/admin/attestation/admin-attestation/PrerakV2"
                     }
                 ],
                 "right": [
@@ -45,7 +45,7 @@
         },
         {
             "admin": {
-                "logoHref" : "admin/attestation/admin-attestation/Prerak",
+                "logoHref" : "admin/attestation/admin-attestation/PrerakV2",
                 "left": [
                     {
                         "title": "Prerak",
