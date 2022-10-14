@@ -1311,8 +1311,8 @@ export class FormsComponent implements OnInit {
 
     this.generalService.getData(get_url).subscribe((res) => {
       res = (res[0]) ? res[0] : res;
-      if (this.propertyName && this.entityId) {
-        this.getNotes();
+      if (this.propertyName) {
+        this.entityId = res.osid;
       }
 
       this.model = res;
