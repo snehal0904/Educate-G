@@ -61,6 +61,12 @@
                         <ng-template ngFor let-element [ngForOf]="item" let-elementIndex="index">
                             <ng-template [ngIf]="element.length > 0">
                                 <ng-template ngFor let-objects [ngForOf]="element" let-objectIndex="index">
+                                    <span class="float-end">
+                                        <a *ngIf="!public && block.claimEdit && objectIndex == 0"
+                                            panelEditLink="{{block.editform}}/{{element[objectIndex].osid}}"
+                                            class="pl-1 fs-7 text-primary-color float-end">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    </span>
                                     <ng-template [ngIf]="element[objectIndex].value" class=" fs-6">
                                       
                                         <h7 data-mdb-toggle="tooltip" title={{element[objectIndex].title}} *ngIf="(block.headValue) ? (element[objectIndex].property == block.headValue ? true : false) : objectIndex == 0;"> <b class="mr-1">{{element[objectIndex].value}}</b>
@@ -84,13 +90,6 @@
 
                                             </ng-template>
                                         </span>
-
-                                            <span class="float-end">
-                                                <a *ngIf="!public && block.claimEdit"
-                                                    panelEditLink="{{block.editform}}/{{element[objectIndex].osid}}"
-                                                    class="pl-1 fs-7 text-primary-color float-end">
-                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                            </span>
                                         </h7>
                                     </ng-template>
         
