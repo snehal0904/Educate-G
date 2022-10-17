@@ -53,26 +53,6 @@
                                                 "type": "select",
                                                 "options" : "this.locationService.getDistrict()"
                                             }
-                                        },
-                                        {
-                                            "name": "block",
-                                            "dependentOn": {
-                                                "key" : "block",
-                                                "title" : "Block",
-                                                "dependentOn" : "district",
-                                                "type": "select",
-                                                "options" :  []
-                                            }
-                                        },
-                                        {
-                                            "name": "village",
-                                            "dependentOn": {
-                                                "key" : "village",
-                                                "title" : "Village",
-                                                "dependentOn" : "block",
-                                                "type": "select",
-                                                "options" :  []
-                                            }
                                         }
                                     ]
                                 }
@@ -91,12 +71,6 @@
                             },
                             {
                                 "name": "parentOrganization"
-                            },
-                            {
-                                "name": "typeOfPastExp"
-                            },
-                            {
-                                "name": "durationOfPastExp"
                             }
                             
                         ]
@@ -155,26 +129,6 @@
                                                 "type": "select",
                                                 "options" : "this.locationService.getDistrict()"
                                             }
-                                        },
-                                        {
-                                            "name": "block",
-                                            "dependentOn": {
-                                                "key" : "block",
-                                                "title" : "Block",
-                                                "dependentOn" : "district",
-                                                "type": "select",
-                                                "options" :  []
-                                            }
-                                        },
-                                        {
-                                            "name": "village",
-                                            "dependentOn": {
-                                                "key" : "village",
-                                                "title" : "Village",
-                                                "dependentOn" : "block",
-                                                "type": "select",
-                                                "options" :  []
-                                            }
                                         }
                                     ]
                                 }
@@ -193,12 +147,6 @@
                             },
                             {
                                 "name": "parentOrganization"
-                            },
-                            {
-                                "name": "typeOfPastExp"
-                            },
-                            {
-                                "name": "durationOfPastExp"
                             }
                             
                         ]
@@ -256,26 +204,6 @@
                                                 "type": "select",
                                                 "options" : "this.locationService.getDistrict()"
                                             }
-                                        },
-                                        {
-                                            "name": "block",
-                                            "dependentOn": {
-                                                "key" : "block",
-                                                "title" : "Block",
-                                                "dependentOn" : "district",
-                                                "type": "select",
-                                                "options" :  []
-                                            }
-                                        },
-                                        {
-                                            "name": "village",
-                                            "dependentOn": {
-                                                "key" : "village",
-                                                "title" : "Village",
-                                                "dependentOn" : "block",
-                                                "type": "select",
-                                                "options" :  []
-                                            }
                                         }
                                     ]
                                 }
@@ -294,12 +222,6 @@
                             },
                             {
                                 "name": "parentOrganization"
-                            },
-                            {
-                                "name": "typeOfPastExp"
-                            },
-                            {
-                                "name": "durationOfPastExp"
                             },
                             {
                                 "name": "candidateStatus"
@@ -354,26 +276,6 @@
                                                 "title" : "District",
                                                 "type": "select",
                                                 "options" : "this.locationService.getDistrict()"
-                                            }
-                                        },
-                                        {
-                                            "name": "block",
-                                            "dependentOn": {
-                                                "key" : "block",
-                                                "title" : "Block",
-                                                "dependentOn" : "district",
-                                                "type": "select",
-                                                "options" :  []
-                                            }
-                                        },
-                                        {
-                                            "name": "village",
-                                            "dependentOn": {
-                                                "key" : "village",
-                                                "title" : "Village",
-                                                "dependentOn" : "block",
-                                                "type": "select",
-                                                "options" :  []
                                             }
                                         }
                                     ]
@@ -601,12 +503,6 @@
                             },
                             {
                                 "name": "mcqPastExperienceVolunteering"
-                            },
-                            {
-                                "name": "freeTextPastExperience"
-                            },
-                            {
-                                "name": "mcqNgoExperience"
                             },
                             {
                                 "name": "freeTextNgoExperience"
