@@ -317,7 +317,6 @@ export class TablesComponent implements OnInit {
     let finalarr = [];
     this.model.forEach((element) => {
       arr = [];
-
       let obj = [];
       obj['fullname'] = element.fullName ? element.fullName : '';
       obj['mobile'] = element.mobile ? element.mobile : '';
@@ -332,10 +331,7 @@ export class TablesComponent implements OnInit {
           .mcqWhyDoYouWantPragatiPrerak
           ? element.interviewDetails[0].mcqWhyDoYouWantPragatiPrerak
           : '';
-        obj['freeTextWhyDoYouWantPragatiPrerak'] = element.interviewDetails[0]
-          .freeTextWhyDoYouWantPragatiPrerak
-          ? element.interviewDetails[0].freeTextWhyDoYouWantPragatiPrerak
-          : '';
+
         obj['mcqPastExperienceVolunteering'] = element.interviewDetails[0]
           .mcqPastExperienceVolunteering
           ? element.interviewDetails[0].mcqPastExperienceVolunteering
@@ -452,11 +448,10 @@ export class TablesComponent implements OnInit {
         'District',
         'VFS team name',
         'Why do you want to be a Pragati Prerak?',
-        'Why do you want to be a Pragati Prerak?',
         'Past experience of volunteering?',
         'Past experience of teaching / volunteering / training ?',
         'NGO experience',
-        'NGO experience details (Sector, Stakeholder, Engagement type)',
+        'NGO experience details',
         'Year of NGO experience',
         'Sector of NGO experience',
         'Primary stakeholder',
@@ -478,7 +473,7 @@ export class TablesComponent implements OnInit {
         'Name of the POC',
         'Mobile number of POC',
         'Relationship with the POC',
-        'Interview Date',
+        'osid',
       ],
     };
     this.csvExporter = new ExportToCsv(options);
