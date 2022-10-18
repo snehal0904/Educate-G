@@ -324,10 +324,109 @@ export class TablesComponent implements OnInit {
       obj['district'] = element.address.district
         ? element.address.district
         : '';
-
       if (element.interviewDetails?.length >= 0) {
         obj['vfsTeamName'] = element.interviewDetails[0].vfsTeamName
           ? element.interviewDetails[0].vfsTeamName
+          : '';
+        obj['mcqWhyDoYouWantPragatiPrerak'] = element.interviewDetails[0]
+          .mcqWhyDoYouWantPragatiPrerak
+          ? element.interviewDetails[0].mcqWhyDoYouWantPragatiPrerak
+          : '';
+        obj['freeTextWhyDoYouWantPragatiPrerak'] = element.interviewDetails[0]
+          .freeTextWhyDoYouWantPragatiPrerak
+          ? element.interviewDetails[0].freeTextWhyDoYouWantPragatiPrerak
+          : '';
+        obj['mcqPastExperienceVolunteering'] = element.interviewDetails[0]
+          .mcqPastExperienceVolunteering
+          ? element.interviewDetails[0].mcqPastExperienceVolunteering
+          : '';
+        obj['freeTextNgoExperience'] = element.interviewDetails[0]
+          .freeTextNgoExperience
+          ? element.interviewDetails[0].freeTextNgoExperience
+          : '';
+        obj['mcqYearOfNgoExperience'] = element.interviewDetails[0]
+          .mcqYearOfNgoExperience
+          ? element.interviewDetails[0].mcqYearOfNgoExperience
+          : '';
+        obj['mcqSectorOfNgoExperience'] = element.interviewDetails[0]
+          .mcqSectorOfNgoExperience
+          ? element.interviewDetails[0].mcqSectorOfNgoExperience
+          : '';
+        obj['mcqPrimaryStakeholder'] = element.interviewDetails[0]
+          .mcqPrimaryStakeholder
+          ? element.interviewDetails[0].mcqPrimaryStakeholder
+          : '';
+        obj['mcqEngagementType'] = element.interviewDetails[0].mcqEngagementType
+          ? element.interviewDetails[0].mcqEngagementType
+          : '';
+        obj['mcqPastTeachingExperience'] = element.interviewDetails[0]
+          .mcqPastTeachingExperience
+          ? element.interviewDetails[0].mcqPastTeachingExperience
+          : '';
+        obj['freeTextTeachingExpierience'] = element.interviewDetails[0]
+          .freeTextTeachingExpierience
+          ? element.interviewDetails[0].freeTextTeachingExpierience
+          : '';
+        obj['mcqYearOfTeachingExpierience'] = element.interviewDetails[0]
+          .mcqYearOfTeachingExpierience
+          ? element.interviewDetails[0].mcqYearOfTeachingExpierience
+          : '';
+        obj['mcqTeachingEngagementType'] = element.interviewDetails[0]
+          .mcqTeachingEngagementType
+          ? element.interviewDetails[0].mcqTeachingEngagementType
+          : '';
+        obj['mcqPrimaryStakeholderType'] = element.interviewDetails[0]
+          .mcqPrimaryStakeholderType
+          ? element.interviewDetails[0].mcqPrimaryStakeholderType
+          : '';
+        obj['mcqTrainingExpierience'] = element.interviewDetails[0]
+          .mcqTrainingExpierience
+          ? element.interviewDetails[0].mcqTrainingExpierience
+          : '';
+        obj['freeTextTrainingExpierience'] = element.interviewDetails[0]
+          .freeTextTrainingExpierience
+          ? element.interviewDetails[0].freeTextTrainingExpierience
+          : '';
+        obj['mcqTrainingProvider'] = element.interviewDetails[0]
+          .mcqTrainingProvider
+          ? element.interviewDetails[0].mcqTrainingProvider
+          : '';
+        obj['mcqTrainingDuration'] = element.interviewDetails[0]
+          .mcqTrainingDuration
+          ? element.interviewDetails[0].mcqTrainingDuration
+          : '';
+        obj['mcqTrainingContent'] = element.interviewDetails[0]
+          .mcqTrainingContent
+          ? element.interviewDetails[0].mcqTrainingContent
+          : '';
+        obj['mcqAnyOtherExperience'] = element.interviewDetails[0]
+          .mcqAnyOtherExperience
+          ? element.interviewDetails[0].mcqAnyOtherExperience
+          : '';
+        obj['freeTextExplainAboutYourExperience'] = element.interviewDetails[0]
+          .freeTextExplainAboutYourExperience
+          ? element.interviewDetails[0].freeTextExplainAboutYourExperience
+          : '';
+        obj['mcqPastExperienceWillHelp'] = element.interviewDetails[0]
+          .mcqPastExperienceWillHelp
+          ? element.interviewDetails[0].mcqPastExperienceWillHelp
+          : '';
+        obj['mcqPocPastExperience'] = element.interviewDetails[0]
+          .mcqPocPastExperience
+          ? element.interviewDetails[0].mcqPocPastExperience
+          : '';
+        obj['freeTextNameOfPoc'] = element.interviewDetails[0].freeTextNameOfPoc
+          ? element.interviewDetails[0].freeTextNameOfPoc
+          : '';
+        obj['digitMobNoOfPoc'] = element.interviewDetails[0].digitMobNoOfPoc
+          ? element.interviewDetails[0].digitMobNoOfPoc
+          : '';
+        obj['mcqRelationshipWithThePOC'] = element.interviewDetails[0]
+          .mcqRelationshipWithThePOC
+          ? element.interviewDetails[0].mcqRelationshipWithThePOC
+          : '';
+        obj['osid'] = element.interviewDetails[0].osid
+          ? element.interviewDetails[0].osid
           : '';
       }
 
@@ -343,7 +442,40 @@ export class TablesComponent implements OnInit {
       useTextFile: false,
       useBom: true,
       useKeysAsHeaders: false,
-      headers: ['full name', 'Mobile', 'District', 'Interview details'],
+      // headers: [
+      //   'full name',
+      //   'Mobile',
+      //   'District',
+      //   'VFS team name',
+      //   'Why do you want to be a Pragati Prerak?',
+      //   'Why do you want to be a Pragati Prerak?',
+      //   'Past experience of volunteering?',
+      //   'Past experience of teaching / volunteering / training ?',
+      //   'NGO experience',
+      //   'NGO experience details (Sector, Stakeholder, Engagement type)',
+      //   'Year of NGO experience',
+      //   'Sector of NGO experience',
+      //   'Primary stakeholder',
+      //   'Engagement type',
+      //   'Past experience of teaching ?',
+      //   'Teaching experience (Engagement type, Primary stakeholder)',
+      //   'Years of teaching experience',
+      //   'Teaching engagement type',
+      //   ' Primary stakeholder type',
+      //   'Past experience of training',
+      //   'Teaching experience (Engagement type, Primary stakeholder)',
+      //   'Training provider',
+      //   'Training duration',
+      //   'Training content/objective',
+      //   'Any other experience?',
+      //   'Explain about your experience',
+      //   'How do you think your past experience will help you in role as Prerak? (To judge comprehension and communication skills)',
+      //   'Can you share details of a POC from any of the past experiences for a reference check?',
+      //   'Name of the POC',
+      //   'Mobile number of POC',
+      //   'Relationship with the POC',
+      //   'Interview Date',
+      // ],
     };
     this.csvExporter = new ExportToCsv(options);
     this.csvExporter.generateCsv(finalarr);
