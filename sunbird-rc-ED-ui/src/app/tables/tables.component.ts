@@ -27,6 +27,7 @@ export class TablesComponent implements OnInit {
   property: any[] = [];
   field;
   public csvExporter: any;
+  public tableData = [];
 
   page: number = 1;
   limit: number = 100;
@@ -75,6 +76,7 @@ export class TablesComponent implements OnInit {
         await this.getData();
       });
     });
+
     this.schemaService
       .getJSONData('/assets/config/ui-config/interview.json')
       .subscribe((res) => {
@@ -149,6 +151,7 @@ export class TablesComponent implements OnInit {
       digitMobNoOfPoc: modelInterview['digitMobNoOfPoc'],
       mcqRelationshipWithThePOC: modelInterview['mcqRelationshipWithThePOC'],
     };
+    // this.model['sorder']  = this.exLength;
     this.generalService
       .postData('/PrerakV2/' + this.identifier, data)
       .subscribe(
@@ -309,6 +312,48 @@ export class TablesComponent implements OnInit {
     this.name = `prerak_with_interviewDetails_${dayjs().format(
       'YYYY-MM-DD_HH_mm'
     )}`;
+    // console.log(this.model);
+    let arr = [];
+    let finalarr = [];
+    this.model.forEach((element) => {
+      arr = [];
+      let str = '';
+      let interviewStr = '';
+      let obj = [];
+      obj['fullname'] = element.fullName ? element.fullName : '';
+      obj['mobile'] = element.mobile ? element.mobile : '';
+      obj['district'] = element.address.district
+        ? element.address.district
+        : '';
+
+      if (element.interviewDetails?.length >= 0) {
+        // console.log('prerakstr', element.interviewDetails.length);
+        obj['vfsTeamName'] = element.interviewDetails[0].vfsTeamName
+          ? element.interviewDetails[0].vfsTeamName
+          : '';
+      }
+
+      finalarr.push(obj);
+    });
+    // console.log(finalarr);
+    const options = {
+      filename: this.name,
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalSeparator: '.',
+      showLabels: true,
+      useTextFile: false,
+      useBom: true,
+      useKeysAsHeaders: false,
+      headers: ['full name', 'Mobile', 'District', 'Interview details'],
+    };
+    this.csvExporter = new ExportToCsv(options);
+    this.csvExporter.generateCsv(finalarr);
+  }
+  downloadCSVFile1() {
+    this.name = `prerak_with_interviewDetails_${dayjs().format(
+      'YYYY-MM-DD_HH_mm'
+    )}`;
     const cols = this.tableSchema.fields;
     cols.push({
       keyPath: 'interviewDetails',
@@ -327,28 +372,54 @@ export class TablesComponent implements OnInit {
       useBom: true,
       useKeysAsHeaders: false,
       headers: _.map(this.tableSchema.fields, (column) =>
-        column.title ? column.title : 'URL'
+        column.title ? column.title : null
       ),
     };
     const tempCSVarray = [];
 
-    this.property.forEach((element) => {
+    //   this.property.forEach((element) => {
+    //     const tempCSVobj = [];
+
+    //     this.tableSchema.fields.forEach((field) => {
+    //       element.forEach((elVal) => {
+    //         if (elVal.name) {
+    //           if (elVal.name == field.name) {
+    //             tempCSVobj[field.name] = elVal.value ? elVal.value : ' ';
+    //           }
+    //         } else if (elVal.custom == true && field.name == undefined) {
+    //           tempCSVobj['URL'] = elVal.redirectToUrl ? elVal.redirectToUrl : '-';
+    //         }
+    //       });
+    //     });
+    //     tempCSVarray.push(tempCSVobj);
+    //   });
+
+    //   this.csvExporter = new ExportToCsv(options);
+    //   this.csvExporter.generateCsv(tempCSVarray);
+    // }
+    this.model.forEach((element) => {
       const tempCSVobj = [];
 
       this.tableSchema.fields.forEach((field) => {
-        element.forEach((elVal) => {
-          if (elVal.name) {
-            if (elVal.name == field.name) {
-              tempCSVobj[field.name] = elVal.value ? elVal.value : ' ';
-            }
-          } else if (elVal.custom == true && field.name == undefined) {
-            tempCSVobj['URL'] = elVal.redirectToUrl ? elVal.redirectToUrl : '-';
-          }
-        });
+        console.log('element', element);
+        // if (element.name == field.name) {
+        tempCSVobj[field.name] = element[field.name]
+          ? element[field.name]
+          : ' ';
+        // }
+        // element.forEach((elVal) => {
+        //   if (elVal.name) {
+        //     if (elVal.name == field.name) {
+        //       tempCSVobj[field.name] = elVal.value ? elVal.value : ' ';
+        //     }
+        //   } else if (elVal.custom == true && field.name == undefined) {
+        //     tempCSVobj['URL'] = elVal.redirectToUrl ? elVal.redirectToUrl : '-';
+        //   }
+        // });
       });
       tempCSVarray.push(tempCSVobj);
     });
-
+    console.log('tempCSVobj', tempCSVarray);
     this.csvExporter = new ExportToCsv(options);
     this.csvExporter.generateCsv(tempCSVarray);
   }
