@@ -317,8 +317,7 @@ export class TablesComponent implements OnInit {
     let finalarr = [];
     this.model.forEach((element) => {
       arr = [];
-      let str = '';
-      let interviewStr = '';
+
       let obj = [];
       obj['fullname'] = element.fullName ? element.fullName : '';
       obj['mobile'] = element.mobile ? element.mobile : '';
@@ -327,7 +326,6 @@ export class TablesComponent implements OnInit {
         : '';
 
       if (element.interviewDetails?.length >= 0) {
-        // console.log('prerakstr', element.interviewDetails.length);
         obj['vfsTeamName'] = element.interviewDetails[0].vfsTeamName
           ? element.interviewDetails[0].vfsTeamName
           : '';
@@ -335,7 +333,7 @@ export class TablesComponent implements OnInit {
 
       finalarr.push(obj);
     });
-    // console.log(finalarr);
+
     const options = {
       filename: this.name,
       fieldSeparator: ',',
