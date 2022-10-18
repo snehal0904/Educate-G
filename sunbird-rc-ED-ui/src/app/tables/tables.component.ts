@@ -324,6 +324,7 @@ export class TablesComponent implements OnInit {
         ? element.address.district
         : '';
       if (element.interviewDetails?.length >= 0) {
+        console.log(element.interviewDetails[0]);
         obj['vfsTeamName'] = element.interviewDetails[0].vfsTeamName
           ? element.interviewDetails[0].vfsTeamName
           : '';
@@ -449,7 +450,6 @@ export class TablesComponent implements OnInit {
         'VFS team name',
         'Why do you want to be a Pragati Prerak?',
         'Past experience of volunteering?',
-        'Past experience of teaching / volunteering / training ?',
         'NGO experience',
         'NGO experience details',
         'Year of NGO experience',
