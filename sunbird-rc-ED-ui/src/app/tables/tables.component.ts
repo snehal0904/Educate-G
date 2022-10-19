@@ -10,6 +10,7 @@ import { ToastMessageService } from '../services/toast-message/toast-message.ser
 import dayjs from 'dayjs';
 import { ExportToCsv } from 'export-to-csv';
 import * as _ from 'lodash-es';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-tables',
@@ -43,17 +44,26 @@ export class TablesComponent implements OnInit {
   fields: FormlyFieldConfig[] = [];
   isEdit: boolean = false;
   responseData: any;
+  token: any;
   filterData: any;
+  roleCheck = false;
   constructor(
     public location: Location,
     public router: Router,
     public toastMsg: ToastMessageService,
     private route: ActivatedRoute,
     public generalService: GeneralService,
-    public schemaService: SchemaService
+    public schemaService: SchemaService,
+    public keycloak: KeycloakService
   ) {}
 
   ngOnInit(): void {
+    this.keycloak.loadUserProfile().then((res) => {
+      if (res.attributes.entity[0].includes('Admin')) {
+        this.roleCheck = true;
+      }
+    });
+
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     let tabUrl = this.router.url;
     this.route.params.subscribe(async (params) => {
@@ -312,7 +322,6 @@ export class TablesComponent implements OnInit {
     this.name = `prerak_with_interviewDetails_${dayjs().format(
       'YYYY-MM-DD_HH_mm'
     )}`;
-    // console.log(this.model);
     let arr = [];
     let finalarr = [];
     this.model.forEach((element) => {
@@ -323,8 +332,68 @@ export class TablesComponent implements OnInit {
       obj['district'] = element.address.district
         ? element.address.district
         : '';
+      obj['qualification'] = element.qualification ? element.qualification : '';
+      obj['gender'] = element.gender ? element.gender : '';
+      obj['sourcingChannel'] = element.sourcingChannel
+        ? element.sourcingChannel
+        : '';
+      obj['referrerIfApplicable'] = element.referrerIfApplicable
+        ? element.referrerIfApplicable
+        : '';
+      obj['relationshipWithTheCandidate'] = element.relationshipWithTheCandidate
+        ? element.relationshipWithTheCandidate
+        : '';
+      obj['candidateStatus'] = element.candidateStatus
+        ? element.candidateStatus
+        : '';
+      obj['vfsMemberName'] = element.vfsMemberName ? element.vfsMemberName : '';
+      obj['numberOfAttempts'] = element.numberOfAttempts
+        ? element.numberOfAttempts
+        : '';
+      obj['callStatus'] = element.callStatus ? element.callStatus : '';
+      obj['explainRROfPrerak'] = element.explainRROfPrerak
+        ? element.explainRROfPrerak
+        : '';
+      obj['userInterestedRole'] = element.userInterestedRole
+        ? element.userInterestedRole
+        : '';
+      obj['reasonForNotInterested'] = element.reasonForNotInterested
+        ? element.reasonForNotInterested
+        : '';
+      obj['descForNotInterested'] = element.descForNotInterested
+        ? element.descForNotInterested
+        : '';
+      obj['confirmName'] = element.confirmName ? element.confirmName : '';
+      obj['confirmPhoneNumber'] = element.confirmPhoneNumber
+        ? element.confirmPhoneNumber
+        : '';
+      obj['alternateMobileNumber'] = element.alternateMobileNumber
+        ? element.alternateMobileNumber
+        : '';
+      obj['confirmQualification'] = element.confirmQualification
+        ? element.confirmQualification
+        : '';
+      obj['whenToCallNextOrOtherNotes'] = element.whenToCallNextOrOtherNotes
+        ? element.whenToCallNextOrOtherNotes
+        : '';
+      obj['accessToMobNo'] = element.accessToMobNo ? element.accessToMobNo : '';
+      if (element.confirmAddress) {
+        obj['confirmDistrict'] = element.confirmAddress.district
+          ? element.confirmAddress.district
+          : '';
+        obj['confirmBlock'] = element.confirmAddress.block
+          ? element.confirmAddress.block
+          : '';
+        obj['confirmVillage'] = element.confirmAddress.village
+          ? element.confirmAddress.village
+          : '';
+      } else {
+        obj['confirmDistrict'] = ' ';
+        obj['confirmBlock'] = ' ';
+        obj['confirmVillage'] = ' ';
+      }
+
       if (element.interviewDetails?.length >= 0) {
-        console.log(element.interviewDetails[0]);
         obj['vfsTeamName'] = element.interviewDetails[0].vfsTeamName
           ? element.interviewDetails[0].vfsTeamName
           : '';
@@ -444,9 +513,31 @@ export class TablesComponent implements OnInit {
       useBom: true,
       useKeysAsHeaders: false,
       headers: [
-        'full name',
+        'full Name',
         'Mobile',
         'District',
+        'Qualification',
+        'Gender',
+        'Sourcing Channel',
+        'Referrer If Applicable',
+        'Relationship With The Candidate',
+        'Candidate Status',
+        'VFS Member Name',
+        'Number Of Attempts',
+        'Call Status',
+        'Explain RR Of Prerak',
+        'User Interested Role',
+        'Reason For Not Interested',
+        'Desc For Not Interested',
+        'Confirm Name',
+        'Confirm Phone Number',
+        'Alternate Mobile Number',
+        'Confirm Qualification',
+        'When To Call Next Or Other Notes',
+        'Access To Mobile No',
+        'Confirm District',
+        'Confirm Block',
+        'Confirm Village',
         'VFS team name',
         'Why do you want to be a Pragati Prerak?',
         'Past experience of volunteering?',
@@ -530,7 +621,6 @@ export class TablesComponent implements OnInit {
       const tempCSVobj = [];
 
       this.tableSchema.fields.forEach((field) => {
-        console.log('element', element);
         // if (element.name == field.name) {
         tempCSVobj[field.name] = element[field.name]
           ? element[field.name]
@@ -548,7 +638,6 @@ export class TablesComponent implements OnInit {
       });
       tempCSVarray.push(tempCSVobj);
     });
-    console.log('tempCSVobj', tempCSVarray);
     this.csvExporter = new ExportToCsv(options);
     this.csvExporter.generateCsv(tempCSVarray);
   }
