@@ -5,7 +5,10 @@
     {{ tableSchema?.title | translate }}
   </h5>
   <!-- <span class="card col-3"> -->
-  <div class="d-flex flex-ai-center flex-jc-flex-end download-report">
+  <div
+    *ngIf="roleCheck"
+    class="d-flex flex-ai-center flex-jc-flex-end download-report"
+  >
     <span class="card cursor-pointer" tabindex="0" (click)="downloadCSVFile()"
       >Download CSV</span
     >
