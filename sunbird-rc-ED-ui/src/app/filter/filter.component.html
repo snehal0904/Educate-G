@@ -1,11 +1,12 @@
-<div class="container">
+<div class="container" style="margin-bottom: -8.5rem!important;">
   <div class="card p-2">
     <!-- Nav tabs -->
     <div class="card-body">
       <ul class="nav nav-tabs mb-4" role="tablist" *ngIf="showTabs">
         <li class="nav-item" *ngFor="let tab of filtered;let index = index;">
           <a class="nav-link primary-text {{tab?.activeTab}} text-capitalize p14"
-            (click)="onTabChange($event, tab?.tab);" data-toggle="tab" href="#{{tab?.tab}}">{{tab?.tabTitle | translate}}</a>
+            (click)="onTabChange($event, tab?.tab);" data-toggle="tab" href="#{{tab?.tab}}">{{tab?.tabTitle |
+            translate}}</a>
         </li>
       </ul>
 

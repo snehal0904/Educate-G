@@ -202,6 +202,13 @@ export class TablesComponent implements OnInit {
     localStorage.setItem('isAdminAdd', 'true');
   }
 
+  addAG() {
+    localStorage.setItem('id', '');
+    localStorage.setItem('isAGAdd', 'true');
+    // this.router.navigate(['/profile/AG2/(claim:add/AG-add)'])
+    // this.router.navigate('/profile/AG2/(claim:add/AG-add)')
+  }
+
   getPrerakData(item, data) {
     this.identifier = item.id;
   }

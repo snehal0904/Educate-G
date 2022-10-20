@@ -13,9 +13,12 @@
             }
         },
         {
-            "prerakv2": {
+            "PrerakV2": {
                 "logoHref" : "profile/PrerakV2",
-                "left": [],
+                "left": [{
+                  "title": "AG List",
+                  "redirectTo": "/myags/attestation/ag/AG"
+              }],
                 "right": [
                     {
                         "title": "LOGOUT",
