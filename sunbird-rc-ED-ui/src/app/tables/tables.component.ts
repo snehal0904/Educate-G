@@ -46,7 +46,7 @@ export class TablesComponent implements OnInit {
   responseData: any;
   token: any;
   filterData: any;
-  roleCheck = true;
+  roleCheck = false;
   constructor(
     public location: Location,
     public router: Router,
@@ -59,9 +59,10 @@ export class TablesComponent implements OnInit {
 
   ngOnInit(): void {
     this.keycloak.loadUserProfile().then((res) => {
-      // if (res[attributes].entity[0].includes('Admin')) {
-      //   this.roleCheck = true;
-      // }
+      this.roleCheck = this.keycloak.isUserInRole(
+        'Report-manager',
+        res['username']
+      );
     });
 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
