@@ -76,7 +76,9 @@
     "typescript": "3.9.5",
     "write-json-file": "^5.0.0",
     "z-schema": "^5.0.0",
-    "zone.js": "~0.10.3"
+    "zone.js": "~0.10.3",
+    "dayjs": "^1.8.26",
+    "export-to-csv": "0.2.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1000.0",
