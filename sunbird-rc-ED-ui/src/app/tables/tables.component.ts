@@ -53,6 +53,7 @@ export class TablesComponent implements OnInit {
     this.route.params.subscribe(async params => {
       this.table = params['table'].toLowerCase();
       this.entity = params['entity'].toLowerCase();
+      console.log("routes",this.table, this.entity)
       this.tab = tabUrl.replace(this.table, "").replace(this.entity, "").split("/").join("");
       this.schemaService.getTableJSON().subscribe(async (TableSchemas) => {
         let filtered = TableSchemas.tables.filter(obj => {
@@ -155,7 +156,7 @@ export class TablesComponent implements OnInit {
 
     });
   }
-  
+
   openPreview(item, row) {
     this.isEdit = false;
     this.isPreview = true;
@@ -178,6 +179,13 @@ export class TablesComponent implements OnInit {
   addPrerak() {
     localStorage.setItem('id', '');
     localStorage.setItem('isAdminAdd', 'true');
+  }
+
+  addAG() {
+    localStorage.setItem('id', '');
+    localStorage.setItem('isAGAdd', 'true');
+    // this.router.navigate(['/profile/AG2/(claim:add/AG-add)'])
+    // this.router.navigate('/profile/AG2/(claim:add/AG-add)')
   }
 
   getPrerakData(item, data) {

@@ -46,6 +46,61 @@
                     }
                 ]
             }
-        }
+        },
+        {
+          "ag": {
+              "api": "/AG",
+              "title": "My AGs",
+              "fields": [
+                  {
+                      "name": "firstName",
+                      "title": "First Name",
+                      "keyPath" : "nameDetails.firstName"
+                  },
+                  {
+                    "name": "lastName",
+                    "title": "Last Name",
+                    "keyPath" : "nameDetails.lastName"
+                },
+
+                {
+                  "name": "AGWhatsappNumber",
+                  "title": "AG Whatsapp Number",
+                  "keyPath" : "AGWhatsappNumber"
+                },
+                {
+                  "name": "category",
+                  "title": "Category",
+                  "keyPath" : "category"
+                },
+                {
+                  "name": "connectVia",
+                  "title": "Connect Via",
+                  "keyPath" : "connectVia"
+                },
+                {
+                  "name": "dob",
+                  "title": "Date of Birth",
+                  "keyPath" : "dob"
+                },
+                {
+                  "name": "fatherDetails",
+                  "title": "Father First name",
+                  "keyPath" : "fatherDetails.firstName"
+                },
+                {
+                  "name": "fatherDetails",
+                  "title": "Father Last name",
+                  "keyPath" : "fatherDetails.lastName"
+                },
+                {
+                  "custom": true,
+                  "type": "button",
+                  "buttonText": "View",
+                  "redirectTo": "/profile/ag-detail:id"
+              }
+              ]
+          }
+      }
     ]
 }

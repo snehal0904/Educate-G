@@ -1,73 +1,145 @@
 {
-    "type": "opensaberLayoutSchema",
-    "version": "0.1",
-    "layouts": [
-       
-        {
-            "prerakv2": {
-                "api": "/PrerakV2",
-                "title": "TEACHER_PROFILE",
-                "langKey" : "prerakAdmin",
-                "headerName" : "fullName",
-                "blocks": [
-                    {
-                        "definition": "PrerakV2",
-                        "title": "PERSONAL_DETAILS",
-                        "add": false,
-                        "edit": true,
-                        "editform":"prerak-setup",
-                        "fields": {
-                            "includes": ["*"],
-                            "excludes": []
-                        },
-                        "propertyShowFirst" : [ "fullName", "mobile", "email"]
+  "type": "opensaberLayoutSchema",
+  "version": "0.1",
+  "layouts": [
+    {
+      "PrerakV2": {
+        "api": "/PrerakV2",
+        "title": "TEACHER_PROFILE",
+        "langKey": "prerakAdmin",
+        "headerName": "fullName",
+        "blocks": [
+          {
+            "definition": "PrerakV2",
+            "title": "PERSONAL_DETAILS",
+            "add": false,
+            "edit": true,
+            "editform": "prerak-setup",
+            "fields": {
+              "includes": [
+                "*"
+              ],
+              "excludes": []
+            },
+            "propertyShowFirst": [
+              "fullName",
+              "mobile",
+              "email"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "AG2": {
+        "api": "/AG",
+        "title": "TEACHER_PROFILE",
+        "langKey": "prerakAdmin",
+        "headerName": "nameDetails.firstName",
+        "multiple": true,
+        "blocks": [
+          {
+            "definition": "AG",
+            "title": "AG",
+            "add": true,
+            "edit": false,
+            "addform": "AG-add",
+            "multiple": true,
+            "fields": {
+              "includes": [
+                "*"
+              ],
+              "excludes": []
+            }
+          }
+        ]
+      }
+    },
 
-                    }
-                ]
+    {
+      "admin-prerak": {
+        "api": "/PrerakV2",
+        "title": "TEACHER_PROFILE",
+        "langKey": "prerakAdmin",
+        "headerName": "fullName",
+        "blocks": [
+          {
+            "definition": "PrerakV2",
+            "title": "PERSONAL_DETAILS",
+            "add": false,
+            "edit": true,
+            "editform": "prerak-admin-setup",
+            "fields": {
+              "includes": [
+                "*"
+              ],
+              "excludes": []
+            },
+            "propertyShowFirst": [
+              "fullName",
+              "mobile",
+              "email"
+            ]
+          },
+          {
+            "definition": "PrerakV2",
+            "title": "Interview Details",
+            "add": true,
+            "addform": "interview",
+            "editform": "interview",
+            "edit": false,
+            "claimEdit": true,
+            "canRaiseClaim": false,
+            "multiple": true,
+            "headValue": "vfsTeamName",
+            "fields": {
+              "includes": [
+                "interviewDetails"
+              ]
             }
-        },
-        {
-            "admin-prerak": {
-                "api": "/PrerakV2",
-                "title": "TEACHER_PROFILE",
-                "langKey" : "prerakAdmin",
-                "headerName" : "fullName",
-                "blocks": [
-                    {
-                        "definition": "PrerakV2",
-                        "title": "PERSONAL_DETAILS",
-                        "add": false,
-                        "edit": true,
-                        "editform":"prerak-admin-setup",
-                        "fields": {
-                            "includes": ["*"],
-                            "excludes": []
-                        },
-                        "propertyShowFirst" : [ "fullName", "mobile", "email"]
-
-                    },
-                    {
-                        "definition": "PrerakV2",
-                        "title": "Interview Details",
-                        "add": true,
-                        "addform":"interview",
-                        "editform":"interview",
-                        "edit": false,
-                        "claimEdit": true,
-                       "canRaiseClaim" : false,
-                        "multiple": true,
-                        "headValue" : "vfsTeamName",
-                        "fields": {
-                            "includes": ["interviewDetails"]
-                        }
-                    }
-                ]
-            }
-        },
-        {
-            "admin": {
-                "table": "admin-attestation/PrerakV2"
-            }
-        }
-    ]
+          }
+        ]
+      }
+    },
+    {
+      "ag-detail": {
+        "api": "/AG",
+        "title": "AG Profile",
+        "headerName": "nameDetails.firstName",
+        "blocks": [
+          {
+            "definition": "AG",
+            "title": "PERSONAL_DETAILS",
+            "add": false,
+            "edit": true,
+            "editform": "ag-setup",
+            "fields": {
+              "includes": [
+                "*"
+              ],
+              "excludes": []
+            },
+            "propertyShowFirst": [
+              "AGWhatsappNumber"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "ags": {
+        "table": "myags"
+      }
+    },
+    {
+      "admin": {
+        "table": "admin-attestation/PrerakV2"
+      }
+    },
+    {
+      "myags": {
+        "table": "ag/AG"
+      }
+    }
+  ]
 }
