@@ -7,7 +7,7 @@
         "api": "/PrerakV2/invite",
         "type": "entity",
         "formclass": "row",
-        "header": "default",
+        "header": "default2",
         "title": "Create Profile",
         "isSignupForm": "true",
         "langKey": "prerakAdmin",
@@ -299,10 +299,58 @@
         "fieldsets": [
           {
             "definition": "AG",
-            "privacyConfig": "AGOsConfig",
-            "globalPrivacyConfig": "internal-access",
             "fields": [
-              "*"
+              {
+                "name":  "AGfullName",
+                "required": true
+              },
+              {
+                "name":  "dob",
+                "required": true
+              },
+              {
+                "name":  "category",
+                "required": true
+              },
+              {
+                "name":  "connectVia",
+                "required": true
+              },
+              {
+                "name":  "fatherFullName",
+                "required": true
+              },
+              {
+                "name":  "motherFullName",
+                "required": true
+              },
+              {
+                "name":  "parentsMobileNumber",
+                "required": true
+              },
+              {
+                "name":  "parentsWhatsappNumber",
+                "required": true
+              },
+              {
+                "name":  "mobileAvailablity",
+                "required": true
+              },
+              {
+                "name":  "lastStandardOfEducation",
+                "required": true
+              },
+              {
+                "name":  "lastStandardOfEducationYear",
+                "required": true
+              },
+              {
+                "name":  "reasonOfLeavingEducation",
+                "required": true
+              },
+              {
+                "name":  "AGDocuments"
+              }
             ]
           }
         ]
@@ -616,7 +664,45 @@
                               },
                               "AGWhatsappNumber": {
                                   "type": "string",
-                                  "title": "कृपया किशोरी के पास उपलब्ध फ़ोन का नंबर दर्ज करें"
+                                  "title": "कृपया किशोरी के पास उपलब्ध फ़ोन का नंबर दर्ज करें",
+                                  "validation": {
+                                    "pattern": "[6-9]{1}[0-9]{9}",
+                                    "message": "Mobile Number must be 10 digit number."
+                                }
+                              }
+
+                          }
+                      },
+                      {
+                          "properties": {
+                              "mobileAvailablity": {
+                                  "enum": [
+                                      "Yes"
+                                  ]
+                              }
+                          },
+                          "required": [
+                              "AGWhatsappNumber"
+                          ]
+                      }
+                  ]
+              },
+              "mobileAvailablity": {
+                  "oneOf": [
+                      {
+                          "properties": {
+                              "mobileAvailablity": {
+                                  "enum": [
+                                      "हाँ"
+                                  ]
+                              },
+                              "AGWhatsappNumber": {
+                                  "type": "string",
+                                  "title": "कृपया किशोरी के पास उपलब्ध फ़ोन का नंबर दर्ज करें",
+                                  "validation": {
+                                    "pattern": "[6-9]{1}[0-9]{9}",
+                                    "message": "Mobile Number must be 10 digit number."
+                                }
                               }
 
                           }
@@ -657,27 +743,8 @@
                   }
               },
               {
-                "name": "nameDetails",
-                "children": {
-                  "definition": "nameDetails",
-                  "title": true,
-                  "fields": [
-                    {
-                      "name": "firstName",
-                      "required": true,
-                      "validation": {
-                        "message": "NAME_NOT_VALID"
-                      }
-                    },
-                    {
-                      "name": "lastName",
-                      "required": true,
-                      "validation": {
-                        "message": "NAME_NOT_VALID"
-                      }
-                    }
-                  ]
-                }
+                "name": "AGfullName",
+                "required": true
               },
               {
                 "name": "dob",
@@ -696,58 +763,30 @@
                 "required": true
               },
               {
-                "name": "fatherDetails",
-                "children": {
-                  "definition": "fatherDetails",
-                  "title": true,
-                  "fields": [
-                    {
-                      "name": "firstName",
-                      "required": true,
-                      "validation": {
-                        "message": "NAME_NOT_VALID"
-                      }
-                    },
-                    {
-                      "name": "lastName",
-                      "required": true,
-                      "validation": {
-                        "message": "NAME_NOT_VALID"
-                      }
-                    }
-                  ]
-                }
+                "name": "fatherFullName",
+                "required": true
+
               },
               {
-                "name": "motherDetails",
-                "children": {
-                  "definition": "motherDetails",
-                  "title": true,
-                  "fields": [
-                    {
-                      "name": "firstName",
-                      "required": true,
-                      "validation": {
-                        "message": "NAME_NOT_VALID"
-                      }
-                    },
-                    {
-                      "name": "lastName",
-                      "required": true,
-                      "validation": {
-                        "message": "NAME_NOT_VALID"
-                      }
-                    }
-                  ]
-                }
+                "name": "motherFullName",
+                "required": true
               },
               {
                 "name": "parentsMobileNumber",
-                "required": true
+                "required": true,
+                "validation": {
+                  "pattern": "[6-9]{1}[0-9]{9}",
+                  "message": "Mobile Number must be 10 digit number."
+              }
               },
+
               {
                 "name": "parentsWhatsappNumber",
-                "required": true
+                "required": true,
+                "validation": {
+                  "pattern": "[6-9]{1}[0-9]{9}",
+                  "message": "Mobile Number must be 10 digit number."
+              }
               },
               {
                 "name": "mobileAvailablity",
