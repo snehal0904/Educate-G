@@ -1,6 +1,6 @@
 <app-header [headerFor]="entity" [tab]="tab"></app-header>
 <app-filter *ngIf="entity == 'admin'" (submitFilter)="onSubmit($event)"></app-filter>
-<div class="container mt-10">
+<div class="container mt-10 ">
   <h5 class="d-inline-block font-weight-bold">
     {{ tableSchema?.title | translate }}
   </h5>
