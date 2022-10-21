@@ -410,6 +410,10 @@ export class LayoutsComponent implements OnInit, OnChanges {
     return object;
   }
 
+  deleteBlock(){
+    console.log("id",this.identifier)
+  }
+
   async getData() {
     var get_url;
     if (this.identifier) {
