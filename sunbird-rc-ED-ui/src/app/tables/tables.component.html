@@ -1,6 +1,6 @@
 <app-header [headerFor]="entity" [tab]="tab"></app-header>
 <app-filter *ngIf="entity == 'admin'" (submitFilter)="onSubmit($event)"></app-filter>
-<div class="container mt-10 ">
+<div class="container mt-10">
   <h5 class="d-inline-block font-weight-bold">
     {{ tableSchema?.title | translate }}
   </h5>
@@ -12,17 +12,18 @@
   </div>
   <!-- </span> -->
   <a *ngIf="entity == 'admin'" panelAddLink="prerak-admin-setup" data-toggle="modal" data-target="#openAddPrerakForm"
-    (click)="addPrerak()" class="fs-7  float-end text-secondary-color"><i class="fa fa-plus pr-1"
+    (click)="addPrerak()" class="fs-7 float-end text-secondary-color"><i class="fa fa-plus pr-1"
       aria-hidden="true"></i><span class="text-secondary-color p14 fw-bold">Add Prerak</span></a>
 
   <a *ngIf="entity == 'myags'" panelAddLink="AG-add" data-toggle="modal" data-target="#openAddAGForm" (click)="addAG()"
-    class="fs-7  float-end text-secondary-color"><i class="fa fa-plus pr-1" aria-hidden="true"></i><span
+    class="fs-7 float-end text-secondary-color"><i class="fa fa-plus pr-1" aria-hidden="true"></i><span
       class="text-secondary-color p14 fw-bold">Add AG</span></a>
 
   <table class="table table-striped">
     <thead>
       <tr>
-        <th class="p16 text-grey-color fw-bold" *ngFor="let th of tableSchema?.fields" scope="col">
+        <th class="p16 text-grey-color fw-bold" *ngFor="let th of tableSchema?.fields" scope="col"
+          (click)="sortTable(th.name)">
           {{ th?.title | translate }}
         </th>
       </tr>
@@ -114,12 +115,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h6 class="modal-title primary-text" id="openAddPrerakForm">{{'PUBLIC_PROFILE' | translate}}</h6>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-              aria-hidden="true">&times;</span></button>
+          <h6 class="modal-title primary-text" id="openAddPrerakForm">
+            {{ "PUBLIC_PROFILE" | translate }}
+          </h6>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
         <div class="modal-body">
-          <app-layouts layout={{layout}} identifier={{identifier}} public="false"></app-layouts>
+          <app-layouts layout="{{ layout }}" identifier="{{ identifier }}" public="false"></app-layouts>
         </div>
       </div>
     </div>
@@ -130,13 +134,16 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h6 class="modal-title primary-text" id="openAddAGForm">Add New AG</h6>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-              aria-hidden="true">&times;</span></button>
+          <h6 class="modal-title primary-text" id="openAddAGForm">
+            Add New AG
+          </h6>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        {{layout}}
+        {{ layout }}
         <div class="modal-body">
-          <app-layouts layout={{layout}} identifier={{identifier}} public="false"></app-layouts>
+          <app-layouts layout="{{ layout }}" identifier="{{ identifier }}" public="false"></app-layouts>
         </div>
       </div>
     </div>
