@@ -14,6 +14,10 @@
         },
         {
           "default":{
+            "left": [{
+              "title": "AG List",
+              "redirectTo": "/myags/attestation/ag/AG"
+          }],
               "right":[
                   {
                     "title": "LOGOUT",
@@ -74,6 +78,22 @@
                     }
                 ]
             }
-        }
+        },
+        {
+          "AG": {
+              "logoHref" : "profile/PrerakV2",
+              "left": [{
+                "title": "AG List",
+                "redirectTo": "/myags/attestation/ag/AG"
+            }],
+              "right": [
+                  {
+                      "title": "LOGOUT",
+                      "redirectTo": "/logout",
+                      "className" : "font-weight-bold"
+                  }
+              ]
+          }
+      }
     ]
 }

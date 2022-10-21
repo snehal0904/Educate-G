@@ -1381,24 +1381,30 @@ export class FormsComponent implements OnInit {
         if (localStorage.getItem('isAdminAdd')) {
           localStorage.setItem('isAdminAdd', '');
           // $('.modal-backdrop').remove()
-          this.router.navigate(['/']);
+          this.router.navigate(['/myags/attestation/ag/AG/']);
           $('.modal-backdrop').remove() // removes the grey overlay.
-          window.location.reload();
+          // window.history.go(-1)
+          // window.location.reload();
         } else {
           $('.modal-backdrop').remove()
           // this.router.navigate([this.redirectTo]);
-          window.location.reload();
+          this.router.navigate(['/myags/attestation/ag/AG/']);
+          // window.history.go(-1)
+          // window.location.reload();
 
         }
         if (localStorage.getItem('isAGAdd')) {
           localStorage.setItem('isAGAdd', '');
-          this.router.navigate(['/profile/admin-prerak/' + res.result.PrerakV2.osid]);
+          this.router.navigate(['/myags/attestation/ag/AG']);
           $('.modal-backdrop').remove() // removes the grey overlay.
-          window.location.reload();
+          // window.history.go(-1)
+          // window.location.reload();
         } else {
           $('.modal-backdrop').remove()
+          this.router.navigate(['/myags/attestation/ag/AG/']);
           // this.router.navigate([this.redirectTo]);
-          window.location.reload();
+          // window.history.go(-1)
+          // window.location.reload();
 
         }
 
