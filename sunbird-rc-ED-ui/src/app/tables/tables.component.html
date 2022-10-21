@@ -1,12 +1,15 @@
 <app-header [headerFor]="entity" [tab]="tab"></app-header>
-<app-filter (submitFilter)="onSubmit($event)"></app-filter>
-<div class="container mt-0">
+<app-filter
+  *ngIf="entity == 'admin'"
+  (submitFilter)="onSubmit($event)"
+></app-filter>
+<div class="container mt-10">
   <h5 class="d-inline-block font-weight-bold">
     {{ tableSchema?.title | translate }}
   </h5>
   <!-- <span class="card col-3"> -->
   <div
-    *ngIf="roleCheck"
+    *ngIf="roleCheck && entity != 'myags'"
     class="d-flex flex-ai-center flex-jc-flex-end download-report"
   >
     <span class="card cursor-pointer" tabindex="0" (click)="downloadCSVFile()"
@@ -17,6 +20,7 @@
   </div>
   <!-- </span> -->
   <a
+    *ngIf="entity == 'admin'"
     panelAddLink="prerak-admin-setup"
     data-toggle="modal"
     data-target="#openAddPrerakForm"
@@ -24,6 +28,17 @@
     class="fs-7 float-end text-secondary-color"
     ><i class="fa fa-plus pr-1" aria-hidden="true"></i
     ><span class="text-secondary-color p14 fw-bold">Add Prerak</span></a
+  >
+
+  <a
+    *ngIf="entity == 'myags'"
+    panelAddLink="AG-add"
+    data-toggle="modal"
+    data-target="#openAddAGForm"
+    (click)="addAG()"
+    class="fs-7 float-end text-secondary-color"
+    ><i class="fa fa-plus pr-1" aria-hidden="true"></i
+    ><span class="text-secondary-color p14 fw-bold">Add AG</span></a
   >
 
   <table class="table table-striped">
@@ -153,6 +168,40 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <div class="modal-body">
+          <app-layouts
+            layout="{{ layout }}"
+            identifier="{{ identifier }}"
+            public="false"
+          ></app-layouts>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal right fade right-xl-modal"
+    id="openAddAGForm"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="openAddAGForm"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title primary-text" id="openAddAGForm">
+            Add New AG
+          </h6>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {{ layout }}
         <div class="modal-body">
           <app-layouts
             layout="{{ layout }}"

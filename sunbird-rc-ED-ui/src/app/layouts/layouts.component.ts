@@ -85,7 +85,7 @@ export class LayoutsComponent implements OnInit, OnChanges {
         this.tab = params['tab']
       }
       localStorage.setItem('entity', this.layout);
-      this.layout = this.layout.toLowerCase()
+      // this.layout = this.layout.toLowerCase()
     });
     this.schemaService.getSchemas().subscribe(async (res) => {
       this.responseData = res;
@@ -408,6 +408,10 @@ export class LayoutsComponent implements OnInit, OnChanges {
         object[key] = data[key];
     }
     return object;
+  }
+
+  deleteBlock(){
+    console.log("id",this.identifier)
   }
 
   async getData() {

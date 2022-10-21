@@ -3,7 +3,7 @@
     "version": "0.1",
     "headers": [
         {
-            "default":{
+            "default2":{
                 "right":[
                     {
                         "title": "LOGIN",
@@ -13,9 +13,23 @@
             }
         },
         {
-            "prerakv2": {
+          "default":{
+              "right":[
+                  {
+                    "title": "LOGOUT",
+                    "redirectTo": "/logout",
+                    "className" : "font-weight-bold"
+                  }
+              ]
+          }
+      },
+        {
+            "PrerakV2": {
                 "logoHref" : "profile/PrerakV2",
-                "left": [],
+                "left": [{
+                  "title": "AG List",
+                  "redirectTo": "/myags/attestation/ag/AG"
+              }],
                 "right": [
                     {
                         "title": "LOGOUT",

@@ -125,6 +125,7 @@ export class FormsComponent implements OnInit {
       var filtered = FormSchemas.forms.filter(obj => {
         return Object.keys(obj)[0] === this.form
       })
+      console.log("filters",filtered)
       this.formSchema = filtered[0][this.form]
 
       if (this.formSchema.api) {
@@ -483,6 +484,17 @@ export class FormsComponent implements OnInit {
             this.responseData.definitions[fieldset.definition].properties[field.name]['title'] = this.translate.instant(field.element.title);
           }
           this.customFields.push(field.name);
+          if(field.data && field.data.type == "api"){
+            this.generalService.getData(field.data.url).subscribe((res) => {
+
+              var data_val = res[0][field.data.key]
+              console.log("data_val",data_val);
+              this.model[field.name] = data_val
+            });
+            // var api_val = this.getEntityData(field.data.url);
+            // var data_val = api_val[0][field.data.key]
+
+          }
         } else {
           this.addWidget(fieldset, field, '')
         }
@@ -561,7 +573,7 @@ export class FormsComponent implements OnInit {
 
 
   addWidget(fieldset, field, childrenName) {
-
+    // console.log("def",this.responseData.definitions,fieldset.definition)
     this.translate.get(this.langKey + '.' + field.name).subscribe(res => {
       let constr = this.langKey + '.' + field.name;
       if (res != constr) {
@@ -813,13 +825,13 @@ export class FormsComponent implements OnInit {
         }
 
         if (field.dependentOn.key == 'block') {
-          
-          this.model[childrenName] = 
+
+          this.model[childrenName] =
              {
               "district": null,
               "block": null,
             }
-          
+
 
           this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['hooks'] = {
             onInit: (field1: FormlyFieldConfig) => {
@@ -837,7 +849,7 @@ export class FormsComponent implements OnInit {
               "block": null,
               "village": null
             }
-          
+
 
           this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['hooks'] = {
             onInit: (field1: FormlyFieldConfig) => {
@@ -1010,6 +1022,10 @@ export class FormsComponent implements OnInit {
       this.identifier = null;
     }
 
+    if (localStorage.getItem('isAGAdd')) {
+      this.identifier = null;
+    }
+
     this.isSubmitForm = true;
     if (this.fileFields.length > 0) {
       this.fileFields.forEach(fileField => {
@@ -1176,7 +1192,7 @@ export class FormsComponent implements OnInit {
                 res[property][j].osUpdatedAt = new Date(res[property][j].osUpdatedAt);
                 tempObj.push(res[property][j])
               }
-    
+
              // tempObj.sort((a, b) => (b.osUpdatedAt) - (a.osUpdatedAt));
               this.propertyId = tempObj[0]["osid"];*/
 
@@ -1333,43 +1349,59 @@ export class FormsComponent implements OnInit {
       if(this.model['address'].hasOwnProperty('district') && this.model['address'].block == null){
         delete this.model['address']['district'];
        }
-      
+
        if(this.model['address'].hasOwnProperty('block') && this.model['address'].block == null){
         delete this.model['address']['block'];
        }
-  
+
        if(this.model['address'].hasOwnProperty('village') && this.model['address'].block == null){
         delete this.model['address']['village'];
        }
-     
+
      }
 
      if(this.model.hasOwnProperty('confirmAddress')){
       if(this.model['confirmAddress'].hasOwnProperty('district') && this.model['confirmAddress'].district == null){
         delete this.model['confirmAddress']['district'];
        }
-      
+
        if(this.model['confirmAddress'].hasOwnProperty('block') && this.model['confirmAddress'].block == null){
         delete this.model['confirmAddress']['block'];
        }
-  
+
        if(this.model['confirmAddress'].hasOwnProperty('village') && this.model['confirmAddress'].village == null){
         delete this.model['confirmAddress']['village'];
        }
-     
-     }
 
+     }
+     console.log(this.model)
     await this.generalService.postData(this.apiUrl, this.model).subscribe((res) => {
       if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
 
         if (localStorage.getItem('isAdminAdd')) {
           localStorage.setItem('isAdminAdd', '');
-          this.router.navigate(['/profile/admin-prerak/' + res.result.PrerakV2.osid]);
+          // $('.modal-backdrop').remove()
+          this.router.navigate(['/']);
           $('.modal-backdrop').remove() // removes the grey overlay.
+          window.location.reload();
         } else {
-          this.router.navigate([this.redirectTo]);
+          $('.modal-backdrop').remove()
+          // this.router.navigate([this.redirectTo]);
+          window.location.reload();
 
         }
+        if (localStorage.getItem('isAGAdd')) {
+          localStorage.setItem('isAGAdd', '');
+          this.router.navigate(['/profile/admin-prerak/' + res.result.PrerakV2.osid]);
+          $('.modal-backdrop').remove() // removes the grey overlay.
+          window.location.reload();
+        } else {
+          $('.modal-backdrop').remove()
+          // this.router.navigate([this.redirectTo]);
+          window.location.reload();
+
+        }
+
       }
       else if (res.params.errmsg != '' && res.params.status == 'UNSUCCESSFUL') {
         this.toastMsg.error('error', res.params.errmsg);
@@ -1389,33 +1421,33 @@ export class FormsComponent implements OnInit {
       if(this.model['address'].hasOwnProperty('district') && this.model['address'].district == null){
         delete this.model['address']['district'];
        }
-      
+
        if(this.model['address'].hasOwnProperty('block') && this.model['address'].block == null){
         delete this.model['address']['block'];
        }
-  
+
        if(this.model['address'].hasOwnProperty('village') && this.model['address'].village == null){
         delete this.model['address']['village'];
        }
-     
+
      }
 
      if(this.model.hasOwnProperty('confirmAddress')){
       if(this.model['confirmAddress'].hasOwnProperty('district') && this.model['confirmAddress'].district == null){
         delete this.model['confirmAddress']['district'];
        }
-      
+
        if(this.model['confirmAddress'].hasOwnProperty('block') && this.model['confirmAddress'].block == null){
         delete this.model['confirmAddress']['block'];
        }
-  
+
        if(this.model['confirmAddress'].hasOwnProperty('village') && this.model['confirmAddress'].village == null){
         delete this.model['confirmAddress']['village'];
        }
-     
+
      }
 
-  
+
     this.generalService.putData(this.apiUrl, this.identifier, this.model).subscribe((res) => {
       if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
         this.router.navigate([this.redirectTo])
