@@ -16,16 +16,10 @@
             "edit": true,
             "editform": "prerak-setup",
             "fields": {
-              "includes": [
-                "*"
-              ],
+              "includes": ["*"],
               "excludes": []
             },
-            "propertyShowFirst": [
-              "fullName",
-              "mobile",
-              "email"
-            ]
+            "propertyShowFirst": ["fullName", "mobile", "email"]
           }
         ]
       }
@@ -46,9 +40,7 @@
             "addform": "AG-add",
             "multiple": true,
             "fields": {
-              "includes": [
-                "*"
-              ],
+              "includes": ["*"],
               "excludes": []
             }
           }
@@ -70,16 +62,10 @@
             "edit": true,
             "editform": "prerak-admin-setup",
             "fields": {
-              "includes": [
-                "*"
-              ],
+              "includes": ["*"],
               "excludes": []
             },
-            "propertyShowFirst": [
-              "fullName",
-              "mobile",
-              "email"
-            ]
+            "propertyShowFirst": ["fullName", "mobile", "email"]
           },
           {
             "definition": "PrerakV2",
@@ -93,9 +79,7 @@
             "multiple": true,
             "headValue": "vfsTeamName",
             "fields": {
-              "includes": [
-                "interviewDetails"
-              ]
+              "includes": ["interviewDetails"]
             }
           }
         ]
@@ -115,14 +99,10 @@
             "editform": "ag-setup",
             "delete": true,
             "fields": {
-              "includes": [
-                "*"
-              ],
+              "includes": ["*"],
               "excludes": []
             },
-            "propertyShowFirst": [
-              "nameDetails.firstName"
-            ]
+            "propertyShowFirst": ["nameDetails.firstName"]
           }
         ]
       }
@@ -133,7 +113,7 @@
       }
     },
     {
-      "admin": {
+      "Admin": {
         "table": "admin-attestation/PrerakV2"
       }
     },
