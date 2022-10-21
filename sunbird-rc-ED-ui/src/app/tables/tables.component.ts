@@ -47,6 +47,8 @@ export class TablesComponent implements OnInit {
   token: any;
   filterData: any;
   roleCheck = false;
+  sort: string = '';
+
   constructor(
     public location: Location,
     public router: Router,
@@ -56,7 +58,19 @@ export class TablesComponent implements OnInit {
     public schemaService: SchemaService,
     public keycloak: KeycloakService
   ) {}
+  sortTable(colName) {
+    if (this.sort === '' || this.sort === 'asc') {
+      this.model = _.orderBy(this.model, [colName], ['desc']);
+      this.addData();
+      this.sort = 'desc';
+    } else {
+      this.model = _.orderBy(this.model, [colName], ['asc']);
+      this.addData();
+      this.sort = 'asc';
+    }
 
+    console.log('colName, this.sort+++', colName, this.sort, this.model);
+  }
   ngOnInit(): void {
     this.keycloak.loadUserProfile().then((res) => {
       this.roleCheck = this.keycloak.isUserInRole(

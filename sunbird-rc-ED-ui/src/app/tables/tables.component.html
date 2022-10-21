@@ -33,6 +33,7 @@
           class="p16 text-grey-color fw-bold"
           *ngFor="let th of tableSchema?.fields"
           scope="col"
+          (click)="sortTable(th.name)"
         >
           {{ th?.title | translate }}
         </th>
