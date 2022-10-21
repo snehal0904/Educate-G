@@ -351,9 +351,14 @@ export class TablesComponent implements OnInit {
       let obj = [];
       obj['fullname'] = element.fullName ? element.fullName : '';
       obj['mobile'] = element.mobile ? element.mobile : '';
-      obj['district'] = element.address.district
-        ? element.address.district
-        : '';
+      if (element.address) {
+        obj['district'] = element.address.district
+          ? element.address.district
+          : '';
+      } else {
+        obj['district'] = '';
+      }
+
       obj['qualification'] = element.qualification ? element.qualification : '';
       obj['gender'] = element.gender ? element.gender : '';
       obj['sourcingChannel'] = element.sourcingChannel
