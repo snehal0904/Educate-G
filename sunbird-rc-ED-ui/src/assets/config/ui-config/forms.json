@@ -751,7 +751,9 @@
                 "required": true,
                 "type": "date",
                 "validation": {
-                  "future": false
+                  "future": false,
+                  "max": "2022-09-10",
+                  "message": "Please enter a valid date"
                 }
               },
               {
