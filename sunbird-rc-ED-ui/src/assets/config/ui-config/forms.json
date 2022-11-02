@@ -275,6 +275,24 @@
                         "type": "select",
                         "options": "this.locationService.getDistrict()"
                       }
+                    },
+                    {
+                      "name": "block",
+                      "dependent": {
+                        "key": "block",
+                        "title": "Block",
+                        "type": "select",
+                        "options": "this.locationService.getBlock()"
+                      }
+                    },
+                    {
+                      "name": "village",
+                      "dependent": {
+                        "key": "village",
+                        "title": "Village",
+                        "type": "select",
+                        "options": "this.locationService.getVillage()"
+                      }
                     }
                   ]
                 }
@@ -301,55 +319,55 @@
             "definition": "AG",
             "fields": [
               {
-                "name":  "AGfullName",
+                "name": "AGfullName",
                 "required": true
               },
               {
-                "name":  "dob",
+                "name": "dob",
                 "required": true
               },
               {
-                "name":  "category",
+                "name": "category",
                 "required": true
               },
               {
-                "name":  "connectVia",
+                "name": "connectVia",
                 "required": true
               },
               {
-                "name":  "fatherFullName",
+                "name": "fatherFullName",
                 "required": true
               },
               {
-                "name":  "motherFullName",
+                "name": "motherFullName",
                 "required": true
               },
               {
-                "name":  "parentsMobileNumber",
+                "name": "parentsMobileNumber",
                 "required": true
               },
               {
-                "name":  "parentsWhatsappNumber",
+                "name": "parentsWhatsappNumber",
                 "required": true
               },
               {
-                "name":  "mobileAvailablity",
+                "name": "mobileAvailablity",
                 "required": true
               },
               {
-                "name":  "lastStandardOfEducation",
+                "name": "lastStandardOfEducation",
                 "required": true
               },
               {
-                "name":  "lastStandardOfEducationYear",
+                "name": "lastStandardOfEducationYear",
                 "required": true
               },
               {
-                "name":  "reasonOfLeavingEducation",
+                "name": "reasonOfLeavingEducation",
                 "required": true
               },
               {
-                "name":  "AGDocuments"
+                "name": "AGDocuments"
               }
             ]
           }
@@ -654,93 +672,79 @@
             "definition": "AG",
             "dependencies": {
               "mobileAvailablity": {
-                  "oneOf": [
-                      {
-                          "properties": {
-                              "mobileAvailablity": {
-                                  "enum": [
-                                      "हाँ"
-                                  ]
-                              },
-                              "AGWhatsappNumber": {
-                                  "type": "string",
-                                  "title": "कृपया किशोरी के पास उपलब्ध फ़ोन का नंबर दर्ज करें",
-                                  "validation": {
-                                    "pattern": "[6-9]{1}[0-9]{9}",
-                                    "message": "Mobile Number must be 10 digit number."
-                                }
-                              }
-
-                          }
+                "oneOf": [
+                  {
+                    "properties": {
+                      "mobileAvailablity": {
+                        "enum": ["हाँ"]
                       },
-                      {
-                          "properties": {
-                              "mobileAvailablity": {
-                                  "enum": [
-                                      "Yes"
-                                  ]
-                              }
-                          },
-                          "required": [
-                              "AGWhatsappNumber"
-                          ]
+                      "AGWhatsappNumber": {
+                        "type": "string",
+                        "title": "कृपया किशोरी के पास उपलब्ध फ़ोन का नंबर दर्ज करें",
+                        "validation": {
+                          "pattern": "[6-9]{1}[0-9]{9}",
+                          "message": "Mobile Number must be 10 digit number."
+                        }
                       }
-                  ]
+                    }
+                  },
+                  {
+                    "properties": {
+                      "mobileAvailablity": {
+                        "enum": ["Yes"]
+                      }
+                    },
+                    "required": ["AGWhatsappNumber"]
+                  }
+                ]
               },
               "mobileAvailablity": {
-                  "oneOf": [
-                      {
-                          "properties": {
-                              "mobileAvailablity": {
-                                  "enum": [
-                                      "हाँ"
-                                  ]
-                              },
-                              "AGWhatsappNumber": {
-                                  "type": "string",
-                                  "title": "कृपया किशोरी के पास उपलब्ध फ़ोन का नंबर दर्ज करें",
-                                  "validation": {
-                                    "pattern": "[6-9]{1}[0-9]{9}",
-                                    "message": "Mobile Number must be 10 digit number."
-                                }
-                              }
-
-                          }
+                "oneOf": [
+                  {
+                    "properties": {
+                      "mobileAvailablity": {
+                        "enum": ["हाँ"]
                       },
-                      {
-                          "properties": {
-                              "mobileAvailablity": {
-                                  "enum": [
-                                      "Yes"
-                                  ]
-                              }
-                          },
-                          "required": [
-                              "AGWhatsappNumber"
-                          ]
+                      "AGWhatsappNumber": {
+                        "type": "string",
+                        "title": "कृपया किशोरी के पास उपलब्ध फ़ोन का नंबर दर्ज करें",
+                        "validation": {
+                          "pattern": "[6-9]{1}[0-9]{9}",
+                          "message": "Mobile Number must be 10 digit number."
+                        }
                       }
-                  ]
+                    }
+                  },
+                  {
+                    "properties": {
+                      "mobileAvailablity": {
+                        "enum": ["Yes"]
+                      }
+                    },
+                    "required": ["AGWhatsappNumber"]
+                  }
+                ]
               }
-          },
+            },
             "fields": [
               {
-                  "name": "prerakName",
-                  "custom": true,
-                  "data": {
-                    "type": "api",
-                    "url": "/PrerakV2",
-                    "key": "fullName"
-                  },
-                  "element": {
-                      "widget": {
-                          "formlyConfig": {
-                              "type": "input",
-                              "templateOptions": {
-                                  "type": "hidden"
-                              }
-                          }
+                "name": "prerakName",
+                "custom": true,
+                "data": {
+                  "type": "api",
+                  "url": "/PrerakV2",
+                  "key": "fullName"
+                },
+                "element": {
+                  "widget": {
+                    "formlyConfig": {
+                      "type": "input",
+                      "templateOptions": {
+                        "type": "hidden"
                       }
+                    }
                   }
+                }
               },
               {
                 "name": "AGfullName",
@@ -765,7 +769,6 @@
               {
                 "name": "fatherFullName",
                 "required": true
-
               },
               {
                 "name": "motherFullName",
@@ -777,7 +780,7 @@
                 "validation": {
                   "pattern": "[6-9]{1}[0-9]{9}",
                   "message": "Mobile Number must be 10 digit number."
-              }
+                }
               },
 
               {
@@ -786,7 +789,7 @@
                 "validation": {
                   "pattern": "[6-9]{1}[0-9]{9}",
                   "message": "Mobile Number must be 10 digit number."
-              }
+                }
               },
               {
                 "name": "mobileAvailablity",
