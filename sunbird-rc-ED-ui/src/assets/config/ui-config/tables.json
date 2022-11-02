@@ -53,16 +53,10 @@
               "title": "My AGs",
               "fields": [
                   {
-                      "name": "firstName",
-                      "title": "First Name",
-                      "keyPath" : "nameDetails.firstName"
+                      "name": "AGfullName",
+                      "title": "Full Name",
+                      "keyPath" : "AGfullName"
                   },
-                  {
-                    "name": "lastName",
-                    "title": "Last Name",
-                    "keyPath" : "nameDetails.lastName"
-                },
-
                 {
                   "name": "AGWhatsappNumber",
                   "title": "AG Whatsapp Number",
@@ -72,26 +66,6 @@
                   "name": "category",
                   "title": "Category",
                   "keyPath" : "category"
-                },
-                {
-                  "name": "connectVia",
-                  "title": "Connect Via",
-                  "keyPath" : "connectVia"
-                },
-                {
-                  "name": "dob",
-                  "title": "Date of Birth",
-                  "keyPath" : "dob"
-                },
-                {
-                  "name": "fatherDetails",
-                  "title": "Father First name",
-                  "keyPath" : "fatherDetails.firstName"
-                },
-                {
-                  "name": "fatherDetails",
-                  "title": "Father Last name",
-                  "keyPath" : "fatherDetails.lastName"
                 },
                 {
                   "custom": true,

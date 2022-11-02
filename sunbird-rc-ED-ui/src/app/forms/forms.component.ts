@@ -599,6 +599,12 @@ export class FormsComponent implements OnInit {
 
         }
 
+        if (field?.datepickerOptions) {
+          this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions']['datepickerOptions'] = { datepickerOptions: {
+            max: "2022-10-10",
+            min: '2022-09-10'
+          }};
+        }
         if (field.placeholder) {
           this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions']['placeholder'] = this.generalService.translateString(this.langKey + '.' + field.placeholder);
         }
@@ -668,6 +674,11 @@ export class FormsComponent implements OnInit {
             }
           }
         }
+        // if (field.type === 'date') {
+        //   this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['validators'] = {
+        //     validation: ['date-future'],
+        //   }
+        // }
 
         if (field.validation) {
           if (field.validation.message) {
@@ -698,6 +709,15 @@ export class FormsComponent implements OnInit {
                     }
                   } else if (this.model[field.validation.greaterThan]) {
                     if ((new Date(this.model[field.validation.greaterThan])).valueOf() < (new Date(control.value)).valueOf()) {
+                      return of(control.value);
+                    }
+                    else {
+                      return of(false);
+                    }
+                  }
+                  else if (field.validation.max) {
+                    console.log("max",(new Date(control.value)).valueOf(),(new Date(field.validation.max)).valueOf())
+                    if ((new Date(control.value)).valueOf() < (new Date(field.validation.max)).valueOf()) {
                       return of(control.value);
                     }
                     else {
@@ -957,6 +977,7 @@ export class FormsComponent implements OnInit {
         }
       }
     }
+    console.log("this.responseData",this.responseData)
   }
 
   addChildWidget(field, ParentName, childrenName) {
@@ -1381,24 +1402,30 @@ export class FormsComponent implements OnInit {
         if (localStorage.getItem('isAdminAdd')) {
           localStorage.setItem('isAdminAdd', '');
           // $('.modal-backdrop').remove()
-          this.router.navigate(['/']);
+          this.router.navigate(['/myags/attestation/ag/AG/']);
           $('.modal-backdrop').remove() // removes the grey overlay.
-          window.location.reload();
+          // window.history.go(-1)
+          // window.location.reload();
         } else {
           $('.modal-backdrop').remove()
           // this.router.navigate([this.redirectTo]);
-          window.location.reload();
+          this.router.navigate(['/myags/attestation/ag/AG/']);
+          // window.history.go(-1)
+          // window.location.reload();
 
         }
         if (localStorage.getItem('isAGAdd')) {
           localStorage.setItem('isAGAdd', '');
-          this.router.navigate(['/profile/admin-prerak/' + res.result.PrerakV2.osid]);
+          this.router.navigate(['/myags/attestation/ag/AG']);
           $('.modal-backdrop').remove() // removes the grey overlay.
-          window.location.reload();
+          // window.history.go(-1)
+          // window.location.reload();
         } else {
           $('.modal-backdrop').remove()
+          this.router.navigate(['/myags/attestation/ag/AG/']);
           // this.router.navigate([this.redirectTo]);
-          window.location.reload();
+          // window.history.go(-1)
+          // window.location.reload();
 
         }
 
