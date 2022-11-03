@@ -11,6 +11,9 @@ import { FieldType } from '@ngx-formly/core';
       [placeholder]="to.placeholder"
       [formControl]="formControl">
     </ng-select>
+    <div class="alert alert-danger" role="alert" *ngIf="showError && formControl.errors">
+      <formly-validation-message [field]="field"></formly-validation-message>
+    </div>
   `,
 })
 export class FormlyFieldNgSelect extends FieldType {
