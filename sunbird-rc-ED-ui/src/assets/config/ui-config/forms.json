@@ -292,13 +292,13 @@
     },
     {
       "ag-setup": {
-        "api": "/AG",
+        "api": "/AGV4",
         "type": "entity",
         "redirectTo": "profile/myags",
         "langKey": "prerakAdmin",
         "fieldsets": [
           {
-            "definition": "AG",
+            "definition": "AGV4",
             "fields": [
               {
                 "name":  "AGfullName",
@@ -645,13 +645,13 @@
     },
     {
       "AG-add": {
-        "api": "/AG",
+        "api": "/AGV4",
         "type": "entity",
         "formclass": "row",
         "title": "Add new AG",
         "fieldsets": [
           {
-            "definition": "AG",
+            "definition": "AGV4",
             "dependencies": {
               "mobileAvailablity": {
                   "oneOf": [
@@ -781,14 +781,35 @@
                   "message": "Mobile Number must be 10 digit number."
               }
               },
+              {
+                "name": "sameAsAbove",
+                "custom": true,
+                "element": {
+                    "title": "Same as above?",
+                    "widget": {
+                        "formlyConfig": {
+                            "type": "checkbox",
+                            "fieldGroupClassName": "controls",
+                            "className": "checkbox",
+                            "templateOptions": {
+                                "required": true
+                            }
 
+                        }
+                    }
+                }
+            },
               {
                 "name": "parentsWhatsappNumber",
                 "required": true,
                 "validation": {
                   "pattern": "[6-9]{1}[0-9]{9}",
                   "message": "Mobile Number must be 10 digit number."
-              }
+                },
+                "expressionProperties": {
+                  "templateOptions.disabled": "model.sameAsAbove",
+                  "templateOptions.required": "!model.sameAsAbove"
+                }
               },
               {
                 "name": "mobileAvailablity",
@@ -812,8 +833,49 @@
                 "required": true
               },
               {
+                "name": "whereStudiedLast",
+                "required": true
+              },
+              {
+                "name": "registrationStatus",
+                "required": true
+              },
+              {
                 "name": "AGDocuments",
                 "required": true
+              },
+              {
+                "name": "isRSOS_NIOSFormSubmitted",
+                "required": true
+              },
+              {
+                "name": "RSOS_NIOSFormPhoto",
+                "required": true,
+                "type": "file"
+              },
+              {
+                "name": "examChoice",
+                "required": true
+              },
+              {
+                "name": "subjects",
+                "required": true,
+                "type": "multiselect",
+                "title": "निम्न में से किशोरी द्वारा चुने गए विषय चुने"
+              },
+              {
+                "name": "birthDateOnRSOS_NIOSForm",
+                "required": true,
+                "type":"date"
+              },
+              {
+                "name": "isRSOS_NIOSRegIdReceived",
+                "required": true
+              },
+              {
+                "name": "RSOS_NIOSRegId",
+                "required": true,
+                "type": "number"
               }
             ]
           }

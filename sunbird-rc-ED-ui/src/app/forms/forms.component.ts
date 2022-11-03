@@ -912,21 +912,55 @@ export class FormsComponent implements OnInit {
         }
       }
 
+
       if (field.type) {
 
         if (field.type === 'multiselect') {
           this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['type'] = field.type;
           this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions']['multiple'] = true;
           if (field.required) {
-            this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions']['placeholder'] = this.translate.instant("SELECT") + ' ' + this.generalService.translateString(this.langKey + '.' + field.name) + "*";
+            this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions']['placeholder'] = field.title + "*";
           } else {
-            this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions']['placeholder'] = this.translate.instant("SELECT") + ' ' + this.generalService.translateString(this.langKey + '.' + field.name);
+            this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions']['placeholder'] = field.title;
           }
 
           this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions']['options'] = [];
-          this.responseData.definitions[fieldset.definition].properties[field.name]['items']['enum'].forEach(enumval => {
-            this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions']['options'].push({ label: enumval, value: enumval })
-          });
+          try{
+            this.responseData.definitions[fieldset.definition].properties[field.name]['items']['enum'].forEach(enumval => {
+              this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions']['options'].push({ label: enumval, value: enumval })
+            });
+          }
+          catch(err){
+            this.responseData.definitions[fieldset.definition].properties[field.name]['enum'].forEach(enumval => {
+              this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions']['options'].push({ label: enumval, value: enumval })
+            });
+          }
+          // if(field.validation.max && field.validation.min){
+          //   this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'] = {}
+          //   this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'][field.name] = {}
+          //   this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'][field.name]['expression'] = (control: FormControl) => {
+          //     if (control.value != null) {
+          //       // console.log("max",control.value.length,field.validation.max)
+          //       // console.log("min",control.value.length,field.validation.min)
+          //       if (control.value.length <= field.validation.max && control.value.length >= field.validation.min) {
+          //         // console.log("in")
+          //         return of(control.value);
+          //       } else {
+          //         return of(false);
+          //       }
+          //       // console.log("multi",control.value)
+          //     }
+          //     return new Promise((resolve, reject) => {
+          //       setTimeout(() => {
+          //         resolve(true);
+          //       }, 1000);
+          //     });
+          //   };
+          //   this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'][field.name]['message'] = "You need to select Minimum "+field.validation.min+" values and Maximum "+field.validation.max+" values";
+
+          // }
+
+
         }
         else if (field.type === 'date') {
           this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions']['type'] = 'date';
@@ -977,7 +1011,7 @@ export class FormsComponent implements OnInit {
         }
       }
     }
-    console.log("this.responseData",this.responseData)
+    // console.log("this.responseData",this.responseData)
   }
 
   addChildWidget(field, ParentName, childrenName) {
@@ -1048,6 +1082,13 @@ export class FormsComponent implements OnInit {
     }
 
     this.isSubmitForm = true;
+    if(this.model['sameAsAbove']){
+      this.model['parentsWhatsappNumber'] = this.model['parentsMobileNumber']
+    }
+    if(this.model['RSOS_NIOSRegId']){
+      this.model['RSOS_NIOSRegId'] = (this.model['RSOS_NIOSRegId']).toString()
+    }
+    console.log("model",this.model);
     if (this.fileFields.length > 0) {
       this.fileFields.forEach(fileField => {
         if (this.model[fileField]) {
@@ -1147,6 +1188,7 @@ export class FormsComponent implements OnInit {
         }
       });
     }
+
     else {
       if (this.type && this.type === 'entity') {
 
@@ -1196,6 +1238,7 @@ export class FormsComponent implements OnInit {
 
       }
     }
+
   }
 
   async raiseClaim(property) {

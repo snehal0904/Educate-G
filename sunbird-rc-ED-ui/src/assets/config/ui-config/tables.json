@@ -49,7 +49,7 @@
         },
         {
           "ag": {
-              "api": "/AG",
+              "api": "/AGV4",
               "title": "My AGs",
               "fields": [
                   {
@@ -57,22 +57,22 @@
                       "title": "Full Name",
                       "keyPath" : "AGfullName"
                   },
-                {
-                  "name": "AGWhatsappNumber",
-                  "title": "AG Whatsapp Number",
-                  "keyPath" : "AGWhatsappNumber"
-                },
-                {
-                  "name": "category",
-                  "title": "Category",
-                  "keyPath" : "category"
-                },
-                {
-                  "custom": true,
-                  "type": "button",
-                  "buttonText": "View",
-                  "redirectTo": "/profile/ag-detail:id"
-              }
+                  {
+                    "name": "dob",
+                    "title": "Date of Birth",
+                    "keyPath" : "dob"
+                  },
+                  {
+                    "name": "category",
+                    "title": "Category",
+                    "keyPath" : "category"
+                  },
+                  {
+                    "custom": true,
+                    "type": "button",
+                    "buttonText": "View",
+                    "redirectTo": "/profile/ag-detail:id"
+                  }
               ]
           }
       }

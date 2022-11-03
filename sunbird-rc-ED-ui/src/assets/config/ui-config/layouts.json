@@ -26,14 +26,14 @@
     },
     {
       "AG2": {
-        "api": "/AG",
+        "api": "/AGV4",
         "title": "TEACHER_PROFILE",
         "langKey": "prerakAdmin",
         "headerName": "nameDetails.firstName",
         "multiple": true,
         "blocks": [
           {
-            "definition": "AG",
+            "definition": "AGV4",
             "title": "AG",
             "add": true,
             "edit": false,
@@ -87,12 +87,12 @@
     },
     {
       "ag-detail": {
-        "api": "/AG",
+        "api": "/AGV4",
         "title": "AG Profile",
         "headerName": "nameDetails.firstName",
         "blocks": [
           {
-            "definition": "AG",
+            "definition": "AGV4",
             "title": "PERSONAL_DETAILS",
             "add": false,
             "edit": true,
@@ -119,7 +119,7 @@
     },
     {
       "myags": {
-        "table": "ag/AG"
+        "table": "ag/AGV4"
       }
     }
   ]

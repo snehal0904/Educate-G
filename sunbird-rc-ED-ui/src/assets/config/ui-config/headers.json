@@ -94,6 +94,38 @@
                   }
               ]
           }
+      },
+      {
+        "ag-detail": {
+            "logoHref" : "profile/PrerakV2",
+            "left": [{
+              "title": "AG List",
+              "redirectTo": "/myags/attestation/ag/AG"
+          }],
+            "right": [
+                {
+                    "title": "LOGOUT",
+                    "redirectTo": "/logout",
+                    "className" : "font-weight-bold"
+                }
+            ]
+        }
+    },
+    {
+      "myags": {
+          "logoHref" : "profile/PrerakV2",
+          "left": [{
+            "title": "AG List",
+            "redirectTo": "/myags/attestation/ag/AG"
+        }],
+          "right": [
+              {
+                  "title": "LOGOUT",
+                  "redirectTo": "/logout",
+                  "className" : "font-weight-bold"
+              }
+          ]
       }
+  }
     ]
 }
