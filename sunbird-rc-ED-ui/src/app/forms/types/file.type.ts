@@ -13,9 +13,9 @@ import { DomSanitizer } from '@angular/platform-browser';
       <div>
       <div (click)="openFileInput()">
         <div></div>
-          
+
            <label class="p12 text-primary-color"> {{'UPLOAD_FILE' | translate}} </label>
-          
+
         <input
           #fileinput
           [multiple]="to.multiple"
@@ -24,7 +24,7 @@ import { DomSanitizer } from '@angular/platform-browser';
           [formControl]="formControl"
           [formlyAttributes]="field"
           (change)="onChange($event)"
-          accept=".png,.jpg,.jpeg,.pdf,.doc,.docx,.xls,.xlsx,.xml,.json"
+          accept=".png,.jpg,.jpeg,.pdf"
           style="visibility: hidden;"
         />
       </div>
@@ -145,13 +145,13 @@ export class FormlyFieldFile extends FieldType {
   //   // }
   }
 }
-  
+
 
   // constructor(public generalService: GeneralService) {
   //   super();
   // }
 
 
- 
+
 
 // }
