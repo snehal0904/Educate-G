@@ -912,6 +912,41 @@ export class FormsComponent implements OnInit {
         }
       }
 
+      // if(field?.name == "examChoice"){
+      //   this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions']['change'] = (field, $event) => {
+      //     console.log('change',$event.target.value);
+      //     if($event.target.value == "0: RSOS पहला प्रयास" || $event.target.value == "2: NIOS पहला प्रयास"){
+      //       // this.responseData.definitions[fieldset.definition].properties['subjects']['validation'] = {};
+      //       // this.responseData.definitions[fieldset.definition].properties['subjects']['validation']['max'] = 7;
+      //       // this.responseData.definitions[fieldset.definition].properties['subjects']['validation']['min'] = 5;
+      //       console.log("val",this.responseData.definitions[fieldset.definition].properties['subjects']['widget']['formlyConfig'])
+      //       this.responseData.definitions[fieldset.definition].properties['subjects']['widget']['formlyConfig']['asyncValidators'] = {}
+      //       this.responseData.definitions[fieldset.definition].properties['subjects']['widget']['formlyConfig']['asyncValidators']['subjects'] = {}
+      //       this.responseData.definitions[fieldset.definition].properties['subjects']['widget']['formlyConfig']['asyncValidators']['subjects']['expression'] = (control: FormControl) => {
+      //         if (control.value != null) {
+      //           // console.log("max",control.value.length,field.validation.max)
+      //           // console.log("min",control.value.length,field.validation.min)
+      //           if (control.value.length <= 7 && control.value.length >= 5) {
+      //             // console.log("in")
+      //             return of(control.value);
+      //           } else {
+      //             return of(false);
+      //           }
+      //           // console.log("multi",control.value)
+      //         }
+      //         return new Promise((resolve, reject) => {
+      //           setTimeout(() => {
+      //             resolve(true);
+      //           }, 1000);
+      //         });
+      //       };
+      //       this.responseData.definitions[fieldset.definition].properties['subjects']['widget']['formlyConfig']['asyncValidators']['subjects']['message'] = "You need to select Minimum 5 values and Maximum 7 values";
+      //       console.log("val",this.responseData.definitions[fieldset.definition].properties['subjects'])
+
+      //     }
+      //   };
+      // }
+
 
       if (field.type) {
 
@@ -935,30 +970,41 @@ export class FormsComponent implements OnInit {
               this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions']['options'].push({ label: enumval, value: enumval })
             });
           }
-          // if(field.validation.max && field.validation.min){
-          //   this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'] = {}
-          //   this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'][field.name] = {}
-          //   this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'][field.name]['expression'] = (control: FormControl) => {
-          //     if (control.value != null) {
-          //       // console.log("max",control.value.length,field.validation.max)
-          //       // console.log("min",control.value.length,field.validation.min)
-          //       if (control.value.length <= field.validation.max && control.value.length >= field.validation.min) {
-          //         // console.log("in")
-          //         return of(control.value);
-          //       } else {
-          //         return of(false);
-          //       }
-          //       // console.log("multi",control.value)
-          //     }
-          //     return new Promise((resolve, reject) => {
-          //       setTimeout(() => {
-          //         resolve(true);
-          //       }, 1000);
-          //     });
-          //   };
-          //   this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'][field.name]['message'] = "You need to select Minimum "+field.validation.min+" values and Maximum "+field.validation.max+" values";
+          if(field?.validation && field?.validation?.max && field?.validation?.min){
+            this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'] = {}
+            this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'][field.name] = {}
+            this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'][field.name]['expression'] = (control: FormControl) => {
+              if (control.value != null) {
+                console.log("examChoice",this.model['examChoice'])
+                console.log("min",control.value.length,field.validation.min)
+                if(this.model['examChoice'] == "RSOS पहला प्रयास" || this.model['examChoice'] == "NIOS पहला प्रयास"){
+                  this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'][field.name]['message'] = "You need to select Minimum 5 values and Maximum 7 values";
+                  if (control.value.length <= 7 && control.value.length >= 5) {
+                    // console.log("in")
+                    return of(control.value);
+                  } else {
+                    return of(false);
+                  }
+                }else{
+                  this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'][field.name]['message'] = "You need to select Minimum "+field.validation.min+" values and Maximum "+field.validation.max+" values";
+                  if (control.value.length <= field.validation.max && control.value.length >= field.validation.min) {
+                    // console.log("in")
+                    return of(control.value);
+                  } else {
+                    return of(false);
+                  }
+                  // console.log("multi",control.value)
+                }
 
-          // }
+              }
+              return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  resolve(true);
+                }, 1000);
+              });
+            };
+
+          }
 
 
         }

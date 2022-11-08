@@ -301,7 +301,7 @@
         "lastStandardOfEducation",
         "lastStandardOfEducationYear",
         "reasonOfLeavingEducation",
-        "AGDocuments"
+        "AGDocumentsV2"
       ],
       "properties": {
         "nameDetails": {
@@ -447,8 +447,8 @@
           ],
           "title": "किशोरी के पढ़ाई छोड़ने का कारण चुने"
         },
-        "AGDocuments": {
-          "$id": "#/properties/AGDocuments",
+        "AGDocumentsV2": {
+          "$id": "#/properties/AGDocumentsV2",
           "type": "string",
           "enum": [
             "टीसी",

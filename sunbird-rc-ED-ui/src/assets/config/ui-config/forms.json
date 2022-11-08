@@ -308,72 +308,7 @@
         ]
       }
     },
-    {
-      "ag-setup": {
-        "api": "/AGV4",
-        "type": "entity",
-        "redirectTo": "profile/myags",
-        "langKey": "prerakAdmin",
-        "fieldsets": [
-          {
-            "definition": "AGV4",
-            "fields": [
-              {
-                "name": "AGfullName",
-                "required": true
-              },
-              {
-                "name": "dob",
-                "required": true
-              },
-              {
-                "name": "category",
-                "required": true
-              },
-              {
-                "name": "connectVia",
-                "required": true
-              },
-              {
-                "name": "fatherFullName",
-                "required": true
-              },
-              {
-                "name": "motherFullName",
-                "required": true
-              },
-              {
-                "name": "parentsMobileNumber",
-                "required": true
-              },
-              {
-                "name": "parentsWhatsappNumber",
-                "required": true
-              },
-              {
-                "name": "mobileAvailablity",
-                "required": true
-              },
-              {
-                "name": "lastStandardOfEducation",
-                "required": true
-              },
-              {
-                "name": "lastStandardOfEducationYear",
-                "required": true
-              },
-              {
-                "name": "reasonOfLeavingEducation",
-                "required": true
-              },
-              {
-                "name": "AGDocuments"
-              }
-            ]
-          }
-        ]
-      }
-    },
+
     {
       "prerak-education": {
         "api": "/PrerakV2",
@@ -663,13 +598,13 @@
     },
     {
       "AG-add": {
-        "api": "/AGV4",
+        "api": "/AGV7",
         "type": "entity",
         "formclass": "row",
         "title": "Add new AG",
         "fieldsets": [
           {
-            "definition": "AGV4",
+            "definition": "AGV7",
             "dependencies": {
               "mobileAvailablity": {
                 "oneOf": [
@@ -748,7 +683,11 @@
               },
               {
                 "name": "AGfullName",
-                "required": true
+                "required": true,
+                "validation": {
+                  "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
+                  "message": "Name is not valid."
+              }
               },
               {
                 "name": "dob",
@@ -770,11 +709,240 @@
               },
               {
                 "name": "fatherFullName",
-                "required": true
+                "required": true,
+                "validation": {
+                  "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
+                  "message": "Name is not valid."
+              }
+
               },
               {
                 "name": "motherFullName",
+                "required": true,
+                "validation": {
+                  "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
+                  "message": "Name is not valid."
+              }
+              },
+              {
+                "name": "parentsMobileNumber",
+                "required": true,
+                "validation": {
+                  "pattern": "[6-9]{1}[0-9]{9}",
+                  "message": "Mobile Number must be 10 digit number."
+              }
+              },
+              {
+                "name": "sameAsAbove",
+                "custom": true,
+                "element": {
+                    "title": "Same as above?",
+                    "widget": {
+                        "formlyConfig": {
+                            "type": "checkbox",
+                            "fieldGroupClassName": "controls",
+                            "className": "checkbox",
+                            "templateOptions": {
+                                "required": true
+                            }
+
+                        }
+                    }
+                }
+            },
+              {
+                "name": "parentsWhatsappNumber",
+                "required": true,
+                "validation": {
+                  "pattern": "[6-9]{1}[0-9]{9}",
+                  "message": "Mobile Number must be 10 digit number."
+                },
+                "expressionProperties": {
+                  "templateOptions.disabled": "model.sameAsAbove",
+                  "templateOptions.required": "!model.sameAsAbove"
+                }
+              },
+              {
+                "name": "mobileAvailablity",
                 "required": true
+              },
+
+              {
+                "name": "lastStandardOfEducation",
+                "required": true
+              },
+              {
+                "name": "lastStandardOfEducationYear",
+                "required": true,
+                "type": "date",
+                "validation": {
+                  "future": false
+                }
+              },
+              {
+                "name": "reasonOfLeavingEducation",
+                "required": true
+              },
+              {
+                "name": "whereStudiedLast",
+                "required": true
+              },
+              {
+                "name": "registrationStatus",
+                "required": true
+              },
+              {
+                "name": "AGDocumentsV2",
+                "required": true
+              }
+
+            ]
+          }
+        ],
+        "redirectTo": "/profile/myags"
+      }
+    },
+    {
+      "ag-setup": {
+        "api": "/AGV7",
+        "type": "entity",
+        "redirectTo": "profile/myags",
+        "langKey": "prerakAdmin",
+        "fieldsets": [
+          {
+            "definition": "AGV7",
+            "dependencies": {
+              "mobileAvailablity": {
+                  "oneOf": [
+                      {
+                          "properties": {
+                              "mobileAvailablity": {
+                                  "enum": [
+                                      "हाँ"
+                                  ]
+                              },
+                              "AGWhatsappNumber": {
+                                  "type": "string",
+                                  "title": "कृपया किशोरी के पास उपलब्ध फ़ोन का नंबर दर्ज करें",
+                                  "validation": {
+                                    "pattern": "[6-9]{1}[0-9]{9}",
+                                    "message": "Mobile Number must be 10 digit number."
+                                }
+                              }
+
+                          }
+                      },
+                      {
+                          "properties": {
+                              "mobileAvailablity": {
+                                  "enum": [
+                                      "Yes"
+                                  ]
+                              }
+                          },
+                          "required": [
+                              "AGWhatsappNumber"
+                          ]
+                      }
+                  ]
+              },
+              "mobileAvailablity": {
+                  "oneOf": [
+                      {
+                          "properties": {
+                              "mobileAvailablity": {
+                                  "enum": [
+                                      "हाँ"
+                                  ]
+                              },
+                              "AGWhatsappNumber": {
+                                  "type": "string",
+                                  "title": "कृपया किशोरी के पास उपलब्ध फ़ोन का नंबर दर्ज करें",
+                                  "validation": {
+                                    "pattern": "[6-9]{1}[0-9]{9}",
+                                    "message": "Mobile Number must be 10 digit number."
+                                }
+                              }
+
+                          }
+                      },
+                      {
+                          "properties": {
+                              "mobileAvailablity": {
+                                  "enum": [
+                                      "Yes"
+                                  ]
+                              }
+                          },
+                          "required": [
+                              "AGWhatsappNumber"
+                          ]
+                      }
+                  ]
+              }
+          },
+            "fields": [
+              {
+                  "name": "prerakName",
+                  "custom": true,
+                  "data": {
+                    "type": "api",
+                    "url": "/PrerakV2",
+                    "key": "fullName"
+                  },
+                  "element": {
+                      "widget": {
+                          "formlyConfig": {
+                              "type": "input",
+                              "templateOptions": {
+                                  "type": "hidden"
+                              }
+                          }
+                      }
+                  }
+              },
+              {
+                "name": "AGfullName",
+                "required": true,
+                "validation": {
+                  "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
+                  "message": "Name is not valid."
+              }
+              },
+              {
+                "name": "dob",
+                "required": true,
+                "type": "date",
+                "validation": {
+                  "future": false,
+                  "max": "2022-09-10",
+                  "message": "Please enter a valid date"
+                }
+              },
+              {
+                "name": "category",
+                "required": true
+              },
+              {
+                "name": "connectVia",
+                "required": true
+              },
+              {
+                "name": "fatherFullName",
+                "required": true,
+                "validation": {
+                  "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
+                  "message": "Name is not valid."
+              }
+
+              },
+              {
+                "name": "motherFullName",
+                "required": true,
+                "validation": {
+                  "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
+                  "message": "Name is not valid."
+              }
               },
               {
                 "name": "parentsMobileNumber",
@@ -846,16 +1014,31 @@
                 "required": true
               },
               {
-                "name": "AGDocuments",
+                "name": "AGDocumentsV2",
                 "required": true
-              },
+              }
+
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "ag-registration": {
+        "api": "/AGV7",
+        "type": "entity",
+        "formclass": "row",
+        "title": "Add new AG",
+        "fieldsets": [
+          {
+            "definition": "AgRegistrationForm",
+            "fields": [
               {
                 "name": "isRSOS_NIOSFormSubmitted",
                 "required": true
               },
               {
                 "name": "RSOS_NIOSFormPhoto",
-                "required": true,
                 "type": "file"
               },
               {
@@ -866,7 +1049,11 @@
                 "name": "subjects",
                 "required": true,
                 "type": "multiselect",
-                "title": "निम्न में से किशोरी द्वारा चुने गए विषय चुने"
+                "title": "निम्न में से किशोरी द्वारा चुने गए विषय चुने",
+                "validation": {
+                  "max": 7,
+                  "min":1
+                }
               },
               {
                 "name": "birthDateOnRSOS_NIOSForm",
@@ -880,8 +1067,13 @@
               {
                 "name": "RSOS_NIOSRegId",
                 "required": true,
-                "type": "number"
+                "type": "number",
+                "validation": {
+                  "pattern": "^[0-9]*$",
+                  "message": "Only numbers are allowed."
+                }
               }
+
             ]
           }
         ],
