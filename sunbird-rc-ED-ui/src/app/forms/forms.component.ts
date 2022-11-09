@@ -1010,7 +1010,7 @@ export class FormsComponent implements OnInit {
         }
         else if (field.type === 'date') {
           this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['templateOptions']['type'] = 'date';
-          if (field.validation && field.validation.future == false) {
+          if (field.validation && field.validation.future == false || field?.validation?.max) {
             this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['modelOptions'] = {
               updateOn: 'blur'
             };
@@ -1018,11 +1018,29 @@ export class FormsComponent implements OnInit {
             this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'][field.name] = {}
             this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'][field.name]['expression'] = (control: FormControl) => {
               if (control.value != null) {
-                if ((new Date(control.value)).valueOf() < Date.now()) {
-                  return of(control.value);
-                } else {
-                  return of(false);
+
+
+                if(field?.validation && field?.validation?.max){
+                  console.log("here2",control.value)
+                  var d = new Date(field?.validation?.max)
+                  console.log("dddate",new Date(control.value),d)
+                  if (new Date(control.value) < d) {
+                    return of(control.value);
+                  } else {
+                    this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'][field.name]['message'] = field?.validation?.message;
+                    return of(false);
+                  }
                 }
+                if(field?.validation && field?.validation?.future == false){
+                  console.log("here1",control.value)
+                  if ((new Date(control.value)).valueOf() < Date.now()) {
+                    return of(control.value);
+                  } else {
+                    this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'][field.name]['message'] = this.translate.instant('DATE_MUST_BIGGER_TO_TODAY_DATE');
+                    return of(false);
+                  }
+                }
+
               }
               return new Promise((resolve, reject) => {
                 setTimeout(() => {
@@ -1030,7 +1048,7 @@ export class FormsComponent implements OnInit {
                 }, 1000);
               });
             };
-            this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'][field.name]['message'] = this.translate.instant('DATE_MUST_BIGGER_TO_TODAY_DATE');
+
           }
         }
         else {
@@ -1491,14 +1509,15 @@ export class FormsComponent implements OnInit {
         if (localStorage.getItem('isAdminAdd')) {
           localStorage.setItem('isAdminAdd', '');
           // $('.modal-backdrop').remove()
-          this.router.navigate(['/myags/attestation/ag/AG/']);
+          this.router.navigate([this.redirectTo]);
+          // this.router.navigate(['/myags/attestation/ag/AG/']);
           $('.modal-backdrop').remove() // removes the grey overlay.
           // window.history.go(-1)
           // window.location.reload();
         } else {
           $('.modal-backdrop').remove()
-          // this.router.navigate([this.redirectTo]);
-          this.router.navigate(['/myags/attestation/ag/AG/']);
+          this.router.navigate([this.redirectTo]);
+          // this.router.navigate(['/myags/attestation/ag/AG/']);
           // window.history.go(-1)
           // window.location.reload();
 
@@ -1511,8 +1530,8 @@ export class FormsComponent implements OnInit {
           // window.location.reload();
         } else {
           $('.modal-backdrop').remove()
-          this.router.navigate(['/myags/attestation/ag/AG/']);
-          // this.router.navigate([this.redirectTo]);
+          // this.router.navigate(['/myags/attestation/ag/AG/']);
+          this.router.navigate([this.redirectTo]);
           // window.history.go(-1)
           // window.location.reload();
 

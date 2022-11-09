@@ -24,7 +24,7 @@ import { DomSanitizer } from '@angular/platform-browser';
           [formControl]="formControl"
           [formlyAttributes]="field"
           (change)="onChange($event)"
-          accept=".png,.jpg,.jpeg,.pdf"
+          accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps"
           style="visibility: hidden;"
         />
       </div>
