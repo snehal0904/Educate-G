@@ -1,44 +1,90 @@
 <app-header [headerFor]="entity" [tab]="tab"></app-header>
-<app-filter *ngIf="entity == 'admin'" (submitFilter)="onSubmit($event)"></app-filter>
+<app-filter
+  *ngIf="entity == 'admin'"
+  (submitFilter)="onSubmit($event)"
+></app-filter>
 <div class="container mt-10">
   <h5 class="d-inline-block font-weight-bold">
     {{ tableSchema?.title | translate }}
   </h5>
   <!-- <span class="card col-3"> -->
-  <div *ngIf="roleCheck && entity != 'myags'" class="d-flex flex-ai-center flex-jc-flex-end download-report">
-    <span class="card cursor-pointer" tabindex="0" (click)="downloadCSVFile()">Download CSV</span>
+  <div
+    *ngIf="roleCheck && entity != 'myags'"
+    class="d-flex flex-ai-center flex-jc-flex-end download-report"
+  >
+    <span
+      class="card cursor-pointer"
+      tabindex="0"
+      (click)="downloadPrerakCSVFile()"
+      >Download CSV</span
+    >
+
+    <img class="cursor-pointer" src="assets/images/download-icon.svg" />
+  </div>
+  <div
+    *ngIf="entity == 'myags'"
+    class="d-flex flex-ai-center flex-jc-flex-end download-report"
+  >
+    <span class="card cursor-pointer" tabindex="0" (click)="downloadAGCSVFile()"
+      >Download CSV</span
+    >
 
     <img class="cursor-pointer" src="assets/images/download-icon.svg" />
   </div>
   <!-- </span> -->
-  <a *ngIf="entity == 'admin'" panelAddLink="prerak-admin-setup" data-toggle="modal" data-target="#openAddPrerakForm"
-    (click)="addPrerak()" class="fs-7 float-end text-secondary-color"><i class="fa fa-plus pr-1"
-      aria-hidden="true"></i><span class="text-secondary-color p14 fw-bold">Add Prerak</span></a>
+  <a
+    *ngIf="entity == 'admin'"
+    panelAddLink="prerak-admin-setup"
+    data-toggle="modal"
+    data-target="#openAddPrerakForm"
+    (click)="addPrerak()"
+    class="fs-7 float-end text-secondary-color"
+    ><i class="fa fa-plus pr-1" aria-hidden="true"></i
+    ><span class="text-secondary-color p14 fw-bold">Add Prerak</span></a
+  >
 
-  <a *ngIf="entity == 'myags'" panelAddLink="AG-add" data-toggle="modal" data-target="#openAddAGForm" (click)="addAG()"
-    class="fs-7 float-end text-secondary-color"><i class="fa fa-plus pr-1" aria-hidden="true"></i><span
-      class="text-secondary-color p14 fw-bold">Add AG</span></a>
+  <a
+    *ngIf="entity == 'myags'"
+    panelAddLink="AG-add"
+    data-toggle="modal"
+    data-target="#openAddAGForm"
+    (click)="addAG()"
+    class="fs-7 float-end text-secondary-color"
+    ><i class="fa fa-plus pr-1" aria-hidden="true"></i
+    ><span class="text-secondary-color p14 fw-bold">Add AG</span></a
+  >
 
   <table class="table table-striped">
     <thead>
       <tr>
-        <th class="p16 text-grey-color fw-bold" *ngFor="let th of tableSchema?.fields" scope="col"
-          (click)="sortTable(th.name)">
+        <th
+          class="p16 text-grey-color fw-bold"
+          *ngFor="let th of tableSchema?.fields"
+          scope="col"
+          (click)="sortTable(th.name)"
+        >
           {{ th?.title | translate }}
         </th>
       </tr>
     </thead>
     <tbody>
-      <ng-template ngFor let-item [ngForOf]="
+      <ng-template
+        ngFor
+        let-item
+        [ngForOf]="
           tableSchema?.items
             | paginate: { itemsPerPage: limit, currentPage: page }
-        " let-i="index">
+        "
+        let-i="index"
+      >
         <tr class="pl-2">
           <ng-template ngFor let-td [ngForOf]="item" class="row" let-j="index">
             <td *ngIf="td.type && td.type === 'button'; else normalTd">
-              <a [routerLink]="[td.redirectToUrl]"
-                class="btn btn-bg btn-sec-bg btn-style float-end text-primary-color text-end fw-bold text-capitalize">{{
-                td?.buttonText | translate }}</a>
+              <a
+                [routerLink]="[td.redirectToUrl]"
+                class="btn btn-bg btn-sec-bg btn-style float-end text-primary-color text-end fw-bold text-capitalize"
+                >{{ td?.buttonText | translate }}</a
+              >
               <!-- <a panelEditLink="prerak-setup"
                                 class=" mr-3 p-2 p14 btn-bg label-primary btn-style float-end" data-toggle="modal"
                                 data-target="#prewiewEdit" (click)="openEdit(item[j])">Edit</a> &nbsp; &nbsp;
@@ -51,10 +97,13 @@
                             &nbsp; -->
             </td>
             <ng-template #normalTd>
-              <td class="col-3" *ngIf="
+              <td
+                class="col-3"
+                *ngIf="
                   td?.formate && td.formate == 'date' && td?.type !== 'name';
                   else notFormate
-                ">
+                "
+              >
                 <b>{{ td?.value | date: "d MMM y" }}</b>
               </td>
               <ng-template class="col-5" #notFormate>
@@ -110,40 +159,68 @@
         </div>
     </div> -->
 
-  <div class="modal right fade right-xl-modal" id="openAddPrerakForm" tabindex="-1" role="dialog"
-    aria-labelledby="openAddPrerakForm">
+  <div
+    class="modal right fade right-xl-modal"
+    id="openAddPrerakForm"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="openAddPrerakForm"
+  >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h6 class="modal-title primary-text" id="openAddPrerakForm">
             {{ "PUBLIC_PROFILE" | translate }}
           </h6>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <app-layouts layout="{{ layout }}" identifier="{{ identifier }}" public="false"></app-layouts>
+          <app-layouts
+            layout="{{ layout }}"
+            identifier="{{ identifier }}"
+            public="false"
+          ></app-layouts>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="modal right fade right-xl-modal" id="openAddAGForm" tabindex="-1" role="dialog"
-    aria-labelledby="openAddAGForm">
+  <div
+    class="modal right fade right-xl-modal"
+    id="openAddAGForm"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="openAddAGForm"
+  >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h6 class="modal-title primary-text" id="openAddAGForm">
             Add New AG
           </h6>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         {{ layout }}
         <div class="modal-body">
-          <app-layouts layout="{{ layout }}" identifier="{{ identifier }}" public="false"></app-layouts>
+          <app-layouts
+            layout="{{ layout }}"
+            identifier="{{ identifier }}"
+            public="false"
+          ></app-layouts>
         </div>
       </div>
     </div>
@@ -179,6 +256,10 @@
       </tr>
     </tbody>
   </table>
-  <pagination-controls class="my-1 float-end" (pageChange)="page = $event" previousLabel="{{ 'PREVIOUS' | translate }}"
-    nextLabel="{{ 'NEXT' | translate }}"></pagination-controls>
+  <pagination-controls
+    class="my-1 float-end"
+    (pageChange)="page = $event"
+    previousLabel="{{ 'PREVIOUS' | translate }}"
+    nextLabel="{{ 'NEXT' | translate }}"
+  ></pagination-controls>
 </div>

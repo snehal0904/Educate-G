@@ -340,7 +340,7 @@ export class TablesComponent implements OnInit {
       return element[keyPath];
     }
   }
-  downloadCSVFile() {
+  downloadPrerakCSVFile() {
     this.name = `prerak_with_interviewDetails_${dayjs().format(
       'YYYY-MM-DD_HH_mm'
     )}`;
@@ -597,17 +597,92 @@ export class TablesComponent implements OnInit {
     this.csvExporter = new ExportToCsv(options);
     this.csvExporter.generateCsv(finalarr);
   }
-  downloadCSVFile1() {
-    this.name = `prerak_with_interviewDetails_${dayjs().format(
-      'YYYY-MM-DD_HH_mm'
-    )}`;
-    const cols = this.tableSchema.fields;
-    cols.push({
-      keyPath: 'interviewDetails',
-      name: 'interviewDetails',
-      status: undefined,
-      title: 'Interview Details',
-      value: 'test 01',
+  downloadAGCSVFile() {
+    this.name = `Ags_${dayjs().format('YYYY-MM-DD_HH_mm')}`;
+    let arr = [];
+    let finalarr = [];
+    this.model.forEach((element) => {
+      arr = [];
+      let obj = [];
+      obj['AGfullName'] = element.AGfullName ? element.AGfullName : '';
+      obj['prerakName'] = element.prerakName ? element.prerakName : '';
+
+      obj['fatherFullName'] = element.fatherFullName
+        ? element.fatherFullName
+        : '';
+      obj['motherFullName'] = element.motherFullName
+        ? element.motherFullName
+        : '';
+      obj['dob'] = element.dob ? element.dob : '';
+
+      obj['mobileAvailablity'] = element.mobileAvailablity
+        ? element.mobileAvailablity
+        : '';
+      obj['parentsMobileNumber'] = element.parentsMobileNumber
+        ? element.parentsMobileNumber
+        : '';
+      obj['parentsWhatsappNumber'] = element.parentsWhatsappNumber
+        ? element.parentsWhatsappNumber
+        : '';
+      obj['AGWhatsappNumber'] = element.AGWhatsappNumber
+        ? element.AGWhatsappNumber
+        : '';
+      obj['connectVia'] = element.connectVia ? element.connectVia : '';
+      obj['registrationStatus'] = element.registrationStatus
+        ? element.registrationStatus
+        : '';
+      obj['lastStandardOfEducationYear'] = element.lastStandardOfEducationYear
+        ? element.lastStandardOfEducationYear
+        : '';
+      obj['whereStudiedLast'] = element.whereStudiedLast
+        ? element.whereStudiedLast
+        : '';
+
+      obj['category'] = element.category ? element.category : '';
+      obj['reasonOfLeavingEducation'] = element.reasonOfLeavingEducation
+        ? element.reasonOfLeavingEducation
+        : '';
+      obj['osOwner'] = element.osOwner[0] ? element.osOwner[0] : '';
+
+      if (element.AGDocumentsV2) {
+        obj['rationCard'] = element.rationCard ? element.rationCard : '';
+        obj['BPLCard'] = element.BPLCard ? element.BPLCard : '';
+        obj['markSheet'] = element.markSheet ? element.markSheet : '';
+        obj['photo'] = element.photo ? element.photo : '';
+        obj['emailId'] = element.emailId ? element.emailId : '';
+        obj['TC_CBO_HighSchool'] = element.TC_CBO_HighSchool
+          ? element.TC_CBO_HighSchool
+          : '';
+        obj['TC'] = element.TC ? element.TC : '';
+        obj['janadharCard'] = element.janadharCard ? element.janadharCard : '';
+        obj['birthCertificate'] = element.birthCertificate
+          ? element.birthCertificate
+          : '';
+        obj['Marksheet_CBO_HighSchool'] = element.Marksheet_CBO_HighSchool
+          ? element.Marksheet_CBO_HighSchool
+          : '';
+        obj['aadhar'] = element.aadhar ? element.aadhar : '';
+        obj['bankPassbook'] = element.bankPassbook ? element.bankPassbook : '';
+        obj['castCertificate'] = element.castCertificate
+          ? element.castCertificate
+          : '';
+      } else {
+        obj['rationCard'] = '';
+        obj['BPLCard'] = '';
+        obj['markSheet'] = '';
+        obj['photo'] = '';
+        obj['emailId'] = '';
+        obj['TC_CBO_HighSchool'] = '';
+        obj['TC'] = '';
+        obj['janadharCard'] = '';
+        obj['birthCertificate'] = '';
+        obj['Marksheet_CBO_HighSchool'] = '';
+        obj['aadhar'] = '';
+        obj['bankPassbook'] = '';
+        obj['castCertificate'] = '';
+      }
+
+      finalarr.push(obj);
     });
     const options = {
       filename: this.name,
@@ -618,54 +693,39 @@ export class TablesComponent implements OnInit {
       useTextFile: false,
       useBom: true,
       useKeysAsHeaders: false,
-      headers: _.map(this.tableSchema.fields, (column) =>
-        column.title ? column.title : null
-      ),
+      headers: [
+        'AGfullName',
+        'prerakName',
+        'fatherFullName',
+        'motherFullName',
+        'dob',
+        'mobileAvailablity',
+        'parentsMobileNumber',
+        'parentsWhatsappNumber',
+        'AGWhatsappNumber',
+        'connectVia',
+        'registrationStatus',
+        'lastStandardOfEducationYear',
+        'whereStudiedLast',
+        'category',
+        'reasonOfLeavingEducation',
+        'osOwner',
+        'rationCard',
+        'BPLCard',
+        'markSheet',
+        'photo',
+        'emailId',
+        'TC_CBO_HighSchool',
+        'TC',
+        'janadharCard',
+        'birthCertificate',
+        'Marksheet_CBO_HighSchool',
+        'aadhar',
+        'bankPassbook',
+        'castCertificate',
+      ],
     };
-    const tempCSVarray = [];
-
-    //   this.property.forEach((element) => {
-    //     const tempCSVobj = [];
-
-    //     this.tableSchema.fields.forEach((field) => {
-    //       element.forEach((elVal) => {
-    //         if (elVal.name) {
-    //           if (elVal.name == field.name) {
-    //             tempCSVobj[field.name] = elVal.value ? elVal.value : ' ';
-    //           }
-    //         } else if (elVal.custom == true && field.name == undefined) {
-    //           tempCSVobj['URL'] = elVal.redirectToUrl ? elVal.redirectToUrl : '-';
-    //         }
-    //       });
-    //     });
-    //     tempCSVarray.push(tempCSVobj);
-    //   });
-
-    //   this.csvExporter = new ExportToCsv(options);
-    //   this.csvExporter.generateCsv(tempCSVarray);
-    // }
-    this.model.forEach((element) => {
-      const tempCSVobj = [];
-
-      this.tableSchema.fields.forEach((field) => {
-        // if (element.name == field.name) {
-        tempCSVobj[field.name] = element[field.name]
-          ? element[field.name]
-          : ' ';
-        // }
-        // element.forEach((elVal) => {
-        //   if (elVal.name) {
-        //     if (elVal.name == field.name) {
-        //       tempCSVobj[field.name] = elVal.value ? elVal.value : ' ';
-        //     }
-        //   } else if (elVal.custom == true && field.name == undefined) {
-        //     tempCSVobj['URL'] = elVal.redirectToUrl ? elVal.redirectToUrl : '-';
-        //   }
-        // });
-      });
-      tempCSVarray.push(tempCSVobj);
-    });
     this.csvExporter = new ExportToCsv(options);
-    this.csvExporter.generateCsv(tempCSVarray);
+    this.csvExporter.generateCsv(finalarr);
   }
 }
