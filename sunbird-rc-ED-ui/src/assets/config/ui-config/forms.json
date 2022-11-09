@@ -694,9 +694,8 @@
                 "required": true,
                 "type": "date",
                 "validation": {
-                  "future": false,
                   "max": "2022-09-10",
-                  "message": "Please enter a valid date"
+                  "message": "किशोरी की आयु 14 वर्ष होनी चाहिए, कृपया मान्य तिथि का चयन करें"
                 }
               },
               {
@@ -1025,13 +1024,14 @@
     },
     {
       "ag-registration": {
+        "api": "/AGV7",
         "type": "property:AgRegistrationForm",
         "redirectTo": "/myags/attestation/ag/AG/",
-        "api": "/AGV7",
-        "formclass": "row",
         "title": "Add AG Registration Details",
         "fieldsets": [
           {
+            "privacyConfig": "PrerakV2OsConfig",
+            "globalPrivacyConfig": "private-access",
             "definition": "AgRegistrationForm",
             "fields": [
               {
@@ -1040,7 +1040,7 @@
               },
               {
                 "name": "RSOS_NIOSFormPhoto",
-                "type": "file"
+                "format": "file"
               },
               {
                 "name": "examChoice",
@@ -1070,9 +1070,9 @@
                 "required": true,
                 "type": "number",
                 "validation": {
-                  "pattern": "^[0-9]*$",
-                  "message": "Only numbers are allowed."
-                }
+                  "pattern": "^[0-9]{11}$|^[0-9]{12}$",
+                  "message": "संख्या 11 या 12 अंकों की होनी चाहिए"
+              }
               }
 
             ]
