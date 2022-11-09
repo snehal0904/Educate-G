@@ -1025,10 +1025,11 @@
     },
     {
       "ag-registration": {
+        "type": "property:AgRegistrationForm",
+        "redirectTo": "/myags/attestation/ag/AG/",
         "api": "/AGV7",
-        "type": "entity",
         "formclass": "row",
-        "title": "Add new AG",
+        "title": "Add AG Registration Details",
         "fieldsets": [
           {
             "definition": "AgRegistrationForm",
@@ -1076,8 +1077,7 @@
 
             ]
           }
-        ],
-        "redirectTo": "/profile/myags"
+        ]
       }
     }
   ]
