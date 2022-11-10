@@ -89,7 +89,7 @@ export class FormsComponent implements OnInit {
         this.form = params['form'].split('/', 1)[0];
         this.identifier = params['form'].split('/', 2)[1];
 
-        if (this.form == 'prerak-admin-setup' || this.form == 'interview') {
+        if (this.form == 'prerak-admin-setup' || this.form == 'interview' || this.form == 'ag-setup') {
           this.isThisAdminRole = true;
         }
       }
@@ -105,7 +105,7 @@ export class FormsComponent implements OnInit {
         this.identifier = params['id']
       }
 
-      if (params['form'] != undefined && (params['form'] == 'prerak-admin-setup' || params['form'] == 'interview')) {
+      if (params['form'] != undefined && (params['form'] == 'prerak-admin-setup' || params['form'] == 'interview' || params['form'] == 'ag-setup')) {
         this.adminForm = params['form'];
 
         if (params.hasOwnProperty('id')) {
@@ -1149,6 +1149,7 @@ export class FormsComponent implements OnInit {
     if(this.model['sameAsAbove']){
       this.model['parentsWhatsappNumber'] = this.model['parentsMobileNumber']
     }
+
     if(this.model['RSOS_NIOSRegId']){
       this.model['RSOS_NIOSRegId'] = (this.model['RSOS_NIOSRegId']).toString()
     }
@@ -1190,13 +1191,15 @@ export class FormsComponent implements OnInit {
             }
             else if (this.type && this.type.includes("property")) {
               var property = this.type.split(":")[1];
-
+              var url;
               if (this.identifier != null && this.entityId != undefined) {
-                var url = [this.apiUrl, this.entityId, property, this.identifier];
+                 url = [this.apiUrl, this.entityId, property, this.identifier];
               } else {
-                var url = [this.apiUrl, this.identifier, property];
+                 url = [this.apiUrl, this.identifier, property];
               }
-
+              if(property == "AgRegistrationForm"){
+                url = [this.apiUrl, localStorage.getItem('id'), property];
+             }
               this.apiUrl = (url.join("/"));
               if (this.model[property]) {
                 this.model = this.model[property];
@@ -1266,7 +1269,7 @@ export class FormsComponent implements OnInit {
         var property = this.type.split(":")[1];
 
         if (this.identifier != null && this.entityId != undefined) {
-          if ((this.adminForm == 'prerak-admin-setup' || this.adminForm == 'interview')) {
+          if ((this.adminForm == 'prerak-admin-setup' || this.adminForm == 'interview' || this.adminForm == 'ag-setup' || this.adminForm == 'ag-registration')) {
             var url = [this.apiUrl, this.identifier, property];
 
           } else if (this.isThisAdminRole) {
@@ -1285,7 +1288,7 @@ export class FormsComponent implements OnInit {
         }
 
         if (this.identifier != null && this.entityId != undefined) {
-          if ((this.adminForm == 'prerak-admin-setup' || this.adminForm == 'interview')) {
+          if ((this.adminForm == 'prerak-admin-setup' || this.adminForm == 'interview' || this.adminForm == 'ag-setup')) {
             this.postData()
           }
           else {
@@ -1441,9 +1444,13 @@ export class FormsComponent implements OnInit {
   getData() {
     var get_url;
     if (this.identifier) {
-      if ((this.adminForm == 'prerak-admin-setup' || this.adminForm == 'interview')) {
+      if ((this.adminForm == 'prerak-admin-setup' || this.adminForm == 'interview'  )) {
         get_url = '/PrerakV2/' + this.identifier;
-      } else {
+      }
+      else if((this.adminForm == 'ag-setup')) {
+        get_url = '/AGV7/' + this.identifier;
+      }
+      else {
 
         get_url = this.propertyName + '/' + this.identifier;
       }
