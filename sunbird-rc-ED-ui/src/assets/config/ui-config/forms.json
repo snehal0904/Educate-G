@@ -300,20 +300,22 @@
                     },
                     {
                       "name": "block",
-                      "dependent": {
+                      "dependentOn": {
                         "key": "block",
                         "title": "Block",
+                        "dependentOn": "district",
                         "type": "select",
-                        "options": "this.locationService.getBlock()"
+                        "options": []
                       }
                     },
                     {
                       "name": "village",
-                      "dependent": {
+                      "dependentOn": {
                         "key": "village",
                         "title": "Village",
+                        "dependentOn": "block",
                         "type": "select",
-                        "options": "this.locationService.getVillage()"
+                        "options": []
                       }
                     }
                   ]
@@ -709,7 +711,7 @@
                 "validation": {
                   "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
                   "message": "Name is not valid."
-              }
+                }
               },
               {
                 "name": "dob",
@@ -719,6 +721,9 @@
                   "max": "2022-09-10",
                   "message": "किशोरी की आयु 14 वर्ष होनी चाहिए, कृपया मान्य तिथि का चयन करें"
                 }
+              },
+              {
+                "name": "PanchayatList"
               },
               {
                 "name": "category",
@@ -734,8 +739,7 @@
                 "validation": {
                   "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
                   "message": "Name is not valid."
-              }
-
+                }
               },
               {
                 "name": "motherFullName",
@@ -743,7 +747,7 @@
                 "validation": {
                   "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
                   "message": "Name is not valid."
-              }
+                }
               },
               {
                 "name": "parentsMobileNumber",
@@ -751,26 +755,25 @@
                 "validation": {
                   "pattern": "[6-9]{1}[0-9]{9}",
                   "message": "Mobile Number must be 10 digit number."
-              }
+                }
               },
               {
                 "name": "sameAsAbove",
                 "custom": true,
                 "element": {
-                    "title": "Same as above?",
-                    "widget": {
-                        "formlyConfig": {
-                            "type": "checkbox",
-                            "fieldGroupClassName": "controls",
-                            "className": "checkbox",
-                            "templateOptions": {
-                                "required": true
-                            }
-
-                        }
+                  "title": "Same as above?",
+                  "widget": {
+                    "formlyConfig": {
+                      "type": "checkbox",
+                      "fieldGroupClassName": "controls",
+                      "className": "checkbox",
+                      "templateOptions": {
+                        "required": true
+                      }
                     }
+                  }
                 }
-            },
+              },
               {
                 "name": "parentsWhatsappNumber",
                 "required": true,
@@ -816,7 +819,6 @@
                 "name": "AGDocumentsV2",
                 "required": true
               }
-
             ]
           }
         ],
@@ -834,93 +836,79 @@
             "definition": "AGV7",
             "dependencies": {
               "mobileAvailablity": {
-                  "oneOf": [
-                      {
-                          "properties": {
-                              "mobileAvailablity": {
-                                  "enum": [
-                                      "हाँ"
-                                  ]
-                              },
-                              "AGWhatsappNumber": {
-                                  "type": "string",
-                                  "title": "कृपया किशोरी के पास उपलब्ध फ़ोन का नंबर दर्ज करें",
-                                  "validation": {
-                                    "pattern": "[6-9]{1}[0-9]{9}",
-                                    "message": "Mobile Number must be 10 digit number."
-                                }
-                              }
-
-                          }
+                "oneOf": [
+                  {
+                    "properties": {
+                      "mobileAvailablity": {
+                        "enum": ["हाँ"]
                       },
-                      {
-                          "properties": {
-                              "mobileAvailablity": {
-                                  "enum": [
-                                      "Yes"
-                                  ]
-                              }
-                          },
-                          "required": [
-                              "AGWhatsappNumber"
-                          ]
+                      "AGWhatsappNumber": {
+                        "type": "string",
+                        "title": "कृपया किशोरी के पास उपलब्ध फ़ोन का नंबर दर्ज करें",
+                        "validation": {
+                          "pattern": "[6-9]{1}[0-9]{9}",
+                          "message": "Mobile Number must be 10 digit number."
+                        }
                       }
-                  ]
+                    }
+                  },
+                  {
+                    "properties": {
+                      "mobileAvailablity": {
+                        "enum": ["Yes"]
+                      }
+                    },
+                    "required": ["AGWhatsappNumber"]
+                  }
+                ]
               },
               "mobileAvailablity": {
-                  "oneOf": [
-                      {
-                          "properties": {
-                              "mobileAvailablity": {
-                                  "enum": [
-                                      "हाँ"
-                                  ]
-                              },
-                              "AGWhatsappNumber": {
-                                  "type": "string",
-                                  "title": "कृपया किशोरी के पास उपलब्ध फ़ोन का नंबर दर्ज करें",
-                                  "validation": {
-                                    "pattern": "[6-9]{1}[0-9]{9}",
-                                    "message": "Mobile Number must be 10 digit number."
-                                }
-                              }
-
-                          }
+                "oneOf": [
+                  {
+                    "properties": {
+                      "mobileAvailablity": {
+                        "enum": ["हाँ"]
                       },
-                      {
-                          "properties": {
-                              "mobileAvailablity": {
-                                  "enum": [
-                                      "Yes"
-                                  ]
-                              }
-                          },
-                          "required": [
-                              "AGWhatsappNumber"
-                          ]
+                      "AGWhatsappNumber": {
+                        "type": "string",
+                        "title": "कृपया किशोरी के पास उपलब्ध फ़ोन का नंबर दर्ज करें",
+                        "validation": {
+                          "pattern": "[6-9]{1}[0-9]{9}",
+                          "message": "Mobile Number must be 10 digit number."
+                        }
                       }
-                  ]
+                    }
+                  },
+                  {
+                    "properties": {
+                      "mobileAvailablity": {
+                        "enum": ["Yes"]
+                      }
+                    },
+                    "required": ["AGWhatsappNumber"]
+                  }
+                ]
               }
-          },
+            },
             "fields": [
               {
-                  "name": "prerakName",
-                  "custom": true,
-                  "data": {
-                    "type": "api",
-                    "url": "/PrerakV2",
-                    "key": "fullName"
-                  },
-                  "element": {
-                      "widget": {
-                          "formlyConfig": {
-                              "type": "input",
-                              "templateOptions": {
-                                  "type": "hidden"
-                              }
-                          }
+                "name": "prerakName",
+                "custom": true,
+                "data": {
+                  "type": "api",
+                  "url": "/PrerakV2",
+                  "key": "fullName"
+                },
+                "element": {
+                  "widget": {
+                    "formlyConfig": {
+                      "type": "input",
+                      "templateOptions": {
+                        "type": "hidden"
                       }
+                    }
                   }
+                }
               },
               {
                 "name": "AGfullName",
@@ -928,7 +916,7 @@
                 "validation": {
                   "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
                   "message": "Name is not valid."
-              }
+                }
               },
               {
                 "name": "dob",
@@ -954,8 +942,7 @@
                 "validation": {
                   "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
                   "message": "Name is not valid."
-              }
-
+                }
               },
               {
                 "name": "motherFullName",
@@ -963,7 +950,7 @@
                 "validation": {
                   "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
                   "message": "Name is not valid."
-              }
+                }
               },
               {
                 "name": "parentsMobileNumber",
@@ -977,32 +964,29 @@
                 "name": "sameAsAbove",
                 "custom": true,
                 "element": {
-                    "title": "Same as above?",
-                    "widget": {
-                        "formlyConfig": {
-                            "type": "checkbox",
-                            "fieldGroupClassName": "controls",
-                            "className": "checkbox",
-                            "templateOptions": {
-                                "required": true
-                            }
-
-                        }
+                  "title": "Same as above?",
+                  "widget": {
+                    "formlyConfig": {
+                      "type": "checkbox",
+                      "fieldGroupClassName": "controls",
+                      "className": "checkbox",
+                      "templateOptions": {
+                        "required": true
+                      }
                     }
+                  }
                 }
-            },
+              },
               {
                 "name": "parentsWhatsappNumber",
                 "required": true,
                 "validation": {
                   "pattern": "[6-9]{1}[0-9]{9}",
                   "message": "Mobile Number must be 10 digit number."
-
                 },
                 "expressionProperties": {
                   "templateOptions.disabled": "model.sameAsAbove",
                   "templateOptions.required": "!model.sameAsAbove"
-
                 }
               },
               {
@@ -1038,7 +1022,6 @@
                 "name": "AGDocumentsV2",
                 "required": true
               }
-
             ]
           }
         ]
@@ -1075,13 +1058,13 @@
                 "title": "निम्न में से किशोरी द्वारा चुने गए विषय चुने",
                 "validation": {
                   "max": 7,
-                  "min":1
+                  "min": 1
                 }
               },
               {
                 "name": "birthDateOnRSOS_NIOSForm",
                 "required": true,
-                "type":"date"
+                "type": "date"
               },
               {
                 "name": "isRSOS_NIOSRegIdReceived",
@@ -1094,9 +1077,8 @@
                 "validation": {
                   "pattern": "^[0-9]{11}$|^[0-9]{12}$",
                   "message": "संख्या 11 या 12 अंकों की होनी चाहिए"
+                }
               }
-              }
-
             ]
           }
         ]
