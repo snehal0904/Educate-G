@@ -1149,9 +1149,9 @@ export class FormsComponent implements OnInit {
     if(this.model['sameAsAbove']){
       this.model['parentsWhatsappNumber'] = this.model['parentsMobileNumber']
     }
-    if(this.model['subjects']){
-      delete this.model['subjects'];
-    }
+    // if(this.model['subjects']){
+    //   delete this.model['subjects'];
+    // }
     if(this.model['RSOS_NIOSFormPhoto']){
       delete this.model['RSOS_NIOSFormPhoto'];
     }
@@ -1234,13 +1234,16 @@ export class FormsComponent implements OnInit {
           }
           else if (this.type && this.type.includes("property")) {
             var property = this.type.split(":")[1];
-
+            // let url;
             if (this.identifier != null && this.entityId != undefined) {
-              var url = [this.apiUrl, this.entityId, property, this.identifier];
+              url = [this.apiUrl, this.entityId, property, this.identifier];
             } else {
-              var url = [this.apiUrl, this.identifier, property];
+              url = [this.apiUrl, this.identifier, property];
             }
-
+            if(property == "AgRegistrationForm"){
+              url = [this.apiUrl, localStorage.getItem('id'), property];
+              this.entityId = undefined;
+           }
             this.apiUrl = (url.join("/"));
             if (this.model[property]) {
               this.model = this.model[property];
@@ -1294,7 +1297,7 @@ export class FormsComponent implements OnInit {
         }
 
         if (this.identifier != null && this.entityId != undefined) {
-          if ((this.adminForm == 'prerak-admin-setup' || this.adminForm == 'interview' || this.adminForm == 'ag-setup')) {
+          if ((this.adminForm == 'prerak-admin-setup' || this.adminForm == 'interview' || this.adminForm == 'ag-setup' || this.adminForm == 'ag-registration')) {
             this.postData()
           }
           else {
