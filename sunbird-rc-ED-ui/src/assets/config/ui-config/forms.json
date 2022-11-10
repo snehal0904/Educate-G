@@ -1070,6 +1070,7 @@
               },
               {
                 "name": "subjects",
+                "required": true,
                 "type": "multiselect",
                 "title": "निम्न में से किशोरी द्वारा चुने गए विषय चुने",
                 "validation": {

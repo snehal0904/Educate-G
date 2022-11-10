@@ -1149,6 +1149,12 @@ export class FormsComponent implements OnInit {
     if(this.model['sameAsAbove']){
       this.model['parentsWhatsappNumber'] = this.model['parentsMobileNumber']
     }
+    if(this.model['subjects']){
+      delete this.model['subjects'];
+    }
+    if(this.model['RSOS_NIOSFormPhoto']){
+      delete this.model['RSOS_NIOSFormPhoto'];
+    }
 
     if(this.model['RSOS_NIOSRegId']){
       this.model['RSOS_NIOSRegId'] = (this.model['RSOS_NIOSRegId']).toString()
