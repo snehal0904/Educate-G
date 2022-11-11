@@ -1570,6 +1570,11 @@ export class FormsComponent implements OnInit {
     // if(this.model['subjects']){
     //   delete this.model['subjects'];
     // }
+    if (property == 'AgRegistrationForm') {
+      if (this.model['AgAddress']) {
+        delete this.model['AgAddress'];
+      }
+    }
     if (this.model['RSOS_NIOSFormPhoto']) {
       delete this.model['RSOS_NIOSFormPhoto'];
     }
