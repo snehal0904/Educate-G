@@ -1901,7 +1901,7 @@ export class FormsComponent implements OnInit {
       ) {
         get_url = '/PrerakV2/' + this.identifier;
       } else if (this.adminForm == 'ag-setup') {
-        get_url = '/AGV7/' + this.identifier;
+        get_url = '/AGV8/' + this.identifier;
       } else {
         get_url = this.propertyName + '/' + this.identifier;
       }

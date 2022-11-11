@@ -622,13 +622,13 @@
     },
     {
       "AG-add": {
-        "api": "/AGV7",
+        "api": "/AGV8",
         "type": "entity",
         "formclass": "row",
         "title": "Add new AG",
         "fieldsets": [
           {
-            "definition": "AGV7",
+            "definition": "AGV8",
             "dependencies": {
               "mobileAvailablity": {
                 "oneOf": [
@@ -868,13 +868,13 @@
     },
     {
       "ag-setup": {
-        "api": "/AGV7",
+        "api": "/AGV8",
         "type": "entity",
         "redirectTo": "profile/myags",
         "langKey": "prerakAdmin",
         "fieldsets": [
           {
-            "definition": "AGV7",
+            "definition": "AGV8",
             "dependencies": {
               "mobileAvailablity": {
                 "oneOf": [
@@ -1114,7 +1114,7 @@
     },
     {
       "ag-registration": {
-        "api": "/AGV7",
+        "api": "/AGV8",
         "type": "property:AgRegistrationForm",
         "redirectTo": "/myags/attestation/ag/AG/",
         "title": "Add AG Registration Details",
