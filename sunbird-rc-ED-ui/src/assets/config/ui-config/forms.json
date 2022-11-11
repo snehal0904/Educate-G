@@ -970,6 +970,50 @@
                 }
               },
               {
+                "name": "AgAddress",
+                "children": {
+                  "definition": "Address",
+                  "title": false,
+                  "fields": [
+                    {
+                      "name": "district",
+                      "dependent": {
+                        "key": "district",
+                        "title": "District",
+                        "type": "select",
+                        "options": "this.locationService.getDistrict()"
+                      }
+                    },
+                    {
+                      "name": "block",
+                      "dependentOn": {
+                        "key": "block",
+                        "title": "Block",
+                        "dependentOn": "district",
+                        "type": "select",
+                        "options": []
+                      }
+                    },
+                    {
+                      "name": "village",
+                      "dependentOn": {
+                        "key": "village",
+                        "title": "Village",
+                        "dependentOn": "block",
+                        "type": "select",
+                        "options": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "PanchayatList"
+              },
+              {
+                "name": "maritalStatus"
+              },
+              {
                 "name": "category",
                 "required": true
               },

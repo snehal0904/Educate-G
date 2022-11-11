@@ -341,29 +341,6 @@ export class FormsComponent implements OnInit {
           block: null,
         },
       };
-    } else {
-      // *****Need to rework on edit case******
-      //   if (
-      //     !this.model.hasOwnProperty('confirmAddress') &&
-      //     this.form == 'prerak-admin-setup'
-      //   ) {
-      //     this.model = {
-      //       confirmAddress: {
-      //         district: null,
-      //         block: null,
-      //       },
-      //     };
-      //   } else if (
-      //     !this.model.hasOwnProperty('AgAddress') &&
-      //     this.form == 'AG-add'
-      //   ) {
-      //     this.model = {
-      //       AgAddress: {
-      //         district: null,
-      //         block: null,
-      //       },
-      //     };
-      //   }
     }
 
     this.schemaloaded = true;
