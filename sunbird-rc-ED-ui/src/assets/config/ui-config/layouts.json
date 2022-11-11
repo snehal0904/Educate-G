@@ -26,14 +26,14 @@
     },
     {
       "AG2": {
-        "api": "/AGV7",
+        "api": "/AGV8",
         "title": "TEACHER_PROFILE",
         "langKey": "prerakAdmin",
         "headerName": "nameDetails.firstName",
         "multiple": true,
         "blocks": [
           {
-            "definition": "AGV7",
+            "definition": "AGV8",
             "title": "AG",
             "add": true,
             "edit": false,
@@ -87,12 +87,12 @@
     },
     {
       "ag-detail": {
-        "api": "/AGV7",
+        "api": "/AGV8",
         "title": "AG Profile",
         "headerName": "nameDetails.firstName",
         "blocks": [
           {
-            "definition": "AGV7",
+            "definition": "AGV8",
             "title": "PERSONAL_DETAILS",
             "add": false,
             "edit": true,
@@ -100,12 +100,12 @@
             "delete": true,
             "fields": {
               "includes": ["*"],
-              "excludes": []
+              "excludes": ["AgRegistrationForm"]
             },
             "propertyShowFirst": ["nameDetails.firstName"]
           },
           {
-            "definition": "AGV7",
+            "definition": "AGV8",
             "title": "Registration Details",
             "add": true,
             "addform": "ag-registration",
@@ -134,7 +134,7 @@
     },
     {
       "myags": {
-        "table": "ag/AGV7"
+        "table": "ag/AGV8"
       }
     }
   ]

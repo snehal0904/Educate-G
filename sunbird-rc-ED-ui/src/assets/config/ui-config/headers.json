@@ -16,7 +16,7 @@
           "default":{
             "left": [{
               "title": "AG List",
-              "redirectTo": "/myags/attestation/ag/AGV7"
+              "redirectTo": "/myags/attestation/ag/AGV8"
           }],
               "right":[
                   {
@@ -32,7 +32,7 @@
                 "logoHref" : "profile/PrerakV2",
                 "left": [{
                   "title": "AG List",
-                  "redirectTo": "/myags/attestation/ag/AGV7"
+                  "redirectTo": "/myags/attestation/ag/AGV8"
               }],
                 "right": [
                     {
@@ -84,7 +84,7 @@
               "logoHref" : "profile/PrerakV2",
               "left": [{
                 "title": "AG List",
-                "redirectTo": "/myags/attestation/ag/AGV7"
+                "redirectTo": "/myags/attestation/ag/AGV8"
             }],
               "right": [
                   {
@@ -100,7 +100,7 @@
             "logoHref" : "profile/PrerakV2",
             "left": [{
               "title": "AG List",
-              "redirectTo": "/myags/attestation/ag/AGV7"
+              "redirectTo": "/myags/attestation/ag/AGV8"
           }],
             "right": [
                 {
@@ -116,7 +116,7 @@
           "logoHref" : "profile/PrerakV2",
           "left": [{
             "title": "AG List",
-            "redirectTo": "/myags/attestation/ag/AGV7"
+            "redirectTo": "/myags/attestation/ag/AGV8"
         }],
           "right": [
               {
