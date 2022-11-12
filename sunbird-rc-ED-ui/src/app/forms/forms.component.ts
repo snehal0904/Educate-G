@@ -325,7 +325,7 @@ export class FormsComponent implements OnInit {
       this.fields[0].templateOptions.label = '';
     }
 
-    if (this.add) {
+    if (this.add && this.form != 'ag-registration') {
       this.model = {};
       this.model = {
         address: {
@@ -619,7 +619,7 @@ export class FormsComponent implements OnInit {
           if (field.data && field.data.type == 'api') {
             this.generalService.getData(field.data.url).subscribe((res) => {
               var data_val = res[0][field.data.key];
-              console.log('data_val', data_val);
+
               this.model[field.name] = data_val;
             });
             // var api_val = this.getEntityData(field.data.url);
