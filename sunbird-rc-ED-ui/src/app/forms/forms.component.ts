@@ -231,7 +231,6 @@ export class FormsComponent implements OnInit {
                               if (pro.hasOwnProperty('properties')) {
                                 Object.keys(pro['properties']).forEach(
                                   function (key3) {
-                                    console.log(pro.properties[key3]);
                                     if (
                                       pro.properties[key3].hasOwnProperty(
                                         'title'
@@ -324,7 +323,6 @@ export class FormsComponent implements OnInit {
     if (this.headingTitle) {
       this.fields[0].templateOptions.label = '';
     }
-
     if (this.add && this.form != 'ag-registration') {
       this.model = {};
       this.model = {
@@ -706,7 +704,6 @@ export class FormsComponent implements OnInit {
   }
 
   addWidget(fieldset, field, childrenName) {
-    // console.log("def",this.responseData.definitions,fieldset.definition)
     this.translate.get(this.langKey + '.' + field.name).subscribe((res) => {
       let constr = this.langKey + '.' + field.name;
       if (res != constr) {
@@ -808,7 +805,6 @@ export class FormsComponent implements OnInit {
                 field.name
               ].items.properties
             ).forEach(function (key) {
-              console.log(key);
               _self.responseData.definitions[fieldset.definition].properties[
                 field.name
               ].items.properties[key].title = _self.checkString(
@@ -939,11 +935,6 @@ export class FormsComponent implements OnInit {
                       return of(false);
                     }
                   } else if (field.validation.max) {
-                    console.log(
-                      'max',
-                      new Date(control.value).valueOf(),
-                      new Date(field.validation.max).valueOf()
-                    );
                     if (
                       new Date(control.value).valueOf() <
                       new Date(field.validation.max).valueOf()
@@ -1310,8 +1301,6 @@ export class FormsComponent implements OnInit {
               'expression'
             ] = (control: FormControl) => {
               if (control.value != null) {
-                console.log('examChoice', this.model['examChoice']);
-                console.log('min', control.value.length, field.validation.min);
                 if (
                   this.model['examChoice'] == 'RSOS पहला प्रयास' ||
                   this.model['examChoice'] == 'NIOS पहला प्रयास'
@@ -1384,9 +1373,7 @@ export class FormsComponent implements OnInit {
             ] = (control: FormControl) => {
               if (control.value != null) {
                 if (field?.validation && field?.validation?.max) {
-                  console.log('here2', control.value);
                   var d = new Date(field?.validation?.max);
-                  console.log('dddate', new Date(control.value), d);
                   if (new Date(control.value) < d) {
                     return of(control.value);
                   } else {
@@ -1399,7 +1386,6 @@ export class FormsComponent implements OnInit {
                   }
                 }
                 if (field?.validation && field?.validation?.future == false) {
-                  console.log('here1', control.value);
                   if (new Date(control.value).valueOf() < Date.now()) {
                     return of(control.value);
                   } else {
@@ -1570,11 +1556,12 @@ export class FormsComponent implements OnInit {
     // if(this.model['subjects']){
     //   delete this.model['subjects'];
     // }
-    if (property == 'AgRegistrationForm') {
-      if (this.model['AgAddress']) {
-        delete this.model['AgAddress'];
-      }
-    }
+    // if (property == 'AgRegistrationForm') {
+    //   if (this.model['AgAddress']) {
+    //     delete this.model['AgAddress'];
+    //   }
+    // }
+
     if (this.model['RSOS_NIOSFormPhoto']) {
       delete this.model['RSOS_NIOSFormPhoto'];
     }
@@ -1582,7 +1569,6 @@ export class FormsComponent implements OnInit {
     if (this.model['RSOS_NIOSRegId']) {
       this.model['RSOS_NIOSRegId'] = this.model['RSOS_NIOSRegId'].toString();
     }
-    console.log('model', this.model);
     if (this.fileFields.length > 0) {
       this.fileFields.forEach((fileField) => {
         if (this.model[fileField]) {
@@ -1919,8 +1905,9 @@ export class FormsComponent implements OnInit {
       if (this.propertyName) {
         this.entityId = res.osid;
       }
-
-      this.model = res;
+      if (this.form != 'ag-registration') {
+        this.model = res;
+      }
 
       this.identifier = res.osid;
 
@@ -1979,7 +1966,7 @@ export class FormsComponent implements OnInit {
         delete this.model['confirmAddress']['village'];
       }
     }
-    console.log(this.model);
+
     await this.generalService.postData(this.apiUrl, this.model).subscribe(
       (res) => {
         if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
