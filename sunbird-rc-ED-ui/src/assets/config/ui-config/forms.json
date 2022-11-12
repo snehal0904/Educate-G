@@ -1056,7 +1056,7 @@
                       "fieldGroupClassName": "controls",
                       "className": "checkbox",
                       "templateOptions": {
-                        "required": true
+                        "required": false
                       }
                     }
                   }
