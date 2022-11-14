@@ -808,9 +808,7 @@
                       "type": "checkbox",
                       "fieldGroupClassName": "controls",
                       "className": "checkbox",
-                      "templateOptions": {
-                        "required": true
-                      }
+                      "templateOptions": {}
                     }
                   }
                 }
@@ -1055,9 +1053,7 @@
                       "type": "checkbox",
                       "fieldGroupClassName": "controls",
                       "className": "checkbox",
-                      "templateOptions": {
-                        "required": false
-                      }
+                      "templateOptions": {}
                     }
                   }
                 }
