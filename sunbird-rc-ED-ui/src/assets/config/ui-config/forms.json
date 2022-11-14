@@ -37,7 +37,12 @@
                 "name": "gender"
               },
               {
-                "name": "age"
+                "name": "age",
+                "required": true,
+                "validation": {
+                  "pattern": "[0-9]",
+                  "message": "AGE_SHOULD_BE_NUMBER"
+                }
               },
               {
                 "name": "address",
@@ -112,7 +117,12 @@
                 "name": "gender"
               },
               {
-                "name": "age"
+                "name": "age",
+                "required": true,
+                "validation": {
+                  "pattern": "[0-9]",
+                  "message": "AGE_SHOULD_BE_NUMBER"
+                }
               },
               {
                 "name": "address",
@@ -186,7 +196,12 @@
                 "name": "gender"
               },
               {
-                "name": "age"
+                "name": "age",
+                "required": true,
+                "validation": {
+                  "pattern": "[0-9]",
+                  "message": "AGE_SHOULD_BE_NUMBER"
+                }
               },
               {
                 "name": "address",
