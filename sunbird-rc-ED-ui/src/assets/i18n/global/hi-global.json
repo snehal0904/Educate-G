@@ -113,6 +113,8 @@
   "VISIBILITY": "दृश्यता",
   "PRIVACY_ATTRIBUTE_DEFINE": "गोपनीयता विशेषता परिभाषित कर",
   "ALREADY_REGISTERED_LOGIN": "पहले से ही बनाया गया है? लॉग इन करें",
+  "AGE_SHOULD_BE_GREATER_THAN_14": "किशोरी की आयु 14 वर्ष होनी चाहिए, कृपया मान्य तिथि का चयन करें",
+  "NUMBER_SHOULD_BE_11_OR_12": "संख्या 11 या 12 अंकों की होनी चाहिए",
   "NOTES": "नोट्स",
   "WELCOME_TO_SUNBIRD_RC": "Sunbird RC में आपका स्वागत ह",
   "LEARN_MORE_ON_GITHUB": "github पर अधिक जानें",

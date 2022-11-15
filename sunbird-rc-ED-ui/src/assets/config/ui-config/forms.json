@@ -657,7 +657,7 @@
                         "title": "कृपया किशोरी के पास उपलब्ध फ़ोन का नंबर दर्ज करें",
                         "validation": {
                           "pattern": "[6-9]{1}[0-9]{9}",
-                          "message": "Mobile Number must be 10 digit number."
+                          "message": "MOBILE_NO_MUST_10_DIGIT"
                         }
                       }
                     }
@@ -684,7 +684,7 @@
                         "title": "कृपया किशोरी के पास उपलब्ध फ़ोन का नंबर दर्ज करें",
                         "validation": {
                           "pattern": "[6-9]{1}[0-9]{9}",
-                          "message": "Mobile Number must be 10 digit number."
+                          "message": "MOBILE_NO_MUST_10_DIGIT"
                         }
                       }
                     }
@@ -725,7 +725,7 @@
                 "required": true,
                 "validation": {
                   "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
-                  "message": "Name is not valid."
+                  "message": "NAME_NOT_VALID"
                 }
               },
               {
@@ -734,7 +734,7 @@
                 "type": "date",
                 "validation": {
                   "max": "2022-09-10",
-                  "message": "किशोरी की आयु 14 वर्ष होनी चाहिए, कृपया मान्य तिथि का चयन करें"
+                  "message": "AGE_SHOULD_BE_GREATER_THAN_14"
                 }
               },
               {
@@ -794,7 +794,7 @@
                 "required": true,
                 "validation": {
                   "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
-                  "message": "Name is not valid."
+                  "message": "NAME_NOT_VALID."
                 }
               },
               {
@@ -802,7 +802,7 @@
                 "required": true,
                 "validation": {
                   "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
-                  "message": "Name is not valid."
+                  "message": "NAME_NOT_VALID."
                 }
               },
               {
@@ -810,7 +810,7 @@
                 "required": true,
                 "validation": {
                   "pattern": "[6-9]{1}[0-9]{9}",
-                  "message": "Mobile Number must be 10 digit number."
+                  "message": "MOBILE_NO_MUST_10_DIGIT"
                 }
               },
               {
@@ -833,7 +833,7 @@
                 "required": true,
                 "validation": {
                   "pattern": "[6-9]{1}[0-9]{9}",
-                  "message": "Mobile Number must be 10 digit number."
+                  "message": "MOBILE_NO_MUST_10_DIGIT"
                 },
                 "expressionProperties": {
                   "templateOptions.disabled": "model.sameAsAbove",
@@ -901,7 +901,7 @@
                         "title": "कृपया किशोरी के पास उपलब्ध फ़ोन का नंबर दर्ज करें",
                         "validation": {
                           "pattern": "[6-9]{1}[0-9]{9}",
-                          "message": "Mobile Number must be 10 digit number."
+                          "message": "MOBILE_NO_MUST_10_DIGIT"
                         }
                       }
                     }
@@ -928,7 +928,7 @@
                         "title": "कृपया किशोरी के पास उपलब्ध फ़ोन का नंबर दर्ज करें",
                         "validation": {
                           "pattern": "[6-9]{1}[0-9]{9}",
-                          "message": "Mobile Number must be 10 digit number."
+                          "message": "MOBILE_NO_MUST_10_DIGIT"
                         }
                       }
                     }
@@ -969,7 +969,7 @@
                 "required": true,
                 "validation": {
                   "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
-                  "message": "Name is not valid."
+                  "message": "NAME_NOT_VALID."
                 }
               },
               {
@@ -979,7 +979,7 @@
                 "validation": {
                   "future": false,
                   "max": "2022-09-10",
-                  "message": "Please enter a valid date"
+                  "message": "VALID_DATE"
                 }
               },
               {
@@ -1039,7 +1039,7 @@
                 "required": true,
                 "validation": {
                   "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
-                  "message": "Name is not valid."
+                  "message": "NAME_NOT_VALID."
                 }
               },
               {
@@ -1047,7 +1047,7 @@
                 "required": true,
                 "validation": {
                   "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
-                  "message": "Name is not valid."
+                  "message": "NAME_NOT_VALID."
                 }
               },
               {
@@ -1055,7 +1055,7 @@
                 "required": true,
                 "validation": {
                   "pattern": "[6-9]{1}[0-9]{9}",
-                  "message": "Mobile Number must be 10 digit number."
+                  "message": "MOBILE_NO_MUST_10_DIGIT"
                 }
               },
               {
@@ -1078,7 +1078,7 @@
                 "required": true,
                 "validation": {
                   "pattern": "[6-9]{1}[0-9]{9}",
-                  "message": "Mobile Number must be 10 digit number."
+                  "message": "MOBILE_NO_MUST_10_DIGIT"
                 },
                 "expressionProperties": {
                   "templateOptions.disabled": "model.sameAsAbove",
@@ -1172,7 +1172,7 @@
                 "type": "number",
                 "validation": {
                   "pattern": "^[0-9]{11}$|^[0-9]{12}$",
-                  "message": "संख्या 11 या 12 अंकों की होनी चाहिए"
+                  "message": "NUMBER_SHOULD_BE_11_OR_12"
                 }
               }
             ]
