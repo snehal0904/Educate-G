@@ -13,6 +13,7 @@ import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+
 // formly
 import { FormlyModule, FormlyFieldConfig } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
@@ -140,6 +141,7 @@ import { FilterComponent } from './filter/filter.component';
     PanelsComponent, EditPanelComponent, AddPanelComponent, TablesComponent,
     AutocompleteTypeComponent,
     FormlyColorInput,
+    // GridTypeComponent,
     HeaderComponent,
     AttestationComponent,
     FileValueAccessor,
@@ -155,7 +157,8 @@ import { FilterComponent } from './filter/filter.component';
     ScanQrCodeComponent,
     BrowseDocumentsComponent,
     AuthImagePipe,
-    FilterComponent
+    FilterComponent,
+    // GridFormlyCellComponent
   ],
   imports: [
     BrowserModule,
@@ -219,7 +222,8 @@ import { FilterComponent } from './filter/filter.component';
         },
         { name: 'file', component: FormlyFieldFile, wrappers: ['form-field'] },
         { name: 'multiselect', component: FormlyFieldNgSelect },
-        { name: 'color', component: FormlyColorInput },
+        { name: 'color', component: FormlyColorInput }
+
       ],
     }),
     ToastrModule.forRoot({
@@ -227,7 +231,8 @@ import { FilterComponent } from './filter/filter.component';
       preventDuplicates: true,
     }),
     NgxPaginationModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    // AgGridModule.withComponents([GridFormlyCellComponent]),
   ],
   exports: [TranslateModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
