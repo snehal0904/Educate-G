@@ -869,9 +869,15 @@
                 "name": "registrationStatus",
                 "required": true
               },
+
               {
-                "name": "AGDocumentsV2",
-                "required": true
+                "name": "AGDocumentsV3",
+                "required": true,
+                "type": "custom:document",
+                "expressionProperties": {
+                  "templateOptions.disabled": "model.whereStudiedLast",
+                  "templateOptions.required": "!model.whereStudiedLast"
+                }
               }
             ]
           }
