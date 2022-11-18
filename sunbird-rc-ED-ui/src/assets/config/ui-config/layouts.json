@@ -89,7 +89,7 @@
       "ag-detail": {
         "api": "/AGV8",
         "title": "AG Profile",
-        "headerName": "nameDetails.firstName",
+        "headerName": "AGfullName",
         "blocks": [
           {
             "definition": "AGV8",
@@ -100,7 +100,7 @@
             "delete": true,
             "fields": {
               "includes": ["*"],
-              "excludes": ["AgRegistrationForm"]
+              "excludes": ["AgRegistrationForm","AGDocumentsV3"]
             },
             "propertyShowFirst": ["nameDetails.firstName"]
           },
