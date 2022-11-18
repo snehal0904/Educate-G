@@ -975,7 +975,7 @@
                 "required": true,
                 "validation": {
                   "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
-                  "message": "NAME_NOT_VALID."
+                  "message": "NAME_NOT_VALID"
                 }
               },
               {
@@ -983,9 +983,8 @@
                 "required": true,
                 "type": "date",
                 "validation": {
-                  "future": false,
                   "max": "2022-09-10",
-                  "message": "VALID_DATE"
+                  "message": "AGE_SHOULD_BE_GREATER_THAN_14"
                 }
               },
               {
@@ -1120,9 +1119,15 @@
                 "name": "registrationStatus",
                 "required": true
               },
+
               {
-                "name": "AGDocumentsV2",
-                "required": true
+                "name": "AGDocumentsV3",
+                "required": true,
+                "type": "custom:document",
+                "expressionProperties": {
+                  "templateOptions.disabled": "model.whereStudiedLast",
+                  "templateOptions.required": "!model.whereStudiedLast"
+                }
               }
             ]
           }

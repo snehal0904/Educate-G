@@ -168,6 +168,7 @@ export class LayoutsComponent implements OnInit, OnChanges {
               }
               else {
                 for (const [key, value] of Object.entries(this.model[element])) {
+                  // console.log("key, value",key, value)
                   if (this.responseData['definitions'][block.definition]['properties'][element]) {
                     if ('$ref' in this.responseData['definitions'][block.definition]['properties'][element]) {
                       var ref_defination = (this.responseData['definitions'][block.definition]['properties'][element]['$ref']).split('/').pop()
@@ -212,6 +213,7 @@ export class LayoutsComponent implements OnInit, OnChanges {
               if (block.fields.excludes && block.fields.excludes.length > 0 && !block.fields.excludes.includes(element)) {
                 this.model[element].forEach(objects => {
                   for (const [key, value] of Object.entries(objects)) {
+
                     if (this.responseData['definitions'][block.definition]['properties'][element]) {
                       if ('$ref' in this.responseData['definitions'][block.definition]['properties'][element]) {
                         var ref_defination = (this.responseData['definitions'][block.definition]['properties'][element]['$ref']).split('/').pop()
@@ -245,6 +247,7 @@ export class LayoutsComponent implements OnInit, OnChanges {
           block.fields.includes.forEach(element => {
             if (this.model[element] && !Array.isArray(this.model[element])) {
               for (const [key, value] of Object.entries(this.model[element])) {
+
                 if (this.responseData['definitions'][block.definition]['properties'][element]) {
                   if ('$ref' in this.responseData['definitions'][block.definition]['properties'][element]) {
                     var ref_defination = (this.responseData['definitions'][block.definition]['properties'][element]['$ref']).split('/').pop()
@@ -328,6 +331,7 @@ export class LayoutsComponent implements OnInit, OnChanges {
 
 
                   for (const [index, [key, value]] of Object.entries(Object.entries(objects))) {
+                    // console.log("key, value",key, value)
                     if ('$ref' in this.responseData['definitions'][block.definition]['properties'][element]) {
                       var ref_defination = (this.responseData['definitions'][block.definition]['properties'][element]['$ref']).split('/').pop()
                       temp_object = this.responseData['definitions'][ref_defination]['properties'][key]
@@ -423,6 +427,9 @@ export class LayoutsComponent implements OnInit, OnChanges {
   deleteBlock(){
     console.log("id",this.identifier)
   }
+  checkArray(arr, arr2){
+    return arr.every(i => arr2.includes(i));
+  }
 
   async getData() {
     var get_url;
@@ -444,6 +451,45 @@ export class LayoutsComponent implements OnInit, OnChanges {
 
       this.Data = [];
       localStorage.setItem('osid', this.identifier);
+      console.log("model: " + JSON.stringify(this.model));
+      if(this.model['whereStudiedLast'] == "प्राइवेट स्कूल"){
+
+        var docs = [
+          "टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)",
+          "मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)",
+          "आधार कार्ड",
+          "2 फोटो",
+          "जनाधार कार्ड",
+          "किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)",
+          "मोबाइल नंबर",
+          "ईमेल आईडी"
+        ];
+        var in_doc = [];
+        this.model['AGDocumentsV3'].forEach(element => {
+          console.log("here",element['document'])
+          if(docs.includes(element['document'])){
+            in_doc.push(element['document'])
+          }
+        });
+
+        console.log(this.checkArray(docs, in_doc));
+        var doc_statuses = [];
+        if(this.checkArray(docs, in_doc)){
+          this.model['AGDocumentsV3'].forEach(docmnt => {
+            doc_statuses.push(docmnt['status'])
+          });
+        }
+        console.log("included",doc_statuses);
+        // उपलब्ध, सुधार की आवश्यकता नहीं
+        // var is_valid = doc_statuses.every( (val, i, arr) => val === arr[0] );
+        var is_valid = doc_statuses.every( (val, i, arr) => val === "उपलब्ध, सुधार की आवश्यकता नहीं" )
+
+        console.log("valid",is_valid);
+        if(!is_valid){
+          delete this.layoutSchema.blocks[1];
+          console.log("this.layoutSchema",this.layoutSchema)
+        }
+      }
       this.addData()
     });
   }
