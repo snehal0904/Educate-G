@@ -1,131 +1,141 @@
 {
-    "type": "opensaberLayoutSchema",
-    "version": "0.1",
-    "headers": [
-        {
-            "default2":{
-                "right":[
-                    {
-                        "title": "LOGIN",
-                        "redirectTo": "/login"
-                    }
-                ]
-            }
-        },
-        {
-          "default":{
-            "left": [{
-              "title": "AG List",
-              "redirectTo": "/myags/attestation/ag/AGV8"
-          }],
-              "right":[
-                  {
-                    "title": "LOGOUT",
-                    "redirectTo": "/logout",
-                    "className" : "font-weight-bold"
-                  }
-              ]
+  "type": "opensaberLayoutSchema",
+  "version": "0.1",
+  "headers": [
+    {
+      "default2": {
+        "right": [
+          {
+            "title": "LOGIN",
+            "redirectTo": "/login"
           }
-      },
-        {
-            "PrerakV2": {
-                "logoHref" : "profile/PrerakV2",
-                "left": [{
-                  "title": "AG List",
-                  "redirectTo": "/myags/attestation/ag/AGV8"
-              }],
-                "right": [
-                    {
-                        "title": "LOGOUT",
-                        "redirectTo": "/logout",
-                        "className" : "font-weight-bold"
-                    }
-                ]
-            }
-        },
-        {
-            "admin-prerak": {
-                "logoHref" : "admin/attestation/admin-attestation/PrerakV2",
-                "left": [
-                    {
-                        "title": "Prerak List",
-                        "redirectTo": "/admin/attestation/admin-attestation/PrerakV2"
-                    }
-                ],
-                "right": [
-                    {
-                        "title": "LOGOUT",
-                        "redirectTo": "/logout",
-                        "className" : "font-weight-bold"
-                    }
-                ]
-            }
-        },
-        {
-            "admin": {
-                "logoHref" : "admin/attestation/admin-attestation/PrerakV2",
-                "left": [
-                    {
-                        "title": "Prerak",
-                        "redirectTo": "/profile/admin"
-                    }
-                ],
-                "right": [
-                    {
-                        "title": "LOGOUT",
-                        "redirectTo": "/logout",
-                        "className" : "font-weight-bold"
-                    }
-                ]
-            }
-        },
-        {
-          "AG": {
-              "logoHref" : "profile/PrerakV2",
-              "left": [{
-                "title": "AG List",
-                "redirectTo": "/myags/attestation/ag/AGV8"
-            }],
-              "right": [
-                  {
-                      "title": "LOGOUT",
-                      "redirectTo": "/logout",
-                      "className" : "font-weight-bold"
-                  }
-              ]
+        ]
+      }
+    },
+    {
+      "default": {
+        "left": [
+          {
+            "title": "AG List",
+            "redirectTo": "/myags/attestation/ag/AGV8"
           }
-      },
-      {
-        "ag-detail": {
-            "logoHref" : "profile/PrerakV2",
-            "left": [{
-              "title": "AG List",
-              "redirectTo": "/myags/attestation/ag/AGV8"
-          }],
-            "right": [
-                {
-                    "title": "LOGOUT",
-                    "redirectTo": "/logout",
-                    "className" : "font-weight-bold"
-                }
-            ]
-        }
+        ],
+        "right": [
+          {
+            "title": "LOGOUT",
+            "redirectTo": "/logout",
+            "className": "font-weight-bold"
+          }
+        ]
+      }
+    },
+    {
+      "PrerakV2": {
+        "logoHref": "profile/PrerakV2",
+        "left": [
+          {
+            "title": "AG List",
+            "redirectTo": "/myags/attestation/ag/AGV8"
+          }
+        ],
+        "right": [
+          {
+            "title": "LOGOUT",
+            "redirectTo": "/logout",
+            "className": "font-weight-bold"
+          }
+        ]
+      }
+    },
+    {
+      "admin-prerak": {
+        "logoHref": "admin/attestation/admin-attestation/PrerakV2",
+        "left": [
+          {
+            "title": "Prerak List",
+            "redirectTo": "/admin/attestation/admin-attestation/PrerakV2"
+          }
+        ],
+        "right": [
+          {
+            "title": "LOGOUT",
+            "redirectTo": "/logout",
+            "className": "font-weight-bold"
+          }
+        ]
+      }
+    },
+    {
+      "admin": {
+        "logoHref": "admin/attestation/admin-attestation/PrerakV2",
+        "left": [
+          {
+            "title": "Prerak List",
+            "redirectTo": "/admin/attestation/admin-attestation/PrerakV2"
+          }
+        ],
+        "right": [
+          {
+            "title": "LOGOUT",
+            "redirectTo": "/logout",
+            "className": "font-weight-bold"
+          }
+        ]
+      }
+    },
+    {
+      "AG": {
+        "logoHref": "profile/PrerakV2",
+        "left": [
+          {
+            "title": "AG List",
+            "redirectTo": "/myags/attestation/ag/AGV8"
+          }
+        ],
+        "right": [
+          {
+            "title": "LOGOUT",
+            "redirectTo": "/logout",
+            "className": "font-weight-bold"
+          }
+        ]
+      }
+    },
+    {
+      "ag-detail": {
+        "logoHref": "profile/PrerakV2",
+        "left": [
+          {
+            "title": "AG List",
+            "redirectTo": "/myags/attestation/ag/AGV8"
+          }
+        ],
+        "right": [
+          {
+            "title": "LOGOUT",
+            "redirectTo": "/logout",
+            "className": "font-weight-bold"
+          }
+        ]
+      }
     },
     {
       "myags": {
-          "logoHref" : "profile/PrerakV2",
-          "left": [{
+        "logoHref": "profile/PrerakV2",
+        "left": [
+          {
             "title": "AG List",
             "redirectTo": "/myags/attestation/ag/AGV8"
-        }],
-          "right": [
-              {
-                  "title": "LOGOUT",
-                  "redirectTo": "/logout",
-                  "className" : "font-weight-bold"
-              }
-          ]
+          }
+        ],
+        "right": [
+          {
+            "title": "LOGOUT",
+            "redirectTo": "/logout",
+            "className": "font-weight-bold"
+          }
+        ]
       }
-  }
-    ]
+    }
+  ]
 }
