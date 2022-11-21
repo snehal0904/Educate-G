@@ -37,14 +37,6 @@
                 "name": "gender"
               },
               {
-                "name": "age",
-                "required": true,
-                "validation": {
-                  "pattern": "[0-9]",
-                  "message": "AGE_SHOULD_BE_NUMBER"
-                }
-              },
-              {
                 "name": "address",
                 "children": {
                   "definition": "Address",
@@ -115,14 +107,6 @@
               },
               {
                 "name": "gender"
-              },
-              {
-                "name": "age",
-                "required": true,
-                "validation": {
-                  "pattern": "[0-9]",
-                  "message": "AGE_SHOULD_BE_NUMBER"
-                }
               },
               {
                 "name": "address",
@@ -196,14 +180,6 @@
                 "name": "gender"
               },
               {
-                "name": "age",
-                "required": true,
-                "validation": {
-                  "pattern": "[0-9]",
-                  "message": "AGE_SHOULD_BE_NUMBER"
-                }
-              },
-              {
                 "name": "address",
                 "children": {
                   "definition": "Address",
@@ -219,24 +195,6 @@
                           "title": "District",
                           "type": "select",
                           "options": "this.locationService.getDistrict()"
-                        }
-                      },
-                      {
-                        "name": "block",
-                        "dependent": {
-                          "key": "block",
-                          "title": "Block",
-                          "type": "select",
-                          "options": "this.locationService.getBlock()"
-                        }
-                      },
-                      {
-                        "name": "village",
-                        "dependent": {
-                          "key": "village",
-                          "title": "Village",
-                          "type": "select",
-                          "options": "this.locationService.getVillage()"
                         }
                       }
                     ]
