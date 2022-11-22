@@ -72,14 +72,14 @@
             ]
           }
         ],
-        "redirectTo": "/profile/prerakv2"
+        "redirectTo": "/profile/PrerakV2"
       }
     },
     {
       "prerak-setup": {
         "api": "/PrerakV2",
         "type": "entity",
-        "redirectTo": "/profile/prerakv2",
+        "redirectTo": "/profile/PrerakV2",
         "langKey": "prerakAdmin",
         "fieldsets": [
           {
@@ -379,7 +379,7 @@
       "teacher-experience": {
         "api": "/PrerakV2",
         "type": "property:experience",
-        "redirectTo": "/profile/prerakv2",
+        "redirectTo": "/profile/PrerakV2",
         "langKey": "prerakAdmin",
         "fieldsets": [
           {
@@ -827,7 +827,6 @@
                 "name": "registrationStatus",
                 "required": true
               },
-
               {
                 "name": "AGDocumentsV3",
                 "required": true,

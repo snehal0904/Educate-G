@@ -54,6 +54,10 @@
           {
             "title": "Prerak List",
             "redirectTo": "/admin/attestation/admin-attestation/PrerakV2"
+          },
+          {
+            "title": "AG List",
+            "redirectTo": "/myags/attestation/ag/AGV8"
           }
         ],
         "right": [
@@ -72,6 +76,10 @@
           {
             "title": "Prerak List",
             "redirectTo": "/admin/attestation/admin-attestation/PrerakV2"
+          },
+          {
+            "title": "AG List",
+            "redirectTo": "/myags/attestation/ag/AGV8"
           }
         ],
         "right": [
