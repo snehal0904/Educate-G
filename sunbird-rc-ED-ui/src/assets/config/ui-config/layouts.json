@@ -25,6 +25,28 @@
       }
     },
     {
+      "Prerak": {
+        "api": "/PrerakV2",
+        "title": "TEACHER_PROFILE",
+        "langKey": "prerakAdmin",
+        "headerName": "fullName",
+        "blocks": [
+          {
+            "definition": "PrerakV2",
+            "title": "PERSONAL_DETAILS",
+            "add": false,
+            "edit": true,
+            "editform": "prerak-setup",
+            "fields": {
+              "includes": ["*"],
+              "excludes": []
+            },
+            "propertyShowFirst": ["fullName", "mobile", "email"]
+          }
+        ]
+      }
+    },
+    {
       "AG2": {
         "api": "/AGV8",
         "title": "TEACHER_PROFILE",
@@ -100,7 +122,7 @@
             "delete": true,
             "fields": {
               "includes": ["*"],
-              "excludes": ["AgRegistrationForm","AGDocumentsV3"]
+              "excludes": ["AgRegistrationForm", "AGDocumentsV3"]
             },
             "propertyShowFirst": ["nameDetails.firstName"]
           },
