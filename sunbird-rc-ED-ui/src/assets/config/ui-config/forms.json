@@ -679,6 +679,44 @@
                 }
               },
               {
+                "name": "prerakId",
+                "custom": true,
+                "data": {
+                  "type": "api",
+                  "url": "/PrerakV2",
+                  "key": "osid"
+                },
+                "element": {
+                  "widget": {
+                    "formlyConfig": {
+                      "type": "input",
+                      "templateOptions": {
+                        "type": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "name": "parentOrganization",
+                "custom": true,
+                "data": {
+                  "type": "api",
+                  "url": "/PrerakV2",
+                  "key": "parentOrganization"
+                },
+                "element": {
+                  "widget": {
+                    "formlyConfig": {
+                      "type": "input",
+                      "templateOptions": {
+                        "type": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              {
                 "name": "AGfullName",
                 "required": true,
                 "validation": {
@@ -924,6 +962,44 @@
                       "templateOptions": {
                         "type": "hidden",
                         "required": true
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "name": "prerakId",
+                "custom": true,
+                "data": {
+                  "type": "api",
+                  "url": "/PrerakV2",
+                  "key": "osid"
+                },
+                "element": {
+                  "widget": {
+                    "formlyConfig": {
+                      "type": "input",
+                      "templateOptions": {
+                        "type": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "name": "parentOrganization",
+                "custom": true,
+                "data": {
+                  "type": "api",
+                  "url": "/PrerakV2",
+                  "key": "parentOrganization"
+                },
+                "element": {
+                  "widget": {
+                    "formlyConfig": {
+                      "type": "input",
+                      "templateOptions": {
+                        "type": "hidden"
                       }
                     }
                   }

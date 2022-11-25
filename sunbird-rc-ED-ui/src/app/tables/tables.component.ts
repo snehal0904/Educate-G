@@ -601,11 +601,38 @@ export class TablesComponent implements OnInit {
     this.name = `Ags_${dayjs().format('YYYY-MM-DD_HH_mm')}`;
     let arr = [];
     let finalarr = [];
+    console.log('this.model', this.model);
     this.model.forEach((element) => {
       arr = [];
       let obj = [];
-      obj['AGfullName'] = element.AGfullName ? element.AGfullName : '';
+      obj['campId'] = element.campId ? element.campId : '';
+      obj['AGId'] = element.osid ? element.osid : '';
+      obj['prerakId'] = element.prerakId ? element.prerakId : '';
       obj['prerakName'] = element.prerakName ? element.prerakName : '';
+      obj['parentOrganization'] = element.parentOrganization
+        ? element.parentOrganization
+        : '';
+
+      obj['AGfullName'] = element.AGfullName ? element.AGfullName : '';
+      obj['dob'] = element.dob ? element.dob : '';
+      obj['category'] = element.category ? element.category : '';
+
+      if (element.AgAddress) {
+        obj['District'] = element.AgAddress.District
+          ? element.AgAddress.District
+          : '';
+        obj['Block'] = element.AgAddress.Block ? element.AgAddress.Block : '';
+        obj['Village'] = element.AgAddress.Village
+          ? element.AgAddress.Village
+          : '';
+      } else {
+        obj['District'] = ' ';
+        obj['Block'] = ' ';
+        obj['Village'] = ' ';
+      }
+      obj['PanchayatList'] = element.PanchayatList ? element.PanchayatList : '';
+      obj['maritalStatus'] = element.maritalStatus ? element.maritalStatus : '';
+      obj['connectVia'] = element.connectVia ? element.connectVia : '';
 
       obj['fatherFullName'] = element.fatherFullName
         ? element.fatherFullName
@@ -613,37 +640,36 @@ export class TablesComponent implements OnInit {
       obj['motherFullName'] = element.motherFullName
         ? element.motherFullName
         : '';
-      obj['dob'] = element.dob ? element.dob : '';
-
-      obj['mobileAvailablity'] = element.mobileAvailablity
-        ? element.mobileAvailablity
-        : '';
       obj['parentsMobileNumber'] = element.parentsMobileNumber
         ? element.parentsMobileNumber
         : '';
       obj['parentsWhatsappNumber'] = element.parentsWhatsappNumber
         ? element.parentsWhatsappNumber
         : '';
+      obj['mobileAvailablity'] = element.mobileAvailablity
+        ? element.mobileAvailablity
+        : '';
+
       obj['AGWhatsappNumber'] = element.AGWhatsappNumber
         ? element.AGWhatsappNumber
         : '';
-      obj['connectVia'] = element.connectVia ? element.connectVia : '';
-      obj['registrationStatus'] = element.registrationStatus
-        ? element.registrationStatus
+      obj['lastStandardOfEducation'] = element.lastStandardOfEducation
+        ? element.lastStandardOfEducation
         : '';
+
       obj['lastStandardOfEducationYear'] = element.lastStandardOfEducationYear
         ? element.lastStandardOfEducationYear
+        : '';
+      obj['reasonOfLeavingEducation'] = element.reasonOfLeavingEducation
+        ? element.reasonOfLeavingEducation
         : '';
       obj['whereStudiedLast'] = element.whereStudiedLast
         ? element.whereStudiedLast
         : '';
 
-      obj['category'] = element.category ? element.category : '';
-      obj['reasonOfLeavingEducation'] = element.reasonOfLeavingEducation
-        ? element.reasonOfLeavingEducation
+      obj['registrationStatus'] = element.registrationStatus
+        ? element.registrationStatus
         : '';
-      obj['osOwner'] = element.osOwner[0] ? element.osOwner[0] : '';
-
       if (element.AGDocumentsV2) {
         obj['rationCard'] = element.rationCard ? element.rationCard : '';
         obj['BPLCard'] = element.BPLCard ? element.BPLCard : '';
@@ -694,22 +720,33 @@ export class TablesComponent implements OnInit {
       useBom: true,
       useKeysAsHeaders: false,
       headers: [
-        'AGfullName',
+        'campId',
+        'AGId',
+        'prerakId',
         'prerakName',
+        'parentOrganization',
+        'AGfullName',
+        'dob',
+        'category',
+        'District',
+        'Block',
+        'Village',
+        'PanchayatList',
+        'maritalStatus',
+        'connectVia',
+
         'fatherFullName',
         'motherFullName',
-        'dob',
-        'mobileAvailablity',
         'parentsMobileNumber',
         'parentsWhatsappNumber',
+        'mobileAvailablity',
         'AGWhatsappNumber',
-        'connectVia',
-        'registrationStatus',
+        'lastStandardOfEducation',
         'lastStandardOfEducationYear',
         'whereStudiedLast',
-        'category',
         'reasonOfLeavingEducation',
-        'osOwner',
+        'whereStudiedLast',
+        'registrationStatus',
         'rationCard',
         'BPLCard',
         'markSheet',
