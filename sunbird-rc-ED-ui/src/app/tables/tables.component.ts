@@ -23,6 +23,7 @@ export class TablesComponent implements OnInit {
   tab: string = 'attestation';
   tableSchema: any;
   apiUrl: any;
+  tabUrl: any;
   model: any;
   Data: string[] = [];
   property: any[] = [];
@@ -40,7 +41,7 @@ export class TablesComponent implements OnInit {
   form = new FormGroup({});
   modelInterview: any;
   options: FormlyFormOptions = {};
-
+  listName: any;
   fields: FormlyFieldConfig[] = [];
   isEdit: boolean = false;
   responseData: any;
@@ -80,11 +81,16 @@ export class TablesComponent implements OnInit {
     });
 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    let tabUrl = this.router.url;
+    this.tabUrl = this.router.url;
+    if (this.tabUrl.includes('Prerak')) {
+      this.listName = 'PrerakList';
+    } else if (this.tabUrl.includes('AGV8')) {
+      this.listName = 'AGList';
+    }
     this.route.params.subscribe(async (params) => {
       this.table = params['table'].toLowerCase();
       this.entity = params['entity'].toLowerCase();
-      this.tab = tabUrl
+      this.tab = this.tabUrl
         .replace(this.table, '')
         .replace(this.entity, '')
         .split('/')

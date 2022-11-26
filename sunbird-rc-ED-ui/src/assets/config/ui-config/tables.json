@@ -1,80 +1,109 @@
 {
-    "type": "opensaberLayoutSchema",
-    "version": "0.1",
-    "limit": "15",
-    "tables": [
-        {
-            "admin-attestation": {
-                "api": "/PrerakV2/search",
-                "title": "CBSE_BOARD_ATTESTATIONS",
-                "fields": [
-                    {
-                        "name": "fullName",
-                        "title": "Full Name",
-                        "keyPath" : "fullName"
-                    },
-                    {
-                        "name": "mobile",
-                        "title": "Contact Number",
-                        "keyPath" : "mobile"
-                    },
-                    {
-                        "name": "district",
-                        "title": "District",
-                        "keyPath" : "address.district"
-                    },
-                    {
-                        "name": "block",
-                        "title": "Block",
-                        "keyPath" : "address.block"
-                    },
-                    {
-                        "name": "village",
-                        "title": "Village",
-                        "keyPath" : "address.village"
-                    },
-                    {
-                        "name": "candidateStatus",
-                        "title": "Candidate Status",
-                        "keyPath" : "candidateStatus"
-                    },
-                    {
-                        "custom": true,
-                        "type": "button",
-                        "buttonText": "View",
-                        "redirectTo": "/profile/admin-prerak:id"
-                    }
-                ]
-            }
-        },
-        {
-          "ag": {
-              "api": "/AGV8",
-              "title": "My AGs",
-              "fields": [
-                  {
-                      "name": "AGfullName",
-                      "title": "Full Name",
-                      "keyPath" : "AGfullName"
-                  },
-                  {
-                    "name": "dob",
-                    "title": "Date of Birth",
-                    "keyPath" : "dob"
-                  },
-                  {
-                    "name": "category",
-                    "title": "Category",
-                    "keyPath" : "category"
-                  },
-                  {
-                    "custom": true,
-                    "type": "button",
-                    "buttonText": "View",
-                    "redirectTo": "/profile/ag-detail:id"
-                  }
-              ]
+  "type": "opensaberLayoutSchema",
+  "version": "0.1",
+  "limit": "15",
+  "tables": [
+    {
+      "admin-attestation": {
+        "api": "/PrerakV2/search",
+        "title": "CBSE_BOARD_ATTESTATIONS",
+        "fields": [
+          {
+            "name": "fullName",
+            "title": "Full Name",
+            "keyPath": "fullName"
+          },
+          {
+            "name": "mobile",
+            "title": "Contact Number",
+            "keyPath": "mobile"
+          },
+          {
+            "name": "district",
+            "title": "District",
+            "keyPath": "address.district"
+          },
+          {
+            "name": "block",
+            "title": "Block",
+            "keyPath": "address.block"
+          },
+          {
+            "name": "village",
+            "title": "Village",
+            "keyPath": "address.village"
+          },
+          {
+            "name": "candidateStatus",
+            "title": "Candidate Status",
+            "keyPath": "candidateStatus"
+          },
+          {
+            "custom": true,
+            "type": "button",
+            "buttonText": "View",
+            "redirectTo": "/profile/admin-prerak:id"
           }
+        ]
       }
-    ]
+    },
+    {
+      "ag-attestation": {
+        "api": "/AGV8/search",
+        "title": "AG List",
+        "fields": [
+          {
+            "name": "AGfullName",
+            "title": "Full Name",
+            "keyPath": "AGfullName"
+          },
+          {
+            "name": "dob",
+            "title": "Date of Birth",
+            "keyPath": "dob"
+          },
+          {
+            "name": "category",
+            "title": "Category",
+            "keyPath": "category"
+          },
+          {
+            "custom": true,
+            "type": "button",
+            "buttonText": "View",
+            "redirectTo": "/profile/ag-detail:id"
+          }
+        ]
+      }
+    },
+    {
+      "ag": {
+        "api": "/AGV8",
+        "title": "My AGs",
+        "fields": [
+          {
+            "name": "AGfullName",
+            "title": "Full Name",
+            "keyPath": "AGfullName"
+          },
+          {
+            "name": "dob",
+            "title": "Date of Birth",
+            "keyPath": "dob"
+          },
+          {
+            "name": "category",
+            "title": "Category",
+            "keyPath": "category"
+          },
+          {
+            "custom": true,
+            "type": "button",
+            "buttonText": "View",
+            "redirectTo": "/profile/ag-detail:id"
+          }
+        ]
+      }
+    }
+  ]
 }
