@@ -603,11 +603,180 @@ export class TablesComponent implements OnInit {
     this.csvExporter = new ExportToCsv(options);
     this.csvExporter.generateCsv(finalarr);
   }
+  // downloadAGCSVFile() {
+  //   this.name = `Ags_${dayjs().format('YYYY-MM-DD_HH_mm')}`;
+  //   let arr = [];
+  //   let finalarr = [];
+  //   console.log('this.model', this.model);
+  //   this.model.forEach((element) => {
+  //     arr = [];
+  //     let obj = [];
+  //     obj['campId'] = element.campId ? element.campId : '';
+  //     obj['AGId'] = element.osid ? element.osid : '';
+  //     obj['prerakId'] = element.prerakId ? element.prerakId : '';
+  //     obj['prerakName'] = element.prerakName ? element.prerakName : '';
+  //     obj['parentOrganization'] = element.parentOrganization
+  //       ? element.parentOrganization
+  //       : '';
+
+  //     obj['AGfullName'] = element.AGfullName ? element.AGfullName : '';
+  //     obj['dob'] = element.dob ? element.dob : '';
+  //     obj['category'] = element.category ? element.category : '';
+
+  //     if (element.AgAddress) {
+  //       obj['District'] = element.AgAddress.District
+  //         ? element.AgAddress.District
+  //         : '';
+  //       obj['Block'] = element.AgAddress.Block ? element.AgAddress.Block : '';
+  //       obj['Village'] = element.AgAddress.Village
+  //         ? element.AgAddress.Village
+  //         : '';
+  //     } else {
+  //       obj['District'] = ' ';
+  //       obj['Block'] = ' ';
+  //       obj['Village'] = ' ';
+  //     }
+  //     obj['PanchayatList'] = element.PanchayatList ? element.PanchayatList : '';
+  //     obj['maritalStatus'] = element.maritalStatus ? element.maritalStatus : '';
+  //     obj['connectVia'] = element.connectVia ? element.connectVia : '';
+
+  //     obj['fatherFullName'] = element.fatherFullName
+  //       ? element.fatherFullName
+  //       : '';
+  //     obj['motherFullName'] = element.motherFullName
+  //       ? element.motherFullName
+  //       : '';
+  //     obj['parentsMobileNumber'] = element.parentsMobileNumber
+  //       ? element.parentsMobileNumber
+  //       : '';
+  //     obj['parentsWhatsappNumber'] = element.parentsWhatsappNumber
+  //       ? element.parentsWhatsappNumber
+  //       : '';
+  //     obj['mobileAvailablity'] = element.mobileAvailablity
+  //       ? element.mobileAvailablity
+  //       : '';
+
+  //     obj['AGWhatsappNumber'] = element.AGWhatsappNumber
+  //       ? element.AGWhatsappNumber
+  //       : '';
+  //     obj['lastStandardOfEducation'] = element.lastStandardOfEducation
+  //       ? element.lastStandardOfEducation
+  //       : '';
+
+  //     obj['lastStandardOfEducationYear'] = element.lastStandardOfEducationYear
+  //       ? element.lastStandardOfEducationYear
+  //       : '';
+  //     obj['reasonOfLeavingEducation'] = element.reasonOfLeavingEducation
+  //       ? element.reasonOfLeavingEducation
+  //       : '';
+  //     obj['whereStudiedLast'] = element.whereStudiedLast
+  //       ? element.whereStudiedLast
+  //       : '';
+
+  //     obj['registrationStatus'] = element.registrationStatus
+  //       ? element.registrationStatus
+  //       : '';
+  //     if (element.AGDocumentsV3) {
+  //       obj['rationCard'] = element.rationCard ? element.rationCard : '';
+  //       obj['BPLCard'] = element.BPLCard ? element.BPLCard : '';
+  //       obj['markSheet'] = element.markSheet ? element.markSheet : '';
+  //       obj['photo'] = element.photo ? element.photo : '';
+  //       obj['emailId'] = element.emailId ? element.emailId : '';
+  //       obj['TC_CBO_HighSchool'] = element.TC_CBO_HighSchool
+  //         ? element.TC_CBO_HighSchool
+  //         : '';
+  //       obj['TC'] = element.TC ? element.TC : '';
+  //       obj['janadharCard'] = element.janadharCard ? element.janadharCard : '';
+  //       obj['birthCertificate'] = element.birthCertificate
+  //         ? element.birthCertificate
+  //         : '';
+  //       obj['Marksheet_CBO_HighSchool'] = element.Marksheet_CBO_HighSchool
+  //         ? element.Marksheet_CBO_HighSchool
+  //         : '';
+  //       obj['aadhar'] = element.aadhar ? element.aadhar : '';
+  //       obj['bankPassbook'] = element.bankPassbook ? element.bankPassbook : '';
+  //       obj['castCertificate'] = element.castCertificate
+  //         ? element.castCertificate
+  //         : '';
+  //     } else {
+  //       obj['rationCard'] = '';
+  //       obj['BPLCard'] = '';
+  //       obj['markSheet'] = '';
+  //       obj['photo'] = '';
+  //       obj['emailId'] = '';
+  //       obj['TC_CBO_HighSchool'] = '';
+  //       obj['TC'] = '';
+  //       obj['janadharCard'] = '';
+  //       obj['birthCertificate'] = '';
+  //       obj['Marksheet_CBO_HighSchool'] = '';
+  //       obj['aadhar'] = '';
+  //       obj['bankPassbook'] = '';
+  //       obj['castCertificate'] = '';
+  //     }
+
+  //     finalarr.push(obj);
+  //   });
+  //   const options = {
+  //     filename: this.name,
+  //     fieldSeparator: ',',
+  //     quoteStrings: '"',
+  //     decimalSeparator: '.',
+  //     showLabels: true,
+  //     useTextFile: false,
+  //     useBom: true,
+  //     useKeysAsHeaders: false,
+  //     headers: [
+  //       'campId',
+  //       'AGId',
+  //       'prerakId',
+  //       'prerakName',
+  //       'parentOrganization',
+  //       'AGfullName',
+  //       'dob',
+  //       'category',
+  //       'District',
+  //       'Block',
+  //       'Village',
+  //       'PanchayatList',
+  //       'maritalStatus',
+  //       'connectVia',
+
+  //       'fatherFullName',
+  //       'motherFullName',
+  //       'parentsMobileNumber',
+  //       'parentsWhatsappNumber',
+  //       'mobileAvailablity',
+  //       'AGWhatsappNumber',
+  //       'lastStandardOfEducation',
+  //       'lastStandardOfEducationYear',
+  //       'whereStudiedLast',
+  //       'reasonOfLeavingEducation',
+  //       'whereStudiedLast',
+  //       'registrationStatus',
+  //       'rationCard',
+  //       'BPLCard',
+  //       'markSheet',
+  //       'photo',
+  //       'emailId',
+  //       'TC_CBO_HighSchool',
+  //       'TC',
+  //       'janadharCard',
+  //       'birthCertificate',
+  //       'Marksheet_CBO_HighSchool',
+  //       'aadhar',
+  //       'bankPassbook',
+  //       'castCertificate',
+  //     ],
+  //   };
+  //   this.csvExporter = new ExportToCsv(options);
+  //   this.csvExporter.generateCsv(finalarr);
+  // }
   downloadAGCSVFile() {
     this.name = `Ags_${dayjs().format('YYYY-MM-DD_HH_mm')}`;
     let arr = [];
     let finalarr = [];
     console.log('this.model', this.model);
+
     this.model.forEach((element) => {
       arr = [];
       let obj = [];
@@ -624,12 +793,12 @@ export class TablesComponent implements OnInit {
       obj['category'] = element.category ? element.category : '';
 
       if (element.AgAddress) {
-        obj['District'] = element.AgAddress.District
-          ? element.AgAddress.District
+        obj['District'] = element.AgAddress.district
+          ? element.AgAddress.district
           : '';
-        obj['Block'] = element.AgAddress.Block ? element.AgAddress.Block : '';
-        obj['Village'] = element.AgAddress.Village
-          ? element.AgAddress.Village
+        obj['Block'] = element.AgAddress.block ? element.AgAddress.block : '';
+        obj['Village'] = element.AgAddress.village
+          ? element.AgAddress.village
           : '';
       } else {
         obj['District'] = ' ';
@@ -673,49 +842,196 @@ export class TablesComponent implements OnInit {
         ? element.whereStudiedLast
         : '';
 
-      obj['registrationStatus'] = element.registrationStatus
+      obj['किशोरी की पंजीकरण की स्थिति'] = element.registrationStatus
         ? element.registrationStatus
         : '';
-      if (element.AGDocumentsV2) {
-        obj['rationCard'] = element.rationCard ? element.rationCard : '';
-        obj['BPLCard'] = element.BPLCard ? element.BPLCard : '';
-        obj['markSheet'] = element.markSheet ? element.markSheet : '';
-        obj['photo'] = element.photo ? element.photo : '';
-        obj['emailId'] = element.emailId ? element.emailId : '';
-        obj['TC_CBO_HighSchool'] = element.TC_CBO_HighSchool
-          ? element.TC_CBO_HighSchool
-          : '';
-        obj['TC'] = element.TC ? element.TC : '';
-        obj['janadharCard'] = element.janadharCard ? element.janadharCard : '';
-        obj['birthCertificate'] = element.birthCertificate
-          ? element.birthCertificate
-          : '';
-        obj['Marksheet_CBO_HighSchool'] = element.Marksheet_CBO_HighSchool
-          ? element.Marksheet_CBO_HighSchool
-          : '';
-        obj['aadhar'] = element.aadhar ? element.aadhar : '';
-        obj['bankPassbook'] = element.bankPassbook ? element.bankPassbook : '';
-        obj['castCertificate'] = element.castCertificate
-          ? element.castCertificate
-          : '';
+
+      // console.log('element---', element);
+      if (element.AGDocumentsV3) {
+        if (Array.isArray(element.AGDocumentsV3)) {
+          element.AGDocumentsV3.forEach((element) => {
+            obj[element.document] = element.document ? element.document : '';
+            obj[element.document + 'status'] = element.status
+              ? element.status
+              : '';
+            obj[element.document + 'number'] = element.document_number
+              ? element.document_number
+              : '';
+            console.log('obj---', obj);
+          });
+        } else {
+          obj['राशन कार्ड'] = element.AGDocumentsV3.rationCard
+            ? element.AGDocumentsV3.rationCard
+            : '';
+          obj['राशन कार्ड-Status'] = '';
+          obj['राशन कार्ड-Doc number'] = '';
+          obj['मार्कशीट'] = element.AGDocumentsV3.markSheet
+            ? element.AGDocumentsV3.markSheet
+            : '';
+          obj['मार्कशीट-Status'] = '';
+          obj['मार्कशीट-Doc number'] = '';
+
+          obj['2 फोटो-Status'] = '';
+          obj['2 फोटो-Doc number'] = '';
+          obj['2 फोटो'] = element.AGDocumentsV3.photo
+            ? element.AGDocumentsV3.photo
+            : '';
+
+          obj['ईमेल आईडी-Status'] = '';
+          obj['ईमेल आईडी-Doc number'] = '';
+          obj['ईमेल आईडी'] = element.AGDocumentsV3.emailId
+            ? element.AGDocumentsV3.emailId
+            : '';
+
+          obj['TC_CBO_HighSchool'] = element.AGDocumentsV3.TC_CBO_HighSchool
+            ? element.AGDocumentsV3.TC_CBO_HighSchool
+            : '';
+          obj['टीसी'] = element.AGDocumentsV3.TC
+            ? element.AGDocumentsV3.TC
+            : '';
+          obj['टीसी-Status'] = '';
+          obj['टीसी-Doc number'] = '';
+
+          obj['जनाधार कार्ड-Status'] = '';
+          obj['जनाधार कार्ड-Doc number'] = '';
+          obj['जनाधार कार्ड'] = element.AGDocumentsV3.janadharCard
+            ? element.AGDocumentsV3.janadharCard
+            : '';
+
+          obj['जन्मा प्रमाण पत्-Status'] = '';
+          obj['जन्मा प्रमाण पत्-Doc number'] = '';
+          obj['जन्मा प्रमाण पत्'] = element.AGDocumentsV3.birthCertificate
+            ? element.AGDocumentsV3.birthCertificate
+            : '';
+          obj[
+            'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)Marksheet_CBO_HighSchool'
+          ] = element.AGDocumentsV3.Marksheet_CBO_HighSchool
+            ? element.AGDocumentsV3.Marksheet_CBO_HighSchool
+            : '';
+          obj[
+            'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)-Status'
+          ] = '';
+          obj[
+            'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)-Doc number'
+          ] = '';
+
+          obj['आधार कार्ड-Status'] = '';
+          obj['आधार कार्ड-Doc number'] = '';
+          obj['आधार कार्ड'] = element.AGDocumentsV3.aadhar
+            ? element.AGDocumentsV3.aadhar
+            : '';
+          obj['किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)-Status'] = '';
+          obj['किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)-Doc number'] = '';
+          obj['किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)'] = element
+            .AGDocumentsV3.bankPassbook
+            ? element.AGDocumentsV3.bankPassbook
+            : '';
+          obj['जाती प्रमाण पत्र'] = element.AGDocumentsV3.castCertificate
+            ? element.AGDocumentsV3.castCertificate
+            : '';
+          obj['जाती प्रमाण पत्र-Status'] = '';
+          obj['जाती प्रमाण पत्र-Doc number'] = '';
+        }
       } else {
-        obj['rationCard'] = '';
-        obj['BPLCard'] = '';
-        obj['markSheet'] = '';
-        obj['photo'] = '';
-        obj['emailId'] = '';
-        obj['TC_CBO_HighSchool'] = '';
-        obj['TC'] = '';
-        obj['janadharCard'] = '';
-        obj['birthCertificate'] = '';
-        obj['Marksheet_CBO_HighSchool'] = '';
-        obj['aadhar'] = '';
-        obj['bankPassbook'] = '';
-        obj['castCertificate'] = '';
+        obj[
+          'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)'
+        ] = '';
+        obj[
+          'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)-Status'
+        ] = '';
+        obj[
+          'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)-Doc number'
+        ] = '';
+        obj[
+          'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)'
+        ] = '';
+        obj[
+          'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)-Status'
+        ] = '';
+        obj[
+          'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)-Doc number'
+        ] = '';
+        obj['आधार कार्ड'] = '';
+        obj['आधार कार्ड-Status'] = '';
+        obj['आधार कार्ड-Doc number'] = '';
+        obj['2 फोटो'] = '';
+        obj['2 फोटो-Status'] = '';
+        obj['2 फोटो-Doc number'] = '';
+        obj['जनाधार कार्ड'] = '';
+        obj['जनाधार कार्ड-Status'] = '';
+        obj['जनाधार कार्ड-Doc number'] = '';
+        obj['किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)'] = '';
+        obj['किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)-Status'] = '';
+        obj['किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)-Doc number'] = '';
+        obj['मोबाइल नंबर'] = '';
+        obj['मोबाइल नंबर-Status'] = '';
+        obj['मोबाइल नंबर-Doc number'] = '';
+        obj['ईमेल आईडी'] = '';
+        obj['ईमेल आईडी-Status'] = '';
+        obj['ईमेल आईडी-Doc number'] = '';
+        obj['टीसी'] = '';
+        obj['टीसी-Status'] = '';
+        obj['टीसी-Doc number'] = '';
+        obj['मार्कशीट'] = '';
+        obj['मार्कशीट-Status'] = '';
+        obj['मार्कशीट-Doc number'] = '';
+        obj['जन्मा प्रमाण पत्'] = '';
+        obj['जन्मा प्रमाण पत्-Status'] = '';
+        obj['जन्मा प्रमाण पत्-Doc number'] = '';
+        obj['जाती प्रमाण पत्र'] = '';
+        obj['जाती प्रमाण पत्र-Status'] = '';
+        obj['जाती प्रमाण पत्र-Doc number'] = '';
+        obj['राशन कार्ड'] = '';
+        obj['राशन कार्ड-Status'] = '';
+        obj['राशन कार्ड-Doc number'] = '';
+      }
+      if (element.AgRegistrationForm) {
+        obj['क्या किशोरी के द्वारा RSOS/NIOS पंजीकरण फॉर्म जमा किया गया है'] =
+          element.AgRegistrationForm.isRSOS_NIOSFormSubmitted
+            ? element.AgRegistrationForm.isRSOS_NIOSFormSubmitted
+            : '';
+        obj[
+          'जमा किए गए RSOS/NIOS रजिस्ट्रेशन फॉर्म की रसीद की एक तस्वीर प्रदान करें'
+        ] = element.AgRegistrationForm.RSOS_NIOSFormPhoto
+          ? element.AgRegistrationForm.RSOS_NIOSFormPhoto
+          : '';
+        obj['निम्न में से चुने की किशोरी कौनसी परीक्षा में भाग लेगी'] = element
+          .AgRegistrationForm.examChoice
+          ? element.AgRegistrationForm.examChoice
+          : '';
+        obj['RSOS/NIOS रजिस्ट्रेशन फॉर्म के अनुसार जन्मतिथि'] = element
+          .AgRegistrationForm.birthDateOnRSOS_NIOSForm
+          ? element.AgRegistrationForm.birthDateOnRSOS_NIOSForm
+          : '';
+        obj['क्या RSOS/NIOS रजिस्ट्रेशन आईडी / क्रमांक प्राप्त हो गयी है'] =
+          element.AgRegistrationForm.isRSOS_NIOSRegIdReceived
+            ? element.AgRegistrationForm.isRSOS_NIOSRegIdReceived
+            : '';
+        obj['किशोरी का RSOS/NIOS रजिस्ट्रेशन आईडी / क्रमांक दर्ज करें'] =
+          element.AgRegistrationForm.RSOS_NIOSRegId
+            ? element.AgRegistrationForm.RSOS_NIOSRegId
+            : '';
+
+        if (element.AgRegistrationForm.subjects) {
+          obj['subjects'] = element.AgRegistrationForm.subjects.toString();
+        } else {
+          obj['subjects'] = '';
+        }
+      } else {
+        obj['क्या किशोरी के द्वारा RSOS/NIOS पंजीकरण फॉर्म जमा किया गया है'] =
+          '';
+        obj[
+          'जमा किए गए RSOS/NIOS रजिस्ट्रेशन फॉर्म की रसीद की एक तस्वीर प्रदान करें'
+        ] = '';
+        obj['निम्न में से चुने की किशोरी कौनसी परीक्षा में भाग लेगी'] = '';
+        obj['RSOS/NIOS रजिस्ट्रेशन फॉर्म के अनुसार जन्मतिथि'] = '';
+        obj['क्या RSOS/NIOS रजिस्ट्रेशन आईडी / क्रमांक प्राप्त हो गयी है'] = '';
+        obj['किशोरी का RSOS/NIOS रजिस्ट्रेशन आईडी / क्रमांक दर्ज करें'] = '';
       }
 
       finalarr.push(obj);
     });
+    console.log('finalarr----', finalarr);
     const options = {
       filename: this.name,
       fieldSeparator: ',',
@@ -740,7 +1056,6 @@ export class TablesComponent implements OnInit {
         'PanchayatList',
         'maritalStatus',
         'connectVia',
-
         'fatherFullName',
         'motherFullName',
         'parentsMobileNumber',
@@ -749,23 +1064,68 @@ export class TablesComponent implements OnInit {
         'AGWhatsappNumber',
         'lastStandardOfEducation',
         'lastStandardOfEducationYear',
-        'whereStudiedLast',
         'reasonOfLeavingEducation',
         'whereStudiedLast',
-        'registrationStatus',
-        'rationCard',
-        'BPLCard',
-        'markSheet',
-        'photo',
-        'emailId',
-        'TC_CBO_HighSchool',
-        'TC',
-        'janadharCard',
-        'birthCertificate',
-        'Marksheet_CBO_HighSchool',
-        'aadhar',
-        'bankPassbook',
-        'castCertificate',
+        'किशोरी की पंजीकरण की स्थिति',
+
+        'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)',
+        'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)-Status',
+        'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)-Doc number',
+
+        'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)',
+        'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)-Status',
+        'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)-Doc number',
+
+        'आधार कार्ड',
+        'आधार कार्ड-Status',
+        'आधार कार्ड-Doc number',
+
+        '2 फोटो',
+        '2 फोटो-Status',
+        '2 फोटो-Doc number',
+
+        'जनाधार कार्ड',
+        'जनाधार कार्ड-Status',
+        'जनाधार कार्ड-Doc number',
+
+        'किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)',
+        'किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)-Status',
+        'किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)-Doc number',
+
+        'मोबाइल नंबर',
+        'मोबाइल नंबर-Status',
+        'मोबाइल नंबर-Doc number',
+
+        'ईमेल आईडी',
+        'ईमेल आईडी-Status',
+        'ईमेल आईडी-Doc number',
+
+        'टीसी',
+        'टीसी-Status',
+        'टीसी-Doc number',
+
+        'मार्कशीट',
+        'मार्कशीट-Status',
+        'मार्कशीट-Doc number',
+
+        'जन्मा प्रमाण पत्',
+        'जन्मा प्रमाण पत्-Status',
+        'जन्मा प्रमाण पत्-Doc number',
+
+        'जाती प्रमाण पत्र',
+        'जाती प्रमाण पत्र-Status',
+        'जाती प्रमाण पत्र-Doc number',
+
+        'राशन कार्ड',
+        'राशन कार्ड-Status',
+        'राशन कार्ड-Doc number',
+        'क्या किशोरी के द्वारा RSOS/NIOS पंजीकरण फॉर्म जमा किया गया है',
+        'जमा किए गए RSOS/NIOS रजिस्ट्रेशन फॉर्म की रसीद की एक तस्वीर प्रदान करें',
+        'निम्न में से चुने की किशोरी कौनसी परीक्षा में भाग लेगी',
+        'subjects',
+        'RSOS/NIOS रजिस्ट्रेशन फॉर्म के अनुसार जन्मतिथि',
+        'क्या RSOS/NIOS रजिस्ट्रेशन आईडी / क्रमांक प्राप्त हो गयी है',
+        'किशोरी का RSOS/NIOS रजिस्ट्रेशन आईडी / क्रमांक दर्ज करें',
       ],
     };
     this.csvExporter = new ExportToCsv(options);
