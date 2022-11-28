@@ -75,7 +75,7 @@
           },
           {
             "title": "AG List",
-            "redirectTo": "/myags/attestation/ag/AGV8"
+            "redirectTo": "/admin/attestation/ag-attestation/AGV8"
           }
         ],
         "right": [
@@ -97,7 +97,7 @@
           },
           {
             "title": "AG List",
-            "redirectTo": "/myags/attestation/ag/AGV8"
+            "redirectTo": "/admin/attestation/ag-attestation/AGV8"
           }
         ],
         "right": [

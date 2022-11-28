@@ -155,6 +155,11 @@
       }
     },
     {
+      "AllAGs": {
+        "table": "ag-attestation/AGV8"
+      }
+    },
+    {
       "myags": {
         "table": "ag/AGV8"
       }
