@@ -437,6 +437,7 @@
                 "name": "start",
                 "required": true,
                 "type": "date",
+                "format": "dd/mm/yyyy",
                 "validation": {
                   "future": false
                 }
@@ -444,6 +445,7 @@
               {
                 "name": "end",
                 "type": "date",
+                "format": "dd/mm/yyyy",
                 "validation": {
                   "greaterThan": "start",
                   "message": "END_DATE_GREATER_THAN_START_DATE"
@@ -728,6 +730,7 @@
                 "name": "dob",
                 "required": true,
                 "type": "date",
+                "format": "dd/mm/yyyy",
                 "validation": {
                   "max": "2022-09-10",
                   "message": "AGE_SHOULD_BE_GREATER_THAN_14"
@@ -849,6 +852,7 @@
                 "name": "lastStandardOfEducationYear",
                 "required": true,
                 "type": "date",
+                "format": "dd/mm/yyyy",
                 "validation": {
                   "future": false
                 }
@@ -1017,6 +1021,7 @@
                 "name": "dob",
                 "required": true,
                 "type": "date",
+                "format": "dd/mm/yyyy",
                 "validation": {
                   "max": "2022-09-10",
                   "message": "AGE_SHOULD_BE_GREATER_THAN_14"
@@ -1138,6 +1143,7 @@
                 "name": "lastStandardOfEducationYear",
                 "required": true,
                 "type": "date",
+                "format": "dd/mm/yyyy",
                 "validation": {
                   "future": false
                 }
@@ -1219,6 +1225,7 @@
                 "name": "birthDateOnRSOS_NIOSForm",
                 "required": true,
                 "type": "date",
+                "format": "dd/mm/yyyy",
                 "expressionProperties": {
                   "templateOptions.disabled": "model.isRSOS_NIOSFormSubmitted=='नहीं'",
                   "templateOptions.required": "model.isRSOS_NIOSFormSubmitted=='हाँ'"
