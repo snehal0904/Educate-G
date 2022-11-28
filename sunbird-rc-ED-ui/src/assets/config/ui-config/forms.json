@@ -948,6 +948,7 @@
             "fields": [
               {
                 "name": "prerakName",
+
                 "custom": true,
                 "data": {
                   "type": "api",
@@ -959,7 +960,8 @@
                     "formlyConfig": {
                       "type": "input",
                       "templateOptions": {
-                        "type": "hidden"
+                        "type": "hidden",
+                        "required": true
                       }
                     }
                   }

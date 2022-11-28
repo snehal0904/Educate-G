@@ -48,6 +48,24 @@
       }
     },
     {
+      "Prerak": {
+        "logoHref": "profile/PrerakV2",
+        "left": [
+          {
+            "title": "AG List",
+            "redirectTo": "/myags/attestation/ag/AGV8"
+          }
+        ],
+        "right": [
+          {
+            "title": "LOGOUT",
+            "redirectTo": "/logout",
+            "className": "font-weight-bold"
+          }
+        ]
+      }
+    },
+    {
       "admin-prerak": {
         "logoHref": "admin/attestation/admin-attestation/PrerakV2",
         "left": [
