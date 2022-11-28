@@ -1,7 +1,7 @@
 {
   "environment": "development",
   "keycloak": {
-    "url": "https://eg2.uniteframework.io/auth",
+    "url": "https://dev-eg2.uniteframework.io/auth",
     "clientId": "registry-frontend",
     "realm": "sunbird-rc"
   },
