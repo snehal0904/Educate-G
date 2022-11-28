@@ -334,10 +334,10 @@ export class FormsComponent implements OnInit {
           district: null,
           block: null,
         },
-        AgAddress: {
-          district: null,
-          block: null,
-        },
+        // AgAddress: {
+        //   district: null,
+        //   block: null,
+        // },
       };
     }
 
@@ -1480,6 +1480,47 @@ export class FormsComponent implements OnInit {
               ]
               return of(control.value);
             }
+          }
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve(true);
+            }, 2000);
+          });
+        };
+      }
+
+      if (field.name == 'sameAsAbove') {
+        console.log("here sameAsAbove")
+        this.responseData.definitions[fieldset.definition].properties[
+          field.name
+        ]['widget']['formlyConfig']['asyncValidators'] = {};
+        this.responseData.definitions[fieldset.definition].properties[
+          field.name
+        ]['widget']['formlyConfig']['asyncValidators'][field.name] = {};
+
+        this.responseData.definitions[fieldset.definition].properties[
+          field.name
+        ]['widget']['formlyConfig']['asyncValidators'][field.name][
+          'expression'
+        ] = (control: FormControl) => {
+          if (control.value != null) {
+            console.log('sameAsAbove', control.value);
+
+            // if (
+            //   control.value == 'सरकारी स्कूल') {
+            //   this.responseData.definitions[fieldset.definition].properties["AGDocumentsV3"]["items"]["properties"]["document"]["enum"] = [
+            //     "टीसी",
+            //     "मार्कशीट",
+            //     "आधार कार्ड",
+            //     "2 फोटो",
+            //     "जनाधार कार्ड",
+            //     "किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)",
+            //     "मोबाइल नंबर",
+            //     "ईमेल आईडी"
+            //   ]
+            //   return of(control.value);
+            // }
+
           }
           return new Promise((resolve, reject) => {
             setTimeout(() => {
