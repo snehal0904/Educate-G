@@ -9,13 +9,23 @@
   </h5>
   <!-- <span class="card col-3"> -->
   <div
-    *ngIf="entity != 'myags'"
+    *ngIf="entity == 'admin' && listName == 'PrerakList'"
     class="d-flex flex-ai-center flex-jc-flex-end download-report"
   >
     <span
       class="card cursor-pointer"
       tabindex="0"
       (click)="downloadPrerakCSVFile()"
+      >Download CSV</span
+    >
+
+    <img class="cursor-pointer" src="assets/images/download-icon.svg" />
+  </div>
+  <div
+    *ngIf="entity == 'admin' && listName == 'AGList'"
+    class="d-flex flex-ai-center flex-jc-flex-end download-report"
+  >
+    <span class="card cursor-pointer" tabindex="0" (click)="downloadAGCSVFile()"
       >Download CSV</span
     >
 
