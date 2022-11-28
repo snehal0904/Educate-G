@@ -69,8 +69,6 @@ export class TablesComponent implements OnInit {
       this.addData();
       this.sort = 'asc';
     }
-
-    console.log('colName, this.sort+++', colName, this.sort, this.model);
   }
   ngOnInit(): void {
     this.keycloak.loadUserProfile().then((res) => {
@@ -603,179 +601,11 @@ export class TablesComponent implements OnInit {
     this.csvExporter = new ExportToCsv(options);
     this.csvExporter.generateCsv(finalarr);
   }
-  // downloadAGCSVFile() {
-  //   this.name = `Ags_${dayjs().format('YYYY-MM-DD_HH_mm')}`;
-  //   let arr = [];
-  //   let finalarr = [];
-  //   console.log('this.model', this.model);
-  //   this.model.forEach((element) => {
-  //     arr = [];
-  //     let obj = [];
-  //     obj['campId'] = element.campId ? element.campId : '';
-  //     obj['AGId'] = element.osid ? element.osid : '';
-  //     obj['prerakId'] = element.prerakId ? element.prerakId : '';
-  //     obj['prerakName'] = element.prerakName ? element.prerakName : '';
-  //     obj['parentOrganization'] = element.parentOrganization
-  //       ? element.parentOrganization
-  //       : '';
 
-  //     obj['AGfullName'] = element.AGfullName ? element.AGfullName : '';
-  //     obj['dob'] = element.dob ? element.dob : '';
-  //     obj['category'] = element.category ? element.category : '';
-
-  //     if (element.AgAddress) {
-  //       obj['District'] = element.AgAddress.District
-  //         ? element.AgAddress.District
-  //         : '';
-  //       obj['Block'] = element.AgAddress.Block ? element.AgAddress.Block : '';
-  //       obj['Village'] = element.AgAddress.Village
-  //         ? element.AgAddress.Village
-  //         : '';
-  //     } else {
-  //       obj['District'] = ' ';
-  //       obj['Block'] = ' ';
-  //       obj['Village'] = ' ';
-  //     }
-  //     obj['PanchayatList'] = element.PanchayatList ? element.PanchayatList : '';
-  //     obj['maritalStatus'] = element.maritalStatus ? element.maritalStatus : '';
-  //     obj['connectVia'] = element.connectVia ? element.connectVia : '';
-
-  //     obj['fatherFullName'] = element.fatherFullName
-  //       ? element.fatherFullName
-  //       : '';
-  //     obj['motherFullName'] = element.motherFullName
-  //       ? element.motherFullName
-  //       : '';
-  //     obj['parentsMobileNumber'] = element.parentsMobileNumber
-  //       ? element.parentsMobileNumber
-  //       : '';
-  //     obj['parentsWhatsappNumber'] = element.parentsWhatsappNumber
-  //       ? element.parentsWhatsappNumber
-  //       : '';
-  //     obj['mobileAvailablity'] = element.mobileAvailablity
-  //       ? element.mobileAvailablity
-  //       : '';
-
-  //     obj['AGWhatsappNumber'] = element.AGWhatsappNumber
-  //       ? element.AGWhatsappNumber
-  //       : '';
-  //     obj['lastStandardOfEducation'] = element.lastStandardOfEducation
-  //       ? element.lastStandardOfEducation
-  //       : '';
-
-  //     obj['lastStandardOfEducationYear'] = element.lastStandardOfEducationYear
-  //       ? element.lastStandardOfEducationYear
-  //       : '';
-  //     obj['reasonOfLeavingEducation'] = element.reasonOfLeavingEducation
-  //       ? element.reasonOfLeavingEducation
-  //       : '';
-  //     obj['whereStudiedLast'] = element.whereStudiedLast
-  //       ? element.whereStudiedLast
-  //       : '';
-
-  //     obj['registrationStatus'] = element.registrationStatus
-  //       ? element.registrationStatus
-  //       : '';
-  //     if (element.AGDocumentsV3) {
-  //       obj['rationCard'] = element.rationCard ? element.rationCard : '';
-  //       obj['BPLCard'] = element.BPLCard ? element.BPLCard : '';
-  //       obj['markSheet'] = element.markSheet ? element.markSheet : '';
-  //       obj['photo'] = element.photo ? element.photo : '';
-  //       obj['emailId'] = element.emailId ? element.emailId : '';
-  //       obj['TC_CBO_HighSchool'] = element.TC_CBO_HighSchool
-  //         ? element.TC_CBO_HighSchool
-  //         : '';
-  //       obj['TC'] = element.TC ? element.TC : '';
-  //       obj['janadharCard'] = element.janadharCard ? element.janadharCard : '';
-  //       obj['birthCertificate'] = element.birthCertificate
-  //         ? element.birthCertificate
-  //         : '';
-  //       obj['Marksheet_CBO_HighSchool'] = element.Marksheet_CBO_HighSchool
-  //         ? element.Marksheet_CBO_HighSchool
-  //         : '';
-  //       obj['aadhar'] = element.aadhar ? element.aadhar : '';
-  //       obj['bankPassbook'] = element.bankPassbook ? element.bankPassbook : '';
-  //       obj['castCertificate'] = element.castCertificate
-  //         ? element.castCertificate
-  //         : '';
-  //     } else {
-  //       obj['rationCard'] = '';
-  //       obj['BPLCard'] = '';
-  //       obj['markSheet'] = '';
-  //       obj['photo'] = '';
-  //       obj['emailId'] = '';
-  //       obj['TC_CBO_HighSchool'] = '';
-  //       obj['TC'] = '';
-  //       obj['janadharCard'] = '';
-  //       obj['birthCertificate'] = '';
-  //       obj['Marksheet_CBO_HighSchool'] = '';
-  //       obj['aadhar'] = '';
-  //       obj['bankPassbook'] = '';
-  //       obj['castCertificate'] = '';
-  //     }
-
-  //     finalarr.push(obj);
-  //   });
-  //   const options = {
-  //     filename: this.name,
-  //     fieldSeparator: ',',
-  //     quoteStrings: '"',
-  //     decimalSeparator: '.',
-  //     showLabels: true,
-  //     useTextFile: false,
-  //     useBom: true,
-  //     useKeysAsHeaders: false,
-  //     headers: [
-  //       'campId',
-  //       'AGId',
-  //       'prerakId',
-  //       'prerakName',
-  //       'parentOrganization',
-  //       'AGfullName',
-  //       'dob',
-  //       'category',
-  //       'District',
-  //       'Block',
-  //       'Village',
-  //       'PanchayatList',
-  //       'maritalStatus',
-  //       'connectVia',
-
-  //       'fatherFullName',
-  //       'motherFullName',
-  //       'parentsMobileNumber',
-  //       'parentsWhatsappNumber',
-  //       'mobileAvailablity',
-  //       'AGWhatsappNumber',
-  //       'lastStandardOfEducation',
-  //       'lastStandardOfEducationYear',
-  //       'whereStudiedLast',
-  //       'reasonOfLeavingEducation',
-  //       'whereStudiedLast',
-  //       'registrationStatus',
-  //       'rationCard',
-  //       'BPLCard',
-  //       'markSheet',
-  //       'photo',
-  //       'emailId',
-  //       'TC_CBO_HighSchool',
-  //       'TC',
-  //       'janadharCard',
-  //       'birthCertificate',
-  //       'Marksheet_CBO_HighSchool',
-  //       'aadhar',
-  //       'bankPassbook',
-  //       'castCertificate',
-  //     ],
-  //   };
-  //   this.csvExporter = new ExportToCsv(options);
-  //   this.csvExporter.generateCsv(finalarr);
-  // }
   downloadAGCSVFile() {
     this.name = `Ags_${dayjs().format('YYYY-MM-DD_HH_mm')}`;
     let arr = [];
     let finalarr = [];
-    console.log('this.model', this.model);
 
     this.model.forEach((element) => {
       arr = [];
@@ -846,18 +676,16 @@ export class TablesComponent implements OnInit {
         ? element.registrationStatus
         : '';
 
-      // console.log('element---', element);
       if (element.AGDocumentsV3) {
         if (Array.isArray(element.AGDocumentsV3)) {
           element.AGDocumentsV3.forEach((element) => {
             obj[element.document] = element.document ? element.document : '';
-            obj[element.document + 'status'] = element.status
+            obj[element.document + '-Status'] = element.status
               ? element.status
               : '';
-            obj[element.document + 'number'] = element.document_number
+            obj[element.document + '-Doc number'] = element.document_number
               ? element.document_number
               : '';
-            console.log('obj---', obj);
           });
         } else {
           obj['राशन कार्ड'] = element.AGDocumentsV3.rationCard
@@ -985,38 +813,37 @@ export class TablesComponent implements OnInit {
         obj['राशन कार्ड-Status'] = '';
         obj['राशन कार्ड-Doc number'] = '';
       }
-      if (element.AgRegistrationForm) {
+      if (element.AgRegistrationForm && element.AgRegistrationForm[0]) {
         obj['क्या किशोरी के द्वारा RSOS/NIOS पंजीकरण फॉर्म जमा किया गया है'] =
-          element.AgRegistrationForm.isRSOS_NIOSFormSubmitted
-            ? element.AgRegistrationForm.isRSOS_NIOSFormSubmitted
+          element.AgRegistrationForm[0].isRSOS_NIOSFormSubmitted
+            ? element.AgRegistrationForm[0].isRSOS_NIOSFormSubmitted
             : '';
         obj[
           'जमा किए गए RSOS/NIOS रजिस्ट्रेशन फॉर्म की रसीद की एक तस्वीर प्रदान करें'
-        ] = element.AgRegistrationForm.RSOS_NIOSFormPhoto
-          ? element.AgRegistrationForm.RSOS_NIOSFormPhoto
+        ] = element.AgRegistrationForm[0].RSOS_NIOSFormPhoto
+          ? element.AgRegistrationForm[0].RSOS_NIOSFormPhoto
           : '';
         obj['निम्न में से चुने की किशोरी कौनसी परीक्षा में भाग लेगी'] = element
-          .AgRegistrationForm.examChoice
-          ? element.AgRegistrationForm.examChoice
+          .AgRegistrationForm[0].examChoice
+          ? element.AgRegistrationForm[0].examChoice
           : '';
-        obj['RSOS/NIOS रजिस्ट्रेशन फॉर्म के अनुसार जन्मतिथि'] = element
-          .AgRegistrationForm.birthDateOnRSOS_NIOSForm
-          ? element.AgRegistrationForm.birthDateOnRSOS_NIOSForm
-          : '';
-        obj['क्या RSOS/NIOS रजिस्ट्रेशन आईडी / क्रमांक प्राप्त हो गयी है'] =
-          element.AgRegistrationForm.isRSOS_NIOSRegIdReceived
-            ? element.AgRegistrationForm.isRSOS_NIOSRegIdReceived
-            : '';
-        obj['किशोरी का RSOS/NIOS रजिस्ट्रेशन आईडी / क्रमांक दर्ज करें'] =
-          element.AgRegistrationForm.RSOS_NIOSRegId
-            ? element.AgRegistrationForm.RSOS_NIOSRegId
-            : '';
-
-        if (element.AgRegistrationForm.subjects) {
-          obj['subjects'] = element.AgRegistrationForm.subjects.toString();
+        if (element.AgRegistrationForm[0].subjects) {
+          obj['subjects'] = element.AgRegistrationForm[0]?.subjects?.toString();
         } else {
           obj['subjects'] = '';
         }
+        obj['RSOS/NIOS रजिस्ट्रेशन फॉर्म के अनुसार जन्मतिथि'] = element
+          .AgRegistrationForm[0].birthDateOnRSOS_NIOSForm
+          ? element.AgRegistrationForm[0].birthDateOnRSOS_NIOSForm
+          : '';
+        obj['क्या RSOS/NIOS रजिस्ट्रेशन आईडी / क्रमांक प्राप्त हो गयी है'] =
+          element.AgRegistrationForm[0].isRSOS_NIOSRegIdReceived
+            ? element.AgRegistrationForm[0].isRSOS_NIOSRegIdReceived
+            : '';
+        obj['किशोरी का RSOS/NIOS रजिस्ट्रेशन आईडी / क्रमांक दर्ज करें'] =
+          element.AgRegistrationForm[0].RSOS_NIOSRegId
+            ? element.AgRegistrationForm[0].RSOS_NIOSRegId
+            : '';
       } else {
         obj['क्या किशोरी के द्वारा RSOS/NIOS पंजीकरण फॉर्म जमा किया गया है'] =
           '';
@@ -1031,7 +858,6 @@ export class TablesComponent implements OnInit {
 
       finalarr.push(obj);
     });
-    console.log('finalarr----', finalarr);
     const options = {
       filename: this.name,
       fieldSeparator: ',',
@@ -1130,5 +956,8 @@ export class TablesComponent implements OnInit {
     };
     this.csvExporter = new ExportToCsv(options);
     this.csvExporter.generateCsv(finalarr);
+  }
+  hasWhiteSpace(s) {
+    return /\s/.test(s);
   }
 }
