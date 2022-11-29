@@ -593,33 +593,36 @@ export class LayoutsComponent implements OnInit, OnChanges {
           'ईमेल आईडी',
         ];
         var in_doc = [];
-        this.model['AGDocumentsV3'].forEach((element) => {
-          console.log('here', element['document']);
-          if (docs.includes(element['document'])) {
-            in_doc.push(element['document']);
-          }
-        });
-
-        console.log(this.checkArray(docs, in_doc));
-        var doc_statuses = [];
-        if (this.checkArray(docs, in_doc)) {
-          this.model['AGDocumentsV3'].forEach((docmnt) => {
-            doc_statuses.push(docmnt['status']);
+        if(this.model['AGDocumentsV3']){
+          this.model['AGDocumentsV3'].forEach((element) => {
+            console.log('here', element['document']);
+            if (docs.includes(element['document'])) {
+              in_doc.push(element['document']);
+            }
           });
-        }
-        console.log('included', doc_statuses);
-        // उपलब्ध, सुधार की आवश्यकता नहीं
-        // var is_valid = doc_statuses.every( (val, i, arr) => val === arr[0] );
-        var is_valid = doc_statuses.every(
-          (val, i, arr) => val === 'उपलब्ध, सुधार की आवश्यकता नहीं'
-        );
 
-        console.log('valid', is_valid);
-        if (!is_valid) {
-          delete this.layoutSchema.blocks[1];
-          console.log('this.layoutSchema', this.layoutSchema);
+          console.log(this.checkArray(docs, in_doc));
+          var doc_statuses = [];
+          if (this.checkArray(docs, in_doc)) {
+            this.model['AGDocumentsV3'].forEach((docmnt) => {
+              doc_statuses.push(docmnt['status']);
+            });
+          }
+          console.log('included', doc_statuses);
+          // उपलब्ध, सुधार की आवश्यकता नहीं
+          // var is_valid = doc_statuses.every( (val, i, arr) => val === arr[0] );
+          var is_valid = doc_statuses.every(
+            (val, i, arr) => val === 'उपलब्ध, सुधार की आवश्यकता नहीं'
+          );
+
+          console.log('valid', is_valid);
+          if (!is_valid) {
+            delete this.layoutSchema.blocks[1];
+            console.log('this.layoutSchema', this.layoutSchema);
+          }
         }
-      }
+        }
+
       this.addData();
     });
   }

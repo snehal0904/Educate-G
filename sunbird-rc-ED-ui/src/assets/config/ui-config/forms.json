@@ -641,12 +641,12 @@
             "fields": [
               {
                 "name": "prerakName",
-                "custom": true,
                 "data": {
                   "type": "api",
                   "url": "/PrerakV2",
                   "key": "fullName"
                 },
+                "custom": true,
                 "element": {
                   "widget": {
                     "formlyConfig": {

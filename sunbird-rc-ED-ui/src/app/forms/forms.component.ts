@@ -323,22 +323,47 @@ export class FormsComponent implements OnInit {
     if (this.headingTitle) {
       this.fields[0].templateOptions.label = '';
     }
-    if (this.add && this.form != 'ag-registration') {
+    if (this.add && this.form == 'AG-add') {
       this.model = {};
-      this.model = {
-        address: {
-          district: null,
-          block: null,
-        },
-        confirmAddress: {
-          district: null,
-          block: null,
-        },
+      this.model['AgAddress'] = {
+        district: null,
+        block: null,
+      }
+      // {
+        // address: {
+        //   district: null,
+        //   block: null,
+        // },
+        // confirmAddress: {
+        //   district: null,
+        //   block: null,
+        // },
         // AgAddress: {
         //   district: null,
         //   block: null,
         // },
-      };
+      // };
+    }
+    else if(this.add && this.form == 'prerak-admin-setup'){
+      this.model = {};
+      this.model['address'] = {
+        district: null,
+        block: null,
+      }
+      this.model['confirmAddress'] = {
+        district: null,
+        block: null,
+      }
+      // this.model = {
+      //   address: {
+      //     district: null,
+      //     block: null,
+      //   },
+      //   confirmAddress: {
+      //     district: null,
+      //     block: null,
+      //   }
+      // };
     }
 
     this.schemaloaded = true;
@@ -603,6 +628,15 @@ export class FormsComponent implements OnInit {
             }
           }
         }
+        if (field.data && field.data.type == 'api') {
+          this.generalService.getData(field.data.url).subscribe((res) => {
+            var data_val = res[0][field.data.key];
+
+            this.model[field.name] = data_val;
+          });
+          // var api_val = this.getEntityData(field.data.url);
+          // var data_val = api_val[0][field.data.key]
+        }
 
         if (field.custom && field.element) {
           this.responseData.definitions[fieldset.definition].properties[
@@ -613,12 +647,15 @@ export class FormsComponent implements OnInit {
               field.name
             ]['title'] = this.translate.instant(field.element.title);
           }
-          this.customFields.push(field.name);
+          if(field.name != "prerakName"){
+            this.customFields.push(field.name);
+          }
           if (field.data && field.data.type == 'api') {
             this.generalService.getData(field.data.url).subscribe((res) => {
               var data_val = res[0][field.data.key];
-
+              console.log("------data_val",data_val);
               this.model[field.name] = data_val;
+              console.log("------this.model",this.model);
             });
             // var api_val = this.getEntityData(field.data.url);
             // var data_val = api_val[0][field.data.key]
@@ -703,7 +740,7 @@ export class FormsComponent implements OnInit {
     return this.titleVal;
   }
 
-  addWidget(fieldset, field, childrenName) {
+  async addWidget(fieldset, field, childrenName) {
     this.translate.get(this.langKey + '.' + field.name).subscribe((res) => {
       let constr = this.langKey + '.' + field.name;
       if (res != constr) {
@@ -1563,6 +1600,16 @@ export class FormsComponent implements OnInit {
         }
       }
     }
+    if(this.form == "AG-add"){
+      await this.generalService.getData("/PrerakV2").subscribe((res) => {
+        var data_val = res[0];
+        console.log("------data_val",data_val);
+        this.model["prerakName"] = data_val["fullName"];
+        this.model["prerakId"] = data_val["osid"];
+        this.model["parentOrganization"] = data_val["parentOrganization"];
+        console.log("------this.model",this.model);
+      });
+    }
     // console.log("this.responseData",this.responseData)
   }
 
@@ -1650,7 +1697,7 @@ export class FormsComponent implements OnInit {
     }
   }
 
-  submit() {
+  async submit() {
     if (localStorage.getItem('isAdminAdd')) {
       this.identifier = null;
     }
@@ -1666,11 +1713,11 @@ export class FormsComponent implements OnInit {
     // if(this.model['subjects']){
     //   delete this.model['subjects'];
     // }
-    // if (property == 'AgRegistrationForm') {
-    //   if (this.model['AgAddress']) {
-    //     delete this.model['AgAddress'];
-    //   }
-    // }
+    if (property == 'AgRegistrationForm') {
+      if (this.model['AgAddress']) {
+        delete this.model['AgAddress'];
+      }
+    }
 
     if (this.model['RSOS_NIOSFormPhoto']) {
       delete this.model['RSOS_NIOSFormPhoto'];
@@ -1679,6 +1726,8 @@ export class FormsComponent implements OnInit {
     if (this.model['RSOS_NIOSRegId']) {
       this.model['RSOS_NIOSRegId'] = this.model['RSOS_NIOSRegId'].toString();
     }
+
+
     if (this.fileFields.length > 0) {
       this.fileFields.forEach((fileField) => {
         if (this.model[fileField]) {
@@ -2077,6 +2126,7 @@ export class FormsComponent implements OnInit {
       }
     }
 
+    console.log("model",this.model);
     await this.generalService.postData(this.apiUrl, this.model).subscribe(
       (res) => {
         if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
@@ -2097,8 +2147,13 @@ export class FormsComponent implements OnInit {
           }
           if (localStorage.getItem('isAGAdd')) {
             localStorage.setItem('isAGAdd', '');
+
+            // uncomment before push
             this.router.navigate(['/myags/attestation/ag/AG']);
             $('.modal-backdrop').remove(); // removes the grey overlay.
+
+
+
             // window.history.go(-1)
             // window.location.reload();
           } else {
