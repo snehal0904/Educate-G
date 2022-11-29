@@ -1384,11 +1384,8 @@ export class FormsComponent implements OnInit {
               });
             };
           }
-        }
-        else if (field.type == 'custom:document') {
-
-        }
-        else if (field.type === 'date') {
+        } else if (field.type == 'custom:document') {
+        } else if (field.type === 'date') {
           this.responseData.definitions[fieldset.definition].properties[
             field.name
           ]['widget']['formlyConfig']['templateOptions']['type'] = 'date';
@@ -1476,45 +1473,46 @@ export class FormsComponent implements OnInit {
         ] = (control: FormControl) => {
           if (control.value != null) {
             console.log('whereStudiedLast', control.value);
-            if (
-              control.value == 'प्राइवेट स्कूल') {
-              this.responseData.definitions[fieldset.definition].properties["AGDocumentsV3"]["items"]["properties"]["document"]["enum"] = [
-                "टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)",
-                "मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)",
-                "आधार कार्ड",
-                "2 फोटो",
-                "जनाधार कार्ड",
-                "किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)",
-                "मोबाइल नंबर",
-                "ईमेल आईडी"
-              ]
+            if (control.value == 'प्राइवेट स्कूल') {
+              this.responseData.definitions[fieldset.definition].properties[
+                'AGDocumentsV3'
+              ]['items']['properties']['document']['enum'] = [
+                'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)',
+                'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)',
+                'आधार कार्ड',
+                '2 फोटो',
+                'जनाधार कार्ड',
+                'किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)',
+                'मोबाइल नंबर',
+                'ईमेल आईडी',
+              ];
               return of(control.value);
-            }
-            else if (
-              control.value == 'सरकारी स्कूल') {
-              this.responseData.definitions[fieldset.definition].properties["AGDocumentsV3"]["items"]["properties"]["document"]["enum"] = [
-                "टीसी",
-                "मार्कशीट",
-                "आधार कार्ड",
-                "2 फोटो",
-                "जनाधार कार्ड",
-                "किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)",
-                "मोबाइल नंबर",
-                "ईमेल आईडी"
-              ]
+            } else if (control.value == 'सरकारी स्कूल') {
+              this.responseData.definitions[fieldset.definition].properties[
+                'AGDocumentsV3'
+              ]['items']['properties']['document']['enum'] = [
+                'टीसी',
+                'मार्कशीट',
+                'आधार कार्ड',
+                '2 फोटो',
+                'जनाधार कार्ड',
+                'किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)',
+                'मोबाइल नंबर',
+                'ईमेल आईडी',
+              ];
               return of(control.value);
-            }
-            else if (
-              control.value == 'कभी पढ़ाई नहीं की') {
-              this.responseData.definitions[fieldset.definition].properties["AGDocumentsV3"]["items"]["properties"]["document"]["enum"] = [
-                "आधार कार्ड",
-                "जन्मा प्रमाण पत्",
-                "जाती प्रमाण पत्र",
-                "राशन कार्ड",
-                "BPL प्रमाण पत्र",
-                "फोटो",
-                "जनाधार कार्ड"
-              ]
+            } else if (control.value == 'कभी पढ़ाई नहीं की') {
+              this.responseData.definitions[fieldset.definition].properties[
+                'AGDocumentsV3'
+              ]['items']['properties']['document']['enum'] = [
+                'आधार कार्ड',
+                'जन्मा प्रमाण पत्',
+                'जाती प्रमाण पत्र',
+                'राशन कार्ड',
+                'BPL प्रमाण पत्र',
+                'फोटो',
+                'जनाधार कार्ड',
+              ];
               return of(control.value);
             }
           }
@@ -2060,13 +2058,14 @@ export class FormsComponent implements OnInit {
     }
 
     this.generalService.getData(get_url).subscribe((res) => {
+      console.log('res===', res);
       res = res[0] ? res[0] : res;
       if (this.propertyName) {
         this.entityId = res.osid;
       }
-      if (this.form != 'ag-registration') {
-        this.model = res;
-      }
+      // if (this.form != 'ag-registration') {
+      this.model = res;
+      // }
 
       this.identifier = res.osid;
 

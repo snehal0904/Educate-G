@@ -162,7 +162,7 @@
     },
     {
       "myags": {
-        "table": "ag/AGV8"
+        "table": "ag-attestation/AGV8"
       }
     }
   ]
