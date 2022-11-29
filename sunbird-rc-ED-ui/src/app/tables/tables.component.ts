@@ -688,49 +688,6 @@ export class TablesComponent implements OnInit {
               : '';
           });
         } else {
-          obj['राशन कार्ड'] = element.AGDocumentsV3.rationCard
-            ? element.AGDocumentsV3.rationCard
-            : '';
-          obj['राशन कार्ड-Status'] = '';
-          obj['राशन कार्ड-Doc number'] = '';
-          obj['मार्कशीट'] = element.AGDocumentsV3.markSheet
-            ? element.AGDocumentsV3.markSheet
-            : '';
-          obj['मार्कशीट-Status'] = '';
-          obj['मार्कशीट-Doc number'] = '';
-
-          obj['2 फोटो-Status'] = '';
-          obj['2 फोटो-Doc number'] = '';
-          obj['2 फोटो'] = element.AGDocumentsV3.photo
-            ? element.AGDocumentsV3.photo
-            : '';
-
-          obj['ईमेल आईडी-Status'] = '';
-          obj['ईमेल आईडी-Doc number'] = '';
-          obj['ईमेल आईडी'] = element.AGDocumentsV3.emailId
-            ? element.AGDocumentsV3.emailId
-            : '';
-
-          obj['TC_CBO_HighSchool'] = element.AGDocumentsV3.TC_CBO_HighSchool
-            ? element.AGDocumentsV3.TC_CBO_HighSchool
-            : '';
-          obj['टीसी'] = element.AGDocumentsV3.TC
-            ? element.AGDocumentsV3.TC
-            : '';
-          obj['टीसी-Status'] = '';
-          obj['टीसी-Doc number'] = '';
-
-          obj['जनाधार कार्ड-Status'] = '';
-          obj['जनाधार कार्ड-Doc number'] = '';
-          obj['जनाधार कार्ड'] = element.AGDocumentsV3.janadharCard
-            ? element.AGDocumentsV3.janadharCard
-            : '';
-
-          obj['जन्मा प्रमाण पत्-Status'] = '';
-          obj['जन्मा प्रमाण पत्-Doc number'] = '';
-          obj['जन्मा प्रमाण पत्'] = element.AGDocumentsV3.birthCertificate
-            ? element.AGDocumentsV3.birthCertificate
-            : '';
           obj[
             'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)Marksheet_CBO_HighSchool'
           ] = element.AGDocumentsV3.Marksheet_CBO_HighSchool
@@ -742,23 +699,68 @@ export class TablesComponent implements OnInit {
           obj[
             'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)-Doc number'
           ] = '';
-
           obj['आधार कार्ड-Status'] = '';
           obj['आधार कार्ड-Doc number'] = '';
           obj['आधार कार्ड'] = element.AGDocumentsV3.aadhar
             ? element.AGDocumentsV3.aadhar
             : '';
+          obj['2 फोटो-Status'] = '';
+          obj['2 फोटो-Doc number'] = '';
+          obj['2 फोटो'] = element.AGDocumentsV3.photo
+            ? element.AGDocumentsV3.photo
+            : '';
+
+          obj['जनाधार कार्ड-Status'] = '';
+          obj['जनाधार कार्ड-Doc number'] = '';
+          obj['जनाधार कार्ड'] = element.AGDocumentsV3.janadharCard
+            ? element.AGDocumentsV3.janadharCard
+            : '';
+
           obj['किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)-Status'] = '';
           obj['किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)-Doc number'] = '';
           obj['किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)'] = element
             .AGDocumentsV3.bankPassbook
             ? element.AGDocumentsV3.bankPassbook
             : '';
+          obj['ईमेल आईडी-Status'] = '';
+          obj['ईमेल आईडी-Doc number'] = '';
+          obj['ईमेल आईडी'] = element.AGDocumentsV3.emailId
+            ? element.AGDocumentsV3.emailId
+            : '';
+          obj['टीसी'] = element.AGDocumentsV3.TC
+            ? element.AGDocumentsV3.TC
+            : '';
+          obj['टीसी-Status'] = '';
+          obj['टीसी-Doc number'] = '';
+
+          obj['मार्कशीट'] = element.AGDocumentsV3.markSheet
+            ? element.AGDocumentsV3.markSheet
+            : '';
+          obj['मार्कशीट-Status'] = '';
+          obj['मार्कशीट-Doc number'] = '';
+
+          obj['जन्मा प्रमाण पत्-Status'] = '';
+          obj['जन्मा प्रमाण पत्-Doc number'] = '';
+          obj['जन्मा प्रमाण पत्'] = element.AGDocumentsV3.birthCertificate
+            ? element.AGDocumentsV3.birthCertificate
+            : '';
           obj['जाती प्रमाण पत्र'] = element.AGDocumentsV3.castCertificate
             ? element.AGDocumentsV3.castCertificate
             : '';
           obj['जाती प्रमाण पत्र-Status'] = '';
           obj['जाती प्रमाण पत्र-Doc number'] = '';
+
+          obj['राशन कार्ड'] = element.AGDocumentsV3.rationCard
+            ? element.AGDocumentsV3.rationCard
+            : '';
+          obj['राशन कार्ड-Status'] = '';
+          obj['राशन कार्ड-Doc number'] = '';
+
+          obj['BPLCard'] = element.AGDocumentsV3.BPLCard
+            ? element.AGDocumentsV3.BPLCard
+            : '';
+          obj['BPLCard-Status'] = '';
+          obj['BPLCard-Doc number'] = '';
         }
       } else {
         obj[
@@ -812,6 +814,9 @@ export class TablesComponent implements OnInit {
         obj['राशन कार्ड'] = '';
         obj['राशन कार्ड-Status'] = '';
         obj['राशन कार्ड-Doc number'] = '';
+        obj['BPLCard'] = '';
+        obj['BPLCard-Status'] = '';
+        obj['BPLCard-Doc number'] = '';
       }
       if (element.AgRegistrationForm && element.AgRegistrationForm[0]) {
         obj['क्या किशोरी के द्वारा RSOS/NIOS पंजीकरण फॉर्म जमा किया गया है'] =
@@ -945,6 +950,11 @@ export class TablesComponent implements OnInit {
         'राशन कार्ड',
         'राशन कार्ड-Status',
         'राशन कार्ड-Doc number',
+
+        'BPLCard',
+        'BPLCard-Status',
+        'BPLCard-Doc number',
+
         'क्या किशोरी के द्वारा RSOS/NIOS पंजीकरण फॉर्म जमा किया गया है',
         'जमा किए गए RSOS/NIOS रजिस्ट्रेशन फॉर्म की रसीद की एक तस्वीर प्रदान करें',
         'निम्न में से चुने की किशोरी कौनसी परीक्षा में भाग लेगी',
