@@ -593,7 +593,11 @@ export class LayoutsComponent implements OnInit, OnChanges {
           'ईमेल आईडी',
         ];
         var in_doc = [];
-        if (Array.isArray(this.model['AGDocumentsV3'])) {
+
+        if (
+          this.model['AGDocumentsV3'] &&
+          Array.isArray(this.model['AGDocumentsV3'])
+        ) {
           this.model['AGDocumentsV3'].forEach((element) => {
             console.log('here', element['document']);
             if (docs.includes(element['document'])) {
@@ -619,9 +623,9 @@ export class LayoutsComponent implements OnInit, OnChanges {
 
         if (!is_valid) {
           delete this.layoutSchema.blocks[1];
-          console.log('this.layoutSchema', this.layoutSchema);
         }
       }
+
       this.addData();
     });
   }
