@@ -756,11 +756,11 @@ export class TablesComponent implements OnInit {
           obj['राशन कार्ड-Status'] = '';
           obj['राशन कार्ड-Doc number'] = '';
 
-          obj['BPLCard'] = element.AGDocumentsV3.BPLCard
+          obj['BPL प्रमाण पत्र'] = element.AGDocumentsV3.BPLCard
             ? element.AGDocumentsV3.BPLCard
             : '';
-          obj['BPLCard-Status'] = '';
-          obj['BPLCard-Doc number'] = '';
+          obj['BPL प्रमाण पत्र-Status'] = '';
+          obj['BPL प्रमाण पत्र-Doc number'] = '';
         }
       } else {
         obj[
@@ -814,9 +814,9 @@ export class TablesComponent implements OnInit {
         obj['राशन कार्ड'] = '';
         obj['राशन कार्ड-Status'] = '';
         obj['राशन कार्ड-Doc number'] = '';
-        obj['BPLCard'] = '';
-        obj['BPLCard-Status'] = '';
-        obj['BPLCard-Doc number'] = '';
+        obj['BPL प्रमाण पत्र'] = '';
+        obj['BPL प्रमाण पत्र-Status'] = '';
+        obj['BPL प्रमाण पत्र-Doc number'] = '';
       }
       if (element.AgRegistrationForm && element.AgRegistrationForm[0]) {
         obj['क्या किशोरी के द्वारा RSOS/NIOS पंजीकरण फॉर्म जमा किया गया है'] =
@@ -951,9 +951,9 @@ export class TablesComponent implements OnInit {
         'राशन कार्ड-Status',
         'राशन कार्ड-Doc number',
 
-        'BPLCard',
-        'BPLCard-Status',
-        'BPLCard-Doc number',
+        'BPL प्रमाण पत्र',
+        'BPL प्रमाण पत्र-Status',
+        'BPL प्रमाण पत्र-Doc number',
 
         'क्या किशोरी के द्वारा RSOS/NIOS पंजीकरण फॉर्म जमा किया गया है',
         'जमा किए गए RSOS/NIOS रजिस्ट्रेशन फॉर्म की रसीद की एक तस्वीर प्रदान करें',
