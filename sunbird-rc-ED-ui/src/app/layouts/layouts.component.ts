@@ -13,6 +13,7 @@ import { Subject } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
+import { convertSchemaToDraft6 } from 'angular6-json-schema-form';
 
 @Component({
   selector: 'app-layouts',
@@ -44,6 +45,7 @@ export class LayoutsComponent implements OnInit, OnChanges {
   params: any;
   langKey;
   titleVal;
+  systemUpdate: boolean = false;
   constructor(
     public location: Location,
     private route: ActivatedRoute,
@@ -100,6 +102,51 @@ export class LayoutsComponent implements OnInit, OnChanges {
           this.location.replaceState('profile/ag-detail/' + this.identifier);
         }
       }
+
+      if (params['layout'] != undefined && params['layout'] == 'Admin') {
+        console.log(params['layout'])
+        this.systemUpdate = true;
+        if (params.hasOwnProperty('id')) {
+          this.identifier = params['id'];
+        } else {
+          this.identifier = localStorage.getItem('id');
+        }
+        // this.generalService.getData('PrerakV2').subscribe(async (res) => {
+        //   console.log("in PrerakV2",res)
+        //   var prerakName = res[0]["fullName"]
+        //   var prerakId = res[0]["osid"]
+        //   var parentOrganization = res[0]["parentOrganization"]
+        //   await this.generalService.getData('AGV8').subscribe((res2) => {
+        //     console.log("in AGV8",res)
+        //     res2.forEach(element => {
+        //       let ag_data = element;
+        //       ag_data["prerakName"] = prerakName;
+        //       ag_data["prerakId"] = prerakId;
+        //       ag_data["parentOrganization"] = parentOrganization;
+        //       this.generalService
+        //       .putData("AGV8/", element?.osid, ag_data)
+        //       .subscribe(
+        //         (res) => {
+        //           console.log("ress AGV8 update",res)
+        //           if (res.params.status == 'SUCCESSFUL') {
+        //             console.log("success")
+        //           }
+        //         },
+        //         (err) => {
+        //           console.log('err AGV8 updation',err)
+        //         }
+        //       );
+        //     }
+
+        //     );
+        //     this.systemUpdate = false;
+        //   });
+
+        // })
+      }
+
+
+
 
       if (params['claim']) {
         this.claim = params['claim'];
