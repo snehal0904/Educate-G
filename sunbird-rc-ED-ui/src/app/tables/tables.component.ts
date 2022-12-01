@@ -661,9 +661,9 @@ export class TablesComponent implements OnInit {
                   if(!element.prerakId){
                     element.prerakId = prerak_obj["prerakId"]
                   }
-                  // if(!element.parentOrganization){
-                  //   element.parentOrganization = prerak_obj["parentOrganization"]
-                  // }
+                  if(!element.parentOrganization){
+                    element.parentOrganization = prerak_obj["parentOrganization"]
+                  }
                 }
 
 
