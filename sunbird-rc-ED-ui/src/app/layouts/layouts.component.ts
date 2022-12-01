@@ -45,7 +45,7 @@ export class LayoutsComponent implements OnInit, OnChanges {
   params: any;
   langKey;
   titleVal;
-  systemUpdate: boolean = false;
+  // systemUpdate: boolean = false;
   constructor(
     public location: Location,
     private route: ActivatedRoute,
@@ -105,7 +105,7 @@ export class LayoutsComponent implements OnInit, OnChanges {
 
       if (params['layout'] != undefined && params['layout'] == 'Admin') {
         console.log(params['layout'])
-        this.systemUpdate = true;
+        // this.systemUpdate = true;
         if (params.hasOwnProperty('id')) {
           this.identifier = params['id'];
         } else {
