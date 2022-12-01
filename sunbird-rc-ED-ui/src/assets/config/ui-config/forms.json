@@ -813,7 +813,7 @@
                   "message": "MOBILE_NO_MUST_10_DIGIT"
                 },
                 "expressionProperties": {
-                  "hideExpression":"model.sameAsAbove",
+                  "hideExpression": "model.sameAsAbove",
                   "templateOptions.disabled": "model.sameAsAbove",
                   "templateOptions.required": "!model.sameAsAbove"
                 }
@@ -1173,9 +1173,9 @@
               {
                 "name": "RSOS_NIOSFormPhoto",
                 "format": "file",
+                "required": false,
                 "expressionProperties": {
-                  "templateOptions.disabled": "model.isRSOS_NIOSFormSubmitted=='नहीं'",
-                  "templateOptions.required": "model.isRSOS_NIOSFormSubmitted=='हाँ'"
+                  "templateOptions.disabled": "model.isRSOS_NIOSFormSubmitted=='नहीं'"
                 }
               },
               {
@@ -1227,8 +1227,8 @@
                   "message": "NUMBER_SHOULD_BE_11_OR_12"
                 },
                 "expressionProperties": {
-                  "templateOptions.disabled": "model.isRSOS_NIOSFormSubmitted=='नहीं'",
-                  "templateOptions.required": "model.isRSOS_NIOSFormSubmitted=='हाँ'"
+                  "templateOptions.disabled": "model.isRSOS_NIOSFormSubmitted=='नहीं'||model.isRSOS_NIOSRegIdReceived=='नहीं'",
+                  "templateOptions.required": "model.isRSOS_NIOSFormSubmitted=='हाँ'&& model.isRSOS_NIOSRegIdReceived=='हाँ'"
                 }
               }
             ]

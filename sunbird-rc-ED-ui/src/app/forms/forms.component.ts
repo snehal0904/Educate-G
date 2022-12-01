@@ -14,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { throwError } from 'rxjs';
 import { LocationService } from '../services/location/location.service';
 import { startWith, switchMap } from 'rxjs/operators';
+import { stringify } from '@angular/compiler/src/util';
 
 declare const $: any;
 
@@ -328,32 +329,31 @@ export class FormsComponent implements OnInit {
       this.model['AgAddress'] = {
         district: null,
         block: null,
-      }
+      };
       // {
-        // address: {
-        //   district: null,
-        //   block: null,
-        // },
-        // confirmAddress: {
-        //   district: null,
-        //   block: null,
-        // },
-        // AgAddress: {
-        //   district: null,
-        //   block: null,
-        // },
+      // address: {
+      //   district: null,
+      //   block: null,
+      // },
+      // confirmAddress: {
+      //   district: null,
+      //   block: null,
+      // },
+      // AgAddress: {
+      //   district: null,
+      //   block: null,
+      // },
       // };
-    }
-    else if(this.add && this.form == 'prerak-admin-setup'){
+    } else if (this.add && this.form == 'prerak-admin-setup') {
       this.model = {};
       this.model['address'] = {
         district: null,
         block: null,
-      }
+      };
       this.model['confirmAddress'] = {
         district: null,
         block: null,
-      }
+      };
       // this.model = {
       //   address: {
       //     district: null,
@@ -647,15 +647,15 @@ export class FormsComponent implements OnInit {
               field.name
             ]['title'] = this.translate.instant(field.element.title);
           }
-          if(field.name != "prerakName"){
+          if (field.name != 'prerakName') {
             this.customFields.push(field.name);
           }
           if (field.data && field.data.type == 'api') {
             this.generalService.getData(field.data.url).subscribe((res) => {
               var data_val = res[0][field.data.key];
-              console.log("------data_val",data_val);
+              console.log('------data_val', data_val);
               this.model[field.name] = data_val;
-              console.log("------this.model",this.model);
+              console.log('------this.model', this.model);
             });
             // var api_val = this.getEntityData(field.data.url);
             // var data_val = api_val[0][field.data.key]
@@ -1525,7 +1525,7 @@ export class FormsComponent implements OnInit {
       }
 
       if (field.name == 'sameAsAbove') {
-        console.log("here sameAsAbove")
+        console.log('here sameAsAbove');
         this.responseData.definitions[fieldset.definition].properties[
           field.name
         ]['widget']['formlyConfig']['asyncValidators'] = {};
@@ -1555,7 +1555,6 @@ export class FormsComponent implements OnInit {
             //   ]
             //   return of(control.value);
             // }
-
           }
           return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -1598,14 +1597,14 @@ export class FormsComponent implements OnInit {
         }
       }
     }
-    if(this.form == "AG-add"){
-      await this.generalService.getData("/PrerakV2").subscribe((res) => {
+    if (this.form == 'AG-add') {
+      await this.generalService.getData('/PrerakV2').subscribe((res) => {
         var data_val = res[0];
-        console.log("------data_val",data_val);
-        this.model["prerakName"] = data_val["fullName"];
-        this.model["prerakId"] = data_val["osid"];
-        this.model["parentOrganization"] = data_val["parentOrganization"];
-        console.log("------this.model",this.model);
+        console.log('------data_val', data_val);
+        this.model['prerakName'] = data_val['fullName'];
+        this.model['prerakId'] = data_val['osid'];
+        this.model['parentOrganization'] = data_val['parentOrganization'];
+        console.log('------this.model', this.model);
       });
     }
     // console.log("this.responseData",this.responseData)
@@ -1716,15 +1715,27 @@ export class FormsComponent implements OnInit {
         delete this.model['AgAddress'];
       }
     }
+    console.log('this.model----', this.model);
+    if (this.model['isRSOS_NIOSFormSubmitted'] == 'नहीं') {
+      alert('here');
+      this.model = {};
+
+      this.model['isRSOS_NIOSRegIdReceived'] = '';
+      this.model['RSOS_NIOSRegId'] = '';
+      this.model['subjects'] = <unknown>[];
+      this.model['examChoice'] = '';
+      this.model['birthDateOnRSOS_NIOSForm'] = '';
+      this.model['RSOS_NIOSFormPhoto'] = '';
+    }
 
     if (this.model['RSOS_NIOSFormPhoto']) {
       delete this.model['RSOS_NIOSFormPhoto'];
     }
+    console.log('this.model2222----', this.model);
 
     if (this.model['RSOS_NIOSRegId']) {
       this.model['RSOS_NIOSRegId'] = this.model['RSOS_NIOSRegId'].toString();
     }
-
 
     if (this.fileFields.length > 0) {
       this.fileFields.forEach((fileField) => {
@@ -2125,7 +2136,7 @@ export class FormsComponent implements OnInit {
       }
     }
 
-    console.log("model",this.model);
+    console.log('model', this.model);
     await this.generalService.postData(this.apiUrl, this.model).subscribe(
       (res) => {
         if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
@@ -2150,8 +2161,6 @@ export class FormsComponent implements OnInit {
             // uncomment before push
             this.router.navigate(['/myags/attestation/ag/AG']);
             $('.modal-backdrop').remove(); // removes the grey overlay.
-
-
 
             // window.history.go(-1)
             // window.location.reload();
