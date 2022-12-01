@@ -10514,11 +10514,14 @@ export class TablesComponent implements OnInit {
           .mcqRelationshipWithThePOC
           ? element.interviewDetails[0].mcqRelationshipWithThePOC
           : '';
-        obj['osid'] = element.interviewDetails[0].osid
-          ? element.interviewDetails[0].osid
-          : '';
+      
       }
 
+      obj['parentOrganization'] = element.parentOrganization?element.parentOrganization:'';
+
+        obj['osid'] = element.osid
+          ? element.osid
+          : '';
       finalarr.push(obj);
     });
 
@@ -10583,6 +10586,7 @@ export class TablesComponent implements OnInit {
         'Name of the POC',
         'Mobile number of POC',
         'Relationship with the POC',
+        'parentOrganization',
         'osid',
       ],
     };
