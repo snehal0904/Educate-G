@@ -88,7 +88,6 @@ export class TablesComponent implements OnInit {
     this.route.params.subscribe(async (params) => {
       this.table = params['table'].toLowerCase();
       if (this.table == 'admin-attestation') {
-        console.log('table', this.table);
       }
       this.entity = params['entity'].toLowerCase();
       this.tab = this.tabUrl
@@ -356,7 +355,6 @@ export class TablesComponent implements OnInit {
     this.model.forEach((element) => {
       arr = [];
       let obj = [];
-      console.log('ele----', element);
       obj['fullname'] = element.fullName ? element.fullName : '';
       obj['mobile'] = element.mobile ? element.mobile : '';
       obj['parentOrganization'] = element.parentOrganization
@@ -670,7 +668,10 @@ export class TablesComponent implements OnInit {
               if (!element.prerakId) {
                 element.prerakId = prerak_obj['prerakId'];
               }
-              if (!element.parentOrganization) {
+              if (
+                !element.parentOrganization ||
+                element.parentOrganization == ''
+              ) {
                 element.parentOrganization = prerak_obj['parentOrganization'];
               }
             }
