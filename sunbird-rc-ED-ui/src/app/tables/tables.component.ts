@@ -640,6 +640,9 @@ export class TablesComponent implements OnInit {
           if (element?.fullName) {
             osid_tmp['prerakName'] = element['fullName'];
           }
+          if (element?.parentOrganization) {
+            osid_tmp['parentOrganization'] = element['parentOrganization'];
+          }
           if (element?.osid) {
             osid_tmp['prerakId'] = element['osid'];
           }
@@ -659,7 +662,6 @@ export class TablesComponent implements OnInit {
                 o.osOwner.includes(element['osOwner'][1]) ||
                 o.osOwner.includes(element['osOwner'][0])
             );
-            // console.log("prerak_obj",prerak_obj)
 
             if (prerak_obj) {
               if (!element.prerakName) {
@@ -668,6 +670,7 @@ export class TablesComponent implements OnInit {
               if (!element.prerakId) {
                 element.prerakId = prerak_obj['prerakId'];
               }
+
               if (
                 !element.parentOrganization ||
                 element.parentOrganization == ''
