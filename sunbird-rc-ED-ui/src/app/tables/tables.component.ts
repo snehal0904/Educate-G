@@ -631,20 +631,21 @@ export class TablesComponent implements OnInit {
     await this.generalService
       .postData('PrerakV2/search', { filters: {} })
       .subscribe((res) => {
-        // console.log("all_data",res);
         res.forEach((element) => {
           let osid_tmp = {};
-          if (element?.fullName) {
-            osid_tmp['prerakName'] = element['fullName'];
-          }
-          if (element?.parentOrganization) {
-            osid_tmp['parentOrganization'] = element['parentOrganization'];
-          }
-          if (element?.osid) {
-            osid_tmp['prerakId'] = element['osid'];
-          }
+
+          osid_tmp['prerakName'] = element['fullName']
+            ? element['fullName']
+            : '';
+          osid_tmp['parentOrganization'] = element['parentOrganization']
+            ? element['parentOrganization']
+            : '';
+          osid_tmp['prerakId'] = element['osid'] ? element['osid'] : '';
+
           if (element?.osOwner) {
-            osid_tmp['PrerakKey'] = element['osOwner'][0];
+            osid_tmp['PrerakKey'] = element['osOwner'][0]
+              ? element['osOwner'][0]
+              : '';
           }
           osid_data.push(osid_tmp);
         });
@@ -654,8 +655,7 @@ export class TablesComponent implements OnInit {
             arr = [];
             let obj = [];
             let prerak_obj = osid_data.find((o) => {
-              o['PrerakKey'].includes(element['osOwner'][1]) ||
-                o['PrerakKey'].includes(element['osOwner'][0]);
+              o['PrerakKey'].includes(element['osOwner'][1]);
             });
 
             if (prerak_obj) {
