@@ -355,6 +355,7 @@ export class TablesComponent implements OnInit {
     this.model.forEach((element) => {
       arr = [];
       let obj = [];
+      obj['PrerakID'] = element.osid ? element.osid : '';
       obj['fullname'] = element.fullName ? element.fullName : '';
       obj['mobile'] = element.mobile ? element.mobile : '';
       obj['parentOrganization'] = element.parentOrganization
@@ -367,7 +368,7 @@ export class TablesComponent implements OnInit {
       } else {
         obj['district'] = '';
       }
-
+      console.log('ele-----', element);
       obj['qualification'] = element.qualification ? element.qualification : '';
       obj['gender'] = element.gender ? element.gender : '';
       obj['sourcingChannel'] = element.sourcingChannel
@@ -531,9 +532,6 @@ export class TablesComponent implements OnInit {
           .mcqRelationshipWithThePOC
           ? element.interviewDetails[0].mcqRelationshipWithThePOC
           : '';
-        obj['osid'] = element.interviewDetails[0].osid
-          ? element.interviewDetails[0].osid
-          : '';
       }
 
       finalarr.push(obj);
@@ -549,6 +547,7 @@ export class TablesComponent implements OnInit {
       useBom: true,
       useKeysAsHeaders: false,
       headers: [
+        'PrerakID',
         'full Name',
         'Mobile',
         'parentOrganization',
@@ -601,7 +600,6 @@ export class TablesComponent implements OnInit {
         'Name of the POC',
         'Mobile number of POC',
         'Relationship with the POC',
-        'osid',
       ],
     };
     this.csvExporter = new ExportToCsv(options);
@@ -653,8 +651,14 @@ export class TablesComponent implements OnInit {
         });
         osUpdated = true;
         if (osUpdated) {
-          // console.log("osid_data",osid_data);
+          console.log('osid_data', osid_data);
           this.model.forEach(async (element) => {
+            console.log(
+              "element['osOwner']===",
+              element['osid'],
+              '    ',
+              element['osOwner']
+            );
             arr = [];
             let obj = [];
             let prerak_obj = osid_data.find(
