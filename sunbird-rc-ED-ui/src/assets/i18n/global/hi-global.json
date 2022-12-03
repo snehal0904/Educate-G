@@ -198,5 +198,6 @@
   "CALL_STATUS": "कॉल की स्थिति",
   "VFS_MEMBER_NAME": "वीएफएस सदस्य का नाम",
   "CANDIDATE_STATUS": "उम्मीदवार की स्थिति",
-  "SOURCING_CHANNEL": "सोर्सिंग चैनल"
+  "SOURCING_CHANNEL": "सोर्सिंग चैनल",
+  "dUPLICATE_MOBILE_NUMBER": "समान मोबाइल नंबर वाला उपयोगकर्ता पहले से मौजूद है"
 }

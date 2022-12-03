@@ -2069,7 +2069,6 @@ export class FormsComponent implements OnInit {
     }
 
     this.generalService.getData(get_url).subscribe((res) => {
-      console.log('res===', res);
       res = res[0] ? res[0] : res;
       if (this.propertyName) {
         this.entityId = res.osid;
@@ -2136,54 +2135,124 @@ export class FormsComponent implements OnInit {
       }
     }
 
-    console.log('model', this.model);
-    await this.generalService.postData(this.apiUrl, this.model).subscribe(
-      (res) => {
-        if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
-          if (localStorage.getItem('isAdminAdd')) {
-            localStorage.setItem('isAdminAdd', '');
-            // $('.modal-backdrop').remove()
-            this.router.navigate([this.redirectTo]);
-            // this.router.navigate(['/myags/attestation/ag/AG/']);
-            $('.modal-backdrop').remove(); // removes the grey overlay.
-            // window.history.go(-1)
-            // window.location.reload();
-          } else {
-            $('.modal-backdrop').remove();
-            this.router.navigate([this.redirectTo]);
-            // this.router.navigate(['/myags/attestation/ag/AG/']);
-            // window.history.go(-1)
-            // window.location.reload();
-          }
-          if (localStorage.getItem('isAGAdd')) {
-            localStorage.setItem('isAGAdd', '');
+    console.log('model---', this.model);
 
-            // uncomment before push
-            this.router.navigate(['/myags/attestation/ag/AG']);
-            $('.modal-backdrop').remove(); // removes the grey overlay.
+    if (this.adminForm == 'prerak-admin-setup' || this.isSignupForm) {
+      await this.generalService
+        .postData('PrerakV2/search', {
+          filters: {},
+          // filters: { mobile: this.model['mobile'] },
+        })
+        .subscribe((res) => {
+          if (res.length == 0) {
+            this.generalService.postData(this.apiUrl, this.model).subscribe(
+              (res) => {
+                if (
+                  res.params.status == 'SUCCESSFUL' &&
+                  !this.model['attest']
+                ) {
+                  if (localStorage.getItem('isAdminAdd')) {
+                    localStorage.setItem('isAdminAdd', '');
+                    // $('.modal-backdrop').remove()
+                    this.router.navigate([this.redirectTo]);
+                    // this.router.navigate(['/myags/attestation/ag/AG/']);
+                    $('.modal-backdrop').remove(); // removes the grey overlay.
+                    // window.history.go(-1)
+                    // window.location.reload();
+                  } else {
+                    $('.modal-backdrop').remove();
+                    this.router.navigate([this.redirectTo]);
+                    // this.router.navigate(['/myags/attestation/ag/AG/']);
+                    // window.history.go(-1)
+                    // window.location.reload();
+                  }
+                  if (localStorage.getItem('isAGAdd')) {
+                    localStorage.setItem('isAGAdd', '');
 
-            // window.history.go(-1)
-            // window.location.reload();
+                    // uncomment before push
+                    this.router.navigate(['/myags/attestation/ag/AG']);
+                    $('.modal-backdrop').remove(); // removes the grey overlay.
+
+                    // window.history.go(-1)
+                    // window.location.reload();
+                  } else {
+                    $('.modal-backdrop').remove();
+                    // this.router.navigate(['/myags/attestation/ag/AG/']);
+                    this.router.navigate([this.redirectTo]);
+                    // window.history.go(-1)
+                    // window.location.reload();
+                  }
+                } else if (
+                  res.params.errmsg != '' &&
+                  res.params.status == 'UNSUCCESSFUL'
+                ) {
+                  this.toastMsg.error('error', res.params.errmsg);
+                  this.isSubmitForm = false;
+                }
+              },
+              (err) => {
+                this.toastMsg.error('error', err.error.params.errmsg);
+                this.isSubmitForm = false;
+              }
+            );
           } else {
-            $('.modal-backdrop').remove();
-            // this.router.navigate(['/myags/attestation/ag/AG/']);
-            this.router.navigate([this.redirectTo]);
-            // window.history.go(-1)
-            // window.location.reload();
+            this.toastMsg.error(
+              'error',
+              this.translate.instant('dUPLICATE_MOBILE_NUMBER')
+            );
           }
-        } else if (
-          res.params.errmsg != '' &&
-          res.params.status == 'UNSUCCESSFUL'
-        ) {
-          this.toastMsg.error('error', res.params.errmsg);
+        });
+    } else {
+      await this.generalService.postData(this.apiUrl, this.model).subscribe(
+        (res) => {
+          if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
+            if (localStorage.getItem('isAdminAdd')) {
+              localStorage.setItem('isAdminAdd', '');
+              // $('.modal-backdrop').remove()
+              this.router.navigate([this.redirectTo]);
+              // this.router.navigate(['/myags/attestation/ag/AG/']);
+              $('.modal-backdrop').remove(); // removes the grey overlay.
+              // window.history.go(-1)
+              // window.location.reload();
+            } else {
+              $('.modal-backdrop').remove();
+              this.router.navigate([this.redirectTo]);
+              // this.router.navigate(['/myags/attestation/ag/AG/']);
+              // window.history.go(-1)
+              // window.location.reload();
+            }
+            if (localStorage.getItem('isAGAdd')) {
+              localStorage.setItem('isAGAdd', '');
+
+              // uncomment before push
+              this.router.navigate(['/myags/attestation/ag/AG']);
+              $('.modal-backdrop').remove(); // removes the grey overlay.
+
+              // window.history.go(-1)
+              // window.location.reload();
+            } else {
+              $('.modal-backdrop').remove();
+              // this.router.navigate(['/myags/attestation/ag/AG/']);
+              this.router.navigate([this.redirectTo]);
+              // window.history.go(-1)
+              // window.location.reload();
+            }
+          } else if (
+            res.params.errmsg != '' &&
+            res.params.status == 'UNSUCCESSFUL'
+          ) {
+            this.toastMsg.error('error', res.params.errmsg);
+            this.isSubmitForm = false;
+          }
+        },
+        (err) => {
+          this.toastMsg.error('error', err.error.params.errmsg);
           this.isSubmitForm = false;
         }
-      },
-      (err) => {
-        this.toastMsg.error('error', err.error.params.errmsg);
-        this.isSubmitForm = false;
-      }
-    );
+      );
+    }
+
+    console.log('model', this.model);
   }
 
   updateData() {
