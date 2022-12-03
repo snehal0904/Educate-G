@@ -368,7 +368,6 @@ export class TablesComponent implements OnInit {
       } else {
         obj['district'] = '';
       }
-      console.log('ele-----', element);
       obj['qualification'] = element.qualification ? element.qualification : '';
       obj['gender'] = element.gender ? element.gender : '';
       obj['sourcingChannel'] = element.sourcingChannel
@@ -645,27 +644,19 @@ export class TablesComponent implements OnInit {
             osid_tmp['prerakId'] = element['osid'];
           }
           if (element?.osOwner) {
-            osid_tmp['osOwner'] = element['osOwner'];
+            osid_tmp['PrerakKey'] = element['osOwner'][0];
           }
           osid_data.push(osid_tmp);
         });
         osUpdated = true;
         if (osUpdated) {
-          console.log('osid_data', osid_data);
           this.model.forEach(async (element) => {
-            console.log(
-              "element['osOwner']===",
-              element['osid'],
-              '    ',
-              element['osOwner']
-            );
             arr = [];
             let obj = [];
-            let prerak_obj = osid_data.find(
-              (o) =>
-                o.osOwner.includes(element['osOwner'][1]) ||
-                o.osOwner.includes(element['osOwner'][0])
-            );
+            let prerak_obj = osid_data.find((o) => {
+              o['PrerakKey'].includes(element['osOwner'][1]) ||
+                o['PrerakKey'].includes(element['osOwner'][0]);
+            });
 
             if (prerak_obj) {
               if (!element.prerakName) {
