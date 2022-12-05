@@ -650,28 +650,30 @@ export class TablesComponent implements OnInit {
         });
         osUpdated = true;
         if (osUpdated) {
+          // console.log(
+          //   [1, 2, 3, 4].filter((value) => [1, 2].includes(value)).length
+          // );
           // to iterate to AG
           this.model.forEach(async (element) => {
             arr = [];
             let obj = [];
             let prerak_obj = osid_data.find((o) => {
+              console.log('===', element['osid']);
               if (
                 o['osOwner'].filter((value) =>
                   element['osOwner'].includes(value)
                 ).length > 0
               ) {
+                console.log('===', element['osid']);
                 console.log(
+                  '+++',
                   o['osOwner'].filter((value) =>
                     element['osOwner'].includes(value)
                   )
                 );
-                o['AGCount'] = o['AGCount'] + 1;
+
                 o;
               }
-              // o['PrerakKey'].filter((value) =>
-              //   element['osOwner'].includes(value)
-              // );
-              // o['PrerakKey'].includes(element['osOwner'][1]);
             });
 
             if (prerak_obj) {
