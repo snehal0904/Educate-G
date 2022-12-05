@@ -650,32 +650,49 @@ export class TablesComponent implements OnInit {
         });
         osUpdated = true;
         if (osUpdated) {
-          // console.log(
-          //   [1, 2, 3, 4].filter((value) => [1, 2].includes(value)).length
-          // );
+          console.log([3, 4].filter((value) => [1, 2].includes(value)).length);
           // to iterate to AG
           this.model.forEach(async (element) => {
             arr = [];
             let obj = [];
-            let prerak_obj = osid_data.find((o) => {
-              console.log('===', element['osid']);
+            let prerak_obj: any;
+            console.log('first prerak', prerak_obj);
+            console.log('===', element['osid']);
+
+            osid_data.forEach(async (ele) => {
               if (
-                o['osOwner'].filter((value) =>
+                ele['osOwner'].filter((value) =>
                   element['osOwner'].includes(value)
                 ).length > 0
               ) {
                 console.log('===', element['osid']);
                 console.log(
                   '+++',
-                  o['osOwner'].filter((value) =>
+                  ele['osOwner'].filter((value) =>
                     element['osOwner'].includes(value)
                   )
                 );
-
-                o;
+                prerak_obj = element;
               }
             });
-
+            // let prerak_obj = osid_data.find((o) => {
+            //   console.log('===', element['osid']);
+            //   if (
+            //     o['osOwner'].filter((value) =>
+            //       element['osOwner'].includes(value)
+            //     ).length > 0
+            //   ) {
+            //     console.log('===', element['osid']);
+            //     console.log(
+            //       '+++',
+            //       o['osOwner'].filter((value) =>
+            //         element['osOwner'].includes(value)
+            //       )
+            //     );
+            //     o;
+            //   }
+            // });
+            console.log('prerak', prerak_obj);
             if (prerak_obj) {
               if (!element.prerakName) {
                 element.prerakName = prerak_obj['prerakName'];
