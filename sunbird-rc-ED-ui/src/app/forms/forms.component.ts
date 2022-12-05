@@ -90,6 +90,7 @@ export class FormsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getLocation();
     this.route.params.subscribe((params) => {
       this.add = this.router.url.includes('add');
 
@@ -135,9 +136,9 @@ export class FormsComponent implements OnInit {
       }
     });
 
-    if(this.form == 'Camp-add'){
-      this.getLocation();
-    }
+    // if(this.form == 'Camp-add'){
+    //   this.getLocation();
+    // }
 
     this.entityName = localStorage.getItem('entity');
 
