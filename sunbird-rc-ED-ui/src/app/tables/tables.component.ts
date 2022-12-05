@@ -650,7 +650,6 @@ export class TablesComponent implements OnInit {
         });
         osUpdated = true;
         if (osUpdated) {
-          console.log([3, 4].filter((value) => [1, 2].includes(value)).length);
           // to iterate to AG
           this.model.forEach(async (element) => {
             arr = [];
@@ -663,6 +662,7 @@ export class TablesComponent implements OnInit {
                   element['osOwner'].includes(value)
                 ).length > 0
               ) {
+                ele['AGCount']++;
                 prerak_obj = ele;
               }
             });
@@ -677,19 +677,24 @@ export class TablesComponent implements OnInit {
             //   }
             // });
             if (prerak_obj) {
-              if (!element.prerakName) {
-                element.prerakName = prerak_obj['prerakName'];
-              }
-              if (!element.prerakId) {
-                element.prerakId = prerak_obj['prerakId'];
-              }
-
-              if (
-                !element.parentOrganization ||
-                element.parentOrganization == ''
-              ) {
-                element.parentOrganization = prerak_obj['parentOrganization'];
-              }
+              // console.log(
+              //   'prerak_obj',
+              //   prerak_obj['prerakName'],
+              //   '--',
+              //   prerak_obj['parentOrganization']
+              // );
+              // if (!element.prerakName) {
+              element.prerakName = prerak_obj['prerakName'];
+              // }
+              // if (!element.prerakId) {
+              element.prerakId = prerak_obj['prerakId'];
+              // }
+              // if (
+              //   !element.parentOrganization ||
+              //   element.parentOrganization == ''
+              // ) {
+              element.parentOrganization = prerak_obj['parentOrganization'];
+              // }
             }
 
             obj['campId'] = element.campId ? element.campId : '';
