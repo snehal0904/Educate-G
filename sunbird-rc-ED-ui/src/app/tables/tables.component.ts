@@ -643,9 +643,7 @@ export class TablesComponent implements OnInit {
           osid_tmp['prerakId'] = element['osid'] ? element['osid'] : '';
 
           if (element?.osOwner) {
-            osid_tmp['PrerakKey'] = element['osOwner'][0]
-              ? element['osOwner'][0]
-              : '';
+            osid_tmp['PrerakKey'] = element['osOwner'];
           }
           osid_data.push(osid_tmp);
         });
@@ -655,14 +653,24 @@ export class TablesComponent implements OnInit {
             arr = [];
             let obj = [];
             let prerak_obj = osid_data.find((o) => {
-              console.log("element['osid']----", element['osid']);
-              console.log(
-                "element['osOwner']----",
-                element['osOwner'][1],
-                '-----',
-                o['PrerakKey']
-              );
-              o['PrerakKey'].includes(element['osOwner'][1]);
+              // console.log("element['osid']----", element['osid']);
+              // console.log(
+              //   "element['osOwner']----",
+              //   element['osOwner'][1],
+              //   '-----',
+              //   o['PrerakKey']
+              // );
+              if (
+                o['PrerakKey'].filter((value) =>
+                  element['osOwner'].includes(value)
+                ).length < 0
+              ) {
+                o;
+              }
+              // o['PrerakKey'].filter((value) =>
+              //   element['osOwner'].includes(value)
+              // );
+              // o['PrerakKey'].includes(element['osOwner'][1]);
             });
 
             if (prerak_obj) {

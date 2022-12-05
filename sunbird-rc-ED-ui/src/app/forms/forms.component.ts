@@ -2128,8 +2128,11 @@ export class FormsComponent implements OnInit {
     if (this.adminForm == 'prerak-admin-setup' || this.isSignupForm) {
       await this.generalService
         .postData('PrerakV2/search', {
-          filters: {},
-          // filters: { mobile: this.model['mobile'] },
+          filters: {
+            mobile: {
+              eq: this.model['mobile'],
+            },
+          },
         })
         .subscribe((res) => {
           if (res.length == 0) {
@@ -2186,7 +2189,7 @@ export class FormsComponent implements OnInit {
           } else {
             this.toastMsg.error(
               'error',
-              this.translate.instant('dUPLICATE_MOBILE_NUMBER')
+              this.translate.instant('DUPLICATE_MOBILE_NUMBER')
             );
           }
         });
