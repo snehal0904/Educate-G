@@ -20,6 +20,19 @@
               "excludes": []
             },
             "propertyShowFirst": ["fullName", "mobile", "email"]
+          },
+          {
+            "definition": "Camp",
+            "title": "Camp",
+            "add": true,
+            "addform": "Camp-add",
+            "editform": "Camp-setup",
+            "edit": true,
+            "claimEdit": true,
+            "canRaiseClaim": false,
+            "fields": {
+              "includes": ["*"]
+            }
           }
 
         ]
