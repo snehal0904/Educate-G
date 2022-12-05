@@ -45,6 +45,8 @@ export class LayoutsComponent implements OnInit, OnChanges {
   params: any;
   langKey;
   titleVal;
+  lat: any;
+  lng: any;
   // systemUpdate: boolean = false;
   constructor(
     public location: Location,
@@ -63,6 +65,7 @@ export class LayoutsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.getLocation();
     this.subHeadername = [];
     if (this.publicData) {
       this.model = this.publicData;
@@ -775,6 +778,24 @@ export class LayoutsComponent implements OnInit, OnChanges {
 
         fieldValue.length ? this.subHeadername.push(fieldValue) : [];
       }
+    }
+  }
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position: Position) => {
+        if (position) {
+          console.log("Latitude: " + position.coords.latitude +
+            "Longitude: " + position.coords.longitude);
+          this.lat = position.coords.latitude;
+          this.lng = position.coords.longitude;
+          console.log(this.lat);
+          console.log(this.lat);
+          this.model['geoLocation'] = this.lat+','+this.lng;
+        }
+      },
+        (error: PositionError) => console.log(error));
+    } else {
+      alert("Geolocation is not supported by this browser.");
     }
   }
 }
