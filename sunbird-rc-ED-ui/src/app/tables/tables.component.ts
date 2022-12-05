@@ -656,8 +656,6 @@ export class TablesComponent implements OnInit {
             arr = [];
             let obj = [];
             let prerak_obj: any;
-            console.log('first prerak', prerak_obj);
-            console.log('===', element['osid']);
 
             osid_data.forEach(async (ele) => {
               if (
@@ -665,34 +663,19 @@ export class TablesComponent implements OnInit {
                   element['osOwner'].includes(value)
                 ).length > 0
               ) {
-                console.log('===', element['osid']);
-                console.log(
-                  '+++',
-                  ele['osOwner'].filter((value) =>
-                    element['osOwner'].includes(value)
-                  )
-                );
-                prerak_obj = element;
+                prerak_obj = ele;
               }
             });
             // let prerak_obj = osid_data.find((o) => {
-            //   console.log('===', element['osid']);
             //   if (
             //     o['osOwner'].filter((value) =>
             //       element['osOwner'].includes(value)
             //     ).length > 0
             //   ) {
-            //     console.log('===', element['osid']);
-            //     console.log(
-            //       '+++',
-            //       o['osOwner'].filter((value) =>
-            //         element['osOwner'].includes(value)
-            //       )
-            //     );
+            //
             //     o;
             //   }
             // });
-            console.log('prerak', prerak_obj);
             if (prerak_obj) {
               if (!element.prerakName) {
                 element.prerakName = prerak_obj['prerakName'];
