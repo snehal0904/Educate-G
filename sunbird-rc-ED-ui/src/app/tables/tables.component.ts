@@ -641,37 +641,60 @@ export class TablesComponent implements OnInit {
             ? element['parentOrganization']
             : '';
           osid_tmp['prerakId'] = element['osid'] ? element['osid'] : '';
+          osid_tmp['AGCount'] = 0;
 
           if (element?.osOwner) {
-            osid_tmp['PrerakKey'] = element['osOwner'][0]
-              ? element['osOwner'][0]
-              : '';
+            osid_tmp['osOwner'] = element['osOwner'];
           }
           osid_data.push(osid_tmp);
         });
         osUpdated = true;
         if (osUpdated) {
+          // to iterate to AG
           this.model.forEach(async (element) => {
             arr = [];
             let obj = [];
-            let prerak_obj = osid_data.find((o) => {
-              o['PrerakKey'].includes(element['osOwner'][1]);
-            });
+            let prerak_obj: any;
 
-            if (prerak_obj) {
-              if (!element.prerakName) {
-                element.prerakName = prerak_obj['prerakName'];
-              }
-              if (!element.prerakId) {
-                element.prerakId = prerak_obj['prerakId'];
-              }
-
+            osid_data.forEach(async (ele) => {
               if (
-                !element.parentOrganization ||
-                element.parentOrganization == ''
+                ele['osOwner'].filter((value) =>
+                  element['osOwner'].includes(value)
+                ).length > 0
               ) {
-                element.parentOrganization = prerak_obj['parentOrganization'];
+                ele['AGCount']++;
+                prerak_obj = ele;
               }
+            });
+            // let prerak_obj = osid_data.find((o) => {
+            //   if (
+            //     o['osOwner'].filter((value) =>
+            //       element['osOwner'].includes(value)
+            //     ).length > 0
+            //   ) {
+            //
+            //     o;
+            //   }
+            // });
+            if (prerak_obj) {
+              // console.log(
+              //   'prerak_obj',
+              //   prerak_obj['prerakName'],
+              //   '--',
+              //   prerak_obj['parentOrganization']
+              // );
+              // if (!element.prerakName) {
+              element.prerakName = prerak_obj['prerakName'];
+              // }
+              // if (!element.prerakId) {
+              element.prerakId = prerak_obj['prerakId'];
+              // }
+              // if (
+              //   !element.parentOrganization ||
+              //   element.parentOrganization == ''
+              // ) {
+              element.parentOrganization = prerak_obj['parentOrganization'];
+              // }
             }
 
             obj['campId'] = element.campId ? element.campId : '';
