@@ -807,6 +807,310 @@
       }
     },
     {
+      "Camp-add": {
+        "api": "/Camp",
+        "type": "entity",
+        "formclass": "row",
+        "title": "Add new Camp",
+        "fieldsets": [
+          {
+            "definition": "Camp",
+            "fields": [
+              {
+                "name": "prerakOsid",
+                "custom": true,
+                "data": {
+                  "type": "api",
+                  "url": "/PrerakV2",
+                  "key": "osid"
+                },
+                "element": {
+                  "widget": {
+                    "formlyConfig": {
+                      "type": "input",
+                      "templateOptions": {
+                        "type": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "name": "geoLocation",
+                "required": true
+
+              },
+              {
+                "name": "campAddress",
+                "required": true
+              },
+              {
+                "name": "locationType",
+                "required": true
+
+              },
+              {
+                "name": "contactOfPersonWhoseHomeUsed",
+                "required": true
+
+              },
+              {
+                "name": "CampOwnerDetails",
+                "children": {
+                  "definition": "CampOwnerDetails",
+                  "title": "कृपया उस व्यक्ति का संपर्क विवरण प्रदान करें जिसके घर का उपयोग किया जा रहा है",
+                  "fields": [
+                    {
+                      "name": "campName",
+                      "required": true,
+                      "validation": {
+                        "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
+                        "message": "Name is not valid."
+                      }
+                    },
+                    {
+                      "name": "mobileNumber",
+                      "required": true,
+                      "validation": {
+                        "pattern": "[6-9]{1}[0-9]{9}",
+                        "message": "MOBILE NUMBER MUST BE 10 DIGIT"
+                      }
+                    },
+                    {
+                      "name": "natureOfLocation",
+                      "required": true
+                    }
+                  ]
+                }
+
+              },
+
+              {
+                "name": "picturesOfLocation",
+                "format": "file",
+                "required": false
+              },
+              {
+                "name": "amenities",
+                "required": true
+
+              },
+              {
+                "name": "keyCommunityStakeHolder",
+                "required": true
+
+              },
+              {
+                "name": "typeOfFirstStakeHolder",
+                "required": true
+
+              },
+              {
+                "name": "nameOfFirstStakeHolder",
+                "required": true,
+                "validation": {
+                  "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
+                  "message": "Name is not valid."
+                }
+
+              },
+              {
+                "name": "mobileOfFirstStakeHolder",
+                "required": true,
+                "validation": {
+                  "pattern": "[6-9]{1}[0-9]{9}",
+                  "message": "MOBILE NUMBER MUST BE 10 DIGIT"
+                }
+
+              },
+              {
+                "name": "typeOfSecondStakeHolder",
+                "required": true
+
+              },
+              {
+                "name": "nameOfSecondStakeHolder",
+                "required": true,
+                "validation": {
+                  "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
+                  "message": "Name is not valid."
+                }
+
+              },
+              {
+                "name": "mobileOfSecondStakeHolder",
+                "required": true,
+                "validation": {
+                  "pattern": "[6-9]{1}[0-9]{9}",
+                  "message": "MOBILE NUMBER MUST BE 10 DIGIT"
+                }
+
+              },
+              {
+                "name": "startDateOfCamp",
+                "required": true,
+                "type": "date"
+
+              }
+            ]
+          }
+        ],
+        "redirectTo": "/profile/Camp"
+      }
+    },
+    {
+      "Camp-setup": {
+        "api": "/Camp",
+        "type": "entity",
+        "formclass": "row",
+        "title": "Add new Camp",
+        "fieldsets": [
+          {
+            "definition": "Camp",
+            "fields": [
+              {
+                "name": "prerakOsid",
+                "custom": true,
+                "data": {
+                  "type": "api",
+                  "url": "/PrerakV2",
+                  "key": "osid"
+                },
+                "element": {
+                  "widget": {
+                    "formlyConfig": {
+                      "type": "input",
+                      "templateOptions": {
+                        "type": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "name": "geoLocation",
+                "required": true
+
+              },
+              {
+                "name": "campAddress",
+                "required": true
+              },
+              {
+                "name": "locationType",
+                "required": true
+
+              },
+              {
+                "name": "contactOfPersonWhoseHomeUsed",
+                "required": true
+
+              },
+              {
+                "name": "CampOwnerDetails",
+                "children": {
+                  "definition": "CampOwnerDetails",
+                  "title": "कृपया उस व्यक्ति का संपर्क विवरण प्रदान करें जिसके घर का उपयोग किया जा रहा है",
+                  "fields": [
+                    {
+                      "name": "campName",
+                      "required": true,
+                      "validation": {
+                        "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
+                        "message": "Name is not valid."
+                      }
+                    },
+                    {
+                      "name": "mobileNumber",
+                      "required": true,
+                      "validation": {
+                        "pattern": "[6-9]{1}[0-9]{9}",
+                        "message": "MOBILE NUMBER MUST BE 10 DIGIT"
+                      }
+                    },
+                    {
+                      "name": "natureOfLocation",
+                      "required": true
+                    }
+                  ]
+                }
+
+              },
+
+              {
+                "name": "picturesOfLocation",
+                "format": "file",
+                "required": false
+              },
+              {
+                "name": "amenities",
+                "required": true
+
+              },
+              {
+                "name": "keyCommunityStakeHolder",
+                "required": true
+
+              },
+              {
+                "name": "typeOfFirstStakeHolder",
+                "required": true
+
+              },
+              {
+                "name": "nameOfFirstStakeHolder",
+                "required": true,
+                "validation": {
+                  "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
+                  "message": "Name is not valid."
+                }
+
+              },
+              {
+                "name": "mobileOfFirstStakeHolder",
+                "required": true,
+                "validation": {
+                  "pattern": "[6-9]{1}[0-9]{9}",
+                  "message": "MOBILE NUMBER MUST BE 10 DIGIT"
+                }
+
+              },
+              {
+                "name": "typeOfSecondStakeHolder",
+                "required": true
+
+              },
+              {
+                "name": "nameOfSecondStakeHolder",
+                "required": true,
+                "validation": {
+                  "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
+                  "message": "Name is not valid."
+                }
+
+              },
+              {
+                "name": "mobileOfSecondStakeHolder",
+                "required": true,
+                "validation": {
+                  "pattern": "[6-9]{1}[0-9]{9}",
+                  "message": "MOBILE NUMBER MUST BE 10 DIGIT"
+                }
+
+              },
+              {
+                "name": "startDateOfCamp",
+                "required": true,
+                "type": "date"
+
+              }
+            ]
+          }
+        ],
+        "redirectTo": "/profile/Camp"
+      }
+    },
+    {
       "ag-setup": {
         "api": "/AGV8",
         "type": "entity",

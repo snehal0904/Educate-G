@@ -75,6 +75,8 @@ export class FormsComponent implements OnInit {
   isSubmitForm: boolean = false;
   adminForm: string;
   isThisAdminRole: boolean = false;
+  lat: any;
+  lng: any;
   constructor(
     private route: ActivatedRoute,
     public translate: TranslateService,
@@ -132,6 +134,10 @@ export class FormsComponent implements OnInit {
         }
       }
     });
+
+    if(this.form == 'Camp-add'){
+      this.getLocation();
+    }
 
     this.entityName = localStorage.getItem('entity');
 
@@ -675,6 +681,7 @@ export class FormsComponent implements OnInit {
             delete this.property[field.name].description;
           }
         }
+
       });
     } else {
       let res = this.responseData.definitions[fieldset.definition].properties;
@@ -2419,5 +2426,24 @@ export class FormsComponent implements OnInit {
         this.toastMsg.error('error', err.error.params.errmsg);
       }
     );
+  }
+
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position: Position) => {
+        if (position) {
+          console.log("Latitude: " + position.coords.latitude +
+            "Longitude: " + position.coords.longitude);
+          this.lat = position.coords.latitude;
+          this.lng = position.coords.longitude;
+          console.log(this.lat);
+          console.log(this.lat);
+          this.model['geoLocation'] = this.lat+','+this.lng;
+        }
+      },
+        (error: PositionError) => console.log(error));
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
   }
 }
