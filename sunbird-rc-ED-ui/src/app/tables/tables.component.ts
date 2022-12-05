@@ -361,6 +361,12 @@ export class TablesComponent implements OnInit {
       obj['parentOrganization'] = element.parentOrganization
         ? element.parentOrganization
         : '';
+      if (element.osOwner[0]) {
+        obj['osOwner[0]'] = element.osOwner[0] ? element.osOwner[0] : '';
+      } else {
+        obj['osOwner[0]'] = '';
+      }
+
       if (element.address) {
         obj['district'] = element.address.district
           ? element.address.district
@@ -550,6 +556,7 @@ export class TablesComponent implements OnInit {
         'full Name',
         'Mobile',
         'parentOrganization',
+        'osOwner[0]',
         'District',
         'Qualification',
         'Gender',
@@ -677,24 +684,11 @@ export class TablesComponent implements OnInit {
             //   }
             // });
             if (prerak_obj) {
-              // console.log(
-              //   'prerak_obj',
-              //   prerak_obj['prerakName'],
-              //   '--',
-              //   prerak_obj['parentOrganization']
-              // );
-              // if (!element.prerakName) {
               element.prerakName = prerak_obj['prerakName'];
-              // }
-              // if (!element.prerakId) {
+
               element.prerakId = prerak_obj['prerakId'];
-              // }
-              // if (
-              //   !element.parentOrganization ||
-              //   element.parentOrganization == ''
-              // ) {
+
               element.parentOrganization = prerak_obj['parentOrganization'];
-              // }
             }
 
             obj['campId'] = element.campId ? element.campId : '';
