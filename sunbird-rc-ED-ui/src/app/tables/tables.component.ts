@@ -658,17 +658,20 @@ export class TablesComponent implements OnInit {
             arr = [];
             let obj = [];
             let prerak_obj = osid_data.find((o) => {
-              // console.log(
-              //   o['osOwner'].filter((value) =>
-              //     element['osOwner'].includes(value)
-              //   ).length
-              // );
+              console.log('===', element['osid']);
               if (
                 o['osOwner'].filter((value) =>
                   element['osOwner'].includes(value)
                 ).length > 0
               ) {
-                // console.log('+++');
+                console.log('===', element['osid']);
+                console.log(
+                  '+++',
+                  o['osOwner'].filter((value) =>
+                    element['osOwner'].includes(value)
+                  )
+                );
+
                 o;
               }
             });
