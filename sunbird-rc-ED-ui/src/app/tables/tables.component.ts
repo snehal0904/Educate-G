@@ -641,30 +641,31 @@ export class TablesComponent implements OnInit {
             ? element['parentOrganization']
             : '';
           osid_tmp['prerakId'] = element['osid'] ? element['osid'] : '';
+          osid_tmp['AGCount'] = 0;
 
           if (element?.osOwner) {
-            osid_tmp['PrerakKey'] = element['osOwner'];
+            osid_tmp['osOwner'] = element['osOwner'];
           }
           osid_data.push(osid_tmp);
         });
         osUpdated = true;
         if (osUpdated) {
+          // to iterate to AG
           this.model.forEach(async (element) => {
             arr = [];
             let obj = [];
             let prerak_obj = osid_data.find((o) => {
-              // console.log("element['osid']----", element['osid']);
-              // console.log(
-              //   "element['osOwner']----",
-              //   element['osOwner'][1],
-              //   '-----',
-              //   o['PrerakKey']
-              // );
               if (
-                o['PrerakKey'].filter((value) =>
+                o['osOwner'].filter((value) =>
                   element['osOwner'].includes(value)
-                ).length < 0
+                ).length > 0
               ) {
+                console.log(
+                  o['osOwner'].filter((value) =>
+                    element['osOwner'].includes(value)
+                  )
+                );
+                o['AGCount'] = o['AGCount'] + 1;
                 o;
               }
               // o['PrerakKey'].filter((value) =>
