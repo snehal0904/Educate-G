@@ -21,6 +21,28 @@
             },
             "propertyShowFirst": ["fullName", "mobile", "email"]
           }
+
+        ]
+      }
+    },
+    {
+      "Camp": {
+        "api": "/Camp",
+        "title": "Camp",
+        "blocks": [
+          {
+            "definition": "Camp",
+            "title": "Camp",
+            "add": true,
+            "addform": "Camp-add",
+            "editform": "Camp-setup",
+            "edit": true,
+            "claimEdit": true,
+            "canRaiseClaim": false,
+            "fields": {
+              "includes": ["*"]
+            }
+          }
         ]
       }
     },
