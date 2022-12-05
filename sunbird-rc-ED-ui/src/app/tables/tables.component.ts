@@ -655,6 +655,13 @@ export class TablesComponent implements OnInit {
             arr = [];
             let obj = [];
             let prerak_obj = osid_data.find((o) => {
+              console.log("element['osid']----", element['osid']);
+              console.log(
+                "element['osOwner']----",
+                element['osOwner'][1],
+                '-----',
+                o['PrerakKey']
+              );
               o['PrerakKey'].includes(element['osOwner'][1]);
             });
 
