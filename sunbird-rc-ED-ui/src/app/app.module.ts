@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
-import { APP_INITIALIZER } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler  } from '@angular/core';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -65,6 +65,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { config } from 'process';
 import { ColorPickerModule } from 'ngx-color-picker';
+import * as Sentry from "@sentry/angular";
 
 
 //form validations
@@ -125,6 +126,7 @@ import { SafeHtmlPipe } from './safe-html.pipe';
 import { initTheme } from './theme.config';
 import { FilterComponent } from './filter/filter.component';
 // import { CreateCertificateComponent } from './create-certificate/create-certificate.component';
+import { Router } from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -260,7 +262,24 @@ import { FilterComponent } from './filter/filter.component';
       useFactory: initTheme,
       deps: [HttpClient, TranslateService],
       multi: true
-    }]
+    },
+    {
+      provide: ErrorHandler,
+      useValue: Sentry.createErrorHandler({
+        showDialog: true,
+      }),
+    },
+    {
+      provide: Sentry.TraceService,
+      deps: [Router],
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: () => () => {},
+      deps: [Sentry.TraceService],
+      multi: true,
+    },
+  ]
 })
 
 
