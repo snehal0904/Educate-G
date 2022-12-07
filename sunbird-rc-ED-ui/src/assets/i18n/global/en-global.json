@@ -12,6 +12,7 @@
   "BASIC_DETAILS": "Basic details",
   "GSTIN_NOT_VALID": "GSTIN is not valid. Ex: 06BZAHM6385P6Z2",
   "NAME_NOT_VALID": "Name is not valid.",
+  "TAKING_MORE_TIME_SOMETHING_WENT_WRONG": "जारीकर्ता से दस्तावेज़ प्राप्त करने में सामान्य से अधिक समय लग रहा है, कुछ गलत हो गया है, कृपया पुनः प्रयास करें",
   "VALID_DATE": "Please enter a valid date",
   "AFFLILIATION_DETAILS": "Affiliation Details",
   "YEAR_NOT_VALID": "Year is not valid. Ex: 2016",
