@@ -1391,6 +1391,44 @@ export class FormsComponent implements OnInit {
             };
           }
         } else if (field.type == 'custom:document') {
+          this.responseData.definitions[fieldset.definition].properties[
+            field.name
+          ]['widget']['formlyConfig']['modelOptions'] = {
+            updateOn: 'blur',
+          };
+          this.responseData.definitions[fieldset.definition].properties[
+            field.name
+          ]['widget']['formlyConfig']['asyncValidators'] = {};
+          this.responseData.definitions[fieldset.definition].properties[
+            field.name
+          ]['widget']['formlyConfig']['asyncValidators'][field.name] = {};
+          this.responseData.definitions[fieldset.definition].properties[
+            field.name
+          ]['widget']['formlyConfig']['asyncValidators'][field.name][
+            'expression'
+          ] = (control: FormControl) => {
+            console.log("control.value",control.value);
+            if (control.value != null) {
+
+              // if (field?.validation && field?.validation?.future == false) {
+                if (control.value[0]['document'] != null) {
+                  return of(control.value);
+                } else {
+                  this.responseData.definitions[
+                    fieldset.definition
+                  ].properties[field.name]['widget']['formlyConfig'][
+                    'asyncValidators'
+                  ][field.name]['message'] = "You should need to provide a valid document information.";
+                  return of(false);
+                }
+              // }
+            }
+            return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                resolve(true);
+              }, 1000);
+            });
+          };
         } else if (field.type === 'date') {
           this.responseData.definitions[fieldset.definition].properties[
             field.name
