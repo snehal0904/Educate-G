@@ -1734,6 +1734,9 @@ export class FormsComponent implements OnInit {
     if (this.model['RSOS_NIOSRegId']) {
       this.model['RSOS_NIOSRegId'] = this.model['RSOS_NIOSRegId'].toString();
     }
+    if(this.model['AGDocumentsV3'][0] == null) {
+      this.model['AGDocumentsV3'] = [];
+    }
 
     if (this.fileFields.length > 0) {
       this.fileFields.forEach((fileField) => {
