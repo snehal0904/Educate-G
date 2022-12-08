@@ -1774,10 +1774,10 @@ export class FormsComponent implements OnInit {
     if (this.model['RSOS_NIOSRegId']) {
       this.model['RSOS_NIOSRegId'] = this.model['RSOS_NIOSRegId'].toString();
     }
-    if(this.model['AGDocumentsV3'][0] == null) {
+    if(this.model['AGDocumentsV3'] && this.model['AGDocumentsV3'][0] == null) {
       this.model['AGDocumentsV3'] = [];
     }
-
+  // console.log("1.1")
     if (this.fileFields.length > 0) {
       this.fileFields.forEach((fileField) => {
         if (this.model[fileField]) {
@@ -1806,13 +1806,16 @@ export class FormsComponent implements OnInit {
               });
 
               this.model[fileField] = documents_list;
+              // console.log("1.2")
               if (this.type && this.type === 'entity') {
+                // console.log("1.2.1")
                 if (this.identifier != null) {
                   this.updateData();
                 } else {
                   this.postData();
                 }
               } else if (this.type && this.type.includes('property')) {
+                // console.log("1.2.2")
                 var property = this.type.split(':')[1];
                 var url;
                 if (this.identifier != null && this.entityId != undefined) {
@@ -1839,7 +1842,7 @@ export class FormsComponent implements OnInit {
               }
             },
             (err) => {
-              console.log(err);
+              // console.log(err);
               this.toastMsg.error(
                 'error',
                 this.translate.instant('SOMETHING_WENT_WRONG')
@@ -1847,13 +1850,16 @@ export class FormsComponent implements OnInit {
             }
           );
         } else {
+          // console.log("1.3")
           if (this.type && this.type === 'entity') {
+            // console.log("1.3.1")
             if (this.identifier != null) {
               this.updateData();
             } else {
               this.postData();
             }
           } else if (this.type && this.type.includes('property')) {
+            // console.log("1.3.2")
             var property = this.type.split(':')[1];
             // let url;
             if (this.identifier != null && this.entityId != undefined) {
@@ -1883,13 +1889,16 @@ export class FormsComponent implements OnInit {
         }
       });
     } else {
+      // console.log("1.4")
       if (this.type && this.type === 'entity') {
+        // console.log("1.4.1")
         if (this.identifier != null) {
           this.updateData();
         } else {
           this.postData();
         }
       } else if (this.type && this.type.includes('property')) {
+        // console.log("1.4.2")
         var property = this.type.split(':')[1];
 
         if (this.identifier != null && this.entityId != undefined) {
@@ -1918,7 +1927,7 @@ export class FormsComponent implements OnInit {
         if (this.model[property]) {
           this.model = this.model[property];
         }
-
+        // console.log("1.5")
         if (this.identifier != null && this.entityId != undefined) {
           if (
             this.adminForm == 'prerak-admin-setup' ||
@@ -1926,11 +1935,14 @@ export class FormsComponent implements OnInit {
             this.adminForm == 'ag-setup' ||
             this.adminForm == 'ag-registration'
           ) {
+            // console.log("1.5.1")
             this.postData();
           } else {
+            // console.log("1.5.2")
             this.updateClaims();
           }
         } else {
+          // console.log("1.6")
           this.postData();
         }
 
