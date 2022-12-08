@@ -117,7 +117,9 @@ export class FormsComponent implements OnInit {
       if (params.hasOwnProperty('id')) {
         this.identifier = params['id'];
       }
-
+      console.log("osiddd local",params['form'] == 'prerak-admin-setup' ||
+      params['form'] == 'interview' ||
+      params['form'] == 'ag-setup')
       if (
         params['form'] != undefined &&
         (params['form'] == 'prerak-admin-setup' ||
@@ -1418,7 +1420,7 @@ export class FormsComponent implements OnInit {
                     fieldset.definition
                   ].properties[field.name]['widget']['formlyConfig'][
                     'asyncValidators'
-                  ][field.name]['message'] = "You should need to provide a valid document information.";
+                  ][field.name]['message'] = "You should need to select atlease one document.";
                   return of(false);
                 }
               // }

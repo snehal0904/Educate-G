@@ -285,6 +285,144 @@
     },
 
     {
+      "add-prerak-admin-setup": {
+        "api": "/PrerakV2",
+        "type": "entity",
+        "redirectTo": "Admin/attestation/admin-attestation/PrerakV2",
+        "langKey": "prerakAdmin",
+        "fieldsets": [
+          {
+            "definition": "PrerakV2",
+            "privacyConfig": "PrerakV2OsConfig",
+            "globalPrivacyConfig": "internal-access",
+            "fields": [
+              {
+                "name": "fullName",
+                "required": true,
+                "validation": {
+                  "message": "NAME_NOT_VALID"
+                }
+              },
+              {
+                "name": "mobile",
+                "required": true,
+                "validation": {
+                  "pattern": "[1-9]{1}[0-9]{9}",
+                  "message": "MOBILE_NO_MUST_10_DIGIT"
+                }
+              },
+              {
+                "name": "qualification"
+              },
+              {
+                "name": "gender"
+              },
+              {
+                "name": "sourcingChannel"
+              },
+              {
+                "name": "referrerIfApplicable"
+              },
+              {
+                "name": "referenceId"
+              },
+              {
+                "name": "relationshipWithTheCandidate"
+              },
+              {
+                "name": "parentOrganization"
+              },
+              {
+                "name": "candidateStatus"
+              },
+              {
+                "name": "vfsMemberName"
+              },
+              {
+                "name": "numberOfAttempts"
+              },
+              {
+                "name": "callStatus"
+              },
+              {
+                "name": "explainRROfPrerak"
+              },
+              {
+                "name": "userInterestedRole"
+              },
+              {
+                "name": "reasonForNotInterested"
+              },
+              {
+                "name": "descForNotInterested"
+              },
+              {
+                "name": "confirmName"
+              },
+              {
+                "name": "confirmPhoneNumber",
+                "validation": {
+                  "pattern": "[1-9]{1}[0-9]{9}",
+                  "message": "MOBILE_NO_MUST_10_DIGIT"
+                }
+              },
+              {
+                "name": "confirmQualification"
+              },
+              {
+                "name": "accessToMobNo"
+              },
+              {
+                "name": "confirmAddress",
+                "children": {
+                  "definition": "Address",
+                  "title": false,
+                  "fields": [
+                    {
+                      "name": "district",
+                      "dependent": {
+                        "key": "district",
+                        "title": "District",
+                        "type": "select",
+                        "options": "this.locationService.getDistrict()"
+                      }
+                    },
+                    {
+                      "name": "block",
+                      "dependentOn": {
+                        "key": "block",
+                        "title": "Block",
+                        "dependentOn": "district",
+                        "type": "select",
+                        "options": []
+                      }
+                    },
+                    {
+                      "name": "village",
+                      "dependentOn": {
+                        "key": "village",
+                        "title": "Village",
+                        "dependentOn": "block",
+                        "type": "select",
+                        "options": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "alternateMobileNumber"
+              },
+              {
+                "name": "whenToCallNextOrOtherNotes"
+              }
+            ]
+          }
+        ]
+      }
+    },
+
+    {
       "prerak-education": {
         "api": "/PrerakV2",
         "type": "property:academicQualifications",
