@@ -117,7 +117,7 @@
             "title": "PERSONAL_DETAILS",
             "add": false,
             "edit": true,
-            "addform": "prerak-admin-setup",
+            "addform": "add-prerak-admin-setup",
             "editform": "prerak-admin-setup",
             "fields": {
               "includes": ["*"],
