@@ -2188,7 +2188,7 @@ export class FormsComponent implements OnInit {
       }
     }
 
-    if (this.adminForm == 'prerak-admin-setup' || this.isSignupForm) {
+    if (this.adminForm == 'add-prerak-admin-setup' || this.isSignupForm) {
       await this.generalService
         .postData('PrerakV2/search', {
           filters: {
