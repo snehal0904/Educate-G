@@ -1315,65 +1315,6 @@
             },
             "fields": [
               {
-                "name": "prerakName",
-
-                "custom": true,
-                "data": {
-                  "type": "api",
-                  "url": "/PrerakV2",
-                  "key": "fullName"
-                },
-                "element": {
-                  "widget": {
-                    "formlyConfig": {
-                      "type": "input",
-                      "templateOptions": {
-                        "type": "hidden",
-                        "required": true
-                      }
-                    }
-                  }
-                }
-              },
-              {
-                "name": "prerakId",
-                "custom": true,
-                "data": {
-                  "type": "api",
-                  "url": "/PrerakV2",
-                  "key": "osid"
-                },
-                "element": {
-                  "widget": {
-                    "formlyConfig": {
-                      "type": "input",
-                      "templateOptions": {
-                        "type": "hidden"
-                      }
-                    }
-                  }
-                }
-              },
-              {
-                "name": "parentOrganization",
-                "custom": true,
-                "data": {
-                  "type": "api",
-                  "url": "/PrerakV2",
-                  "key": "parentOrganization"
-                },
-                "element": {
-                  "widget": {
-                    "formlyConfig": {
-                      "type": "input",
-                      "templateOptions": {
-                        "type": "hidden"
-                      }
-                    }
-                  }
-                }
-              },
-              {
                 "name": "AGfullName",
                 "required": true,
                 "validation": {
@@ -1490,6 +1431,7 @@
                   "message": "MOBILE_NO_MUST_10_DIGIT"
                 },
                 "expressionProperties": {
+                  "hideExpression": "model.sameAsAbove",
                   "templateOptions.disabled": "model.sameAsAbove",
                   "templateOptions.required": "!model.sameAsAbove"
                 }
@@ -1524,7 +1466,6 @@
                 "name": "registrationStatus",
                 "required": true
               },
-
               {
                 "name": "AGDocumentsV3",
                 "required": true,

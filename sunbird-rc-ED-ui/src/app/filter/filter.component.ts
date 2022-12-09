@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { TranslateService } from '@ngx-translate/core';
 import { SchemaService } from '../services/data/schema.service';
@@ -42,13 +43,18 @@ export class FilterComponent implements OnInit {
     noDataLabel: this.translate.instant("FILTER_NOT_AVAILABLE"),
     classes: "myclass custom-class"
   };
+  layout: any;
   constructor(
     public schemaService: SchemaService,
     public translate: TranslateService,
-    public generalService: GeneralService
+    public generalService: GeneralService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.layout = params['layout'];
+    });
     this.schemaService.getFilterJSON().subscribe((searchSchemas) => {
       this.searchSchemas = searchSchemas;
 
@@ -56,21 +62,24 @@ export class FilterComponent implements OnInit {
         this.searchJson = this.searchSchemas.searches[key];
 
         Object.keys(this.searchJson).forEach((key1) => {
+          if(this.layout == key1){
           this.filtered.push(this.searchJson[key1]);
 
           if (this.searchJson[key1]?.activeTab === 'active') {
             this.activeTabIs = this.searchJson[key1].tab;
           }
+          this.schemaService.getSchemas().subscribe((res) => {
+            this.responseData = res;
+            console.log("schema Response", this.responseData);
+            this.showFilter();
+          });
+        }
         });
       }, (error) => {
         console.log("error", error);
       });
 
-      this.schemaService.getSchemas().subscribe((res) => {
-        this.responseData = res;
-        console.log("schema Response", this.responseData);
-        this.showFilter();
-      });
+     
     });
   }
 
@@ -186,6 +195,7 @@ export class FilterComponent implements OnInit {
 
   onItemDeSelect(item: any) {
     this.fields = this.data[0].fieldGroup.filter((obj) => obj.key !== item.id);
+    delete this.model[item.id];
     this.data[0].fieldGroup = [...this.fields];
   }
 

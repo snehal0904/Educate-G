@@ -5,7 +5,7 @@
     "limit": "5",
     "searches": [
         {
-            "prerakv2": {
+            "PrerakV2": {
                 "tab": "prerak",
                 "tabTitle": "SEARCH_PRERAK",
                 "api": "/PrerakV2/search",
@@ -270,6 +270,94 @@
                         {
                             "title": "SOURCING_CHANNEL",
                             "property": "sourcingChannel"
+                        }
+                    ]
+                }
+            },
+            "AGV8" : {
+                "tab": "agv8",
+                "tabTitle": "SEARCH_AG",
+                "api": "/AGV8/search",
+                "activeTab": "active",
+                "privateFields": "AGV8OsConfig",
+                "filters": [
+                    {
+                        "key": "fullName",
+                        "type": "text",
+                        "title": "FULL_NAME",
+                        "propertyPath": "AGfullName"
+                    },
+                    {
+                        "key": "dob",
+                        "type": "text",
+                        "title": "DOB",
+                        "propertyPath": "dob"
+                    },
+                    {
+                        "key": "category",
+                        "type": "text",
+                        "title": "CATEGORY",
+                        "propertyPath": "category"
+                    },
+                    {
+                        "key": "district",
+                        "type": "select",
+                        "title": "DISTRICT",
+                        "propertyPath": "AgAddress.district",
+                        "templateOptions": {
+                            "placeholder": "DISTRICT",
+                            "options": [
+                                {
+                                    "label": "Pali",
+                                    "value": "Pali"
+                                },
+                                {
+                                    "label": "Jaipur",
+                                    "value": "Jaipur"
+                                },
+                                {
+                                    "label": "Baran",
+                                    "value": "Baran"
+                                },
+                                {
+                                    "label": "Dausa",
+                                    "value": "Dausa"
+                                },
+                                {
+                                    "label": "Jodhpur",
+                                    "value": "Jodhpur"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "key": "block",
+                        "type": "text",
+                        "title": "BLOCK",
+                        "propertyPath": "AgAddress.block"
+                    }
+                ],
+                "results": {
+                    "fields": [
+                        {
+                            "title": "FULL_NAME",
+                            "property": "fullName"
+                        },
+                        {
+                            "title": "DOB",
+                            "property": "dob"
+                        },
+                        {
+                            "title": "CATEGORY",
+                            "property": "category"
+                        },
+                        {
+                            "title": "DISTRICT",
+                            "property": "AgAddress.district"
+                        },
+                        {
+                            "title": "BLOCK",
+                            "property": "AgAddress.block"
                         }
                     ]
                 }

@@ -136,6 +136,12 @@ export class FormsComponent implements OnInit {
           //this.propertyName = 'Prerak';
         }
       }
+
+      if( params['form'] == 'add-prerak-admin-setup')
+      {
+        this.adminForm = params['form'];
+      }
+
     });
 
     // if(this.form == 'Camp-add'){
@@ -2127,7 +2133,11 @@ export class FormsComponent implements OnInit {
         this.entityId = res.osid;
       }
       // if (this.form != 'ag-registration') {
+
+    if(!this.add){
       this.model = res;
+    }
+     
       // }
 
       this.identifier = res.osid;
@@ -2255,6 +2265,7 @@ export class FormsComponent implements OnInit {
               this.translate.instant('DUPLICATE_MOBILE_NUMBER')
             );
           }
+          this.isSubmitForm = false;
         });
     } else {
       await this.generalService.postData(this.apiUrl, this.model).subscribe(

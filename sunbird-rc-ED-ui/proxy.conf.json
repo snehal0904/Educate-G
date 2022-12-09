@@ -1,6 +1,6 @@
 {
     "/registry/api/v1": {
-      "target": "https://dev-eg2.uniteframework.io",
+      "target": "https://eg2.uniteframework.io",
       "changeOrigin": true,
       "logLevel": "debug",
       "secure": false
@@ -8,15 +8,14 @@
     },
 
     "/registry/api": {
-      "target": "https://dev-eg2.uniteframework.io",
+      "target": "https://eg2.uniteframework.io",
       "changeOrigin": true,
       "logLevel": "debug",
       "secure": false
 
     },
-
     "/registry/api/docs": {
-      "target": "https://dev-eg2.uniteframework.io",
+      "target": "https://eg2.uniteframework.io",
       "changeOrigin": true,
       "logLevel": "debug",
       "secure": false
