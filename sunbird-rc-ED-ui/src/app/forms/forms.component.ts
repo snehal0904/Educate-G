@@ -15,6 +15,7 @@ import { throwError } from 'rxjs';
 import { LocationService } from '../services/location/location.service';
 import { startWith, switchMap } from 'rxjs/operators';
 import { stringify } from '@angular/compiler/src/util';
+import { KeycloakService } from 'keycloak-angular';
 
 declare const $: any;
 
@@ -77,6 +78,7 @@ export class FormsComponent implements OnInit {
   isThisAdminRole: boolean = false;
   lat: any;
   lng: any;
+  roleCheck: boolean;
   constructor(
     private route: ActivatedRoute,
     public translate: TranslateService,
@@ -86,10 +88,19 @@ export class FormsComponent implements OnInit {
     public schemaService: SchemaService,
     private formlyJsonschema: FormlyJsonschema,
     public generalService: GeneralService,
-    private location: Location
+    private location: Location,
+    public keycloak: KeycloakService
   ) {}
 
   ngOnInit(): void {
+
+    this.keycloak.loadUserProfile().then((res) => {
+      this.roleCheck = this.keycloak.isUserInRole(
+        'Report-manager',
+        res['username']
+      );
+    });
+
     this.getLocation();
     this.route.params.subscribe((params) => {
       this.add = this.router.url.includes('add');
@@ -176,7 +187,11 @@ export class FormsComponent implements OnInit {
         }
 
         if (this.formSchema.redirectTo) {
-          this.redirectTo = this.formSchema.redirectTo;
+          if (this.roleCheck && this.form === "ag-setup") {
+            this.redirectTo = "/admin/attestation/ag-attestation/AGV8";
+          } else {
+            this.redirectTo = this.formSchema.redirectTo;
+          }
         }
 
         if (this.formSchema.type) {
