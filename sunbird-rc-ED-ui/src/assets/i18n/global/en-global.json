@@ -178,7 +178,7 @@
   "THIS_CERTIFICATE_IS_NOT_VALID": "This Certificate is not valid",
   "SOMETHING_WENT_WRONG_WITH_SCHEMA_URL": "Something went wrong with Schema URL or Path not found",
   "ATTESTATION_REQUESTED": "Attestation Requested",
-  "dUPLICATE_MOBILE_NUMBER": "User with same mobile number is already present",
+  "DUPLICATE_MOBILE_NUMBER": "User with same mobile number is already present",
   "SAVED_TO_DRAFT": "Saved to DRAFT",
   "PUBLISHED": "Published",
   "SELECT": "Select",
