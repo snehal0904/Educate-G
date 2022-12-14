@@ -1023,11 +1023,7 @@
 
               },
 
-              {
-                "name": "picturesOfLocation",
-                "format": "file",
-                "required": false
-              },
+
               {
                 "name": "amenities",
                 "required": true
@@ -1172,13 +1168,6 @@
                     }
                   ]
                 }
-
-              },
-
-              {
-                "name": "picturesOfLocation",
-                "format": "file",
-                "required": false
               },
               {
                 "name": "amenities",
@@ -1496,14 +1485,7 @@
                 "name": "isRSOS_NIOSFormSubmitted",
                 "required": true
               },
-              {
-                "name": "RSOS_NIOSFormPhoto",
-                "format": "file",
-                "required": false,
-                "expressionProperties": {
-                  "templateOptions.disabled": "model.isRSOS_NIOSFormSubmitted=='नहीं'"
-                }
-              },
+
               {
                 "name": "examChoice",
                 "required": true,

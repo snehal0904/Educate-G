@@ -9,7 +9,7 @@ Sentry.init({
   dsn: "https://85c4f20a5c9a4d29bee0f04787174cd3@o4504281638567936.ingest.sentry.io/4504281991086080",
   integrations: [
     new BrowserTracing({
-      tracePropagationTargets: ["localhost", "https://yourserver.io/api"],
+      tracePropagationTargets: ["localhost","http://localhost:4200", "https://yourserver.io/api"],
       routingInstrumentation: Sentry.routingInstrumentation,
     }),
   ],
@@ -20,7 +20,7 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
-enableProdMode();
+// enableProdMode();
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
   .then(success => console.log(`Bootstrap success`))
