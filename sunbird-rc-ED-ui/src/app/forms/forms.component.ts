@@ -16,6 +16,7 @@ import { LocationService } from '../services/location/location.service';
 import { startWith, switchMap } from 'rxjs/operators';
 import { stringify } from '@angular/compiler/src/util';
 import { KeycloakService } from 'keycloak-angular';
+import * as Sentry from "@sentry/angular";
 
 declare const $: any;
 
@@ -79,6 +80,7 @@ export class FormsComponent implements OnInit {
   lat: any;
   lng: any;
   adminRole: boolean;
+
   constructor(
     private route: ActivatedRoute,
     public translate: TranslateService,
@@ -93,6 +95,7 @@ export class FormsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
     this.keycloak.loadUserProfile().then((res) => {
       this.adminRole = this.keycloak.isUserInRole('admin', res['username']);
     });
@@ -345,6 +348,13 @@ export class FormsComponent implements OnInit {
   }
 
   loadSchema() {
+    // console.log("testtt---",this.test[1].replace("null","emp"));
+    // Sentry.addBreadcrumb({
+    //   category: "auth",
+    //   message: "Authenticated user ",
+    //   level: "info",
+    // });
+    // throw new Error("Error occurred.");
     this.form2 = new FormGroup({});
     this.options = {};
     this.fields = [this.formlyJsonschema.toFieldConfig(this.schema)];
@@ -1777,15 +1787,15 @@ export class FormsComponent implements OnInit {
       }
     }
     if (this.model['isRSOS_NIOSFormSubmitted'] == 'नहीं') {
-      alert('here');
+      // alert('here');
       this.model = {};
-
-      this.model['isRSOS_NIOSRegIdReceived'] = '';
+      this.model['isRSOS_NIOSFormSubmitted'] = 'नहीं'
+      this.model['isRSOS_NIOSRegIdReceived'] = 'नहीं';
       this.model['RSOS_NIOSRegId'] = '';
-      this.model['subjects'] = <unknown>[];
-      this.model['examChoice'] = '';
-      this.model['birthDateOnRSOS_NIOSForm'] = '';
-      this.model['RSOS_NIOSFormPhoto'] = '';
+      this.model['subjects'] = <unknown>[""];
+      this.model['examChoice'] = "";
+      this.model['birthDateOnRSOS_NIOSForm'] = new Date();
+      this.model['RSOS_NIOSFormPhoto'] = "";
     }
 
     if (this.model['RSOS_NIOSFormPhoto']) {
@@ -1827,16 +1837,16 @@ export class FormsComponent implements OnInit {
               });
 
               this.model[fileField] = documents_list;
-              // console.log("1.2")
+              console.log("1.2")
               if (this.type && this.type === 'entity') {
-                // console.log("1.2.1")
+                console.log("1.2.1")
                 if (this.identifier != null) {
                   this.updateData();
                 } else {
                   this.postData();
                 }
               } else if (this.type && this.type.includes('property')) {
-                // console.log("1.2.2")
+                console.log("1.2.2")
                 var property = this.type.split(':')[1];
                 var url;
                 if (this.identifier != null && this.entityId != undefined) {
@@ -1871,16 +1881,16 @@ export class FormsComponent implements OnInit {
             }
           );
         } else {
-          // console.log("1.3")
+          console.log("1.3")
           if (this.type && this.type === 'entity') {
-            // console.log("1.3.1")
+            console.log("1.3.1")
             if (this.identifier != null) {
               this.updateData();
             } else {
               this.postData();
             }
           } else if (this.type && this.type.includes('property')) {
-            // console.log("1.3.2")
+            console.log("1.3.2")
             var property = this.type.split(':')[1];
             // let url;
             if (this.identifier != null && this.entityId != undefined) {
@@ -1896,7 +1906,7 @@ export class FormsComponent implements OnInit {
             if (this.model[property]) {
               this.model = this.model[property];
             }
-
+            console.log("1.3.2",this.identifier,this.entityId)
             if (this.identifier != null && this.entityId != undefined) {
               this.updateClaims();
             } else {
@@ -1910,16 +1920,16 @@ export class FormsComponent implements OnInit {
         }
       });
     } else {
-      // console.log("1.4")
+      console.log("1.4")
       if (this.type && this.type === 'entity') {
-        // console.log("1.4.1")
+        console.log("1.4.1")
         if (this.identifier != null) {
           this.updateData();
         } else {
           this.postData();
         }
       } else if (this.type && this.type.includes('property')) {
-        // console.log("1.4.2")
+        console.log("1.4.2")
         var property = this.type.split(':')[1];
 
         if (this.identifier != null && this.entityId != undefined) {
@@ -1927,10 +1937,12 @@ export class FormsComponent implements OnInit {
             this.adminForm == 'prerak-admin-setup' ||
             this.adminForm == 'interview' ||
             this.adminForm == 'ag-setup' ||
-            this.adminForm == 'ag-registration'
+            this.form == 'ag-registration' && this.add
           ) {
+            console.log("1.4.3")
             var url = [this.apiUrl, this.identifier, property];
           } else if (this.isThisAdminRole) {
+            console.log("1.4.4")
             var url = [
               this.apiUrl,
               localStorage.getItem('id'),
@@ -1938,9 +1950,15 @@ export class FormsComponent implements OnInit {
               this.identifier,
             ];
           } else {
-            var url = [this.apiUrl, this.entityId, property, this.identifier];
+            console.log("1.4.5")
+            if(this.form == 'ag-registration'){
+              var url = [this.apiUrl,  localStorage.getItem('ag-id'), property, this.identifier];
+            }else{
+              var url = [this.apiUrl, this.entityId, property, this.identifier];
+            }
           }
         } else {
+          console.log("1.4.6")
           var url = [this.apiUrl, this.identifier, property];
         }
 
@@ -1948,22 +1966,22 @@ export class FormsComponent implements OnInit {
         if (this.model[property]) {
           this.model = this.model[property];
         }
-        // console.log("1.5")
+        console.log("1.5",this.form)
         if (this.identifier != null && this.entityId != undefined) {
           if (
             this.adminForm == 'prerak-admin-setup' ||
             this.adminForm == 'interview' ||
             this.adminForm == 'ag-setup' ||
-            this.adminForm == 'ag-registration'
+            this.form == 'ag-registration' && this.add
           ) {
-            // console.log("1.5.1")
+            console.log("1.5.1")
             this.postData();
           } else {
-            // console.log("1.5.2")
+            console.log("1.5.2")
             this.updateClaims();
           }
         } else {
-          // console.log("1.6")
+          console.log("1.6")
           this.postData();
         }
 
@@ -2035,7 +2053,12 @@ export class FormsComponent implements OnInit {
     this.generalService.attestationReq('/send', data).subscribe(
       (res) => {
         if (res.params.status == 'SUCCESSFUL') {
-          this.router.navigate([this.redirectTo]);
+          if( this.form == 'ag-registration'){
+            window.history.go(-1)
+            // window.location.reload();
+          }else{
+            this.router.navigate([this.redirectTo]);
+          }
         } else if (
           res.params.errmsg != '' &&
           res.params.status == 'UNSUCCESSFUL'
@@ -2149,9 +2172,15 @@ export class FormsComponent implements OnInit {
       }
       // if (this.form != 'ag-registration') {
 
+<<<<<<< HEAD
       if (!this.add) {
         this.model = res;
       }
+=======
+    if(!this.add){
+      this.model = res;
+    }
+>>>>>>> 21141224158e26cebf999941fcf33dca6f91f8ca
 
       // }
 
@@ -2230,20 +2259,31 @@ export class FormsComponent implements OnInit {
                   res.params.status == 'SUCCESSFUL' &&
                   !this.model['attest']
                 ) {
+
                   if (localStorage.getItem('isAdminAdd')) {
                     localStorage.setItem('isAdminAdd', '');
                     // $('.modal-backdrop').remove()
-                    this.router.navigate([this.redirectTo]);
+                    if( this.form == 'ag-registration'){
+                      window.history.go(-1)
+                      // window.location.reload();
+                    }else{
+                      this.router.navigate([this.redirectTo]);
+                    }
                     // this.router.navigate(['/myags/attestation/ag/AG/']);
                     $('.modal-backdrop').remove(); // removes the grey overlay.
                     // window.history.go(-1)
-                    // window.location.reload();
+                    // // window.location.reload();
                   } else {
                     $('.modal-backdrop').remove();
-                    this.router.navigate([this.redirectTo]);
+                    if( this.form == 'ag-registration'){
+                      window.history.go(-1)
+                     // window.location.reload();
+                    }else{
+                      this.router.navigate([this.redirectTo]);
+                    }
                     // this.router.navigate(['/myags/attestation/ag/AG/']);
                     // window.history.go(-1)
-                    // window.location.reload();
+                    // // window.location.reload();
                   }
                   if (localStorage.getItem('isAGAdd')) {
                     localStorage.setItem('isAGAdd', '');
@@ -2253,13 +2293,14 @@ export class FormsComponent implements OnInit {
                     $('.modal-backdrop').remove(); // removes the grey overlay.
 
                     // window.history.go(-1)
-                    // window.location.reload();
+                    // // window.location.reload();
                   } else {
                     $('.modal-backdrop').remove();
                     // this.router.navigate(['/myags/attestation/ag/AG/']);
-                    this.router.navigate([this.redirectTo]);
+
+
                     // window.history.go(-1)
-                    // window.location.reload();
+                    // // window.location.reload();
                   }
                 } else if (
                   res.params.errmsg != '' &&
@@ -2289,17 +2330,27 @@ export class FormsComponent implements OnInit {
             if (localStorage.getItem('isAdminAdd')) {
               localStorage.setItem('isAdminAdd', '');
               // $('.modal-backdrop').remove()
-              this.router.navigate([this.redirectTo]);
+              if( this.form == 'ag-registration'){
+                window.history.go(-1)
+                // window.location.reload();
+              }else{
+                this.router.navigate([this.redirectTo]);
+              }
               // this.router.navigate(['/myags/attestation/ag/AG/']);
               $('.modal-backdrop').remove(); // removes the grey overlay.
               // window.history.go(-1)
-              // window.location.reload();
+              // // window.location.reload();
             } else {
               $('.modal-backdrop').remove();
-              this.router.navigate([this.redirectTo]);
+              if( this.form == 'ag-registration'){
+                window.history.go(-1)
+                // window.location.reload();
+              }else{
+                this.router.navigate([this.redirectTo]);
+              }
               // this.router.navigate(['/myags/attestation/ag/AG/']);
               // window.history.go(-1)
-              // window.location.reload();
+              // // window.location.reload();
             }
             if (localStorage.getItem('isAGAdd')) {
               localStorage.setItem('isAGAdd', '');
@@ -2309,13 +2360,18 @@ export class FormsComponent implements OnInit {
               $('.modal-backdrop').remove(); // removes the grey overlay.
 
               // window.history.go(-1)
-              // window.location.reload();
+              // // window.location.reload();
             } else {
               $('.modal-backdrop').remove();
               // this.router.navigate(['/myags/attestation/ag/AG/']);
-              this.router.navigate([this.redirectTo]);
+              if( this.form == 'ag-registration'){
+                window.history.go(-1)
+                // window.location.reload();
+              }else{
+                this.router.navigate([this.redirectTo]);
+              }
               // window.history.go(-1)
-              // window.location.reload();
+              // // window.location.reload();
             }
           } else if (
             res.params.errmsg != '' &&
@@ -2385,7 +2441,12 @@ export class FormsComponent implements OnInit {
       .subscribe(
         (res) => {
           if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
-            this.router.navigate([this.redirectTo]);
+            if( this.form == 'ag-registration'){
+              window.history.go(-1)
+              // window.location.reload();
+            }else{
+              this.router.navigate([this.redirectTo]);
+            }
           } else if (
             res.params.errmsg != '' &&
             res.params.status == 'UNSUCCESSFUL'
@@ -2478,12 +2539,16 @@ export class FormsComponent implements OnInit {
   getEntityData(apiUrl) {
     if (this.identifier !== undefined) {
       this.generalService.getData(apiUrl).subscribe((res) => {
+        if(res && res[0][this.propertyName].length){
         this.entityId = res[0].osid;
         this.exLength = res[0][this.propertyName].length;
+        }
       });
     } else {
       this.generalService.getData(apiUrl).subscribe((res) => {
-        this.exLength = res[0][this.propertyName].length;
+        if(res && res[0][this.propertyName].length){
+          this.exLength = res[0][this.propertyName].length;
+        }
       });
     }
   }
@@ -2496,7 +2561,12 @@ export class FormsComponent implements OnInit {
     this.generalService.updateclaims(this.apiUrl, this.model).subscribe(
       (res) => {
         if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
-          this.router.navigate([this.redirectTo]);
+          if( this.form == 'ag-registration'){
+            window.history.go(-1)
+            // window.location.reload();
+          }else{
+            this.router.navigate([this.redirectTo]);
+          }
         } else if (
           res.params.errmsg != '' &&
           res.params.status == 'UNSUCCESSFUL'
