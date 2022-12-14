@@ -97,9 +97,10 @@ export class LayoutsComponent implements OnInit, OnChanges {
       }
 
       if (params['layout'] != undefined && params['layout'] == 'ag-detail') {
+        console.log("lay params",params);
         if (params.hasOwnProperty('id')) {
           this.identifier = params['id'];
-          localStorage.setItem('id', params['id']);
+          localStorage.setItem('ag-id', params['id']);
         } else {
           this.identifier = localStorage.getItem('id');
           this.location.replaceState('profile/ag-detail/' + this.identifier);

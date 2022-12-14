@@ -285,8 +285,8 @@ import { Router } from "@angular/router";
 
 export class AppModule {
   languages;
-  constructor(translate: TranslateService, authConfig: AuthConfigService) {
-
+  constructor(translate: TranslateService, authConfig: AuthConfigService, trace: Sentry.TraceService) {
+    // myUndefinedFunction();
     authConfig.getConfig().subscribe((config) => {
       this.languages = config.languages;
       var installed_languages = [];
