@@ -78,7 +78,7 @@ export class FormsComponent implements OnInit {
   isThisAdminRole: boolean = false;
   lat: any;
   lng: any;
-  roleCheck: boolean;
+  adminRole: boolean;
   constructor(
     private route: ActivatedRoute,
     public translate: TranslateService,
@@ -93,12 +93,8 @@ export class FormsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     this.keycloak.loadUserProfile().then((res) => {
-      this.roleCheck = this.keycloak.isUserInRole(
-        'Report-manager',
-        res['username']
-      );
+      this.adminRole = this.keycloak.isUserInRole('admin', res['username']);
     });
 
     this.getLocation();
@@ -128,9 +124,12 @@ export class FormsComponent implements OnInit {
       if (params.hasOwnProperty('id')) {
         this.identifier = params['id'];
       }
-      console.log("osiddd local",params['form'] == 'prerak-admin-setup' ||
-      params['form'] == 'interview' ||
-      params['form'] == 'ag-setup')
+      console.log(
+        'osiddd local',
+        params['form'] == 'prerak-admin-setup' ||
+          params['form'] == 'interview' ||
+          params['form'] == 'ag-setup'
+      );
       if (
         params['form'] != undefined &&
         (params['form'] == 'prerak-admin-setup' ||
@@ -148,16 +147,10 @@ export class FormsComponent implements OnInit {
         }
       }
 
-      if( params['form'] == 'add-prerak-admin-setup')
-      {
+      if (params['form'] == 'add-prerak-admin-setup') {
         this.adminForm = params['form'];
       }
-
     });
-
-    // if(this.form == 'Camp-add'){
-    //   this.getLocation();
-    // }
 
     this.entityName = localStorage.getItem('entity');
 
@@ -166,7 +159,7 @@ export class FormsComponent implements OnInit {
         var filtered = FormSchemas.forms.filter((obj) => {
           return Object.keys(obj)[0] === this.form;
         });
-
+        console.log('filtered---', filtered);
         this.formSchema = filtered[0][this.form];
 
         if (this.formSchema.api) {
@@ -187,8 +180,17 @@ export class FormsComponent implements OnInit {
         }
 
         if (this.formSchema.redirectTo) {
-          if (this.roleCheck && this.form === "ag-setup") {
-            this.redirectTo = "/admin/attestation/ag-attestation/AGV8";
+          console.log(
+            'this.formSchema.redirectTo==',
+            this.formSchema.redirectTo,
+            '---',
+            this.adminRole
+          );
+          if (
+            this.adminRole &&
+            (this.form === 'ag-setup' || this.form === 'AG-add')
+          ) {
+            this.redirectTo = '/admin/attestation/ag-attestation/AGV8';
           } else {
             this.redirectTo = this.formSchema.redirectTo;
           }
@@ -705,7 +707,6 @@ export class FormsComponent implements OnInit {
             delete this.property[field.name].description;
           }
         }
-
       });
     } else {
       let res = this.responseData.definitions[fieldset.definition].properties;
@@ -1430,20 +1431,19 @@ export class FormsComponent implements OnInit {
           ]['widget']['formlyConfig']['asyncValidators'][field.name][
             'expression'
           ] = (control: FormControl) => {
-            console.log("control.value",control.value);
+            console.log('control.value', control.value);
             if (control.value != null) {
-
               // if (field?.validation && field?.validation?.future == false) {
-                if (control.value[0]['document'] != null) {
-                  return of(control.value);
-                } else {
-                  this.responseData.definitions[
-                    fieldset.definition
-                  ].properties[field.name]['widget']['formlyConfig'][
-                    'asyncValidators'
-                  ][field.name]['message'] = "You should need to select atlease one document.";
-                  return of(false);
-                }
+              if (control.value[0]['document'] != null) {
+                return of(control.value);
+              } else {
+                this.responseData.definitions[fieldset.definition].properties[
+                  field.name
+                ]['widget']['formlyConfig']['asyncValidators'][field.name][
+                  'message'
+                ] = 'You should need to select atlease one document.';
+                return of(false);
+              }
               // }
             }
             return new Promise((resolve, reject) => {
@@ -1795,10 +1795,10 @@ export class FormsComponent implements OnInit {
     if (this.model['RSOS_NIOSRegId']) {
       this.model['RSOS_NIOSRegId'] = this.model['RSOS_NIOSRegId'].toString();
     }
-    if(this.model['AGDocumentsV3'] && this.model['AGDocumentsV3'][0] == null) {
+    if (this.model['AGDocumentsV3'] && this.model['AGDocumentsV3'][0] == null) {
       this.model['AGDocumentsV3'] = [];
     }
-  // console.log("1.1")
+    // console.log("1.1")
     if (this.fileFields.length > 0) {
       this.fileFields.forEach((fileField) => {
         if (this.model[fileField]) {
@@ -2149,10 +2149,10 @@ export class FormsComponent implements OnInit {
       }
       // if (this.form != 'ag-registration') {
 
-    if(!this.add){
-      this.model = res;
-    }
-     
+      if (!this.add) {
+        this.model = res;
+      }
+
       // }
 
       this.identifier = res.osid;
@@ -2512,20 +2512,26 @@ export class FormsComponent implements OnInit {
 
   getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position: Position) => {
-        if (position) {
-          console.log("Latitude: " + position.coords.latitude +
-            "Longitude: " + position.coords.longitude);
-          this.lat = position.coords.latitude;
-          this.lng = position.coords.longitude;
-          console.log(this.lat);
-          console.log(this.lat);
-          this.model['geoLocation'] = this.lat+','+this.lng;
-        }
-      },
-        (error: PositionError) => console.log(error));
+      navigator.geolocation.getCurrentPosition(
+        (position: Position) => {
+          if (position) {
+            console.log(
+              'Latitude: ' +
+                position.coords.latitude +
+                'Longitude: ' +
+                position.coords.longitude
+            );
+            this.lat = position.coords.latitude;
+            this.lng = position.coords.longitude;
+            console.log(this.lat);
+            console.log(this.lat);
+            this.model['geoLocation'] = this.lat + ',' + this.lng;
+          }
+        },
+        (error: PositionError) => console.log(error)
+      );
     } else {
-      alert("Geolocation is not supported by this browser.");
+      alert('Geolocation is not supported by this browser.');
     }
   }
 }
