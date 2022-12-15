@@ -29,12 +29,14 @@ export class KeycloakloginComponent implements OnInit {
       }
     });
     this.user = this.keycloakService.getUsername();
+
     this.keycloakService.getToken().then((token) => {
       localStorage.setItem('token', token);
       localStorage.setItem(
         'LoggedInKeyclockID',
         JSON.parse(atob(token.split('.')[1])).sub
       );
+
       localStorage.setItem('loggedInUser', this.user);
       if (
         this.config.getEnv('appType') &&
