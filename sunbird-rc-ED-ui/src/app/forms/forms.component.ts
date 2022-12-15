@@ -1508,7 +1508,7 @@ export class FormsComponent implements OnInit {
                     ].properties[field.name]['widget']['formlyConfig'][
                       'asyncValidators'
                     ][field.name]['message'] = this.translate.instant(
-                      'DATE_MUST_BIGGER_TO_TODAY_DATE'
+                      'AADHAR_TAKEN'
                     );
                     return of(false);
                   }
@@ -1627,6 +1627,54 @@ export class FormsComponent implements OnInit {
             //   ]
             //   return of(control.value);
             // }
+          }
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve(true);
+            }, 2000);
+          });
+        };
+      }
+
+      if (field.name == 'aadharNumber') {
+        this.responseData.definitions[fieldset.definition].properties[
+          field.name
+        ]['widget']['formlyConfig']['asyncValidators'] = {};
+        this.responseData.definitions[fieldset.definition].properties[
+          field.name
+        ]['widget']['formlyConfig']['asyncValidators'][field.name] = {};
+
+        this.responseData.definitions[fieldset.definition].properties[
+          field.name
+        ]['widget']['formlyConfig']['asyncValidators'][field.name][
+          'expression'
+        ] = async (control: FormControl) => {
+          if (control.value != null) {
+            await this.generalService
+            .postData('AGV8/search', {
+              filters: {
+                aadharNumber: {
+                  eq: control.value,
+                },
+              },
+            })
+            .subscribe((res) => {
+              if (res.length == 0) {
+                this.responseData.definitions[
+                  fieldset.definition
+                ].properties[field.name]['widget']['formlyConfig'][
+                  'asyncValidators'
+                ][field.name]['message'] = this.translate.instant(
+                  'DATE_MUST_BIGGER_TO_TODAY_DATE'
+                );
+                return of(false);
+              }
+              else{
+                return of(control.value);
+              }
+
+            });
+
           }
           return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -2149,19 +2197,25 @@ export class FormsComponent implements OnInit {
 
   getData() {
     var get_url;
+
     if (this.identifier) {
       if (
         this.adminForm == 'prerak-admin-setup' ||
-        this.adminForm == 'interview'
+        this.adminForm == 'interview' ||
+        this.form == 'ag-setup'
       ) {
         get_url = '/PrerakV2/' + this.identifier;
-      } else if (this.adminForm == 'ag-setup') {
+        console.log('get_url1',get_url)
+      } else if (this.form == 'ag-setup') {
         get_url = '/AGV8/' + this.identifier;
+        console.log('get_url2',get_url)
       } else {
         get_url = this.propertyName + '/' + this.identifier;
+        console.log('get_url3',get_url)
       }
     } else {
       get_url = this.apiUrl;
+      console.log('get_url4',get_url,this.form)
     }
 
     this.generalService.getData(get_url).subscribe((res) => {
@@ -2262,7 +2316,7 @@ export class FormsComponent implements OnInit {
                     }else{
                       this.router.navigate([this.redirectTo]);
                     }
-                    // this.router.navigate(['/myags/attestation/ag/AG/']);
+                    // this.router.navigate(['/myags/attestation/ag/AGV8/']);
                     $('.modal-backdrop').remove(); // removes the grey overlay.
                     // window.history.go(-1)
                     // // window.location.reload();
@@ -2274,7 +2328,7 @@ export class FormsComponent implements OnInit {
                     }else{
                       this.router.navigate([this.redirectTo]);
                     }
-                    // this.router.navigate(['/myags/attestation/ag/AG/']);
+                    // this.router.navigate(['/myags/attestation/ag/AGV8/']);
                     // window.history.go(-1)
                     // // window.location.reload();
                   }
@@ -2282,14 +2336,14 @@ export class FormsComponent implements OnInit {
                     localStorage.setItem('isAGAdd', '');
 
                     // uncomment before push
-                    this.router.navigate(['/myags/attestation/ag/AG']);
+                    this.router.navigate(['/myags/attestation/ag/AGV8']);
                     $('.modal-backdrop').remove(); // removes the grey overlay.
 
                     // window.history.go(-1)
                     // // window.location.reload();
                   } else {
                     $('.modal-backdrop').remove();
-                    // this.router.navigate(['/myags/attestation/ag/AG/']);
+                    // this.router.navigate(['/myags/attestation/ag/AGV8/']);
 
 
                     // window.history.go(-1)
@@ -2329,7 +2383,7 @@ export class FormsComponent implements OnInit {
               }else{
                 this.router.navigate([this.redirectTo]);
               }
-              // this.router.navigate(['/myags/attestation/ag/AG/']);
+              // this.router.navigate(['/myags/attestation/ag/AGV8/']);
               $('.modal-backdrop').remove(); // removes the grey overlay.
               // window.history.go(-1)
               // // window.location.reload();
@@ -2341,7 +2395,7 @@ export class FormsComponent implements OnInit {
               }else{
                 this.router.navigate([this.redirectTo]);
               }
-              // this.router.navigate(['/myags/attestation/ag/AG/']);
+              // this.router.navigate(['/myags/attestation/ag/AGV8/']);
               // window.history.go(-1)
               // // window.location.reload();
             }
@@ -2349,14 +2403,14 @@ export class FormsComponent implements OnInit {
               localStorage.setItem('isAGAdd', '');
 
               // uncomment before push
-              this.router.navigate(['/myags/attestation/ag/AG']);
+              this.router.navigate(['/myags/attestation/ag/AGV8']);
               $('.modal-backdrop').remove(); // removes the grey overlay.
 
               // window.history.go(-1)
               // // window.location.reload();
             } else {
               $('.modal-backdrop').remove();
-              // this.router.navigate(['/myags/attestation/ag/AG/']);
+              // this.router.navigate(['/myags/attestation/ag/AGV8/']);
               if( this.form == 'ag-registration'){
                 window.history.go(-1)
                 // window.location.reload();

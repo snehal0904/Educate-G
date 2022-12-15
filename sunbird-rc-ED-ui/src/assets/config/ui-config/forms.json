@@ -937,6 +937,14 @@
                   "templateOptions.disabled": "model.whereStudiedLast",
                   "templateOptions.required": "!model.whereStudiedLast"
                 }
+              },
+              {
+                "name": "aadharNumber",
+                "required": true,
+                "validation": {
+                  "pattern": "^[0-9]{12}$",
+                  "message": "AADHAR_NOT_VALID."
+                }
               }
             ]
           }
@@ -1462,6 +1470,14 @@
                 "expressionProperties": {
                   "templateOptions.disabled": "model.whereStudiedLast",
                   "templateOptions.required": "!model.whereStudiedLast"
+                }
+              },
+              {
+                "name": "aadharNumber",
+                "required": true,
+                "validation": {
+                  "pattern": "^[0-9]{12}$",
+                  "message": "AADHAR_NOT_VALID."
                 }
               }
             ]
