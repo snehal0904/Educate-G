@@ -717,6 +717,7 @@
         "type": "entity",
         "formclass": "row",
         "title": "Add new AG",
+
         "fieldsets": [
           {
             "definition": "AGV8",
@@ -941,7 +942,7 @@
             ]
           }
         ],
-        "redirectTo": "/profile/myags"
+        "redirectTo": "myags/attestation/ag/AGV8"
       }
     },
     {
@@ -976,7 +977,6 @@
               {
                 "name": "geoLocation",
                 "required": true
-
               },
               {
                 "name": "campAddress",
@@ -985,12 +985,10 @@
               {
                 "name": "locationType",
                 "required": true
-
               },
               {
                 "name": "contactOfPersonWhoseHomeUsed",
                 "required": true
-
               },
               {
                 "name": "CampOwnerDetails",
@@ -1020,24 +1018,19 @@
                     }
                   ]
                 }
-
               },
-
 
               {
                 "name": "amenities",
                 "required": true
-
               },
               {
                 "name": "keyCommunityStakeHolder",
                 "required": true
-
               },
               {
                 "name": "typeOfFirstStakeHolder",
                 "required": true
-
               },
               {
                 "name": "nameOfFirstStakeHolder",
@@ -1046,7 +1039,6 @@
                   "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
                   "message": "Name is not valid."
                 }
-
               },
               {
                 "name": "mobileOfFirstStakeHolder",
@@ -1055,12 +1047,10 @@
                   "pattern": "[6-9]{1}[0-9]{9}",
                   "message": "MOBILE NUMBER MUST BE 10 DIGIT"
                 }
-
               },
               {
                 "name": "typeOfSecondStakeHolder",
                 "required": true
-
               },
               {
                 "name": "nameOfSecondStakeHolder",
@@ -1069,7 +1059,6 @@
                   "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
                   "message": "Name is not valid."
                 }
-
               },
               {
                 "name": "mobileOfSecondStakeHolder",
@@ -1078,13 +1067,11 @@
                   "pattern": "[6-9]{1}[0-9]{9}",
                   "message": "MOBILE NUMBER MUST BE 10 DIGIT"
                 }
-
               },
               {
                 "name": "startDateOfCamp",
                 "required": true,
                 "type": "date"
-
               }
             ]
           }
@@ -1124,7 +1111,6 @@
               {
                 "name": "geoLocation",
                 "required": true
-
               },
               {
                 "name": "campAddress",
@@ -1133,12 +1119,10 @@
               {
                 "name": "locationType",
                 "required": true
-
               },
               {
                 "name": "contactOfPersonWhoseHomeUsed",
                 "required": true
-
               },
               {
                 "name": "CampOwnerDetails",
@@ -1172,17 +1156,14 @@
               {
                 "name": "amenities",
                 "required": true
-
               },
               {
                 "name": "keyCommunityStakeHolder",
                 "required": true
-
               },
               {
                 "name": "typeOfFirstStakeHolder",
                 "required": true
-
               },
               {
                 "name": "nameOfFirstStakeHolder",
@@ -1191,7 +1172,6 @@
                   "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
                   "message": "Name is not valid."
                 }
-
               },
               {
                 "name": "mobileOfFirstStakeHolder",
@@ -1200,12 +1180,10 @@
                   "pattern": "[6-9]{1}[0-9]{9}",
                   "message": "MOBILE NUMBER MUST BE 10 DIGIT"
                 }
-
               },
               {
                 "name": "typeOfSecondStakeHolder",
                 "required": true
-
               },
               {
                 "name": "nameOfSecondStakeHolder",
@@ -1214,7 +1192,6 @@
                   "pattern": "^[a-zA-Z]+ [a-zA-Z]+$",
                   "message": "Name is not valid."
                 }
-
               },
               {
                 "name": "mobileOfSecondStakeHolder",
@@ -1223,13 +1200,11 @@
                   "pattern": "[6-9]{1}[0-9]{9}",
                   "message": "MOBILE NUMBER MUST BE 10 DIGIT"
                 }
-
               },
               {
                 "name": "startDateOfCamp",
                 "required": true,
                 "type": "date"
-
               }
             ]
           }
@@ -1241,7 +1216,7 @@
       "ag-setup": {
         "api": "/AGV8",
         "type": "entity",
-        "redirectTo": "profile/myags",
+        "redirectTo": "myags/attestation/ag/AGV8",
         "langKey": "prerakAdmin",
         "fieldsets": [
           {
