@@ -16,7 +16,7 @@ import { LocationService } from '../services/location/location.service';
 import { startWith, switchMap } from 'rxjs/operators';
 import { stringify } from '@angular/compiler/src/util';
 import { KeycloakService } from 'keycloak-angular';
-import * as Sentry from "@sentry/angular";
+import * as Sentry from '@sentry/angular';
 
 declare const $: any;
 
@@ -79,8 +79,8 @@ export class FormsComponent implements OnInit {
   isThisAdminRole: boolean = false;
   lat: any;
   lng: any;
-  roleCheck: boolean;
-  test: any[] = null;
+  adminRole: boolean;
+
   constructor(
     private route: ActivatedRoute,
     public translate: TranslateService,
@@ -95,12 +95,8 @@ export class FormsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // console.log("testtt---",this.test[1].replace("null","emp"));
     this.keycloak.loadUserProfile().then((res) => {
-      this.roleCheck = this.keycloak.isUserInRole(
-        'Report-manager',
-        res['username']
-      );
+      this.adminRole = this.keycloak.isUserInRole('admin', res['username']);
     });
 
     this.getLocation();
@@ -130,9 +126,12 @@ export class FormsComponent implements OnInit {
       if (params.hasOwnProperty('id')) {
         this.identifier = params['id'];
       }
-      console.log("osiddd local",params['form'] == 'prerak-admin-setup' ||
-      params['form'] == 'interview' ||
-      params['form'] == 'ag-setup')
+      console.log(
+        'osiddd local',
+        params['form'] == 'prerak-admin-setup' ||
+          params['form'] == 'interview' ||
+          params['form'] == 'ag-setup'
+      );
       if (
         params['form'] != undefined &&
         (params['form'] == 'prerak-admin-setup' ||
@@ -150,16 +149,10 @@ export class FormsComponent implements OnInit {
         }
       }
 
-      if( params['form'] == 'add-prerak-admin-setup')
-      {
+      if (params['form'] == 'add-prerak-admin-setup') {
         this.adminForm = params['form'];
       }
-
     });
-
-    // if(this.form == 'Camp-add'){
-    //   this.getLocation();
-    // }
 
     this.entityName = localStorage.getItem('entity');
 
@@ -168,7 +161,7 @@ export class FormsComponent implements OnInit {
         var filtered = FormSchemas.forms.filter((obj) => {
           return Object.keys(obj)[0] === this.form;
         });
-
+        console.log('filtered---', filtered);
         this.formSchema = filtered[0][this.form];
 
         if (this.formSchema.api) {
@@ -189,8 +182,17 @@ export class FormsComponent implements OnInit {
         }
 
         if (this.formSchema.redirectTo) {
-          if (this.roleCheck && this.form === "ag-setup") {
-            this.redirectTo = "/admin/attestation/ag-attestation/AGV8";
+          console.log(
+            'this.formSchema.redirectTo==',
+            this.formSchema.redirectTo,
+            '---',
+            this.adminRole
+          );
+          if (
+            this.adminRole &&
+            (this.form === 'ag-setup' || this.form === 'AG-add')
+          ) {
+            this.redirectTo = '/admin/attestation/ag-attestation/AGV8';
           } else {
             this.redirectTo = this.formSchema.redirectTo;
           }
@@ -714,7 +716,6 @@ export class FormsComponent implements OnInit {
             delete this.property[field.name].description;
           }
         }
-
       });
     } else {
       let res = this.responseData.definitions[fieldset.definition].properties;
@@ -1439,20 +1440,19 @@ export class FormsComponent implements OnInit {
           ]['widget']['formlyConfig']['asyncValidators'][field.name][
             'expression'
           ] = (control: FormControl) => {
-            console.log("control.value",control.value);
+            console.log('control.value', control.value);
             if (control.value != null) {
-
               // if (field?.validation && field?.validation?.future == false) {
-                if (control.value[0]['document'] != null) {
-                  return of(control.value);
-                } else {
-                  this.responseData.definitions[
-                    fieldset.definition
-                  ].properties[field.name]['widget']['formlyConfig'][
-                    'asyncValidators'
-                  ][field.name]['message'] = "You should need to select atlease one document.";
-                  return of(false);
-                }
+              if (control.value[0]['document'] != null) {
+                return of(control.value);
+              } else {
+                this.responseData.definitions[fieldset.definition].properties[
+                  field.name
+                ]['widget']['formlyConfig']['asyncValidators'][field.name][
+                  'message'
+                ] = 'You should need to select atlease one document.';
+                return of(false);
+              }
               // }
             }
             return new Promise((resolve, reject) => {
@@ -1836,13 +1836,13 @@ export class FormsComponent implements OnInit {
     if (this.model['isRSOS_NIOSFormSubmitted'] == 'नहीं') {
       // alert('here');
       this.model = {};
-      this.model['isRSOS_NIOSFormSubmitted'] = 'नहीं'
+      this.model['isRSOS_NIOSFormSubmitted'] = 'नहीं';
       this.model['isRSOS_NIOSRegIdReceived'] = 'नहीं';
       this.model['RSOS_NIOSRegId'] = '';
-      this.model['subjects'] = <unknown>[""];
-      this.model['examChoice'] = "";
+      this.model['subjects'] = <unknown>[''];
+      this.model['examChoice'] = '';
       this.model['birthDateOnRSOS_NIOSForm'] = new Date();
-      this.model['RSOS_NIOSFormPhoto'] = "";
+      this.model['RSOS_NIOSFormPhoto'] = '';
     }
 
     if (this.model['RSOS_NIOSFormPhoto']) {
@@ -1852,10 +1852,10 @@ export class FormsComponent implements OnInit {
     if (this.model['RSOS_NIOSRegId']) {
       this.model['RSOS_NIOSRegId'] = this.model['RSOS_NIOSRegId'].toString();
     }
-    if(this.model['AGDocumentsV3'] && this.model['AGDocumentsV3'][0] == null) {
+    if (this.model['AGDocumentsV3'] && this.model['AGDocumentsV3'][0] == null) {
       this.model['AGDocumentsV3'] = [];
     }
-  // console.log("1.1")
+    // console.log("1.1")
     if (this.fileFields.length > 0) {
       this.fileFields.forEach((fileField) => {
         if (this.model[fileField]) {
@@ -1884,16 +1884,16 @@ export class FormsComponent implements OnInit {
               });
 
               this.model[fileField] = documents_list;
-              console.log("1.2")
+              console.log('1.2');
               if (this.type && this.type === 'entity') {
-                console.log("1.2.1")
+                console.log('1.2.1');
                 if (this.identifier != null) {
                   this.updateData();
                 } else {
                   this.postData();
                 }
               } else if (this.type && this.type.includes('property')) {
-                console.log("1.2.2")
+                console.log('1.2.2');
                 var property = this.type.split(':')[1];
                 var url;
                 if (this.identifier != null && this.entityId != undefined) {
@@ -1928,16 +1928,16 @@ export class FormsComponent implements OnInit {
             }
           );
         } else {
-          console.log("1.3")
+          console.log('1.3');
           if (this.type && this.type === 'entity') {
-            console.log("1.3.1")
+            console.log('1.3.1');
             if (this.identifier != null) {
               this.updateData();
             } else {
               this.postData();
             }
           } else if (this.type && this.type.includes('property')) {
-            console.log("1.3.2")
+            console.log('1.3.2');
             var property = this.type.split(':')[1];
             // let url;
             if (this.identifier != null && this.entityId != undefined) {
@@ -1953,7 +1953,7 @@ export class FormsComponent implements OnInit {
             if (this.model[property]) {
               this.model = this.model[property];
             }
-            console.log("1.3.2",this.identifier,this.entityId)
+            console.log('1.3.2', this.identifier, this.entityId);
             if (this.identifier != null && this.entityId != undefined) {
               this.updateClaims();
             } else {
@@ -1967,16 +1967,16 @@ export class FormsComponent implements OnInit {
         }
       });
     } else {
-      console.log("1.4")
+      console.log('1.4');
       if (this.type && this.type === 'entity') {
-        console.log("1.4.1")
+        console.log('1.4.1');
         if (this.identifier != null) {
           this.updateData();
         } else {
           this.postData();
         }
       } else if (this.type && this.type.includes('property')) {
-        console.log("1.4.2")
+        console.log('1.4.2');
         var property = this.type.split(':')[1];
 
         if (this.identifier != null && this.entityId != undefined) {
@@ -1984,12 +1984,12 @@ export class FormsComponent implements OnInit {
             this.adminForm == 'prerak-admin-setup' ||
             this.adminForm == 'interview' ||
             this.adminForm == 'ag-setup' ||
-            this.form == 'ag-registration' && this.add
+            (this.form == 'ag-registration' && this.add)
           ) {
-            console.log("1.4.3")
+            console.log('1.4.3');
             var url = [this.apiUrl, this.identifier, property];
           } else if (this.isThisAdminRole) {
-            console.log("1.4.4")
+            console.log('1.4.4');
             var url = [
               this.apiUrl,
               localStorage.getItem('id'),
@@ -1997,15 +1997,20 @@ export class FormsComponent implements OnInit {
               this.identifier,
             ];
           } else {
-            console.log("1.4.5")
-            if(this.form == 'ag-registration'){
-              var url = [this.apiUrl,  localStorage.getItem('ag-id'), property, this.identifier];
-            }else{
+            console.log('1.4.5');
+            if (this.form == 'ag-registration') {
+              var url = [
+                this.apiUrl,
+                localStorage.getItem('ag-id'),
+                property,
+                this.identifier,
+              ];
+            } else {
               var url = [this.apiUrl, this.entityId, property, this.identifier];
             }
           }
         } else {
-          console.log("1.4.6")
+          console.log('1.4.6');
           var url = [this.apiUrl, this.identifier, property];
         }
 
@@ -2013,22 +2018,22 @@ export class FormsComponent implements OnInit {
         if (this.model[property]) {
           this.model = this.model[property];
         }
-        console.log("1.5",this.form)
+        console.log('1.5', this.form);
         if (this.identifier != null && this.entityId != undefined) {
           if (
             this.adminForm == 'prerak-admin-setup' ||
             this.adminForm == 'interview' ||
             this.adminForm == 'ag-setup' ||
-            this.form == 'ag-registration' && this.add
+            (this.form == 'ag-registration' && this.add)
           ) {
-            console.log("1.5.1")
+            console.log('1.5.1');
             this.postData();
           } else {
-            console.log("1.5.2")
+            console.log('1.5.2');
             this.updateClaims();
           }
         } else {
-          console.log("1.6")
+          console.log('1.6');
           this.postData();
         }
 
@@ -2100,10 +2105,10 @@ export class FormsComponent implements OnInit {
     this.generalService.attestationReq('/send', data).subscribe(
       (res) => {
         if (res.params.status == 'SUCCESSFUL') {
-          if( this.form == 'ag-registration'){
-            window.history.go(-1)
+          if (this.form == 'ag-registration') {
+            window.history.go(-1);
             // window.location.reload();
-          }else{
+          } else {
             this.router.navigate([this.redirectTo]);
           }
         } else if (
@@ -2225,9 +2230,9 @@ export class FormsComponent implements OnInit {
       }
       // if (this.form != 'ag-registration') {
 
-    if(!this.add){
-      this.model = res;
-    }
+      if (!this.add) {
+        this.model = res;
+      }
 
       // }
 
@@ -2306,14 +2311,13 @@ export class FormsComponent implements OnInit {
                   res.params.status == 'SUCCESSFUL' &&
                   !this.model['attest']
                 ) {
-
                   if (localStorage.getItem('isAdminAdd')) {
                     localStorage.setItem('isAdminAdd', '');
                     // $('.modal-backdrop').remove()
-                    if( this.form == 'ag-registration'){
-                      window.history.go(-1)
+                    if (this.form == 'ag-registration') {
+                      window.history.go(-1);
                       // window.location.reload();
-                    }else{
+                    } else {
                       this.router.navigate([this.redirectTo]);
                     }
                     // this.router.navigate(['/myags/attestation/ag/AGV8/']);
@@ -2322,10 +2326,10 @@ export class FormsComponent implements OnInit {
                     // // window.location.reload();
                   } else {
                     $('.modal-backdrop').remove();
-                    if( this.form == 'ag-registration'){
-                      window.history.go(-1)
-                     // window.location.reload();
-                    }else{
+                    if (this.form == 'ag-registration') {
+                      window.history.go(-1);
+                      // window.location.reload();
+                    } else {
                       this.router.navigate([this.redirectTo]);
                     }
                     // this.router.navigate(['/myags/attestation/ag/AGV8/']);
@@ -2344,7 +2348,6 @@ export class FormsComponent implements OnInit {
                   } else {
                     $('.modal-backdrop').remove();
                     // this.router.navigate(['/myags/attestation/ag/AGV8/']);
-
 
                     // window.history.go(-1)
                     // // window.location.reload();
@@ -2377,10 +2380,10 @@ export class FormsComponent implements OnInit {
             if (localStorage.getItem('isAdminAdd')) {
               localStorage.setItem('isAdminAdd', '');
               // $('.modal-backdrop').remove()
-              if( this.form == 'ag-registration'){
-                window.history.go(-1)
+              if (this.form == 'ag-registration') {
+                window.history.go(-1);
                 // window.location.reload();
-              }else{
+              } else {
                 this.router.navigate([this.redirectTo]);
               }
               // this.router.navigate(['/myags/attestation/ag/AGV8/']);
@@ -2389,10 +2392,10 @@ export class FormsComponent implements OnInit {
               // // window.location.reload();
             } else {
               $('.modal-backdrop').remove();
-              if( this.form == 'ag-registration'){
-                window.history.go(-1)
+              if (this.form == 'ag-registration') {
+                window.history.go(-1);
                 // window.location.reload();
-              }else{
+              } else {
                 this.router.navigate([this.redirectTo]);
               }
               // this.router.navigate(['/myags/attestation/ag/AGV8/']);
@@ -2410,11 +2413,13 @@ export class FormsComponent implements OnInit {
               // // window.location.reload();
             } else {
               $('.modal-backdrop').remove();
+
               // this.router.navigate(['/myags/attestation/ag/AGV8/']);
               if( this.form == 'ag-registration'){
                 window.history.go(-1)
+
                 // window.location.reload();
-              }else{
+              } else {
                 this.router.navigate([this.redirectTo]);
               }
               // window.history.go(-1)
@@ -2488,10 +2493,10 @@ export class FormsComponent implements OnInit {
       .subscribe(
         (res) => {
           if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
-            if( this.form == 'ag-registration'){
-              window.history.go(-1)
+            if (this.form == 'ag-registration') {
+              window.history.go(-1);
               // window.location.reload();
-            }else{
+            } else {
               this.router.navigate([this.redirectTo]);
             }
           } else if (
@@ -2586,14 +2591,14 @@ export class FormsComponent implements OnInit {
   getEntityData(apiUrl) {
     if (this.identifier !== undefined) {
       this.generalService.getData(apiUrl).subscribe((res) => {
-        if(res && res[0][this.propertyName].length){
-        this.entityId = res[0].osid;
-        this.exLength = res[0][this.propertyName].length;
+        if (res && res[0][this.propertyName].length) {
+          this.entityId = res[0].osid;
+          this.exLength = res[0][this.propertyName].length;
         }
       });
     } else {
       this.generalService.getData(apiUrl).subscribe((res) => {
-        if(res && res[0][this.propertyName].length){
+        if (res && res[0][this.propertyName].length) {
           this.exLength = res[0][this.propertyName].length;
         }
       });
@@ -2608,10 +2613,10 @@ export class FormsComponent implements OnInit {
     this.generalService.updateclaims(this.apiUrl, this.model).subscribe(
       (res) => {
         if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
-          if( this.form == 'ag-registration'){
-            window.history.go(-1)
+          if (this.form == 'ag-registration') {
+            window.history.go(-1);
             // window.location.reload();
-          }else{
+          } else {
             this.router.navigate([this.redirectTo]);
           }
         } else if (
@@ -2629,20 +2634,26 @@ export class FormsComponent implements OnInit {
 
   getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position: Position) => {
-        if (position) {
-          console.log("Latitude: " + position.coords.latitude +
-            "Longitude: " + position.coords.longitude);
-          this.lat = position.coords.latitude;
-          this.lng = position.coords.longitude;
-          console.log(this.lat);
-          console.log(this.lat);
-          this.model['geoLocation'] = this.lat+','+this.lng;
-        }
-      },
-        (error: PositionError) => console.log(error));
+      navigator.geolocation.getCurrentPosition(
+        (position: Position) => {
+          if (position) {
+            console.log(
+              'Latitude: ' +
+                position.coords.latitude +
+                'Longitude: ' +
+                position.coords.longitude
+            );
+            this.lat = position.coords.latitude;
+            this.lng = position.coords.longitude;
+            console.log(this.lat);
+            console.log(this.lat);
+            this.model['geoLocation'] = this.lat + ',' + this.lng;
+          }
+        },
+        (error: PositionError) => console.log(error)
+      );
     } else {
-      alert("Geolocation is not supported by this browser.");
+      alert('Geolocation is not supported by this browser.');
     }
   }
 }

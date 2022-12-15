@@ -6,45 +6,47 @@ import { AppConfig } from '../../app.config';
 @Component({
   selector: 'app-keycloaklogin',
   templateUrl: './keycloaklogin.component.html',
-  styleUrls: ['./keycloaklogin.component.css']
+  styleUrls: ['./keycloaklogin.component.css'],
 })
 export class KeycloakloginComponent implements OnInit {
-  user : any;
+  user: any;
   entity: string;
-  profileUrl: string  = '';
+  profileUrl: string = '';
   constructor(
     public keycloakService: KeycloakService,
-    public router: Router, private config: AppConfig
-
-  ) { }
+    public router: Router,
+    private config: AppConfig
+  ) {}
 
   ngOnInit(): void {
-    this.keycloakService.loadUserProfile().then((res)=>{
-
-
+    this.keycloakService.loadUserProfile().then((res) => {
       this.entity = res['attributes'].entity[0];
-      if(res['attributes'].hasOwnProperty('locale') && res['attributes'].locale.length){
+      if (
+        res['attributes'].hasOwnProperty('locale') &&
+        res['attributes'].locale.length
+      ) {
         localStorage.setItem('setLanguage', res['attributes'].locale[0]);
       }
     });
     this.user = this.keycloakService.getUsername();
-    this.keycloakService.getToken().then((token)=>{
-      console.log('keyCloak teacher token - ', token);
-      // Add this line -------->>>>>>>
-      // console.log("res",atob(token.split('.')[1]));
 
+    this.keycloakService.getToken().then((token) => {
       localStorage.setItem('token', token);
+      localStorage.setItem(
+        'LoggedInKeyclockID',
+        JSON.parse(atob(token.split('.')[1])).sub
+      );
+
       localStorage.setItem('loggedInUser', this.user);
-      console.log('---------',this.config.getEnv('appType'))
-      if(this.config.getEnv('appType') && this.config.getEnv('appType') === 'digital_wallet'){
-        this.profileUrl = this.entity+'/documents'
-      }else{
-        this.profileUrl = '/profile/'+this.entity;
+      if (
+        this.config.getEnv('appType') &&
+        this.config.getEnv('appType') === 'digital_wallet'
+      ) {
+        this.profileUrl = this.entity + '/documents';
+      } else {
+        this.profileUrl = '/profile/' + this.entity;
       }
       this.router.navigate([this.profileUrl]);
-
     });
   }
-
-
 }
