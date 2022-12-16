@@ -1547,7 +1547,7 @@
                 "required": true,
                 "type": "number",
                 "validation": {
-                  "pattern": "^[0-9]{11}$|^[0-9]{12}$",
+                  "pattern": "^[0-9]{10}$|^[0-9]{11}$",
                   "message": "NUMBER_SHOULD_BE_11_OR_12"
                 },
                 "expressionProperties": {
