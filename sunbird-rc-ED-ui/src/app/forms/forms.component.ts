@@ -970,6 +970,7 @@ export class FormsComponent implements OnInit {
             ] = (control: FormControl) => {
               if (control.value != null) {
                 if (field.type === 'date') {
+
                   if (this.model[field.validation.lessThan]) {
                     if (
                       new Date(
@@ -1806,10 +1807,14 @@ export class FormsComponent implements OnInit {
       this.model['isRSOS_NIOSFormSubmitted'] = 'नहीं';
       this.model['isRSOS_NIOSRegIdReceived'] = 'नहीं';
       this.model['RSOS_NIOSRegId'] = '';
-      this.model['subjects'] = <unknown>[''];
+      this.model['subjects'] = ["NA"];
       this.model['examChoice'] = '';
       this.model['birthDateOnRSOS_NIOSForm'] = new Date();
       this.model['RSOS_NIOSFormPhoto'] = '';
+    }
+
+    if (this.model['RSOS_NIOSRegId'] == null) {
+      this.model['RSOS_NIOSRegId'] = "";
     }
 
     if (this.model['RSOS_NIOSFormPhoto']) {
