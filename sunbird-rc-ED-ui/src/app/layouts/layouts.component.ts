@@ -613,7 +613,6 @@ export class LayoutsComponent implements OnInit, OnChanges {
         this.model = res;
       } else {
         res.forEach((element) => {
-          console.log(element);
           if (
             element.osOwner[0] == localStorage.getItem('LoggedInKeyclockID')
           ) {

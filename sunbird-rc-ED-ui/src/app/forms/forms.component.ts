@@ -101,7 +101,7 @@ export class FormsComponent implements OnInit {
 
     this.getLocation();
     this.route.params.subscribe((params) => {
-      this.add = this.router.url.includes('add');
+      this.add = this.router.url.includes('claim:add');
 
       if (params['form'] != undefined) {
         this.form = params['form'].split('/', 1)[0];
@@ -126,12 +126,6 @@ export class FormsComponent implements OnInit {
       if (params.hasOwnProperty('id')) {
         this.identifier = params['id'];
       }
-      console.log(
-        'osiddd local',
-        params['form'] == 'prerak-admin-setup' ||
-          params['form'] == 'interview' ||
-          params['form'] == 'ag-setup'
-      );
       if (
         params['form'] != undefined &&
         (params['form'] == 'prerak-admin-setup' ||
@@ -161,7 +155,6 @@ export class FormsComponent implements OnInit {
         var filtered = FormSchemas.forms.filter((obj) => {
           return Object.keys(obj)[0] === this.form;
         });
-        console.log('filtered---', filtered);
         this.formSchema = filtered[0][this.form];
 
         if (this.formSchema.api) {
@@ -182,12 +175,6 @@ export class FormsComponent implements OnInit {
         }
 
         if (this.formSchema.redirectTo) {
-          console.log(
-            'this.formSchema.redirectTo==',
-            this.formSchema.redirectTo,
-            '---',
-            this.adminRole
-          );
           if (
             this.adminRole &&
             (this.form === 'ag-setup' || this.form === 'AG-add')
@@ -347,13 +334,6 @@ export class FormsComponent implements OnInit {
   }
 
   loadSchema() {
-    // console.log("testtt---",this.test[1].replace("null","emp"));
-    // Sentry.addBreadcrumb({
-    //   category: "auth",
-    //   message: "Authenticated user ",
-    //   level: "info",
-    // });
-    // throw new Error("Error occurred.");
     this.form2 = new FormGroup({});
     this.options = {};
     this.fields = [this.formlyJsonschema.toFieldConfig(this.schema)];
@@ -1389,7 +1369,6 @@ export class FormsComponent implements OnInit {
                   ] =
                     'You need to select Minimum 5 values and Maximum 7 values';
                   if (control.value.length <= 7 && control.value.length >= 5) {
-                    // console.log("in")
                     return of(control.value);
                   } else {
                     return of(false);
@@ -1409,12 +1388,10 @@ export class FormsComponent implements OnInit {
                     control.value.length <= field.validation.max &&
                     control.value.length >= field.validation.min
                   ) {
-                    // console.log("in")
                     return of(control.value);
                   } else {
                     return of(false);
                   }
-                  // console.log("multi",control.value)
                 }
               }
               return new Promise((resolve, reject) => {
@@ -1441,7 +1418,6 @@ export class FormsComponent implements OnInit {
           ]['widget']['formlyConfig']['asyncValidators'][field.name][
             'expression'
           ] = (control: FormControl) => {
-            console.log('control.value', control.value);
             if (control.value != null) {
               // if (field?.validation && field?.validation?.future == false) {
               if (control.value[0]['document'] != null) {
@@ -1718,15 +1694,6 @@ export class FormsComponent implements OnInit {
         }
       }
     }
-    if (this.form == 'AG-add') {
-      await this.generalService.getData('/PrerakV2').subscribe((res) => {
-        var data_val = res[0];
-        this.model['prerakName'] = data_val['fullName'];
-        this.model['prerakId'] = data_val['osid'];
-        this.model['parentOrganization'] = data_val['parentOrganization'];
-      });
-    }
-    // console.log("this.responseData",this.responseData)
   }
 
   addChildWidget(field, ParentName, childrenName) {
@@ -1860,7 +1827,6 @@ export class FormsComponent implements OnInit {
     if (this.model['AGDocumentsV3'] && this.model['AGDocumentsV3'][0] == null) {
       this.model['AGDocumentsV3'] = [];
     }
-    // console.log("1.1")
     if (this.fileFields.length > 0) {
       this.fileFields.forEach((fileField) => {
         if (this.model[fileField]) {
@@ -1889,16 +1855,13 @@ export class FormsComponent implements OnInit {
               });
 
               this.model[fileField] = documents_list;
-              console.log('1.2');
               if (this.type && this.type === 'entity') {
-                console.log('1.2.1');
                 if (this.identifier != null) {
                   this.updateData();
                 } else {
                   this.postData();
                 }
               } else if (this.type && this.type.includes('property')) {
-                console.log('1.2.2');
                 var property = this.type.split(':')[1];
                 var url;
                 if (this.identifier != null && this.entityId != undefined) {
@@ -1925,7 +1888,6 @@ export class FormsComponent implements OnInit {
               }
             },
             (err) => {
-              // console.log(err);
               this.toastMsg.error(
                 'error',
                 this.translate.instant('SOMETHING_WENT_WRONG')
@@ -1933,16 +1895,13 @@ export class FormsComponent implements OnInit {
             }
           );
         } else {
-          console.log('1.3');
           if (this.type && this.type === 'entity') {
-            console.log('1.3.1');
             if (this.identifier != null) {
               this.updateData();
             } else {
               this.postData();
             }
           } else if (this.type && this.type.includes('property')) {
-            console.log('1.3.2');
             var property = this.type.split(':')[1];
             // let url;
             if (this.identifier != null && this.entityId != undefined) {
@@ -1958,7 +1917,6 @@ export class FormsComponent implements OnInit {
             if (this.model[property]) {
               this.model = this.model[property];
             }
-            console.log('1.3.2', this.identifier, this.entityId);
             if (this.identifier != null && this.entityId != undefined) {
               this.updateClaims();
             } else {
@@ -1972,16 +1930,13 @@ export class FormsComponent implements OnInit {
         }
       });
     } else {
-      console.log('1.4');
       if (this.type && this.type === 'entity') {
-        console.log('1.4.1');
         if (this.identifier != null) {
           this.updateData();
         } else {
           this.postData();
         }
       } else if (this.type && this.type.includes('property')) {
-        console.log('1.4.2');
         var property = this.type.split(':')[1];
 
         if (this.identifier != null && this.entityId != undefined) {
@@ -1991,10 +1946,8 @@ export class FormsComponent implements OnInit {
             this.adminForm == 'ag-setup' ||
             (this.form == 'ag-registration' && this.add)
           ) {
-            console.log('1.4.3');
             var url = [this.apiUrl, this.identifier, property];
           } else if (this.isThisAdminRole) {
-            console.log('1.4.4');
             var url = [
               this.apiUrl,
               localStorage.getItem('id'),
@@ -2002,7 +1955,6 @@ export class FormsComponent implements OnInit {
               this.identifier,
             ];
           } else {
-            console.log('1.4.5');
             if (this.form == 'ag-registration') {
               var url = [
                 this.apiUrl,
@@ -2015,7 +1967,6 @@ export class FormsComponent implements OnInit {
             }
           }
         } else {
-          console.log('1.4.6');
           var url = [this.apiUrl, this.identifier, property];
         }
 
@@ -2023,7 +1974,6 @@ export class FormsComponent implements OnInit {
         if (this.model[property]) {
           this.model = this.model[property];
         }
-        console.log('1.5', this.form);
         if (this.identifier != null && this.entityId != undefined) {
           if (
             this.adminForm == 'prerak-admin-setup' ||
@@ -2031,14 +1981,11 @@ export class FormsComponent implements OnInit {
             this.adminForm == 'ag-setup' ||
             (this.form == 'ag-registration' && this.add)
           ) {
-            console.log('1.5.1');
             this.postData();
           } else {
-            console.log('1.5.2');
             this.updateClaims();
           }
         } else {
-          console.log('1.6');
           this.postData();
         }
 
@@ -2642,16 +2589,8 @@ export class FormsComponent implements OnInit {
       navigator.geolocation.getCurrentPosition(
         (position: Position) => {
           if (position) {
-            console.log(
-              'Latitude: ' +
-                position.coords.latitude +
-                'Longitude: ' +
-                position.coords.longitude
-            );
             this.lat = position.coords.latitude;
             this.lng = position.coords.longitude;
-            console.log(this.lat);
-            console.log(this.lat);
             this.model['geoLocation'] = this.lat + ',' + this.lng;
           }
         },
