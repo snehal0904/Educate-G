@@ -101,6 +101,7 @@ export class FormsComponent implements OnInit {
 
     this.getLocation();
     this.route.params.subscribe((params) => {
+      console.log(params);
       this.add = this.router.url.includes('claim:add');
 
       if (params['form'] != undefined) {
@@ -1154,6 +1155,12 @@ export class FormsComponent implements OnInit {
         };
       }
 
+      if (field.enum) {
+        this.responseData.definitions[fieldset.definition].properties[
+          field.name
+        ]['items']['properties']['document']['enum'] = field.enum
+      }
+
       if (field.dependentOn) {
         this.responseData.definitions[fieldset.definition].properties[
           field.name
@@ -1510,6 +1517,12 @@ export class FormsComponent implements OnInit {
         ]['widget']['formlyConfig']['templateOptions']['disabled'] =
           field.disabled;
       }
+      if (field.defaultValue) {
+        this.responseData.definitions[fieldset.definition].properties[
+          field.name
+        ]['widget']['formlyConfig']['defaultValue'] =
+        field.defaultValue;
+      }
 
       if (field.name == 'whereStudiedLast') {
         this.responseData.definitions[fieldset.definition].properties[
@@ -1808,9 +1821,8 @@ export class FormsComponent implements OnInit {
       this.model['isRSOS_NIOSRegIdReceived'] = 'नहीं';
       this.model['RSOS_NIOSRegId'] = '';
       this.model['subjects'] = ["NA"];
-      this.model['examChoice'] = '';
-      this.model['birthDateOnRSOS_NIOSForm'] = new Date();
-      this.model['RSOS_NIOSFormPhoto'] = '';
+      this.model['examChoice'] = 'NA';
+      this.model['birthDateOnRSOS_NIOSForm'] = (new Date()).toISOString().split('T')[0];
     }
 
     if (this.model['RSOS_NIOSRegId'] == null) {
@@ -2176,6 +2188,8 @@ export class FormsComponent implements OnInit {
     }
 
     this.generalService.getData(get_url).subscribe((res) => {
+      console.log(this.propertyName + '/' + this.identifier)
+      console.log("get res",res)
       res = res[0] ? res[0] : res;
       if (this.propertyName) {
         this.entityId = res.osid;

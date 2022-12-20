@@ -927,7 +927,9 @@
               },
               {
                 "name": "registrationStatus",
-                "required": true
+                "required": true,
+                "disabled":true,
+                "defaultValue" : "पहले से ही पंजीकृत"
               },
               {
                 "name": "AGDocumentsV3",
@@ -1461,7 +1463,9 @@
               },
               {
                 "name": "registrationStatus",
-                "required": true
+                "required": true,
+                "disabled":true,
+                "defaultValue" : "पहले से ही पंजीकृत"
               },
               {
                 "name": "AGDocumentsV3",
@@ -1489,13 +1493,13 @@
       "ag-registration": {
         "api": "/AGV8",
         "type": "property:AgRegistrationForm",
-        "redirectTo": "/myags/attestation/ag/AG/",
+        "redirectTo": "/myags/attestation/ag/AGV8/",
         "title": "Add AG Registration Details",
         "fieldsets": [
           {
             "privacyConfig": "PrerakV2OsConfig",
             "globalPrivacyConfig": "private-access",
-            "definition": "AgRegistrationForm",
+            "definition": "AgRegistrationFormV2",
             "fields": [
               {
                 "name": "isRSOS_NIOSFormSubmitted",
