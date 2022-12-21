@@ -1,15 +1,15 @@
 {
   "environment": "development",
   "keycloak": {
-    "url": "https://eg2.uniteframework.io/auth",
+    "url": "https://dev-eg2.uniteframework.io/auth",
     "clientId": "registry-frontend",
     "realm": "sunbird-rc"
   },
   "configFolder": "/assets/config/ui-config",
   "languageFolder": "/assets/i18n",
   "title": "Educate Girls",
-  "baseUrl": "http://localhost:4200/registry/api/v1",
-  "schemaUrl": "https://eg2.uniteframework.io/registry/api/docs/swagger.json",
+  "baseUrl": "https://dev-eg2.uniteframework.io/registry/api/v1",
+  "schemaUrl": "https://dev-eg2.uniteframework.io/registry/api/docs/swagger.json",
   "footerText": "Educate Girls",
   "languages": ["en", "hi"],
   "appType": "attestation",

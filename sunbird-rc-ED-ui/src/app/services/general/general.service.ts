@@ -97,7 +97,7 @@ export class GeneralService {
   }
 
   deleteRecord(id) {
-    var url = this.baseUrl + "";
+    var url = this.baseUrl + "/config/"+id;
     let headers = new HttpHeaders();
     url.replace('//', '/');
     const req = {
@@ -105,7 +105,7 @@ export class GeneralService {
       headers: headers
     };
 
-    return this.dataService.get(req);
+    return this.dataService.delete(req);
   }
 
   // Configurations
