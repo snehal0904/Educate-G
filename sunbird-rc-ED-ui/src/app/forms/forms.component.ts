@@ -180,7 +180,7 @@ export class FormsComponent implements OnInit {
             this.adminRole &&
             (this.form === 'ag-setup' || this.form === 'AG-add')
           ) {
-            this.redirectTo = '/admin/attestation/ag-attestation/AGV8';
+            this.redirectTo = '/myags/attestation/ag/AGV8';
           } else {
             this.redirectTo = this.formSchema.redirectTo;
           }
@@ -1544,7 +1544,6 @@ export class FormsComponent implements OnInit {
               ]['items']['properties']['document']['enum'] = [
                 'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)',
                 'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)',
-                'आधार कार्ड',
                 '2 फोटो',
                 'जनाधार कार्ड',
                 'किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)',
@@ -1558,7 +1557,6 @@ export class FormsComponent implements OnInit {
               ]['items']['properties']['document']['enum'] = [
                 'टीसी',
                 'मार्कशीट',
-                'आधार कार्ड',
                 '2 फोटो',
                 'जनाधार कार्ड',
                 'किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)',
@@ -1570,7 +1568,6 @@ export class FormsComponent implements OnInit {
               this.responseData.definitions[fieldset.definition].properties[
                 'AGDocumentsV3'
               ]['items']['properties']['document']['enum'] = [
-                'आधार कार्ड',
                 'जन्मा प्रमाण पत्',
                 'जाती प्रमाण पत्र',
                 'राशन कार्ड',
@@ -1954,9 +1951,7 @@ export class FormsComponent implements OnInit {
         if (this.identifier != null && this.entityId != undefined) {
           if (
             this.adminForm == 'prerak-admin-setup' ||
-            this.adminForm == 'interview' ||
-            this.adminForm == 'ag-setup' ||
-            (this.form == 'ag-registration' && this.add)
+            this.adminForm == 'interview'
           ) {
             var url = [this.apiUrl, this.identifier, property];
           } else if (this.isThisAdminRole) {
@@ -1967,13 +1962,21 @@ export class FormsComponent implements OnInit {
               this.identifier,
             ];
           } else {
-            if (this.form == 'ag-registration') {
+            if (this.form == 'ag-registration' ||  this.form == 'ag-setup') {
+
               var url = [
                 this.apiUrl,
                 localStorage.getItem('ag-id'),
                 property,
                 this.identifier,
               ];
+              if(this.add){
+                url = [
+                  this.apiUrl,
+                  localStorage.getItem('ag-id'),
+                  property
+                ]
+              }
             } else {
               var url = [this.apiUrl, this.entityId, property, this.identifier];
             }
@@ -1990,8 +1993,8 @@ export class FormsComponent implements OnInit {
           if (
             this.adminForm == 'prerak-admin-setup' ||
             this.adminForm == 'interview' ||
-            this.adminForm == 'ag-setup' ||
-            (this.form == 'ag-registration' && this.add)
+            this.form == 'ag-setup' ||
+            this.form == 'ag-registration' && this.add
           ) {
             this.postData();
           } else {
@@ -2170,8 +2173,7 @@ export class FormsComponent implements OnInit {
     if (this.identifier) {
       if (
         this.adminForm == 'prerak-admin-setup' ||
-        this.adminForm == 'interview' ||
-        this.form == 'ag-setup'
+        this.adminForm == 'interview'
       ) {
         get_url = '/PrerakV2/' + this.identifier;
         console.log('get_url1',get_url)
@@ -2183,8 +2185,14 @@ export class FormsComponent implements OnInit {
         console.log('get_url3',get_url)
       }
     } else {
-      get_url = this.apiUrl;
-      console.log('get_url4',get_url,this.form)
+      if (this.form == 'ag-setup') {
+        get_url = '/AGV8/' + localStorage.getItem('ag-id');
+        console.log('get_url2',get_url)}
+      else{
+        get_url = this.apiUrl;
+        console.log('get_url4',get_url,this.form)
+      }
+
     }
 
     this.generalService.getData(get_url).subscribe((res) => {

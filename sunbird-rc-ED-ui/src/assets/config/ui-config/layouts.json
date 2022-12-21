@@ -158,9 +158,10 @@
             "delete": true,
             "fields": {
               "includes": ["*"],
-              "excludes": ["AgRegistrationForm", "AGDocumentsV3"]
+              "excludes": ["AgRegistrationForm"]
             },
-            "propertyShowFirst": ["nameDetails.firstName"]
+            "propertyShowFirst": ["nameDetails.firstName"],
+            "externalEntity": true
           },
           {
             "definition": "AGV8",
