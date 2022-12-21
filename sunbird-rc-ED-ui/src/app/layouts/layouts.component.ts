@@ -630,7 +630,6 @@ export class LayoutsComponent implements OnInit, OnChanges {
         var docs = [
           'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)',
           'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)',
-          'आधार कार्ड',
           '2 फोटो',
           'जनाधार कार्ड',
           'किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)',
@@ -649,22 +648,28 @@ export class LayoutsComponent implements OnInit, OnChanges {
             }
           });
         }
-
+        console.log("in_doc",in_doc,docs);
         var doc_statuses = [];
         if (this.checkArray(docs, in_doc)) {
           if (Array.isArray(this.model['AGDocumentsV3'])) {
             this.model['AGDocumentsV3'].forEach((docmnt) => {
+              console.log(docmnt)
               doc_statuses.push(docmnt['status']);
             });
           }
         }
+        console.log("doc_statuses",doc_statuses)
 
         // उपलब्ध, सुधार की आवश्यकता नहीं
         // var is_valid = doc_statuses.every( (val, i, arr) => val === arr[0] );
-        var is_valid = doc_statuses.every(
-          (val, i, arr) => val === 'उपलब्ध, सुधार की आवश्यकता नहीं'
-        );
+        var is_valid = false;
+        if(doc_statuses.length > 0){
+          is_valid = doc_statuses.every(
+            (val, i, arr) => val === 'उपलब्ध, सुधार की आवश्यकता नहीं'
+          );
+        }
 
+        console.log("is_valid",is_valid,doc_statuses)
         if (!is_valid) {
           delete this.layoutSchema.blocks[1];
         }
