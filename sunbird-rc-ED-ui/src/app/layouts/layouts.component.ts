@@ -596,7 +596,9 @@ export class LayoutsComponent implements OnInit, OnChanges {
     return object;
   }
 
-  deleteBlock() {}
+  deleteBlock() {
+
+  }
   checkArray(arr, arr2) {
     return arr.every((i) => arr2.includes(i));
   }

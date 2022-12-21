@@ -10,18 +10,6 @@
         "headerName": "fullName",
         "blocks": [
           {
-            "definition": "PrerakV2",
-            "title": "PERSONAL_DETAILS",
-            "add": false,
-            "edit": true,
-            "editform": "prerak-setup",
-            "fields": {
-              "includes": ["*"],
-              "excludes": []
-            },
-            "propertyShowFirst": ["fullName", "mobile", "email"]
-          },
-          {
             "definition": "Camp",
             "title": "Camp",
             "add": true,
@@ -33,7 +21,20 @@
             "fields": {
               "includes": ["*"]
             }
+          },
+          {
+            "definition": "PrerakV2",
+            "title": "PERSONAL_DETAILS",
+            "add": false,
+            "edit": true,
+            "editform": "prerak-setup",
+            "fields": {
+              "includes": ["*"],
+              "excludes": []
+            },
+            "propertyShowFirst": ["fullName", "mobile", "email"]
           }
+
 
         ]
       }
