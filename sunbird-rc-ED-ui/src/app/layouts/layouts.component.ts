@@ -99,7 +99,7 @@ export class LayoutsComponent implements OnInit, OnChanges {
       if (params['layout'] != undefined && params['layout'] == 'ag-detail') {
         if (params.hasOwnProperty('id')) {
           this.identifier = params['id'];
-          localStorage.setItem('id', params['id']);
+          localStorage.setItem('ag-id', params['id']);
         } else {
           this.identifier = localStorage.getItem('id');
           this.location.replaceState('profile/ag-detail/' + this.identifier);
@@ -107,7 +107,6 @@ export class LayoutsComponent implements OnInit, OnChanges {
       }
 
       if (params['layout'] != undefined && params['layout'] == 'Admin') {
-        console.log(params['layout'])
         // this.systemUpdate = true;
         if (params.hasOwnProperty('id')) {
           this.identifier = params['id'];
@@ -147,9 +146,6 @@ export class LayoutsComponent implements OnInit, OnChanges {
 
         // })
       }
-
-
-
 
       if (params['claim']) {
         this.claim = params['claim'];
@@ -464,11 +460,7 @@ export class LayoutsComponent implements OnInit, OnChanges {
                     //this.model[tempName].forEach((objects1, j) => {
                     for (let j = 0; j < this.model[tempName].length; j++) {
                       objects1 = this.model[tempName][j];
-                      console.log(
-                        objects.osid +
-                          '  ' +
-                          objects1.propertiesOSID[element][0]
-                      );
+
                       if (objects.osid == objects1.propertiesOSID[element][0]) {
                         objects1.propertiesOSID.osUpdatedAt = new Date(
                           objects1.propertiesOSID.osUpdatedAt
@@ -484,7 +476,6 @@ export class LayoutsComponent implements OnInit, OnChanges {
                           a.propertiesOSID.osUpdatedAt
                       );
                       this.model[element][i]['_osState'] = tempObj[0]._osState;
-                      console.log({ tempObj });
                     }
                   }
 
@@ -605,9 +596,7 @@ export class LayoutsComponent implements OnInit, OnChanges {
     return object;
   }
 
-  deleteBlock() {
-    console.log('id', this.identifier);
-  }
+  deleteBlock() {}
   checkArray(arr, arr2) {
     return arr.every((i) => arr2.includes(i));
   }
@@ -623,8 +612,14 @@ export class LayoutsComponent implements OnInit, OnChanges {
       if (this.identifier) {
         this.model = res;
       } else {
-        this.model = res[0];
-        this.identifier = res[0].osid;
+        res.forEach((element) => {
+          if (
+            element.osOwner[0] == localStorage.getItem('LoggedInKeyclockID')
+          ) {
+            this.model = element;
+            this.identifier = element.osid;
+          }
+        });
       }
 
       this.getHeadingTitle(this.model);
@@ -635,7 +630,6 @@ export class LayoutsComponent implements OnInit, OnChanges {
         var docs = [
           'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)',
           'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)',
-          'आधार कार्ड',
           '2 फोटो',
           'जनाधार कार्ड',
           'किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)',
@@ -649,28 +643,33 @@ export class LayoutsComponent implements OnInit, OnChanges {
           Array.isArray(this.model['AGDocumentsV3'])
         ) {
           this.model['AGDocumentsV3'].forEach((element) => {
-            console.log('here', element['document']);
             if (docs.includes(element['document'])) {
               in_doc.push(element['document']);
             }
           });
         }
-
+        console.log("in_doc",in_doc,docs);
         var doc_statuses = [];
         if (this.checkArray(docs, in_doc)) {
           if (Array.isArray(this.model['AGDocumentsV3'])) {
             this.model['AGDocumentsV3'].forEach((docmnt) => {
+              console.log(docmnt)
               doc_statuses.push(docmnt['status']);
             });
           }
         }
+        console.log("doc_statuses",doc_statuses)
 
         // उपलब्ध, सुधार की आवश्यकता नहीं
         // var is_valid = doc_statuses.every( (val, i, arr) => val === arr[0] );
-        var is_valid = doc_statuses.every(
-          (val, i, arr) => val === 'उपलब्ध, सुधार की आवश्यकता नहीं'
-        );
+        var is_valid = false;
+        if(doc_statuses.length > 0){
+          is_valid = doc_statuses.every(
+            (val, i, arr) => val === 'उपलब्ध, सुधार की आवश्यकता नहीं'
+          );
+        }
 
+        console.log("is_valid",is_valid,doc_statuses)
         if (!is_valid) {
           delete this.layoutSchema.blocks[1];
         }
@@ -782,20 +781,18 @@ export class LayoutsComponent implements OnInit, OnChanges {
   }
   getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position: Position) => {
-        if (position) {
-          console.log("Latitude: " + position.coords.latitude +
-            "Longitude: " + position.coords.longitude);
-          this.lat = position.coords.latitude;
-          this.lng = position.coords.longitude;
-          console.log(this.lat);
-          console.log(this.lat);
-          this.model['geoLocation'] = this.lat+','+this.lng;
-        }
-      },
-        (error: PositionError) => console.log(error));
+      navigator.geolocation.getCurrentPosition(
+        (position: Position) => {
+          if (position) {
+            this.lat = position.coords.latitude;
+            this.lng = position.coords.longitude;
+            this.model['geoLocation'] = this.lat + ',' + this.lng;
+          }
+        },
+        (error: PositionError) => console.log(error)
+      );
     } else {
-      alert("Geolocation is not supported by this browser.");
+      alert('Geolocation is not supported by this browser.');
     }
   }
 }

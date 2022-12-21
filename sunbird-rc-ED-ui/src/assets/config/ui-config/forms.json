@@ -791,7 +791,7 @@
                 "type": "date",
                 "format": "dd/mm/yyyy",
                 "validation": {
-                  "max": "2022-09-10",
+                  "max": "2008-11-15",
                   "message": "AGE_SHOULD_BE_GREATER_THAN_14"
                 }
               },
@@ -927,7 +927,9 @@
               },
               {
                 "name": "registrationStatus",
-                "required": true
+                "required": true,
+                "disabled":true,
+                "defaultValue" : "पहले से ही पंजीकृत"
               },
               {
                 "name": "AGDocumentsV3",
@@ -936,6 +938,14 @@
                 "expressionProperties": {
                   "templateOptions.disabled": "model.whereStudiedLast",
                   "templateOptions.required": "!model.whereStudiedLast"
+                }
+              },
+              {
+                "name": "aadharNumber",
+                "required": true,
+                "validation": {
+                  "pattern": "^[0-9]{12}$",
+                  "message": "AADHAR_NOT_VALID."
                 }
               }
             ]
@@ -1168,10 +1178,7 @@
                     }
                   ]
                 }
-
               },
-
-
               {
                 "name": "amenities",
                 "required": true
@@ -1320,7 +1327,7 @@
                 "type": "date",
                 "format": "dd/mm/yyyy",
                 "validation": {
-                  "max": "2022-09-10",
+                  "max": "2008-11-15",
                   "message": "AGE_SHOULD_BE_GREATER_THAN_14"
                 }
               },
@@ -1456,7 +1463,9 @@
               },
               {
                 "name": "registrationStatus",
-                "required": true
+                "required": true,
+                "disabled":true,
+                "defaultValue" : "पहले से ही पंजीकृत"
               },
               {
                 "name": "AGDocumentsV3",
@@ -1465,6 +1474,14 @@
                 "expressionProperties": {
                   "templateOptions.disabled": "model.whereStudiedLast",
                   "templateOptions.required": "!model.whereStudiedLast"
+                }
+              },
+              {
+                "name": "aadharNumber",
+                "required": true,
+                "validation": {
+                  "pattern": "^[0-9]{12}$",
+                  "message": "AADHAR_NOT_VALID."
                 }
               }
             ]
@@ -1476,13 +1493,13 @@
       "ag-registration": {
         "api": "/AGV8",
         "type": "property:AgRegistrationForm",
-        "redirectTo": "/myags/attestation/ag/AG/",
+        "redirectTo": "/myags/attestation/ag/AGV8/",
         "title": "Add AG Registration Details",
         "fieldsets": [
           {
             "privacyConfig": "PrerakV2OsConfig",
             "globalPrivacyConfig": "private-access",
-            "definition": "AgRegistrationForm",
+            "definition": "AgRegistrationFormV2",
             "fields": [
               {
                 "name": "isRSOS_NIOSFormSubmitted",
@@ -1493,7 +1510,7 @@
                 "name": "examChoice",
                 "required": true,
                 "expressionProperties": {
-                  "templateOptions.disabled": "model.isRSOS_NIOSFormSubmitted=='नहीं'",
+                  "hideExpression":"model.isRSOS_NIOSFormSubmitted=='नहीं'",
                   "templateOptions.required": "model.isRSOS_NIOSFormSubmitted=='हाँ'"
                 }
               },
@@ -1507,7 +1524,7 @@
                   "min": 1
                 },
                 "expressionProperties": {
-                  "templateOptions.disabled": "model.isRSOS_NIOSFormSubmitted=='नहीं'",
+                  "hideExpression":"model.isRSOS_NIOSFormSubmitted=='नहीं'",
                   "templateOptions.required": "model.isRSOS_NIOSFormSubmitted=='हाँ'"
                 }
               },
@@ -1517,7 +1534,7 @@
                 "type": "date",
                 "format": "dd/mm/yyyy",
                 "expressionProperties": {
-                  "templateOptions.disabled": "model.isRSOS_NIOSFormSubmitted=='नहीं'",
+                  "hideExpression":"model.isRSOS_NIOSFormSubmitted=='नहीं'",
                   "templateOptions.required": "model.isRSOS_NIOSFormSubmitted=='हाँ'"
                 }
               },
@@ -1525,7 +1542,7 @@
                 "name": "isRSOS_NIOSRegIdReceived",
                 "required": true,
                 "expressionProperties": {
-                  "templateOptions.disabled": "model.isRSOS_NIOSFormSubmitted=='नहीं'",
+                  "hideExpression":"model.isRSOS_NIOSFormSubmitted=='नहीं'",
                   "templateOptions.required": "model.isRSOS_NIOSFormSubmitted=='हाँ'"
                 }
               },
@@ -1534,11 +1551,11 @@
                 "required": true,
                 "type": "number",
                 "validation": {
-                  "pattern": "^[0-9]{11}$|^[0-9]{12}$",
+                  "pattern": "^[0-9]{10}$|^[0-9]{11}$",
                   "message": "NUMBER_SHOULD_BE_11_OR_12"
                 },
                 "expressionProperties": {
-                  "templateOptions.disabled": "model.isRSOS_NIOSFormSubmitted=='नहीं'||model.isRSOS_NIOSRegIdReceived=='नहीं'",
+                  "hideExpression":"model.isRSOS_NIOSFormSubmitted=='नहीं'||model.isRSOS_NIOSRegIdReceived=='नहीं'",
                   "templateOptions.required": "model.isRSOS_NIOSFormSubmitted=='हाँ'&& model.isRSOS_NIOSRegIdReceived=='हाँ'"
                 }
               }

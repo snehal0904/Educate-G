@@ -158,9 +158,10 @@
             "delete": true,
             "fields": {
               "includes": ["*"],
-              "excludes": ["AgRegistrationForm", "AGDocumentsV3"]
+              "excludes": ["AgRegistrationForm"]
             },
-            "propertyShowFirst": ["nameDetails.firstName"]
+            "propertyShowFirst": ["nameDetails.firstName"],
+            "externalEntity": true
           },
           {
             "definition": "AGV8",
@@ -172,7 +173,6 @@
             "claimEdit": true,
             "canRaiseClaim": false,
             "multiple": true,
-            "headValue": "vfsTeamName",
             "fields": {
               "includes": ["AgRegistrationForm"]
             }

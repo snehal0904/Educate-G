@@ -12,6 +12,8 @@
   "BASIC_DETAILS": "मूल विवरण",
   "GSTIN_NOT_VALID": "GSTIN मान्य नहीं है। उदा: 06BZAHM6385P6Z2",
   "NAME_NOT_VALID": "नाम मान्य नहीं है।",
+  "AADHAR_NOT_VALID": "आधार मान्य नहीं है",
+  "AADHAR_TAKEN": "यह आधार नंबर पहले से पंजीकृत है",
   "TAKING_MORE_TIME_SOMETHING_WENT_WRONG": "जारीकर्ता से दस्तावेज़ प्राप्त करने में सामान्य से अधिक समय लग रहा है, कुछ गलत हो गया है, कृपया पुनः प्रयास करें",
   "AFFLILIATION_DETAILS": "संबद्धता विवरण",
   "YEAR_NOT_VALID": "वर्ष मान्य नहीं है। उदाहरण: 2016",
