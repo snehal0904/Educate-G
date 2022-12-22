@@ -14,7 +14,7 @@ import { map } from 'rxjs/operators';
 export class GeneralService {
   baseUrl = this.config.getEnv('baseUrl');
   translatedString: string;
-  constructor(public dataService: DataService, 
+  constructor(public dataService: DataService,
     private http: HttpClient, private config: AppConfig, public translate: TranslateService) {
   }
 
@@ -96,6 +96,18 @@ export class GeneralService {
     return this.dataService.put(req);
   }
 
+  deleteRecord(id) {
+    var url = this.baseUrl + "/config/"+id;
+    let headers = new HttpHeaders();
+    url.replace('//', '/');
+    const req = {
+      url: url,
+      headers: headers
+    };
+
+    return this.dataService.delete(req);
+  }
+
   // Configurations
   getConfigs() {
     let url = "./assets/config/config.json";
@@ -141,7 +153,7 @@ export class GeneralService {
 
         let blob = new Blob([data], {
             type: 'application/pdf' // must match the Accept type
-            // type: 'application/octet-stream' // for excel 
+            // type: 'application/octet-stream' // for excel
         });
         var link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
@@ -154,6 +166,6 @@ export class GeneralService {
     })).subscribe((result: any) => {
     });
   }
-  
+
 }
 
