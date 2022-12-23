@@ -94,6 +94,24 @@ export class DataService {
     );
   }
 
+   /**
+   * for making get api calls
+   *
+   * @param requestParam param
+   */
+   delete(requestParam): Observable<any> {
+    const httpOptions: HttpOptions = {
+      headers: requestParam.header ? requestParam.header : this.getHeader(),
+      params: requestParam.param,
+    };
+
+    return this.http.delete(requestParam.url, httpOptions).pipe(
+      mergeMap((data: any) => {
+        return observableOf(data);
+      })
+    );
+  }
+
   getDocument(url: string): Observable<any> {
     return new Observable((observer: Subscriber<any>) => {
       let objectUrl: string = null;

@@ -51,8 +51,8 @@
               translate}}
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
             </a>
-            <ng-template [ngIf]="block?.delete && layout != 'ag-detail'">
-              <a *ngIf="!public" class="pl-1 fs-7" style="color: indianred;" (click)="deleteBlock()">| Delete
+            <ng-template [ngIf]="block?.delete">
+              <a *ngIf="!public" class="pl-1 fs-7" style="color: indianred;" (click)="deleteBlock(identifier)">| Delete
                 <i class="fa fa-trash" aria-hidden="true"></i>
               </a>
 
