@@ -241,7 +241,7 @@ export class TablesComponent implements OnInit {
     if (this.entity) {
       url = this.apiUrl;
     } else {
-      console.log('Something went wrong');
+      // console.log('Something went wrong');
       return;
     }
 
@@ -622,7 +622,7 @@ export class TablesComponent implements OnInit {
     // osid_data.forEach(async (element, index) => {
     //   await this.generalService.postData("PrerakV2/search", {"filters":{"osid":{"contains":element?.osid}}}).subscribe(
     //     (res) => {
-    //       console.log("all_data",res);
+    //       // console.log("all_data",res);
     //       osid_data[index]["parentOrganization"] = res[0]["parentOrganization"]
     //       // if(!element.prerakName){
     //       //   element.prerakName = res[0]["fullName"]
@@ -1048,7 +1048,7 @@ export class TablesComponent implements OnInit {
                 element.AgRegistrationForm[0].examChoice
                   ? element.AgRegistrationForm[0].examChoice
                   : '';
-
+              // console.log("subj",element.AgRegistrationForm[0].subjects)
               if (element.AgRegistrationForm[0].subjects) {
                 obj['subjects'] =
                   element.AgRegistrationForm[0].subjects.toString();
@@ -1192,7 +1192,7 @@ export class TablesComponent implements OnInit {
               'किशोरी का RSOS/NIOS रजिस्ट्रेशन आईडी / क्रमांक दर्ज करें',
             ],
           };
-          console.log('finalarr--', finalarr);
+          // console.log('finalarr--', finalarr);
           this.csvExporter = new ExportToCsv(options);
           this.csvExporter.generateCsv(finalarr);
           this.loader = false;
@@ -1492,7 +1492,7 @@ export class TablesComponent implements OnInit {
               ? element.AgRegistrationForm[0].examChoice
               : '';
           if (element.AgRegistrationForm[0].subjects) {
-            obj['subjects'] = element.AgRegistrationForm[0].subjects.toString();
+            obj['subjects'] = element.AgRegistrationForm[0].subjects.toString().replace(",","|");
           } else {
             obj['subjects'] = '';
           }
@@ -1515,6 +1515,7 @@ export class TablesComponent implements OnInit {
             'जमा किए गए RSOS/NIOS रजिस्ट्रेशन फॉर्म की रसीद की एक तस्वीर प्रदान करें'
           ] = '';
           obj['निम्न में से चुने की किशोरी कौनसी परीक्षा में भाग लेगी'] = '';
+          obj['subjects'] = '';
           obj['RSOS/NIOS रजिस्ट्रेशन फॉर्म के अनुसार जन्मतिथि'] = '';
           obj['क्या RSOS/NIOS रजिस्ट्रेशन आईडी / क्रमांक प्राप्त हो गयी है'] =
             '';
@@ -1628,7 +1629,7 @@ export class TablesComponent implements OnInit {
           'किशोरी का RSOS/NIOS रजिस्ट्रेशन आईडी / क्रमांक दर्ज करें',
         ],
       };
-      console.log('finalarr--', finalarr);
+      // console.log('finalarr--', finalarr);
       this.csvExporter = new ExportToCsv(options);
       this.csvExporter.generateCsv(finalarr);
       this.loader = false;
