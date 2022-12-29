@@ -8,7 +8,7 @@
   "configFolder": "/assets/config/ui-config",
   "languageFolder": "/assets/i18n",
   "title": "Educate Girls",
-  "baseUrl": "https://dev-eg2.uniteframework.io/registry/api/v1",
+  "baseUrl": "http://dev-eg2.uniteframework.io/registry/api/v1",
   "schemaUrl": "https://dev-eg2.uniteframework.io/registry/api/docs/swagger.json",
   "footerText": "Educate Girls",
   "languages": ["en", "hi"],
