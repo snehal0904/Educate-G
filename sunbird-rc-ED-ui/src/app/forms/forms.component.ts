@@ -1964,7 +1964,6 @@ export class FormsComponent implements OnInit {
           } else {
 
             if (this.form == 'ag-registration' ||  this.form == 'ag-setup') {
-              console.log("formmmm",this.form)
               var url = [
                 this.apiUrl,
                 localStorage.getItem('ag-id'),
@@ -2007,7 +2006,6 @@ export class FormsComponent implements OnInit {
             this.form == 'ag-setup' ||
             this.form == 'ag-registration'
           ) {
-            console.log("formmmm2",this.form)
             if(this.add){
               this.postData();
             }else {
