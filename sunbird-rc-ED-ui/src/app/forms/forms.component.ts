@@ -1962,8 +1962,8 @@ export class FormsComponent implements OnInit {
               this.identifier,
             ];
           } else {
-            if (this.form == 'ag-registration' ||  this.form == 'ag-setup') {
 
+            if (this.form == 'ag-registration' ||  this.form == 'ag-setup') {
               var url = [
                 this.apiUrl,
                 localStorage.getItem('ag-id'),
@@ -1982,7 +1982,17 @@ export class FormsComponent implements OnInit {
             }
           }
         } else {
-          var url = [this.apiUrl, this.identifier, property];
+          if (this.form == 'ag-registration') {
+              url = [
+                this.apiUrl,
+                localStorage.getItem('ag-id'),
+                property
+              ]
+
+          }else{
+            var url = [this.apiUrl, this.identifier, property];
+          }
+
         }
 
         this.apiUrl = url.join('/');
@@ -1994,11 +2004,13 @@ export class FormsComponent implements OnInit {
             this.adminForm == 'prerak-admin-setup' ||
             this.adminForm == 'interview' ||
             this.form == 'ag-setup' ||
-            this.form == 'ag-registration' && this.add
+            this.form == 'ag-registration'
           ) {
-            this.postData();
-          } else {
-            this.updateClaims();
+            if(this.add){
+              this.postData();
+            }else {
+              this.updateClaims();
+            }
           }
         } else {
           this.postData();
