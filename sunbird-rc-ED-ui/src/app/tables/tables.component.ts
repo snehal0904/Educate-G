@@ -618,23 +618,6 @@ export class TablesComponent implements OnInit {
     this.name = `Ags_${dayjs().format('YYYY-MM-DD_HH_mm')}`;
     let arr = [];
     let finalarr = [];
-
-    // osid_data.forEach(async (element, index) => {
-    //   await this.generalService.postData("PrerakV2/search", {"filters":{"osid":{"contains":element?.osid}}}).subscribe(
-    //     (res) => {
-    //       // console.log("all_data",res);
-    //       osid_data[index]["parentOrganization"] = res[0]["parentOrganization"]
-    //       // if(!element.prerakName){
-    //       //   element.prerakName = res[0]["fullName"]
-    //       // }
-    //       // if(!element.prerakId){
-    //       //   element.prerakId = res[0]["osid"]
-    //       // }
-    //       // if(!element.parentOrganization){
-    //       //   element.parentOrganization = res[0]["parentOrganization"]
-    //       // }
-    //     })
-    // })
     var osid_data = [];
     var osUpdated = false;
     await this.generalService
@@ -661,6 +644,9 @@ export class TablesComponent implements OnInit {
         if (osUpdated) {
           // to iterate to AG
           this.model.forEach(async (element) => {
+            if (element['osOwner'].length == 1) {
+              element['osOwner'][1] = element.osCreatedBy;
+            }
             arr = [];
             let obj = [];
             let data = [];
@@ -976,62 +962,6 @@ export class TablesComponent implements OnInit {
                   ? data['BPL प्रमाण पत्र-Doc number']
                   : '';
               }
-              // } else {
-              //   obj[
-              //     'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)'
-              //   ] = '';
-              //   obj[
-              //     'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)-Status'
-              //   ] = '';
-              //   obj[
-              //     'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)-Doc number'
-              //   ] = '';
-              //   obj[
-              //     'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)'
-              //   ] = '';
-              //   obj[
-              //     'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)-Status'
-              //   ] = '';
-              //   obj[
-              //     'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)-Doc number'
-              //   ] = '';
-              //   obj['आधार कार्ड'] = '';
-              //   obj['आधार कार्ड-Status'] = '';
-              //   obj['आधार कार्ड-Doc number'] = '';
-              //   obj['2 फोटो'] = '';
-              //   obj['2 फोटो-Status'] = '';
-              //   obj['2 फोटो-Doc number'] = '';
-              //   obj['जनाधार कार्ड'] = '';
-              //   obj['जनाधार कार्ड-Status'] = '';
-              //   obj['जनाधार कार्ड-Doc number'] = '';
-              //   obj['किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)'] = '';
-              //   obj['किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)-Status'] = '';
-              //   obj['किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)-Doc number'] =
-              //     '';
-              //   obj['मोबाइल नंबर'] = '';
-              //   obj['मोबाइल नंबर-Status'] = '';
-              //   obj['मोबाइल नंबर-Doc number'] = '';
-              //   obj['ईमेल आईडी'] = '';
-              //   obj['ईमेल आईडी-Status'] = '';
-              //   obj['ईमेल आईडी-Doc number'] = '';
-              //   obj['टीसी'] = '';
-              //   obj['टीसी-Status'] = '';
-              //   obj['टीसी-Doc number'] = '';
-              //   obj['मार्कशीट'] = '';
-              //   obj['मार्कशीट-Status'] = '';
-              //   obj['मार्कशीट-Doc number'] = '';
-              //   obj['जन्मा प्रमाण पत्'] = '';
-              //   obj['जन्मा प्रमाण पत्-Status'] = '';
-              //   obj['जन्मा प्रमाण पत्-Doc number'] = '';
-              //   obj['जाती प्रमाण पत्र'] = '';
-              //   obj['जाती प्रमाण पत्र-Status'] = '';
-              //   obj['जाती प्रमाण पत्र-Doc number'] = '';
-              //   obj['राशन कार्ड'] = '';
-              //   obj['राशन कार्ड-Status'] = '';
-              //   obj['राशन कार्ड-Doc number'] = '';
-              //   obj['BPL प्रमाण पत्र'] = '';
-              //   obj['BPL प्रमाण पत्र-Status'] = '';
-              //   obj['BPL प्रमाण पत्र-Doc number'] = '';
             }
             if (element.AgRegistrationForm && element.AgRegistrationForm[0]) {
               obj[
@@ -1192,7 +1122,6 @@ export class TablesComponent implements OnInit {
               'किशोरी का RSOS/NIOS रजिस्ट्रेशन आईडी / क्रमांक दर्ज करें',
             ],
           };
-          // console.log('finalarr--', finalarr);
           this.csvExporter = new ExportToCsv(options);
           this.csvExporter.generateCsv(finalarr);
           this.loader = false;
