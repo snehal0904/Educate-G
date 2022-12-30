@@ -22,10 +22,12 @@
     <img class="cursor-pointer" src="assets/images/download-icon.svg" />
   </div>
   <!-- </span> -->
+
   <a *ngIf="entity == 'admin' && listName == 'PrerakList'" panelAddLink="add-prerak-admin-setup" data-toggle="modal"
     data-target="#openAddPrerakForm" (click)="addPrerak()" class="fs-7 float-end text-secondary-color"><i
       class="fa fa-plus pr-1" aria-hidden="true"></i><span class="text-secondary-color p14 fw-bold">Add New</span></a>
   <!-- <a
+
     *ngIf="entity == 'admin' && listName == 'AGList'"
     panelAddLink="AG-add"
     data-toggle="modal"
@@ -34,10 +36,12 @@
     class="fs-7 float-end text-secondary-color"
     ><i class="fa fa-plus pr-1" aria-hidden="true"></i
     ><span class="text-secondary-color p14 fw-bold">Add New</span></a
+
   > -->
   <a *ngIf="entity == 'myags'" panelAddLink="AG-add" data-toggle="modal" data-target="#openAddAGForm" (click)="addAG()"
     class="fs-7 float-end text-secondary-color"><i class="fa fa-plus pr-1" aria-hidden="true"></i><span
       class="text-secondary-color p14 fw-bold">Add New</span></a>
+
 
   <table class="table table-striped">
     <thead>
