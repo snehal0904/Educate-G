@@ -36,10 +36,6 @@
           {
             "title": "AG List",
             "redirectTo": "/myags/attestation/ag/AGV8"
-          },
-          {
-            "title": "Camp",
-            "redirectTo": "/profile/Camp"
           }
         ],
         "right": [

@@ -596,7 +596,12 @@ export class LayoutsComponent implements OnInit, OnChanges {
     return object;
   }
 
-  deleteBlock() {}
+  async deleteBlock(id) {
+    console.log("deleteBlock", id);
+    await this.generalService.deleteRecord(id).subscribe((res) => {
+      this.router.navigate(['/login']);
+    })
+  }
   checkArray(arr, arr2) {
     return arr.every((i) => arr2.includes(i));
   }
