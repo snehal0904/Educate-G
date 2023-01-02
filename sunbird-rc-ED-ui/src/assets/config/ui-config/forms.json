@@ -1461,9 +1461,7 @@
               },
               {
                 "name": "registrationStatus",
-                "required": true,
-                "disabled":true,
-                "defaultValue" : "पहले से ही पंजीकृत"
+                "required": true
               },
               {
                 "name": "AGDocumentsV3",
