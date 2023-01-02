@@ -1279,19 +1279,20 @@ export class FormsComponent implements OnInit {
         ]['widget']['formlyConfig']['asyncValidators'][field.name][
           'expression'
         ] = (control: FormControl) => {
-          console.log("here",control.value)
+          console.log("here",control.value,this.model)
           if (control.value != null) {
             if (
-              this.model['examChoice'] == 'RSOS पहला प्रयास' ||
-              this.model['examChoice'] == 'NIOS पहला प्रयास'
+              control.value == 'RSOS पहला प्रयास' ||
+              control.value == 'NIOS पहला प्रयास'
             ) {
               if(this.model['subjects']){
+
                 this.responseData.definitions[fieldset.definition].properties[
                   field.name
                 ]['widget']['formlyConfig']['asyncValidators'][field.name][
                   'message'
                 ] =
-                  'You need to select Minimum 5 values and Maximum 7 values';
+                  'You need to select Minimum 5 subjects and Maximum 7 subjects';
                 if (this.model['subjects'].length <= 7 && this.model['subjects'].length >= 5) {
                   return of(control.value);
                 } else {
@@ -1300,13 +1301,14 @@ export class FormsComponent implements OnInit {
               }
 
             } else {
+              console.log("this.model['subjects']",this.model['subjects'])
               this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'][field.name][
                 'message'
               ] =
-                'You need to select Minimum ';
+                'You need to select Minimum 1 subjects and Maximum 7 subjects';
               if (
-                this.model['subjects'].length <= field.validation.max &&
-                this.model['subjects'].length >= field.validation.min
+                this.model['subjects'].length <= 7 &&
+                this.model['subjects'].length >= 1
               ) {
                 return of(control.value);
               } else {
