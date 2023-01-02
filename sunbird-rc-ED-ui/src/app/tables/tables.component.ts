@@ -1007,6 +1007,7 @@ export class TablesComponent implements OnInit {
               ] = '';
               obj['निम्न में से चुने की किशोरी कौनसी परीक्षा में भाग लेगी'] =
                 '';
+              obj['subjects'] = ''
               obj['RSOS/NIOS रजिस्ट्रेशन फॉर्म के अनुसार जन्मतिथि'] = '';
               obj[
                 'क्या RSOS/NIOS रजिस्ट्रेशन आईडी / क्रमांक प्राप्त हो गयी है'
