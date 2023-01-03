@@ -20,6 +20,34 @@ import * as Sentry from '@sentry/angular';
 
 declare const $: any;
 
+const RSOS_PehlaPrayas = 'RSOS पहला प्रयास';
+const NSOS_PehlaPrayas = 'NIOS पहला प्रयास';
+const privateSchoolEnums = [
+  'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)',
+  'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)',
+  '2 फोटो',
+  'जनाधार कार्ड',
+  'किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)',
+  'मोबाइल नंबर',
+  'ईमेल आईडी',
+];
+const sarkariSchoolEnums = [
+  'टीसी',
+  'मार्कशीट',
+  '2 फोटो',
+  'जनाधार कार्ड',
+  'किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)',
+  'मोबाइल नंबर',
+  'ईमेल आईडी',
+];
+const noSchoolEnums = [
+  'जन्मा प्रमाण पत्',
+  'जाती प्रमाण पत्र',
+  'राशन कार्ड',
+  'BPL प्रमाण पत्र',
+  '2 फोटो',
+  'जनाधार कार्ड',
+];
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
@@ -1282,8 +1310,7 @@ export class FormsComponent implements OnInit {
           console.log("here",control.value,this.model)
           if (control.value != null) {
             if (
-              control.value == 'RSOS पहला प्रयास' ||
-              control.value == 'NIOS पहला प्रयास'
+              isRSOS_NSOS_First(control.value)
             ) {
               if(this.model['subjects']){
 
@@ -1296,6 +1323,7 @@ export class FormsComponent implements OnInit {
                 if (this.model['subjects'].length <= 7 && this.model['subjects'].length >= 5) {
                   return of(control.value);
                 } else {
+                  this.generalService.debugLog("1");
                   return of(false);
                 }
               }
@@ -1312,6 +1340,7 @@ export class FormsComponent implements OnInit {
               ) {
                 return of(control.value);
               } else {
+                this.generalService.debugLog("2");
                 return of(false);
               }
             }
@@ -1388,8 +1417,8 @@ export class FormsComponent implements OnInit {
             ] = (control: FormControl) => {
               if (control.value != null) {
                 if (
-                  this.model['examChoice'] == 'RSOS पहला प्रयास' ||
-                  this.model['examChoice'] == 'NIOS पहला प्रयास'
+                  this.model['examChoice'] == RSOS_PehlaPrayas ||
+                  this.model['examChoice'] == NSOS_PehlaPrayas
                 ) {
                   this.responseData.definitions[fieldset.definition].properties[
                     field.name
@@ -1400,6 +1429,7 @@ export class FormsComponent implements OnInit {
                   if (control.value.length <= 7 && control.value.length >= 5) {
                     return of(control.value);
                   } else {
+                    this.generalService.debugLog("subject - Minimum 5 values and Maximum 7 values");
                     return of(false);
                   }
                 } else {
@@ -1419,6 +1449,7 @@ export class FormsComponent implements OnInit {
                   ) {
                     return of(control.value);
                   } else {
+                    this.generalService.debugLog("Minimum 1 values and Maximum 7 values");
                     return of(false);
                   }
                 }
@@ -1560,45 +1591,73 @@ export class FormsComponent implements OnInit {
           'expression'
         ] = (control: FormControl) => {
           if (control.value != null) {
+            this.model['AGDocumentsV3'] = [];
+            console.log(this.model['AGDocumentsV3'])
             if (control.value == 'प्राइवेट स्कूल') {
               this.responseData.definitions[fieldset.definition].properties[
                 'AGDocumentsV3'
-              ]['items']['properties']['document']['enum'] = [
-                'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)',
-                'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)',
-                '2 फोटो',
-                'जनाधार कार्ड',
-                'किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)',
-                'मोबाइल नंबर',
-                'ईमेल आईडी',
-              ];
+              ]['items']['properties']['document']['enum'] = privateSchoolEnums;
               return of(control.value);
             } else if (control.value == 'सरकारी स्कूल') {
               this.responseData.definitions[fieldset.definition].properties[
                 'AGDocumentsV3'
-              ]['items']['properties']['document']['enum'] = [
-                'टीसी',
-                'मार्कशीट',
-                '2 फोटो',
-                'जनाधार कार्ड',
-                'किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)',
-                'मोबाइल नंबर',
-                'ईमेल आईडी',
-              ];
+              ]['items']['properties']['document']['enum'] = sarkariSchoolEnums;
               return of(control.value);
             } else if (control.value == 'कभी पढ़ाई नहीं की') {
               this.responseData.definitions[fieldset.definition].properties[
                 'AGDocumentsV3'
-              ]['items']['properties']['document']['enum'] = [
-                'जन्मा प्रमाण पत्',
-                'जाती प्रमाण पत्र',
-                'राशन कार्ड',
-                'BPL प्रमाण पत्र',
-                'फोटो',
-                'जनाधार कार्ड',
-              ];
+              ]['items']['properties']['document']['enum'] = noSchoolEnums;
               return of(control.value);
+            }else{
+              this.responseData.definitions[fieldset.definition].properties[
+                'AGDocumentsV3'
+              ]['items']['properties']['document']['enum'] = [];
             }
+          }
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve(true);
+            }, 2000);
+          });
+        };
+      }
+
+
+      if (field.name == 'AGDocumentsV3') {
+        if(!this.model['whereStudiedLast']){
+          this.responseData.definitions[fieldset.definition].properties[
+            'AGDocumentsV3'
+          ]['items']['properties']['document']['enum'] = [];
+        }
+        this.responseData.definitions[fieldset.definition].properties[
+          field.name
+        ]['widget']['formlyConfig']['asyncValidators'] = {};
+        this.responseData.definitions[fieldset.definition].properties[
+          field.name
+        ]['widget']['formlyConfig']['asyncValidators'][field.name] = {};
+
+        this.responseData.definitions[fieldset.definition].properties[
+          field.name
+        ]['widget']['formlyConfig']['asyncValidators'][field.name][
+          'expression'
+        ] = (control: FormControl) => {
+          if (control.value != null) {
+            var enumList = [];
+            if(this.model['whereStudiedLast']){
+              if (this.model['whereStudiedLast'] == 'प्राइवेट स्कूल') {
+                enumList = privateSchoolEnums;
+              } else if (this.model['whereStudiedLast'] == 'सरकारी स्कूल') {
+                enumList = sarkariSchoolEnums;
+              } else if (this.model['whereStudiedLast'] == 'कभी पढ़ाई नहीं की') {
+                enumList = noSchoolEnums;
+              }
+              control.value.forEach(doc_ele => {
+                enumList = enumList.filter(e => e !== doc_ele.document);
+              });
+            }
+            this.responseData.definitions[fieldset.definition].properties[
+              'AGDocumentsV3'
+            ]['items']['properties']['document']['enum'] = enumList;
           }
           return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -1727,6 +1786,7 @@ export class FormsComponent implements OnInit {
       }
     }
   }
+
 
   addChildWidget(field, ParentName, childrenName) {
     this.res =
@@ -2657,3 +2717,8 @@ export class FormsComponent implements OnInit {
     }
   }
 }
+function isRSOS_NSOS_First(text) {
+  return text == RSOS_PehlaPrayas ||
+  text == NSOS_PehlaPrayas;
+}
+
