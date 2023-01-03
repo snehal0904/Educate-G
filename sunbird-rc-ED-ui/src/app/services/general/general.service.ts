@@ -167,5 +167,9 @@ export class GeneralService {
     });
   }
 
+  debugLog(text){
+    console.log(text);
+  }
+
 }
 
