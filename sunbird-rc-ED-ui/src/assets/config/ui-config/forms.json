@@ -932,6 +932,7 @@
               {
                 "name": "AGDocumentsV3",
                 "required": true,
+                "title": "नीचे दी गई सूची से कृपया उन दस्तावेजों का चयन करें जो किशोरी के पास उपलब्ध हैं*",
                 "type": "custom:document",
                 "expressionProperties": {
                   "templateOptions.disabled": "model.whereStudiedLast",
@@ -1439,9 +1440,9 @@
               {
                 "name": "AGDocumentsV3",
                 "required": true,
+                "title": "नीचे दी गई सूची से कृपया उन दस्तावेजों का चयन करें जो किशोरी के पास उपलब्ध हैं*",
                 "type": "custom:document",
                 "expressionProperties": {
-                  "hideExpression": "!model.whereStudiedLast",
                   "templateOptions.disabled": "model.whereStudiedLast",
                   "templateOptions.required": "!model.whereStudiedLast"
                 }

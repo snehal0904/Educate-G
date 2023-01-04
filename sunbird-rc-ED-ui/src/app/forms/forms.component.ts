@@ -833,6 +833,12 @@ export class FormsComponent implements OnInit {
               },
             };
         }
+        if (field.title) {
+          this.responseData.definitions[fieldset.definition].properties[
+            field.name
+          ]['title'] =
+          field.title
+        }
         if (field.placeholder) {
           this.responseData.definitions[fieldset.definition].properties[
             field.name
@@ -1591,8 +1597,7 @@ export class FormsComponent implements OnInit {
           'expression'
         ] = (control: FormControl) => {
           if (control.value != null) {
-            this.model['AGDocumentsV3'] = [];
-            console.log(this.model['AGDocumentsV3'])
+            // this.model['AGDocumentsV3'] = [];
             if (control.value == 'प्राइवेट स्कूल') {
               this.responseData.definitions[fieldset.definition].properties[
                 'AGDocumentsV3'

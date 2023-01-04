@@ -146,7 +146,7 @@
             "delete": true,
             "fields": {
               "includes": ["*"],
-              "excludes": ["AgRegistrationForm"]
+              "excludes": ["AgRegistrationForm","AGDocumentsV3"]
             },
             "propertyShowFirst": ["nameDetails.firstName"],
             "externalEntity": true
