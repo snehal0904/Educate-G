@@ -1613,10 +1613,11 @@ export class FormsComponent implements OnInit {
                 'AGDocumentsV3'
               ]['items']['properties']['document']['enum'] = noSchoolEnums;
               return of(control.value);
-            }else{
+            }
+            else{
               this.responseData.definitions[fieldset.definition].properties[
                 'AGDocumentsV3'
-              ]['items']['properties']['document']['enum'] = [];
+              ]['items']['properties']['document']['enum'] = privateSchoolEnums;
             }
           }
           return new Promise((resolve, reject) => {
@@ -1629,10 +1630,32 @@ export class FormsComponent implements OnInit {
 
 
       if (field.name == 'AGDocumentsV3') {
-        if(!this.model['whereStudiedLast']){
+        // if(!this.model['whereStudiedLast']){
+        //   this.responseData.definitions[fieldset.definition].properties[
+        //     'AGDocumentsV3'
+        //   ]['items']['properties']['document']['enum'] = privateSchoolEnums;
+        // }
+        if (this.model['whereStudiedLast'] == 'प्राइवेट स्कूल') {
           this.responseData.definitions[fieldset.definition].properties[
             'AGDocumentsV3'
-          ]['items']['properties']['document']['enum'] = [];
+          ]['items']['properties']['document']['enum'] = privateSchoolEnums;
+
+        } else if (this.model['whereStudiedLast'] == 'सरकारी स्कूल') {
+          this.responseData.definitions[fieldset.definition].properties[
+            'AGDocumentsV3'
+          ]['items']['properties']['document']['enum'] = sarkariSchoolEnums;
+
+        } else if (this.model['whereStudiedLast'] == 'कभी पढ़ाई नहीं की') {
+          this.responseData.definitions[fieldset.definition].properties[
+            'AGDocumentsV3'
+          ]['items']['properties']['document']['enum'] = noSchoolEnums;
+
+        }
+        else{
+          var all_docs = privateSchoolEnums.concat(sarkariSchoolEnums);
+          this.responseData.definitions[fieldset.definition].properties[
+            'AGDocumentsV3'
+          ]['items']['properties']['document']['enum'] = all_docs;
         }
         this.responseData.definitions[fieldset.definition].properties[
           field.name
@@ -1662,7 +1685,7 @@ export class FormsComponent implements OnInit {
             }
             this.responseData.definitions[fieldset.definition].properties[
               'AGDocumentsV3'
-            ]['items']['properties']['document']['enum'] = enumList;
+            ]['items']['properties']['document']['enum'] = privateSchoolEnums;
           }
           return new Promise((resolve, reject) => {
             setTimeout(() => {
