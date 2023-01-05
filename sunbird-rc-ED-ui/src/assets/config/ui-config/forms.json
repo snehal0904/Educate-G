@@ -1479,7 +1479,6 @@
 
               {
                 "name": "examChoice",
-                "required": true,
                 "expressionProperties": {
                   "hideExpression":"model.isRSOS_NIOSFormSubmitted=='नहीं'",
                   "templateOptions.required": "model.isRSOS_NIOSFormSubmitted=='हाँ'"
@@ -1487,7 +1486,6 @@
               },
               {
                 "name": "subjects",
-                "required": true,
                 "type": "multiselect",
                 "title": "निम्न में से किशोरी द्वारा चुने गए विषय चुने",
                 "validation": {
@@ -1501,7 +1499,6 @@
               },
               {
                 "name": "birthDateOnRSOS_NIOSForm",
-                "required": true,
                 "type": "date",
                 "format": "dd/mm/yyyy",
                 "expressionProperties": {
@@ -1511,7 +1508,6 @@
               },
               {
                 "name": "isRSOS_NIOSRegIdReceived",
-                "required": true,
                 "expressionProperties": {
                   "hideExpression":"model.isRSOS_NIOSFormSubmitted=='नहीं'",
                   "templateOptions.required": "model.isRSOS_NIOSFormSubmitted=='हाँ'"
@@ -1519,7 +1515,6 @@
               },
               {
                 "name": "RSOS_NIOSRegId",
-                "required": true,
                 "type": "number",
                 "validation": {
                   "pattern": "^[0-9]{10}$|^[0-9]{11}$",
@@ -1527,7 +1522,77 @@
                 },
                 "expressionProperties": {
                   "hideExpression":"model.isRSOS_NIOSFormSubmitted=='नहीं'||model.isRSOS_NIOSRegIdReceived=='नहीं'",
-                  "templateOptions.required": "model.isRSOS_NIOSFormSubmitted=='हाँ'&& model.isRSOS_NIOSRegIdReceived=='हाँ'"
+                  "templateOptions.required": "model.isRSOS_NIOSFormSubmitted=='हाँ' && model.isRSOS_NIOSRegIdReceived=='हाँ'"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "ag-registration-setup": {
+        "api": "/AGV8",
+        "type": "property:AgRegistrationForm",
+        "redirectTo": "/myags/attestation/ag/AGV8/",
+        "title": "Add AG Registration Details",
+        "fieldsets": [
+          {
+            "privacyConfig": "PrerakV2OsConfig",
+            "globalPrivacyConfig": "private-access",
+            "definition": "AgRegistrationFormV2",
+            "fields": [
+              {
+                "name": "isRSOS_NIOSFormSubmitted",
+                "required": true
+              },
+
+              {
+                "name": "examChoice",
+                "expressionProperties": {
+                  "hideExpression":"model.isRSOS_NIOSFormSubmitted=='नहीं'",
+                  "templateOptions.required": "model.isRSOS_NIOSFormSubmitted=='हाँ'"
+                }
+              },
+              {
+                "name": "subjects",
+                "type": "multiselect",
+                "title": "निम्न में से किशोरी द्वारा चुने गए विषय चुने",
+                "validation": {
+                  "max": 7,
+                  "min": 1
+                },
+                "expressionProperties": {
+                  "hideExpression":"model.isRSOS_NIOSFormSubmitted=='नहीं'",
+                  "templateOptions.required": "model.isRSOS_NIOSFormSubmitted=='हाँ'"
+                }
+              },
+              {
+                "name": "birthDateOnRSOS_NIOSForm",
+                "type": "date",
+                "format": "dd/mm/yyyy",
+                "expressionProperties": {
+                  "hideExpression":"model.isRSOS_NIOSFormSubmitted=='नहीं'",
+                  "templateOptions.required": "model.isRSOS_NIOSFormSubmitted=='हाँ'"
+                }
+              },
+              {
+                "name": "isRSOS_NIOSRegIdReceived",
+                "expressionProperties": {
+                  "hideExpression":"model.isRSOS_NIOSFormSubmitted=='नहीं'",
+                  "templateOptions.required": "model.isRSOS_NIOSFormSubmitted=='हाँ'"
+                }
+              },
+              {
+                "name": "RSOS_NIOSRegId",
+                "type": "number",
+                "validation": {
+                  "pattern": "^[0-9]{10}$|^[0-9]{11}$",
+                  "message": "NUMBER_SHOULD_BE_11_OR_12"
+                },
+                "expressionProperties": {
+                  "hideExpression":"model.isRSOS_NIOSFormSubmitted=='नहीं'||model.isRSOS_NIOSRegIdReceived=='नहीं'",
+                  "templateOptions.required": "model.isRSOS_NIOSFormSubmitted=='हाँ' && model.isRSOS_NIOSRegIdReceived=='हाँ'"
                 }
               }
             ]

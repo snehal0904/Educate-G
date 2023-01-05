@@ -827,7 +827,15 @@ export class TablesComponent implements OnInit {
                     ]
                   : '';
 
-
+                  obj['आधार कार्ड'] = data['आधार कार्ड']
+                  ? data['आधार कार्ड']
+                  : '';
+                obj['आधार कार्ड-Status'] = data['आधार कार्ड-Status']
+                  ? data['आधार कार्ड-Status']
+                  : '';
+                obj['आधार कार्ड-Doc number'] = data['आधार कार्ड-Doc number']
+                  ? data['आधार कार्ड-Doc number']
+                  : '';
 
                 obj['फोटो'] = data['फोटो'] ? data['फोटो'] : '';
                 obj['फोटो-Status'] = data['फोटो-Status']
@@ -1057,6 +1065,9 @@ export class TablesComponent implements OnInit {
               'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)-Status',
               'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)-Doc number',
 
+              'आधार कार्ड',
+              'आधार कार्ड-Status',
+              'आधार कार्ड-Doc number',
 
               'फोटो',
               'फोटो-Status',
@@ -1278,7 +1289,15 @@ export class TablesComponent implements OnInit {
                 ]
               : '';
 
-
+              obj['आधार कार्ड'] = data['आधार कार्ड']
+              ? data['आधार कार्ड']
+              : '';
+            obj['आधार कार्ड-Status'] = data['आधार कार्ड-Status']
+              ? data['आधार कार्ड-Status']
+              : '';
+            obj['आधार कार्ड-Doc number'] = data['आधार कार्ड-Doc number']
+              ? data['आधार कार्ड-Doc number']
+              : '';
 
             obj['फोटो'] = data['फोटो'] ? data['फोटो'] : '';
             obj['फोटो-Status'] = data['फोटो-Status'] ? data['फोटो-Status'] : '';
@@ -1487,7 +1506,9 @@ export class TablesComponent implements OnInit {
           'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)',
           'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)-Status',
           'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)-Doc number',
-
+          'आधार कार्ड',
+          'आधार कार्ड-Status',
+          'आधार कार्ड-Doc number',
 
 
           'फोटो',

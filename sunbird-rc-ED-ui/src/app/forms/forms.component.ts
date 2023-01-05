@@ -22,6 +22,8 @@ declare const $: any;
 
 const RSOS_PehlaPrayas = 'RSOS पहला प्रयास';
 const NSOS_PehlaPrayas = 'NIOS पहला प्रयास';
+const RSOS_PurakPrayas = 'RSOS पूरक प्रयास';
+const NSOS_PurakPrayas = 'NIOS पूरक प्रयास';
 const privateSchoolEnums = [
   'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)',
   'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)',
@@ -108,6 +110,8 @@ export class FormsComponent implements OnInit {
   lat: any;
   lng: any;
   adminRole: boolean;
+  errMsg: string;
+  subjectsLoaded: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -229,7 +233,7 @@ export class FormsComponent implements OnInit {
         }
 
         this.schemaService.getSchemas().subscribe(
-          (res) => {
+          async (res) => {
             this.responseData = res;
             this.formSchema.fieldsets.forEach((fieldset) => {
               if (fieldset.hasOwnProperty('privacyConfig')) {
@@ -343,7 +347,10 @@ export class FormsComponent implements OnInit {
             this.schema['properties'] = this.property;
             this.schema['required'] = this.required;
             this.schema['dependencies'] = this.dependencies;
-            this.loadSchema();
+            await this.loadSchema();
+            this.schemaloaded = true;
+
+
           },
           (error) => {
             this.toastMsg.error(
@@ -360,6 +367,10 @@ export class FormsComponent implements OnInit {
         );
       }
     );
+    setTimeout(() => {
+      this.subjectsLoaded = true;
+      console.log("subjectsLoaded",this.subjectsLoaded)
+    }, 3000);
   }
 
   loadSchema() {
@@ -416,7 +427,7 @@ export class FormsComponent implements OnInit {
       // };
     }
 
-    this.schemaloaded = true;
+    // this.schemaloaded = true;
   }
 
   visilibity(fields) {
@@ -1313,43 +1324,42 @@ export class FormsComponent implements OnInit {
         ]['widget']['formlyConfig']['asyncValidators'][field.name][
           'expression'
         ] = (control: FormControl) => {
-          console.log("here",control.value,this.model)
           if (control.value != null) {
+            if(this.subjectsLoaded){
+                this.model['subjects'] = [];
+                // this.loadSchema();
+            }
             if (
               isRSOS_NSOS_First(control.value)
             ) {
               if(this.model['subjects']){
 
-                this.responseData.definitions[fieldset.definition].properties[
-                  field.name
-                ]['widget']['formlyConfig']['asyncValidators'][field.name][
-                  'message'
-                ] =
-                  'You need to select Minimum 5 subjects and Maximum 7 subjects';
                 if (this.model['subjects'].length <= 7 && this.model['subjects'].length >= 5) {
+                  this.errMsg = null;
                   return of(control.value);
-                } else {
-                  this.generalService.debugLog("1");
-                  return of(false);
+                }else{
+
+                  this.errMsg ='You need to select Minimum 5 subjects and Maximum 7 subjects';
+                  // return of(false);
                 }
               }
 
-            } else {
-              console.log("this.model['subjects']",this.model['subjects'])
-              this.responseData.definitions[fieldset.definition].properties[field.name]['widget']['formlyConfig']['asyncValidators'][field.name][
-                'message'
-              ] =
-                'You need to select Minimum 1 subjects and Maximum 7 subjects';
-              if (
-                this.model['subjects'].length <= 7 &&
-                this.model['subjects'].length >= 1
-              ) {
-                return of(control.value);
-              } else {
-                this.generalService.debugLog("2");
-                return of(false);
+            } else if(isRSOS_NSOS_Last(control.value)) {
+              if(this.model['subjects']){
+
+                if (this.model['subjects'].length <= 7 && this.model['subjects'].length >= 1) {
+                  this.errMsg = null;
+                  return of(control.value);
+                }else{
+
+                   this.errMsg ='You need to select Minimum 1 subjects and Maximum 7 subjects';
+                  //  return of(false);
+                }
               }
+            } else{
+              this.errMsg = null;
             }
+
           }
           return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -1433,12 +1443,15 @@ export class FormsComponent implements OnInit {
                   ] =
                     'You need to select Minimum 5 values and Maximum 7 values';
                   if (control.value.length <= 7 && control.value.length >= 5) {
+                    this.errMsg = null;
                     return of(control.value);
                   } else {
+                    this.errMsg = 'You need to select Minimum 5 values and Maximum 7 values';
                     this.generalService.debugLog("subject - Minimum 5 values and Maximum 7 values");
                     return of(false);
                   }
-                } else {
+                } else if(this.model['examChoice'] == RSOS_PurakPrayas ||
+                this.model['examChoice'] == NSOS_PurakPrayas) {
                   this.responseData.definitions[fieldset.definition].properties[
                     field.name
                   ]['widget']['formlyConfig']['asyncValidators'][field.name][
@@ -1450,11 +1463,16 @@ export class FormsComponent implements OnInit {
                     field.validation.max +
                     ' values';
                   if (
-                    control.value.length <= field.validation.max &&
-                    control.value.length >= field.validation.min
+                    control.value.length <= 7 && control.value.length >= 1
                   ) {
+                    this.errMsg = null;
                     return of(control.value);
                   } else {
+                    // this.errMsg = 'You need to select Minimum ' +
+                    // field.validation.min +
+                    // ' values and Maximum ' +
+                    // field.validation.max +
+                    // ' values';
                     this.generalService.debugLog("Minimum 1 values and Maximum 7 values");
                     return of(false);
                   }
@@ -1635,28 +1653,28 @@ export class FormsComponent implements OnInit {
         //     'AGDocumentsV3'
         //   ]['items']['properties']['document']['enum'] = privateSchoolEnums;
         // }
-        if (this.model['whereStudiedLast'] == 'प्राइवेट स्कूल') {
-          this.responseData.definitions[fieldset.definition].properties[
-            'AGDocumentsV3'
-          ]['items']['properties']['document']['enum'] = privateSchoolEnums;
+        // if (this.model['whereStudiedLast'] == 'प्राइवेट स्कूल') {
+        //   this.responseData.definitions[fieldset.definition].properties[
+        //     'AGDocumentsV3'
+        //   ]['items']['properties']['document']['enum'] = privateSchoolEnums;
 
-        } else if (this.model['whereStudiedLast'] == 'सरकारी स्कूल') {
-          this.responseData.definitions[fieldset.definition].properties[
-            'AGDocumentsV3'
-          ]['items']['properties']['document']['enum'] = sarkariSchoolEnums;
+        // } else if (this.model['whereStudiedLast'] == 'सरकारी स्कूल') {
+        //   this.responseData.definitions[fieldset.definition].properties[
+        //     'AGDocumentsV3'
+        //   ]['items']['properties']['document']['enum'] = sarkariSchoolEnums;
 
-        } else if (this.model['whereStudiedLast'] == 'कभी पढ़ाई नहीं की') {
-          this.responseData.definitions[fieldset.definition].properties[
-            'AGDocumentsV3'
-          ]['items']['properties']['document']['enum'] = noSchoolEnums;
+        // } else if (this.model['whereStudiedLast'] == 'कभी पढ़ाई नहीं की') {
+        //   this.responseData.definitions[fieldset.definition].properties[
+        //     'AGDocumentsV3'
+        //   ]['items']['properties']['document']['enum'] = noSchoolEnums;
 
-        }
-        else{
-          var all_docs = privateSchoolEnums.concat(sarkariSchoolEnums);
-          this.responseData.definitions[fieldset.definition].properties[
-            'AGDocumentsV3'
-          ]['items']['properties']['document']['enum'] = all_docs;
-        }
+        // }
+        // else{
+        //   var all_docs = privateSchoolEnums.concat(sarkariSchoolEnums);
+        //   this.responseData.definitions[fieldset.definition].properties[
+        //     'AGDocumentsV3'
+        //   ]['items']['properties']['document']['enum'] = all_docs;
+        // }
         this.responseData.definitions[fieldset.definition].properties[
           field.name
         ]['widget']['formlyConfig']['asyncValidators'] = {};
@@ -1946,191 +1964,218 @@ export class FormsComponent implements OnInit {
     if (this.model['AGDocumentsV3'] && this.model['AGDocumentsV3'][0] == null) {
       this.model['AGDocumentsV3'] = [];
     }
-    if (this.fileFields.length > 0) {
-      this.fileFields.forEach((fileField) => {
-        if (this.model[fileField]) {
-          var formData = new FormData();
-          for (let i = 0; i < this.model[fileField].length; i++) {
-            const file = this.model[fileField][i];
-            formData.append('files', file);
-          }
 
-          if (this.type && this.type.includes('property')) {
-            var property = this.type.split(':')[1];
-          }
+    // if (this.model['examChoice']) {
+    //   if (
+    //     isRSOS_NSOS_First(this.model['examChoice'])
+    //   ) {
+    //     if(this.model['subjects']){
 
-          let id = this.entityId ? this.entityId : this.identifier;
-          var url = [this.apiUrl, id, property, 'documents'];
-          this.generalService.postData(url.join('/'), formData).subscribe(
-            (res) => {
-              var documents_list: any[] = [];
-              var documents_obj = {
-                fileName: '',
-                format: 'file',
-              };
-              res.documentLocations.forEach((element) => {
-                documents_obj.fileName = element;
-                documents_list.push(documents_obj);
-              });
+    //       if (this.model['subjects'].length <= 7 && this.model['subjects'].length >= 5) {
+    //         this.errMsg =
+    //         'You need to select Minimum 5 subjects and Maximum 7 subjects';
+    //       }
+    //     }
 
-              this.model[fileField] = documents_list;
-              if (this.type && this.type === 'entity') {
-                if (this.identifier != null) {
-                  this.updateData();
-                } else {
+    //   } else if(isRSOS_NSOS_Last(this.model['examChoice'])) {
+    //     if(this.model['subjects']){
+
+    //       if (this.model['subjects'].length <= 7 && this.model['subjects'].length >= 1) {
+    //         this.errMsg =
+    //         'You need to select Minimum 1 subjects and Maximum 7 subjects';
+    //       }
+    //     }
+    //   }
+    // }
+    // else{
+      if (this.fileFields.length > 0) {
+        this.fileFields.forEach((fileField) => {
+          if (this.model[fileField]) {
+            var formData = new FormData();
+            for (let i = 0; i < this.model[fileField].length; i++) {
+              const file = this.model[fileField][i];
+              formData.append('files', file);
+            }
+
+            if (this.type && this.type.includes('property')) {
+              var property = this.type.split(':')[1];
+            }
+
+            let id = this.entityId ? this.entityId : this.identifier;
+            var url = [this.apiUrl, id, property, 'documents'];
+            this.generalService.postData(url.join('/'), formData).subscribe(
+              (res) => {
+                var documents_list: any[] = [];
+                var documents_obj = {
+                  fileName: '',
+                  format: 'file',
+                };
+                res.documentLocations.forEach((element) => {
+                  documents_obj.fileName = element;
+                  documents_list.push(documents_obj);
+                });
+
+                this.model[fileField] = documents_list;
+                if (this.type && this.type === 'entity') {
+                  if (this.identifier != null) {
+                    this.updateData();
+                  } else {
+                    this.postData();
+                  }
+                } else if (this.type && this.type.includes('property')) {
+                  var property = this.type.split(':')[1];
+                  var url;
+                  if (this.identifier != null && this.entityId != undefined) {
+                    url = [this.apiUrl, this.entityId, property, this.identifier];
+                  } else {
+                    url = [this.apiUrl, this.identifier, property];
+                  }
+                  if (property == 'AgRegistrationForm') {
+                    url = [this.apiUrl, localStorage.getItem('id'), property];
+                  }
+                  this.apiUrl = url.join('/');
+                  if (this.model[property]) {
+                    this.model = this.model[property];
+                  }
+
                   this.postData();
-                }
-              } else if (this.type && this.type.includes('property')) {
-                var property = this.type.split(':')[1];
-                var url;
-                if (this.identifier != null && this.entityId != undefined) {
-                  url = [this.apiUrl, this.entityId, property, this.identifier];
-                } else {
-                  url = [this.apiUrl, this.identifier, property];
-                }
-                if (property == 'AgRegistrationForm') {
-                  url = [this.apiUrl, localStorage.getItem('id'), property];
-                }
-                this.apiUrl = url.join('/');
-                if (this.model[property]) {
-                  this.model = this.model[property];
-                }
 
-                this.postData();
-
-                if (
-                  this.model.hasOwnProperty('attest') &&
-                  this.model['attest']
-                ) {
-                  this.raiseClaim(property);
+                  if (
+                    this.model.hasOwnProperty('attest') &&
+                    this.model['attest']
+                  ) {
+                    this.raiseClaim(property);
+                  }
                 }
+              },
+              (err) => {
+                this.toastMsg.error(
+                  'error',
+                  this.translate.instant('SOMETHING_WENT_WRONG')
+                );
               }
-            },
-            (err) => {
-              this.toastMsg.error(
-                'error',
-                this.translate.instant('SOMETHING_WENT_WRONG')
-              );
-            }
-          );
-        } else {
-          if (this.type && this.type === 'entity') {
-            if (this.identifier != null) {
-              this.updateData();
-            } else {
-              this.postData();
-            }
-          } else if (this.type && this.type.includes('property')) {
-            var property = this.type.split(':')[1];
-            // let url;
-            if (this.identifier != null && this.entityId != undefined) {
-              url = [this.apiUrl, this.entityId, property, this.identifier];
-            } else {
-              url = [this.apiUrl, this.identifier, property];
-            }
-            if (property == 'AgRegistrationForm') {
-              url = [this.apiUrl, localStorage.getItem('id'), property];
-              this.entityId = undefined;
-            }
-            this.apiUrl = url.join('/');
-            if (this.model[property]) {
-              this.model = this.model[property];
-            }
-            if (this.identifier != null && this.entityId != undefined) {
-              this.updateClaims();
-            } else {
-              this.postData();
-            }
+            );
+          } else {
+            if (this.type && this.type === 'entity') {
+              if (this.identifier != null) {
+                this.updateData();
+              } else {
+                this.postData();
+              }
+            } else if (this.type && this.type.includes('property')) {
+              var property = this.type.split(':')[1];
+              // let url;
+              if (this.identifier != null && this.entityId != undefined) {
+                url = [this.apiUrl, this.entityId, property, this.identifier];
+              } else {
+                url = [this.apiUrl, this.identifier, property];
+              }
+              if (property == 'AgRegistrationForm') {
+                url = [this.apiUrl, localStorage.getItem('id'), property];
+                this.entityId = undefined;
+              }
+              this.apiUrl = url.join('/');
+              if (this.model[property]) {
+                this.model = this.model[property];
+              }
+              if (this.identifier != null && this.entityId != undefined) {
+                this.updateClaims();
+              } else {
+                this.postData();
+              }
 
-            if (this.model.hasOwnProperty('attest') && this.model['attest']) {
-              this.raiseClaim(property);
+              if (this.model.hasOwnProperty('attest') && this.model['attest']) {
+                this.raiseClaim(property);
+              }
             }
           }
-        }
-      });
-    } else {
-      if (this.type && this.type === 'entity') {
-        if (this.identifier != null) {
-          this.updateData();
-        } else {
-          this.postData();
-        }
-      } else if (this.type && this.type.includes('property')) {
-        var property = this.type.split(':')[1];
-
-        if (this.identifier != null && this.entityId != undefined) {
-          if (
-            this.adminForm == 'prerak-admin-setup' ||
-            this.adminForm == 'interview'
-          ) {
-            var url = [this.apiUrl, this.identifier, property];
-          } else if (this.isThisAdminRole) {
-            var url = [
-              this.apiUrl,
-              localStorage.getItem('id'),
-              property,
-              this.identifier,
-            ];
+        });
+      } else {
+        if (this.type && this.type === 'entity') {
+          if (this.identifier != null) {
+            this.updateData();
           } else {
+            this.postData();
+          }
+        } else if (this.type && this.type.includes('property')) {
+          var property = this.type.split(':')[1];
 
-            if (this.form == 'ag-registration' ||  this.form == 'ag-setup') {
+          if (this.identifier != null && this.entityId != undefined) {
+            if (
+              this.adminForm == 'prerak-admin-setup' ||
+              this.adminForm == 'interview'
+            ) {
+              var url = [this.apiUrl, this.identifier, property];
+            } else if (this.isThisAdminRole) {
               var url = [
                 this.apiUrl,
-                localStorage.getItem('ag-id'),
+                localStorage.getItem('id'),
                 property,
                 this.identifier,
               ];
-              if(this.add){
+            } else {
+
+              if (this.form == 'ag-registration' ||  this.form == 'ag-setup' || this.form == 'ag-registration-setup') {
+                var url = [
+                  this.apiUrl,
+                  localStorage.getItem('ag-id'),
+                  property,
+                  this.identifier,
+                ];
+                if(this.add){
+                  url = [
+                    this.apiUrl,
+                    localStorage.getItem('ag-id'),
+                    property
+                  ]
+                }
+              } else {
+                var url = [this.apiUrl, this.entityId, property, this.identifier];
+              }
+            }
+          } else {
+            if (this.form == 'ag-registration' || this.form == 'ag-registration-setup') {
                 url = [
                   this.apiUrl,
                   localStorage.getItem('ag-id'),
                   property
                 ]
+
+            }else{
+              var url = [this.apiUrl, this.identifier, property];
+            }
+
+          }
+
+          this.apiUrl = url.join('/');
+          if (this.model[property]) {
+            this.model = this.model[property];
+          }
+          if (this.identifier != null && this.entityId != undefined) {
+            if (
+              this.adminForm == 'prerak-admin-setup' ||
+              this.adminForm == 'interview' ||
+              this.form == 'ag-setup' ||
+              this.form == 'ag-registration' || this.form == 'ag-registration-setup'
+            ) {
+              if(this.add){
+                this.postData();
+              }else {
+                this.updateClaims();
               }
-            } else {
-              var url = [this.apiUrl, this.entityId, property, this.identifier];
             }
-          }
-        } else {
-          if (this.form == 'ag-registration') {
-              url = [
-                this.apiUrl,
-                localStorage.getItem('ag-id'),
-                property
-              ]
-
-          }else{
-            var url = [this.apiUrl, this.identifier, property];
+          } else {
+            this.postData();
           }
 
-        }
-
-        this.apiUrl = url.join('/');
-        if (this.model[property]) {
-          this.model = this.model[property];
-        }
-        if (this.identifier != null && this.entityId != undefined) {
-          if (
-            this.adminForm == 'prerak-admin-setup' ||
-            this.adminForm == 'interview' ||
-            this.form == 'ag-setup' ||
-            this.form == 'ag-registration'
-          ) {
-            if(this.add){
-              this.postData();
-            }else {
-              this.updateClaims();
-            }
+          if (this.model.hasOwnProperty('attest') && this.model['attest']) {
+            this.raiseClaim(property);
           }
-        } else {
-          this.postData();
-        }
-
-        if (this.model.hasOwnProperty('attest') && this.model['attest']) {
-          this.raiseClaim(property);
         }
       }
-    }
+    // }
+
+
   }
 
   async raiseClaim(property) {
@@ -2194,7 +2239,7 @@ export class FormsComponent implements OnInit {
     this.generalService.attestationReq('/send', data).subscribe(
       (res) => {
         if (res.params.status == 'SUCCESSFUL') {
-          if (this.form == 'ag-registration') {
+          if (this.form == 'ag-registration' || this.form == 'ag-registration-setup') {
             window.history.go(-1);
             // window.location.reload();
           } else {
@@ -2317,7 +2362,7 @@ export class FormsComponent implements OnInit {
 
     }
 
-    this.generalService.getData(get_url).subscribe((res) => {
+    this.generalService.getData(get_url).subscribe(async (res) => {
       console.log(this.propertyName + '/' + this.identifier)
       console.log("get res",res)
       res = res[0] ? res[0] : res;
@@ -2333,8 +2378,54 @@ export class FormsComponent implements OnInit {
       // }
 
       this.identifier = res.osid;
+      if(this.model['whereStudiedLast']){
+        console.log("whereStudiedLast",this.model['whereStudiedLast'])
+        if (this.model['whereStudiedLast'] == 'प्राइवेट स्कूल') {
+          this.responseData.definitions['AGV8'].properties[
+            'AGDocumentsV3'
+          ]['items']['properties']['document']['enum'] = privateSchoolEnums;
 
-      this.loadSchema();
+        } else if (this.model['whereStudiedLast'] == 'सरकारी स्कूल') {
+          this.responseData.definitions['AGV8'].properties[
+            'AGDocumentsV3'
+          ]['items']['properties']['document']['enum'] = sarkariSchoolEnums;
+
+        } else if (this.model['whereStudiedLast'] == 'कभी पढ़ाई नहीं की') {
+          this.responseData.definitions['AGV8'].properties[
+            'AGDocumentsV3'
+          ]['items']['properties']['document']['enum'] = noSchoolEnums;
+
+        }
+      }
+      if (this.model['examChoice']) {
+        if (
+          isRSOS_NSOS_First(this.model['examChoice'])
+        ) {
+          if(this.model['subjects']){
+
+            if (this.model['subjects'].length <= 7 && this.model['subjects'].length >= 5) {
+              this.errMsg =
+              'You need to select Minimum 5 subjects and Maximum 7 subjects';
+            }
+          }
+
+        } else if(isRSOS_NSOS_Last(this.model['examChoice'])) {
+          if(this.model['subjects']){
+
+            if (this.model['subjects'].length <= 7 && this.model['subjects'].length >= 1) {
+              this.errMsg =
+              'You need to select Minimum 1 subjects and Maximum 7 subjects';
+            }
+          }
+        }
+      }
+      await this.loadSchema();
+      // var intervalId = setInterval(function() {
+      //   this.subjectsLoaded = true;
+      //   console.log("inside",this.subjectsLoaded)
+      //   clearInterval(intervalId);
+      // }, 2000);
+
     });
   }
 
@@ -2410,7 +2501,7 @@ export class FormsComponent implements OnInit {
                   if (localStorage.getItem('isAdminAdd')) {
                     localStorage.setItem('isAdminAdd', '');
                     // $('.modal-backdrop').remove()
-                    if (this.form == 'ag-registration') {
+                    if (this.form == 'ag-registration' || this.form == 'ag-registration-setup') {
                       window.history.go(-1);
                       // window.location.reload();
                     } else {
@@ -2422,7 +2513,7 @@ export class FormsComponent implements OnInit {
                     // // window.location.reload();
                   } else {
                     $('.modal-backdrop').remove();
-                    if (this.form == 'ag-registration') {
+                    if (this.form == 'ag-registration'  || this.form == 'ag-registration-setup') {
                       window.history.go(-1);
                       // window.location.reload();
                     } else {
@@ -2476,7 +2567,7 @@ export class FormsComponent implements OnInit {
             if (localStorage.getItem('isAdminAdd')) {
               localStorage.setItem('isAdminAdd', '');
               // $('.modal-backdrop').remove()
-              if (this.form == 'ag-registration') {
+              if (this.form == 'ag-registration' || this.form == 'ag-registration-setup') {
                 window.history.go(-1);
                 // window.location.reload();
               } else {
@@ -2488,7 +2579,7 @@ export class FormsComponent implements OnInit {
               // // window.location.reload();
             } else {
               $('.modal-backdrop').remove();
-              if (this.form == 'ag-registration') {
+              if (this.form == 'ag-registration' || this.form == 'ag-registration-setup') {
                 window.history.go(-1);
                 // window.location.reload();
               } else {
@@ -2511,7 +2602,7 @@ export class FormsComponent implements OnInit {
               $('.modal-backdrop').remove();
 
               // this.router.navigate(['/myags/attestation/ag/AGV8/']);
-              if( this.form == 'ag-registration'){
+              if( this.form == 'ag-registration' || this.form == 'ag-registration-setup'){
                 window.history.go(-1)
 
                 // window.location.reload();
@@ -2589,7 +2680,7 @@ export class FormsComponent implements OnInit {
       .subscribe(
         (res) => {
           if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
-            if (this.form == 'ag-registration') {
+            if (this.form == 'ag-registration' || this.form == 'ag-registration-setup') {
               window.history.go(-1);
               // window.location.reload();
             } else {
@@ -2709,7 +2800,7 @@ export class FormsComponent implements OnInit {
     this.generalService.updateclaims(this.apiUrl, this.model).subscribe(
       (res) => {
         if (res.params.status == 'SUCCESSFUL' && !this.model['attest']) {
-          if (this.form == 'ag-registration') {
+          if (this.form == 'ag-registration' || this.form == 'ag-registration-setup') {
             window.history.go(-1);
             // window.location.reload();
           } else {
@@ -2748,5 +2839,10 @@ export class FormsComponent implements OnInit {
 function isRSOS_NSOS_First(text) {
   return text == RSOS_PehlaPrayas ||
   text == NSOS_PehlaPrayas;
+}
+
+function isRSOS_NSOS_Last(text) {
+  return text == RSOS_PurakPrayas ||
+  text == NSOS_PurakPrayas;
 }
 
