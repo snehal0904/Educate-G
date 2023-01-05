@@ -634,8 +634,10 @@ export class LayoutsComponent implements OnInit, OnChanges {
 
       this.Data = [];
       localStorage.setItem('osid', this.identifier);
-      if (this.model['whereStudiedLast'] == 'प्राइवेट स्कूल') {
-        var docs = [
+      if (this.model['whereStudiedLast']) {
+        var docs = []
+        if (this.model['whereStudiedLast'] == 'प्राइवेट स्कूल') {
+        docs = [
           'टीसी (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)',
           'मार्कशीट (CBO या उच्चतर माध्यमिक सरकारी स्कूल के प्रधानाचार्य द्वारा भेरिफाइड और हस्ताक्षरित)',
           '2 फोटो',
@@ -644,6 +646,17 @@ export class LayoutsComponent implements OnInit, OnChanges {
           'मोबाइल नंबर',
           'ईमेल आईडी',
         ];
+      } else if(this.model['whereStudiedLast'] == 'सरकारी स्कूल') {
+        docs = [
+          'टीसी',
+          'मार्कशीट',
+          '2 फोटो',
+          'जनाधार कार्ड',
+          'किशोरी का बैंक पासबुक (स्वयं या संयुक्त खाता)',
+          'मोबाइल नंबर',
+          'ईमेल आईडी',
+        ];
+      }
         var in_doc = [];
 
         if (

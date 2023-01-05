@@ -156,7 +156,7 @@
             "title": "Registration Details",
             "add": true,
             "addform": "ag-registration",
-            "editform": "ag-registration",
+            "editform": "ag-registration-setup",
             "edit": false,
             "claimEdit": true,
             "canRaiseClaim": false,
